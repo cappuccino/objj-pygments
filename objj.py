@@ -26,14 +26,17 @@ class ObjectiveJLexer(RegexLexer):
     #: optional Comment or Whitespace
     _ws = r'(?:\s|//.*?\n|/[*].*?[*]/)*'
 
+    flags = re.DOTALL
+
     tokens = {
         'root': [
             include('whitespace'),
             
             # function definition
-            (r'([\+-]' + _ws + r')(?=\()',
-             using(this), 'function_signature'),
+            (r'([\+-]' + _ws + r')(?=\([$a-zA-Z_])(.*?)(?={)',
+             bygroups(using(this), using(this, state='function_signature'))),
 
+            # class definition
             (r'(@interface|@implementation)(\s+)', bygroups(Keyword, Text),
              'classname'),
             (r'(@class|@protocol)(\s*)', bygroups(Keyword, Text),

@@ -26,39 +26,19 @@ class ObjectiveJLexer(RegexLexer):
     #: optional Comment or Whitespace
     _ws = r'(?:\s|//.*?\n|/[*].*?[*]/)*'
 
-    def expand_func(self, match, *args):
-        state = 0
-        index_counter = 0
-        tokens = list()
-        tokentypes = [Name.Function, Text, Keyword.Type, Text, Name, Text]
-        
-        parts = re.split(r'(\)?' + ObjectiveJLexer._ws + r'\(?)', match.group(0))
-        
-        for part in parts:
-            tokens.append((index_counter, tokentypes[state], part))
-            index_counter += len(part)
-            state = (state + 1) % len(tokentypes)
-            
-        return tokens
-
     tokens = {
         'root': [
             include('whitespace'),
             
             # function definition
-            (r'([+-]' + _ws + r'\(' + _ws + r')' 
-             r'([$a-zA-Z_][a-zA-Z0-0_]+)'       # return type
-             r'(' + _ws + r'\)' + _ws + r')'
-             r'([^;]+?)'                        # name + params
-             r'(' + _ws + r')({)',
-             bygroups(Text, Keyword.Type, Text, expand_func,
-                      Text, Punctuation)),
+            (r'([\+-]' + _ws + r')(?=\()',
+             using(this), 'function_signature'),
 
             (r'(@interface|@implementation)(\s+)', bygroups(Keyword, Text),
              'classname'),
-            (r'(@class|@protocol)(\s' + _ws + r')', bygroups(Keyword, Text),
+            (r'(@class|@protocol)(\s*)', bygroups(Keyword, Text),
              'forward_classname'),
-            (r'(' + _ws + r')(@end)(' + _ws + r')', bygroups(Text, Keyword, Text)),
+            (r'(\s*)(@end)(\s*)', bygroups(Text, Keyword, Text)),
 
             include('statements'),
             ('[{}]', Punctuation),
@@ -133,26 +113,58 @@ class ObjectiveJLexer(RegexLexer):
         ],
         'classname' : [
             # interface definition that inherits
-            ('([a-zA-Z_][a-zA-Z0-9_]*)(\s*:\s*)([a-zA-Z_][a-zA-Z0-9_]*)?',
-             bygroups(Name.Class, Text, Name.Class), '#pop'),
+            (r'([a-zA-Z_][a-zA-Z0-9_]*)(' + _ws + r':' + _ws + r')([a-zA-Z_][a-zA-Z0-9_]*)?',
+             bygroups(Name.Class, using(this), Name.Class), '#pop'),
             # interface definition for a category
-            ('([a-zA-Z_][a-zA-Z0-9_]*)(\s*)(\([a-zA-Z_][a-zA-Z0-9_]*\))',
-             bygroups(Name.Class, Text, Name.Label), '#pop'),
+            (r'([a-zA-Z_][a-zA-Z0-9_]*)(' + _ws + r'\()([a-zA-Z_][a-zA-Z0-9_]*)(\))',
+             bygroups(Name.Class, using(this), Name.Label, Text), '#pop'),
             # simple interface / implementation
-            ('([a-zA-Z_][a-zA-Z0-9_]*)', Name.Class, '#pop')
+            (r'([a-zA-Z_][a-zA-Z0-9_]*)', Name.Class, '#pop')
         ],
         'forward_classname' : [
-          ('([a-zA-Z_][a-zA-Z0-9_]*)(\s*,\s*)',
-           bygroups(Name.Class, Text), 'forward_classname'),
-          ('([a-zA-Z_][a-zA-Z0-9_]*)(\s*;?)',
-           bygroups(Name.Class, Text), '#pop')
+            (r'([a-zA-Z_][a-zA-Z0-9_]*)(\s*,\s*)',
+             bygroups(Name.Class, Text), '#push'),
+            (r'([a-zA-Z_][a-zA-Z0-9_]*)(\s*;?)',
+             bygroups(Name.Class, Text), '#pop')
         ],
-        'function': [
+        'function_signature': [
             include('whitespace'),
-            include('statements'),
-            (';', Punctuation),
-            ('{', Punctuation, '#push'),
-            ('}', Punctuation, '#pop'),
+
+            # start of a selector w/ parameters
+            (r'(\(' + _ws + r')'                # open paren
+             r'([a-zA-Z_][a-zA-Z0-9_]+)'        # return type
+             r'(' + _ws + r'\)' + _ws + r')'    # close paren
+             r'([$a-zA-Z_][a-zA-Z0-9_]+:)',     # function name
+             bygroups(using(this), Keyword.Type, using(this),
+                 Name.Function),
+             'function_parameters'),
+
+            # no-param function
+            (r'(\(' + _ws + r')'                # open paren
+             r'([a-zA-Z_][a-zA-Z0-9_]+)'        # return type
+             r'(' + _ws + r'\)' + _ws + r')'    # close paren
+             r'([$a-zA-Z_][a-zA-Z0-9_]+)',      # function name
+             bygroups(using(this), Keyword.Type, using(this),
+                 Name.Function),
+             "#pop"),
+
+            ('', Text, '#pop'),
+        ],
+        'function_parameters': [
+            include('whitespace'),
+
+            # parameters
+            (r'(\(' + _ws + r')'                # open paren
+             r'([a-zA-Z_][a-zA-Z0-9_]+)'        # type
+             r'(' + _ws + r'\)' + _ws + r')'    # close paren
+             r'([$a-zA-Z_][a-zA-Z0-9_]+)',      # param name
+             bygroups(using(this), Keyword.Type, using(this), Text)),
+
+            # one piece of a selector name
+            (r'([$a-zA-Z_][a-zA-Z0-9_]+:)',     # function name
+             Name.Function),
+
+            ('{', Punctuation, "#pop")
         ],
         'string': [
             (r'"', String, '#pop'),
@@ -186,7 +198,6 @@ class ObjectiveJLexer(RegexLexer):
 if __name__ == '__main__':
     from pygments import highlight
     from pygments.formatters import HtmlFormatter
-    from pygments.lexers import ObjectiveCLexer
     import sys
 
     code = open(sys.argv[1]).read()

@@ -20,7 +20,7 @@ class ObjectiveJLexer(RegexLexer):
 
     name = 'Objective-J'
     aliases = ['objective-j', 'objectivej', 'obj-j', 'objj']
-    filenames = ['*.m']
+    filenames = ['*.j']
     mimetypes = ['text/x-objective-j']
 
     #: optional Comment or Whitespace
@@ -206,17 +206,8 @@ class ObjectiveJLexer(RegexLexer):
     }
 
     def analyse_text(text):
-        if '@import' in text: # strings
-            return True
-        if re.match(r'CP[A-Z][a-zA-Z]+', text): # message
+        if '@import' in text: # special directive found in most Objective-J files
             return True
         return False
 
-if __name__ == '__main__':
-    from pygments import highlight
-    from pygments.formatters import HtmlFormatter
-    import sys
-
-    code = open(sys.argv[1]).read()
-    highlight(code, ObjectiveJLexer(), HtmlFormatter(noclasses=True), open(sys.argv[1] + '.html','w'))
        

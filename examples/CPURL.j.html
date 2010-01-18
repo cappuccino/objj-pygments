@@ -1,598 +1,679 @@
-<div class="highlight"><pre><span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&lt;Foundation/CPObject.j&gt;</span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
 
-CPURLNameKey                        <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLNameKey&quot;</span>;
-CPURLLocalizedNameKey               <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLLocalizedNameKey&quot;</span>;
-CPURLIsRegularFileKey               <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLIsRegularFileKey&quot;</span>;
-CPURLIsDirectoryKey                 <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLIsDirectoryKey&quot;</span>;
-CPURLIsSymbolicLinkKey              <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLIsSymbolicLinkKey&quot;</span>;
-CPURLIsVolumeKey                    <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLIsVolumeKey&quot;</span>;
-CPURLIsPackageKey                   <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLIsPackageKey&quot;</span>;
-CPURLIsSystemImmutableKey           <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLIsSystemImmutableKey&quot;</span>;
-CPURLIsUserImmutableKey             <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLIsUserImmutableKey&quot;</span>;
-CPURLIsHiddenKey                    <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLIsHiddenKey&quot;</span>;
-CPURLHasHiddenExtensionKey          <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLHasHiddenExtensionKey&quot;</span>;
-CPURLCreationDateKey                <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLCreationDateKey&quot;</span>;
-CPURLContentAccessDateKey           <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLContentAccessDateKey&quot;</span>;
-CPURLContentModificationDateKey     <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLContentModificationDateKey&quot;</span>;
-CPURLAttributeModificationDateKey   <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLAttributeModificationDateKey&quot;</span>;
-CPURLLinkCountKey                   <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLLinkCountKey&quot;</span>;
-CPURLParentDirectoryURLKey          <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLParentDirectoryURLKey&quot;</span>;
-CPURLVolumeURLKey                   <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLTypeIdentifierKey&quot;</span>;
-CPURLTypeIdentifierKey              <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLTypeIdentifierKey&quot;</span>;
-CPURLLocalizedTypeDescriptionKey    <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLLocalizedTypeDescriptionKey&quot;</span>;
-CPURLLabelNumberKey                 <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLLabelNumberKey&quot;</span>;
-CPURLLabelColorKey                  <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLLabelColorKey&quot;</span>;
-CPURLLocalizedLabelKey              <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLLocalizedLabelKey&quot;</span>;
-CPURLEffectiveIconKey               <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLEffectiveIconKey&quot;</span>;
-CPURLCustomIconKey                  <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLCustomIconKey&quot;</span>;
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=latin1">
+  <style type="text/css">
+td.linenos { background-color: #f0f0f0; padding-right: 10px; }
+span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+pre { line-height: 125%; }
+body .hll { background-color: #ffffcc }
+body  { background: #f8f8f8; }
+body .c { color: #408080; font-style: italic } /* Comment */
+body .err { border: 1px solid #FF0000 } /* Error */
+body .k { color: #008000; font-weight: bold } /* Keyword */
+body .o { color: #666666 } /* Operator */
+body .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+body .cp { color: #BC7A00 } /* Comment.Preproc */
+body .c1 { color: #408080; font-style: italic } /* Comment.Single */
+body .cs { color: #408080; font-style: italic } /* Comment.Special */
+body .gd { color: #A00000 } /* Generic.Deleted */
+body .ge { font-style: italic } /* Generic.Emph */
+body .gr { color: #FF0000 } /* Generic.Error */
+body .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+body .gi { color: #00A000 } /* Generic.Inserted */
+body .go { color: #808080 } /* Generic.Output */
+body .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+body .gs { font-weight: bold } /* Generic.Strong */
+body .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+body .gt { color: #0040D0 } /* Generic.Traceback */
+body .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+body .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+body .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+body .kp { color: #008000 } /* Keyword.Pseudo */
+body .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+body .kt { color: #B00040 } /* Keyword.Type */
+body .m { color: #666666 } /* Literal.Number */
+body .s { color: #BA2121 } /* Literal.String */
+body .na { color: #7D9029 } /* Name.Attribute */
+body .nb { color: #008000 } /* Name.Builtin */
+body .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+body .no { color: #880000 } /* Name.Constant */
+body .nd { color: #AA22FF } /* Name.Decorator */
+body .ni { color: #999999; font-weight: bold } /* Name.Entity */
+body .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+body .nf { color: #0000FF } /* Name.Function */
+body .nl { color: #A0A000 } /* Name.Label */
+body .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+body .nt { color: #008000; font-weight: bold } /* Name.Tag */
+body .nv { color: #19177C } /* Name.Variable */
+body .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+body .w { color: #bbbbbb } /* Text.Whitespace */
+body .mf { color: #666666 } /* Literal.Number.Float */
+body .mh { color: #666666 } /* Literal.Number.Hex */
+body .mi { color: #666666 } /* Literal.Number.Integer */
+body .mo { color: #666666 } /* Literal.Number.Oct */
+body .sb { color: #BA2121 } /* Literal.String.Backtick */
+body .sc { color: #BA2121 } /* Literal.String.Char */
+body .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+body .s2 { color: #BA2121 } /* Literal.String.Double */
+body .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+body .sh { color: #BA2121 } /* Literal.String.Heredoc */
+body .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+body .sx { color: #008000 } /* Literal.String.Other */
+body .sr { color: #BB6688 } /* Literal.String.Regex */
+body .s1 { color: #BA2121 } /* Literal.String.Single */
+body .ss { color: #19177C } /* Literal.String.Symbol */
+body .bp { color: #008000 } /* Name.Builtin.Pseudo */
+body .vc { color: #19177C } /* Name.Variable.Class */
+body .vg { color: #19177C } /* Name.Variable.Global */
+body .vi { color: #19177C } /* Name.Variable.Instance */
+body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
-<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPURL</span> <span style="color: #666666">:</span> <span style="color: #0000FF; font-weight: bold">CPObject</span>
-{
-    CPURL       _base <span style="color: #008000; font-weight: bold">@accessors</span>(readonly, property<span style="color: #666666">=</span>baseURL);
-    CPString    _relative <span style="color: #008000; font-weight: bold">@accessors</span>(readonly, property<span style="color: #666666">=</span>relativeString);
+  </style>
+</head>
+<body>
+<h2></h2>
 
-    CPDictionary    _resourceValues;
-}
+<div class="highlight"><pre><span class="cp">@import</span> <span class="s2">&lt;Foundation/CPObject.j&gt;</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithScheme:</span>(<span style="color: #B00040">CPString</span>)scheme <span style="color: #0000FF">host:</span>(<span style="color: #B00040">CPString</span>)host <span style="color: #0000FF">path:</span>(<span style="color: #B00040">CPString</span>)path
-{
-    <span style="color: #008000; font-weight: bold">var</span> uri <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">URI</span>();
-    uri.scheme <span style="color: #666666">=</span> scheme;
-    uri.authority <span style="color: #666666">=</span> host;
-    uri.path <span style="color: #666666">=</span> path;
-    [<span style="color: #008000">self</span> initWithString<span style="color: #666666">:</span>uri.<span style="color: #0000FF">toString</span>()];
-}
+<span class="n">CPURLNameKey</span>                        <span class="o">=</span> <span class="s">@&quot;CPURLNameKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLLocalizedNameKey</span>               <span class="o">=</span> <span class="s">@&quot;CPURLLocalizedNameKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLIsRegularFileKey</span>               <span class="o">=</span> <span class="s">@&quot;CPURLIsRegularFileKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLIsDirectoryKey</span>                 <span class="o">=</span> <span class="s">@&quot;CPURLIsDirectoryKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLIsSymbolicLinkKey</span>              <span class="o">=</span> <span class="s">@&quot;CPURLIsSymbolicLinkKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLIsVolumeKey</span>                    <span class="o">=</span> <span class="s">@&quot;CPURLIsVolumeKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLIsPackageKey</span>                   <span class="o">=</span> <span class="s">@&quot;CPURLIsPackageKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLIsSystemImmutableKey</span>           <span class="o">=</span> <span class="s">@&quot;CPURLIsSystemImmutableKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLIsUserImmutableKey</span>             <span class="o">=</span> <span class="s">@&quot;CPURLIsUserImmutableKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLIsHiddenKey</span>                    <span class="o">=</span> <span class="s">@&quot;CPURLIsHiddenKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLHasHiddenExtensionKey</span>          <span class="o">=</span> <span class="s">@&quot;CPURLHasHiddenExtensionKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLCreationDateKey</span>                <span class="o">=</span> <span class="s">@&quot;CPURLCreationDateKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLContentAccessDateKey</span>           <span class="o">=</span> <span class="s">@&quot;CPURLContentAccessDateKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLContentModificationDateKey</span>     <span class="o">=</span> <span class="s">@&quot;CPURLContentModificationDateKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLAttributeModificationDateKey</span>   <span class="o">=</span> <span class="s">@&quot;CPURLAttributeModificationDateKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLLinkCountKey</span>                   <span class="o">=</span> <span class="s">@&quot;CPURLLinkCountKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLParentDirectoryURLKey</span>          <span class="o">=</span> <span class="s">@&quot;CPURLParentDirectoryURLKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLVolumeURLKey</span>                   <span class="o">=</span> <span class="s">@&quot;CPURLTypeIdentifierKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLTypeIdentifierKey</span>              <span class="o">=</span> <span class="s">@&quot;CPURLTypeIdentifierKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLLocalizedTypeDescriptionKey</span>    <span class="o">=</span> <span class="s">@&quot;CPURLLocalizedTypeDescriptionKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLLabelNumberKey</span>                 <span class="o">=</span> <span class="s">@&quot;CPURLLabelNumberKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLLabelColorKey</span>                  <span class="o">=</span> <span class="s">@&quot;CPURLLabelColorKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLLocalizedLabelKey</span>              <span class="o">=</span> <span class="s">@&quot;CPURLLocalizedLabelKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLEffectiveIconKey</span>               <span class="o">=</span> <span class="s">@&quot;CPURLEffectiveIconKey&quot;</span><span class="p">;</span>
+<span class="n">CPURLCustomIconKey</span>                  <span class="o">=</span> <span class="s">@&quot;CPURLCustomIconKey&quot;</span><span class="p">;</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithString:</span>(<span style="color: #B00040">CPString</span>)URLString
-{
-    <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> initWithString<span style="color: #666666">:</span>URLString relativeToURL<span style="color: #666666">:</span><span style="color: #008000; font-weight: bold">nil</span>];
-}
+<span class="k">@implementation</span> <span class="nc">CPURL</span> <span class="o">:</span> <span class="nc">CPObject</span>
+<span class="p">{</span>
+    <span class="n">CPURL</span>       <span class="n">_base</span> <span class="k">@accessors</span><span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">property</span><span class="o">=</span><span class="n">baseURL</span><span class="p">);</span>
+    <span class="n">CPString</span>    <span class="n">_relative</span> <span class="k">@accessors</span><span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">property</span><span class="o">=</span><span class="n">relativeString</span><span class="p">);</span>
 
-<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">URLWithString:</span>(<span style="color: #B00040">CPString</span>)URLString
-{
-    <span style="color: #008000; font-weight: bold">return</span> [[<span style="color: #008000">self</span> alloc] initWithString<span style="color: #666666">:</span>URLString];
-}
+    <span class="n">CPDictionary</span>    <span class="n">_resourceValues</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithString:</span>(<span style="color: #B00040">CPString</span>)URLString <span style="color: #0000FF">relativeToURL:</span>(<span style="color: #B00040">CPURL</span>)baseURL
-{
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>URI_RE.<span style="color: #0000FF">test</span>(URLString))
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">nil</span>;
+<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithScheme:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>scheme <span class="nf">host:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>host <span class="nf">path:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>path
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">uri</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">URI</span><span class="p">();</span>
+    <span class="n">uri</span><span class="p">.</span><span class="n">scheme</span> <span class="o">=</span> <span class="n">scheme</span><span class="p">;</span>
+    <span class="n">uri</span><span class="p">.</span><span class="n">authority</span> <span class="o">=</span> <span class="n">host</span><span class="p">;</span>
+    <span class="n">uri</span><span class="p">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="p">;</span>
+    <span class="p">[</span><span class="nb">self</span> <span class="n">initWithString</span><span class="o">:</span><span class="n">uri</span><span class="p">.</span><span class="nf">toString</span><span class="p">()];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithString:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>URLString
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">initWithString</span><span class="o">:</span><span class="n">URLString</span> <span class="n">relativeToURL</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">URLWithString:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>URLString
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithString</span><span class="o">:</span><span class="n">URLString</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithString:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>URLString <span class="nf">relativeToURL:</span><span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span>baseURL
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">URLString</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
     
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">self</span>)
-    {
-        _base <span style="color: #666666">=</span> baseURL;
-        _relative <span style="color: #666666">=</span> URLString;
-        _resourceValues <span style="color: #666666">=</span> [CPDictionary dictionary];
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_base</span> <span class="o">=</span> <span class="n">baseURL</span><span class="p">;</span>
+        <span class="n">_relative</span> <span class="o">=</span> <span class="n">URLString</span><span class="p">;</span>
+        <span class="n">_resourceValues</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPDictionary</span> <span class="n">dictionary</span><span class="p">];</span>
+    <span class="p">}</span>
 
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
-}
+    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">URLWithString:</span>(<span style="color: #B00040">CPString</span>)URLString <span style="color: #0000FF">relativeToURL:</span>(<span style="color: #B00040">CPURL</span>)baseURL
-{
-    <span style="color: #008000; font-weight: bold">return</span> [[<span style="color: #008000">self</span> alloc] initWithString<span style="color: #666666">:</span>URLString relativeToURL<span style="color: #666666">:</span>baseURL];
-}
+<span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">URLWithString:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>URLString <span class="nf">relativeToURL:</span><span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span>baseURL
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithString</span><span class="o">:</span><span class="n">URLString</span> <span class="n">relativeToURL</span><span class="o">:</span><span class="n">baseURL</span><span class="p">];</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPURL</span>)<span style="color: #0000FF">absoluteURL</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> absStr <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span><span class="nf">absoluteURL</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">absStr</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
     
-    <span style="color: #008000; font-weight: bold">if</span> (absStr <span style="color: #666666">!==</span> _relative)
-        <span style="color: #008000; font-weight: bold">return</span> [[CPURL alloc] initWithString<span style="color: #666666">:</span>absStr];
+    <span class="k">if</span> <span class="p">(</span><span class="n">absStr</span> <span class="o">!==</span> <span class="n">_relative</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[[</span><span class="n">CPURL</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithString</span><span class="o">:</span><span class="n">absStr</span><span class="p">];</span>
     
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
-}
+    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">absoluteString</span>
-{
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">resolve</span>([_base absoluteString] <span style="color: #666666">||</span> <span style="color: #BA2121">&quot;&quot;</span>, _relative);
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">absoluteString</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nf">resolve</span><span class="p">([</span><span class="n">_base</span> <span class="n">absoluteString</span><span class="p">]</span> <span class="o">||</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">_relative</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span style="color: #408080; font-style: italic">// if absolute, returns same as absoluteString</span>
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">relativeString</span>
-{
-    <span style="color: #008000; font-weight: bold">return</span> _relative;
-}
+<span class="c1">// if absolute, returns same as absoluteString</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">relativeString</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">_relative</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">path</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).path <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">path</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">path</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #408080; font-style: italic">// if absolute, returns the same as path</span>
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">relativePath</span>
-{
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(_relative) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(_relative).path <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
-}
+<span class="c1">// if absolute, returns the same as path</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">relativePath</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">_relative</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">_relative</span><span class="p">).</span><span class="n">path</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">scheme</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).protocol <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">scheme</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">protocol</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">user</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).user <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">user</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">user</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">password</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).password <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">password</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">password</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">host</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).domain <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">host</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">domain</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">port</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">if</span> (URI_RE.<span style="color: #0000FF">test</span>(str)) {
-        <span style="color: #008000; font-weight: bold">var</span> port <span style="color: #666666">=</span> <span style="color: #0000FF">parse</span>(str).port;
-        <span style="color: #008000; font-weight: bold">if</span> (port)
-            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">parseInt</span>(port, <span style="color: #666666">10</span>);
-    }
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">nil</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">port</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="n">port</span> <span class="o">=</span> <span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">port</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">port</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">parameterString</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).query <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">parameterString</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">query</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">fragment</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).anchor <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">fragment</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">anchor</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isEqual:</span>(<span style="color: #B00040">id</span>)anObject
-{
-    <span style="color: #408080; font-style: italic">// Is checking if baseURL isEqual correct? Does &quot;identical&quot; mean same object or equivalent values?</span>
-    <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> relativeString] <span style="color: #666666">===</span> [anObject relativeString] <span style="color: #666666">&amp;&amp;</span>
-        ([<span style="color: #008000">self</span> baseURL] <span style="color: #666666">===</span> [anObject baseURL] <span style="color: #666666">||</span> [[<span style="color: #008000">self</span> baseURL] isEqual<span style="color: #666666">:</span>[anObject baseURL]]);
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isEqual:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="p">{</span>
+    <span class="c1">// Is checking if baseURL isEqual correct? Does &quot;identical&quot; mean same object or equivalent values?</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">relativeString</span><span class="p">]</span> <span class="o">===</span> <span class="p">[</span><span class="n">anObject</span> <span class="n">relativeString</span><span class="p">]</span> <span class="o">&amp;&amp;</span>
+        <span class="p">([</span><span class="nb">self</span> <span class="n">baseURL</span><span class="p">]</span> <span class="o">===</span> <span class="p">[</span><span class="n">anObject</span> <span class="n">baseURL</span><span class="p">]</span> <span class="o">||</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">baseURL</span><span class="p">]</span> <span class="n">isEqual</span><span class="o">:</span><span class="p">[</span><span class="n">anObject</span> <span class="n">baseURL</span><span class="p">]]);</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">lastPathComponent</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> path <span style="color: #666666">=</span> [<span style="color: #008000">self</span> path];
-    <span style="color: #008000; font-weight: bold">return</span> path <span style="color: #666666">?</span> path.<span style="color: #0000FF">split</span>(<span style="color: #BA2121">&quot;/&quot;</span>).<span style="color: #0000FF">pop</span>() <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">lastPathComponent</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">path</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">path</span> <span class="o">?</span> <span class="n">path</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">).</span><span class="nf">pop</span><span class="p">()</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">pathExtension</span>
-{
-    <span style="color: #008000; font-weight: bold">var</span> path <span style="color: #666666">=</span> [<span style="color: #008000">self</span> path],
-        ext <span style="color: #666666">=</span> path.<span style="color: #0000FF">match</span>(<span style="color: #BB6688">/\.(\w+)$/</span>);
-    <span style="color: #008000; font-weight: bold">return</span> ext <span style="color: #666666">?</span> ext[<span style="color: #666666">1</span>] <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">pathExtension</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">path</span><span class="p">],</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sr">/\.(\w+)$/</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">ext</span> <span class="o">?</span> <span class="n">ext</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPURL</span>)<span style="color: #0000FF">standardizedURL</span>
-{
-    <span style="color: #008000; font-weight: bold">return</span> [CPURL URLWithString<span style="color: #666666">:</span><span style="color: #0000FF">format</span>(<span style="color: #0000FF">parse</span>(_relative)) relativeToURL<span style="color: #666666">:</span>_base];
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span><span class="nf">standardizedURL</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">CPURL</span> <span class="n">URLWithString</span><span class="o">:</span><span class="nf">format</span><span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">_relative</span><span class="p">))</span> <span class="n">relativeToURL</span><span class="o">:</span><span class="n">_base</span><span class="p">];</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isFileURL</span>
-{
-    <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> scheme] <span style="color: #666666">===</span> <span style="color: #BA2121">&quot;file&quot;</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isFileURL</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">scheme</span><span class="p">]</span> <span class="o">===</span> <span class="s">&quot;file&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">description</span>
-{
-    <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> absoluteString];
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">description</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">resourceValueForKey:</span>(<span style="color: #B00040">CPString</span>)aKey
-{
-    <span style="color: #008000; font-weight: bold">return</span> [_resourceValues objectForKey<span style="color: #666666">:</span>aKey];
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">resourceValueForKey:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aKey
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_resourceValues</span> <span class="n">objectForKey</span><span class="o">:</span><span class="n">aKey</span><span class="p">];</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">setResourceValue:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">forKey:</span>(<span style="color: #B00040">CPString</span>)aKey
-{
-    [_resourceValues setObject<span style="color: #666666">:</span>anObject forKey<span style="color: #666666">:</span>aKey];
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">setResourceValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">forKey:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aKey
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">_resourceValues</span> <span class="n">setObject</span><span class="o">:</span><span class="n">anObject</span> <span class="n">forKey</span><span class="o">:</span><span class="n">aKey</span><span class="p">];</span>
+<span class="p">}</span>
 
-<span style="color: #008000; font-weight: bold">@end</span>
+<span class="k">@end</span>
 
-<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPURL</span> (<span style="color: #A0A000">CPCoding</span>)
+<span class="k">@implementation</span> <span class="nc">CPURL</span> <span class="p">(</span><span class="nl">CPCoding</span>)
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithCoder:</span>(<span style="color: #B00040">CPCoder</span>)aCoder
-{
-    _base <span style="color: #666666">=</span> [aCoder decodeObjectForKey<span style="color: #666666">:</span><span style="color: #BA2121">&quot;CPURLBaseKey&quot;</span>];
-    _relative <span style="color: #666666">=</span> [aCoder decodeObjectForKey<span style="color: #666666">:</span><span style="color: #BA2121">&quot;CPURLRelativeKey&quot;</span>];
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithCoder:</span><span class="p">(</span><span class="kt">CPCoder</span><span class="p">)</span>aCoder
+<span class="p">{</span>
+    <span class="n">_base</span> <span class="o">=</span> <span class="p">[</span><span class="n">aCoder</span> <span class="n">decodeObjectForKey</span><span class="o">:</span><span class="s">&quot;CPURLBaseKey&quot;</span><span class="p">];</span>
+    <span class="n">_relative</span> <span class="o">=</span> <span class="p">[</span><span class="n">aCoder</span> <span class="n">decodeObjectForKey</span><span class="o">:</span><span class="s">&quot;CPURLRelativeKey&quot;</span><span class="p">];</span>
+    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">encodeWithCoder:</span>(<span style="color: #B00040">CPCoder</span>)aCoder
-{
-    [aCoder encodeObject<span style="color: #666666">:</span>_base forKey<span style="color: #666666">:</span><span style="color: #BA2121">&quot;CPURLBaseKey&quot;</span>];
-    [aCoder encodeObject<span style="color: #666666">:</span>_relative forKey<span style="color: #666666">:</span><span style="color: #BA2121">&quot;CPURLRelativeKey&quot;</span>];
-}
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">encodeWithCoder:</span><span class="p">(</span><span class="kt">CPCoder</span><span class="p">)</span>aCoder
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">aCoder</span> <span class="n">encodeObject</span><span class="o">:</span><span class="n">_base</span> <span class="n">forKey</span><span class="o">:</span><span class="s">&quot;CPURLBaseKey&quot;</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">aCoder</span> <span class="n">encodeObject</span><span class="o">:</span><span class="n">_relative</span> <span class="n">forKey</span><span class="o">:</span><span class="s">&quot;CPURLRelativeKey&quot;</span><span class="p">];</span>
+<span class="p">}</span>
 
-<span style="color: #008000; font-weight: bold">@end</span>
+<span class="k">@end</span>
 
-<span style="color: #408080; font-style: italic">// original code: http://code.google.com/p/js-uri/</span>
+<span class="c1">// original code: http://code.google.com/p/js-uri/</span>
 
-<span style="color: #408080; font-style: italic">// Based on the regex in RFC2396 Appendix B.</span>
-<span style="color: #008000; font-weight: bold">var</span> URI_RE <span style="color: #666666">=</span> <span style="color: #BB6688">/^(?:([^:\/?\#]+):)?(?:\/\/([^\/?\#]*))?([^?\#]*)(?:\?([^\#]*))?(?:\#(.*))?/</span>;
+<span class="c1">// Based on the regex in RFC2396 Appendix B.</span>
+<span class="kd">var</span> <span class="n">URI_RE</span> <span class="o">=</span> <span class="sr">/^(?:([^:\/?\#]+):)?(?:\/\/([^\/?\#]*))?([^?\#]*)(?:\?([^\#]*))?(?:\#(.*))?/</span><span class="p">;</span>
 
-<span style="color: #408080; font-style: italic">/**</span>
-<span style="color: #408080; font-style: italic"> * Uniform Resource Identifier (URI) - RFC3986</span>
-<span style="color: #408080; font-style: italic"> */</span>
-<span style="color: #008000; font-weight: bold">var</span> URI <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(str) {
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>str) str <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
-    <span style="color: #008000; font-weight: bold">var</span> result <span style="color: #666666">=</span> str.<span style="color: #0000FF">match</span>(URI_RE);
-    <span style="color: #008000">this</span>.scheme <span style="color: #666666">=</span> result[<span style="color: #666666">1</span>] <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">null</span>;
-    <span style="color: #008000">this</span>.authority <span style="color: #666666">=</span> result[<span style="color: #666666">2</span>] <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">null</span>;
-    <span style="color: #008000">this</span>.path <span style="color: #666666">=</span> result[<span style="color: #666666">3</span>] <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">null</span>;
-    <span style="color: #008000">this</span>.query <span style="color: #666666">=</span> result[<span style="color: #666666">4</span>] <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">null</span>;
-    <span style="color: #008000">this</span>.fragment <span style="color: #666666">=</span> result[<span style="color: #666666">5</span>] <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">null</span>;
-}
+<span class="cm">/**</span>
+<span class="cm"> * Uniform Resource Identifier (URI) - RFC3986</span>
+<span class="cm"> */</span>
+<span class="kd">var</span> <span class="n">URI</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">str</span><span class="p">)</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">result</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="n">URI_RE</span><span class="p">);</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">scheme</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">authority</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">fragment</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #408080; font-style: italic">/**</span>
-<span style="color: #408080; font-style: italic"> * Convert the URI to a String.</span>
-<span style="color: #408080; font-style: italic"> */</span>
-URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> () {
-    <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
+<span class="cm">/**</span>
+<span class="cm"> * Convert the URI to a String.</span>
+<span class="cm"> */</span>
+<span class="n">URI</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">toString</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
  
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">this</span>.scheme)
-        str <span style="color: #666666">+=</span> <span style="color: #008000">this</span>.scheme <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;:&quot;</span>;
+    <span class="k">if</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">scheme</span><span class="p">)</span>
+        <span class="n">str</span> <span class="o">+=</span> <span class="nb">this</span><span class="p">.</span><span class="n">scheme</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span><span class="p">;</span>
 
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">this</span>.authority)
-        str <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;//&quot;</span> <span style="color: #666666">+</span> <span style="color: #008000">this</span>.authority;
+    <span class="k">if</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">authority</span><span class="p">)</span>
+        <span class="n">str</span> <span class="o">+=</span> <span class="s">&quot;//&quot;</span> <span class="o">+</span> <span class="nb">this</span><span class="p">.</span><span class="n">authority</span><span class="p">;</span>
 
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">this</span>.path)
-        str <span style="color: #666666">+=</span> <span style="color: #008000">this</span>.path;
+    <span class="k">if</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">str</span> <span class="o">+=</span> <span class="nb">this</span><span class="p">.</span><span class="n">path</span><span class="p">;</span>
 
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">this</span>.query)
-        str <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;?&quot;</span> <span style="color: #666666">+</span> <span style="color: #008000">this</span>.query;
+    <span class="k">if</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">str</span> <span class="o">+=</span> <span class="s">&quot;?&quot;</span> <span class="o">+</span> <span class="nb">this</span><span class="p">.</span><span class="n">query</span><span class="p">;</span>
 
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">this</span>.fragment)
-        str <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;#&quot;</span> <span style="color: #666666">+</span> <span style="color: #008000">this</span>.fragment;
+    <span class="k">if</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">fragment</span><span class="p">)</span>
+        <span class="n">str</span> <span class="o">+=</span> <span class="s">&quot;#&quot;</span> <span class="o">+</span> <span class="nb">this</span><span class="p">.</span><span class="n">fragment</span><span class="p">;</span>
  
-    <span style="color: #008000; font-weight: bold">return</span> str;
-}
+    <span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color: #008000; font-weight: bold">var</span> parse <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(uri) {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">URI</span>(uri);
-}
+<span class="kd">var</span> <span class="n">parse</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">URI</span><span class="p">(</span><span class="n">uri</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span style="color: #008000; font-weight: bold">var</span> unescape <span style="color: #666666">=</span>  <span style="color: #008000; font-weight: bold">function</span>(str, plus) {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">decodeURI</span>(str).<span style="color: #0000FF">replace</span>(<span style="color: #BB6688">/\+/g</span>, <span style="color: #BA2121">&quot; &quot;</span>);
-}
+<span class="kd">var</span> <span class="n">unescape</span> <span class="o">=</span>  <span class="kd">function</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">plus</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">decodeURI</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="sr">/\+/g</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span style="color: #008000; font-weight: bold">var</span> unescapeComponent <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(str, plus) {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">decodeURIComponent</span>(str).<span style="color: #0000FF">replace</span>(<span style="color: #BB6688">/\+/g</span>, <span style="color: #BA2121">&quot; &quot;</span>);
-}
+<span class="kd">var</span> <span class="n">unescapeComponent</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">plus</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="sr">/\+/g</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span style="color: #408080; font-style: italic">// from Chiron&#39;s HTTP module:</span>
+<span class="c1">// from Chiron&#39;s HTTP module:</span>
 
-<span style="color: #408080; font-style: italic">/**** keys</span>
-<span style="color: #408080; font-style: italic">    members of a parsed URI object.</span>
-<span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> keys <span style="color: #666666">=</span> [
-    <span style="color: #BA2121">&quot;url&quot;</span>,
-    <span style="color: #BA2121">&quot;protocol&quot;</span>,
-    <span style="color: #BA2121">&quot;authorityRoot&quot;</span>,
-    <span style="color: #BA2121">&quot;authority&quot;</span>,
-        <span style="color: #BA2121">&quot;userInfo&quot;</span>,
-            <span style="color: #BA2121">&quot;user&quot;</span>,
-            <span style="color: #BA2121">&quot;password&quot;</span>,
-        <span style="color: #BA2121">&quot;domain&quot;</span>,
-            <span style="color: #BA2121">&quot;domains&quot;</span>,
-        <span style="color: #BA2121">&quot;port&quot;</span>,
-    <span style="color: #BA2121">&quot;path&quot;</span>,
-        <span style="color: #BA2121">&quot;root&quot;</span>,
-        <span style="color: #BA2121">&quot;directory&quot;</span>,
-            <span style="color: #BA2121">&quot;directories&quot;</span>,
-        <span style="color: #BA2121">&quot;file&quot;</span>,
-    <span style="color: #BA2121">&quot;query&quot;</span>,
-    <span style="color: #BA2121">&quot;anchor&quot;</span>
-];
+<span class="cm">/**** keys</span>
+<span class="cm">    members of a parsed URI object.</span>
+<span class="cm">*/</span>
+<span class="kd">var</span> <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">&quot;url&quot;</span><span class="p">,</span>
+    <span class="s">&quot;protocol&quot;</span><span class="p">,</span>
+    <span class="s">&quot;authorityRoot&quot;</span><span class="p">,</span>
+    <span class="s">&quot;authority&quot;</span><span class="p">,</span>
+        <span class="s">&quot;userInfo&quot;</span><span class="p">,</span>
+            <span class="s">&quot;user&quot;</span><span class="p">,</span>
+            <span class="s">&quot;password&quot;</span><span class="p">,</span>
+        <span class="s">&quot;domain&quot;</span><span class="p">,</span>
+            <span class="s">&quot;domains&quot;</span><span class="p">,</span>
+        <span class="s">&quot;port&quot;</span><span class="p">,</span>
+    <span class="s">&quot;path&quot;</span><span class="p">,</span>
+        <span class="s">&quot;root&quot;</span><span class="p">,</span>
+        <span class="s">&quot;directory&quot;</span><span class="p">,</span>
+            <span class="s">&quot;directories&quot;</span><span class="p">,</span>
+        <span class="s">&quot;file&quot;</span><span class="p">,</span>
+    <span class="s">&quot;query&quot;</span><span class="p">,</span>
+    <span class="s">&quot;anchor&quot;</span>
+<span class="p">];</span>
 
-<span style="color: #408080; font-style: italic">/**** expressionKeys</span>
-<span style="color: #408080; font-style: italic">    members of a parsed URI object that you get</span>
-<span style="color: #408080; font-style: italic">    from evaluting the strict regular expression.</span>
-<span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> expressionKeys <span style="color: #666666">=</span> [
-    <span style="color: #BA2121">&quot;url&quot;</span>,
-    <span style="color: #BA2121">&quot;protocol&quot;</span>,
-    <span style="color: #BA2121">&quot;authorityRoot&quot;</span>,
-    <span style="color: #BA2121">&quot;authority&quot;</span>,
-        <span style="color: #BA2121">&quot;userInfo&quot;</span>,
-            <span style="color: #BA2121">&quot;user&quot;</span>,
-            <span style="color: #BA2121">&quot;password&quot;</span>,
-        <span style="color: #BA2121">&quot;domain&quot;</span>,
-        <span style="color: #BA2121">&quot;port&quot;</span>,
-    <span style="color: #BA2121">&quot;path&quot;</span>,
-        <span style="color: #BA2121">&quot;root&quot;</span>,
-        <span style="color: #BA2121">&quot;directory&quot;</span>,
-        <span style="color: #BA2121">&quot;file&quot;</span>,
-    <span style="color: #BA2121">&quot;query&quot;</span>,
-    <span style="color: #BA2121">&quot;anchor&quot;</span>
-];
+<span class="cm">/**** expressionKeys</span>
+<span class="cm">    members of a parsed URI object that you get</span>
+<span class="cm">    from evaluting the strict regular expression.</span>
+<span class="cm">*/</span>
+<span class="kd">var</span> <span class="n">expressionKeys</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">&quot;url&quot;</span><span class="p">,</span>
+    <span class="s">&quot;protocol&quot;</span><span class="p">,</span>
+    <span class="s">&quot;authorityRoot&quot;</span><span class="p">,</span>
+    <span class="s">&quot;authority&quot;</span><span class="p">,</span>
+        <span class="s">&quot;userInfo&quot;</span><span class="p">,</span>
+            <span class="s">&quot;user&quot;</span><span class="p">,</span>
+            <span class="s">&quot;password&quot;</span><span class="p">,</span>
+        <span class="s">&quot;domain&quot;</span><span class="p">,</span>
+        <span class="s">&quot;port&quot;</span><span class="p">,</span>
+    <span class="s">&quot;path&quot;</span><span class="p">,</span>
+        <span class="s">&quot;root&quot;</span><span class="p">,</span>
+        <span class="s">&quot;directory&quot;</span><span class="p">,</span>
+        <span class="s">&quot;file&quot;</span><span class="p">,</span>
+    <span class="s">&quot;query&quot;</span><span class="p">,</span>
+    <span class="s">&quot;anchor&quot;</span>
+<span class="p">];</span>
 
-<span style="color: #408080; font-style: italic">/**** strictExpression</span>
-<span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> strictExpression <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #008000">RegExp</span>( <span style="color: #408080; font-style: italic">/* url */</span>
-    <span style="color: #BA2121">&quot;^&quot;</span> <span style="color: #666666">+</span>
-    <span style="color: #BA2121">&quot;(?:&quot;</span> <span style="color: #666666">+</span>
-        <span style="color: #BA2121">&quot;([^:/?#]+):&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* protocol */</span>
-    <span style="color: #BA2121">&quot;)?&quot;</span> <span style="color: #666666">+</span>
-    <span style="color: #BA2121">&quot;(?:&quot;</span> <span style="color: #666666">+</span>
-        <span style="color: #BA2121">&quot;(//)&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* authorityRoot */</span>
-        <span style="color: #BA2121">&quot;(&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* authority */</span>
-            <span style="color: #BA2121">&quot;(?:&quot;</span> <span style="color: #666666">+</span>
-                <span style="color: #BA2121">&quot;(&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* userInfo */</span>
-                    <span style="color: #BA2121">&quot;([^:@]*)&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* user */</span>
-                    <span style="color: #BA2121">&quot;:?&quot;</span> <span style="color: #666666">+</span>
-                    <span style="color: #BA2121">&quot;([^:@]*)&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* password */</span>
-                <span style="color: #BA2121">&quot;)?&quot;</span> <span style="color: #666666">+</span>
-                <span style="color: #BA2121">&quot;@&quot;</span> <span style="color: #666666">+</span>
-            <span style="color: #BA2121">&quot;)?&quot;</span> <span style="color: #666666">+</span>
-            <span style="color: #BA2121">&quot;([^:/?#]*)&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* domain */</span>
-            <span style="color: #BA2121">&quot;(?::(</span><span style="color: #BB6622; font-weight: bold">\\</span><span style="color: #BA2121">d*))?&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* port */</span>
-        <span style="color: #BA2121">&quot;)&quot;</span> <span style="color: #666666">+</span>
-    <span style="color: #BA2121">&quot;)?&quot;</span> <span style="color: #666666">+</span>
-    <span style="color: #BA2121">&quot;(&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* path */</span>
-        <span style="color: #BA2121">&quot;(/?)&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* root */</span>
-        <span style="color: #BA2121">&quot;((?:[^?#/]*/)*)&quot;</span> <span style="color: #666666">+</span>
-        <span style="color: #BA2121">&quot;([^?#]*)&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* file */</span>
-    <span style="color: #BA2121">&quot;)&quot;</span> <span style="color: #666666">+</span>
-    <span style="color: #BA2121">&quot;(?:</span><span style="color: #BB6622; font-weight: bold">\\</span><span style="color: #BA2121">?([^#]*))?&quot;</span> <span style="color: #666666">+</span> <span style="color: #408080; font-style: italic">/* query */</span>
-    <span style="color: #BA2121">&quot;(?:#(.*))?&quot;</span> <span style="color: #408080; font-style: italic">/*anchor */</span>
-);
+<span class="cm">/**** strictExpression</span>
+<span class="cm">*/</span>
+<span class="kd">var</span> <span class="n">strictExpression</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span> <span class="cm">/* url */</span>
+    <span class="s">&quot;^&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;(?:&quot;</span> <span class="o">+</span>
+        <span class="s">&quot;([^:/?#]+):&quot;</span> <span class="o">+</span> <span class="cm">/* protocol */</span>
+    <span class="s">&quot;)?&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;(?:&quot;</span> <span class="o">+</span>
+        <span class="s">&quot;(//)&quot;</span> <span class="o">+</span> <span class="cm">/* authorityRoot */</span>
+        <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="cm">/* authority */</span>
+            <span class="s">&quot;(?:&quot;</span> <span class="o">+</span>
+                <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="cm">/* userInfo */</span>
+                    <span class="s">&quot;([^:@]*)&quot;</span> <span class="o">+</span> <span class="cm">/* user */</span>
+                    <span class="s">&quot;:?&quot;</span> <span class="o">+</span>
+                    <span class="s">&quot;([^:@]*)&quot;</span> <span class="o">+</span> <span class="cm">/* password */</span>
+                <span class="s">&quot;)?&quot;</span> <span class="o">+</span>
+                <span class="s">&quot;@&quot;</span> <span class="o">+</span>
+            <span class="s">&quot;)?&quot;</span> <span class="o">+</span>
+            <span class="s">&quot;([^:/?#]*)&quot;</span> <span class="o">+</span> <span class="cm">/* domain */</span>
+            <span class="s">&quot;(?::(</span><span class="se">\\</span><span class="s">d*))?&quot;</span> <span class="o">+</span> <span class="cm">/* port */</span>
+        <span class="s">&quot;)&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;)?&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="cm">/* path */</span>
+        <span class="s">&quot;(/?)&quot;</span> <span class="o">+</span> <span class="cm">/* root */</span>
+        <span class="s">&quot;((?:[^?#/]*/)*)&quot;</span> <span class="o">+</span>
+        <span class="s">&quot;([^?#]*)&quot;</span> <span class="o">+</span> <span class="cm">/* file */</span>
+    <span class="s">&quot;)&quot;</span> <span class="o">+</span>
+    <span class="s">&quot;(?:</span><span class="se">\\</span><span class="s">?([^#]*))?&quot;</span> <span class="o">+</span> <span class="cm">/* query */</span>
+    <span class="s">&quot;(?:#(.*))?&quot;</span> <span class="cm">/*anchor */</span>
+<span class="p">);</span>
 
-<span style="color: #408080; font-style: italic">/**** Parser</span>
-<span style="color: #408080; font-style: italic">    returns a URI parser function given</span>
-<span style="color: #408080; font-style: italic">    a regular expression that renders </span>
-<span style="color: #408080; font-style: italic">    `expressionKeys` and returns an `Object`</span>
-<span style="color: #408080; font-style: italic">    mapping all `keys` to values.</span>
-<span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> Parser <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> (expression) {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">function</span> (url) {
-        <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000; font-weight: bold">typeof</span> url <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;undefined&quot;</span>)
-            <span style="color: #008000; font-weight: bold">throw</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #008000">Error</span>(<span style="color: #BA2121">&quot;HttpError: URL is undefined&quot;</span>);
-        <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000; font-weight: bold">typeof</span> url <span style="color: #666666">!=</span> <span style="color: #BA2121">&quot;string&quot;</span>) <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #008000">Object</span>(url);
+<span class="cm">/**** Parser</span>
+<span class="cm">    returns a URI parser function given</span>
+<span class="cm">    a regular expression that renders </span>
+<span class="cm">    `expressionKeys` and returns an `Object`</span>
+<span class="cm">    mapping all `keys` to values.</span>
+<span class="cm">*/</span>
+<span class="kd">var</span> <span class="n">Parser</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="n">url</span> <span class="o">==</span> <span class="s">&quot;undefined&quot;</span><span class="p">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s">&quot;HttpError: URL is undefined&quot;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="n">url</span> <span class="o">!=</span> <span class="s">&quot;string&quot;</span><span class="p">)</span> <span class="k">return</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
 
-        <span style="color: #008000; font-weight: bold">var</span> items <span style="color: #666666">=</span> {};
-        <span style="color: #008000; font-weight: bold">var</span> parts <span style="color: #666666">=</span> expression.<span style="color: #0000FF">exec</span>(url);
+        <span class="kd">var</span> <span class="n">items</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="kd">var</span> <span class="n">parts</span> <span class="o">=</span> <span class="n">expression</span><span class="p">.</span><span class="nf">exec</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
 
-        <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> parts.length; i<span style="color: #666666">++</span>) {
-            items[expressionKeys[i]] <span style="color: #666666">=</span> parts[i] <span style="color: #666666">?</span> parts[i] <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>;
-        }
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">parts</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">items</span><span class="p">[</span><span class="n">expressionKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">?</span> <span class="n">parts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        items.root <span style="color: #666666">=</span> (items.root <span style="color: #666666">||</span> items.authorityRoot) <span style="color: #666666">?</span> <span style="color: #BA2121">&#39;/&#39;</span> <span style="color: #666666">:</span> <span style="color: #BA2121">&#39;&#39;</span>;
+        <span class="n">items</span><span class="p">.</span><span class="n">root</span> <span class="o">=</span> <span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">root</span> <span class="o">||</span> <span class="n">items</span><span class="p">.</span><span class="n">authorityRoot</span><span class="p">)</span> <span class="o">?</span> <span class="sc">&#39;/&#39;</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
 
-        items.directories <span style="color: #666666">=</span> items.directory.<span style="color: #0000FF">split</span>(<span style="color: #BA2121">&quot;/&quot;</span>);
-        <span style="color: #008000; font-weight: bold">if</span> (items.directories[items.directories.length <span style="color: #666666">-</span> <span style="color: #666666">1</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;&quot;</span>) {
-            items.directories.<span style="color: #0000FF">pop</span>();
-        }
+        <span class="n">items</span><span class="p">.</span><span class="n">directories</span> <span class="o">=</span> <span class="n">items</span><span class="p">.</span><span class="n">directory</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">directories</span><span class="p">[</span><span class="n">items</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">items</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span>
+        <span class="p">}</span>
 
-        <span style="color: #408080; font-style: italic">/* normalize */</span>
-        <span style="color: #008000; font-weight: bold">var</span> directories <span style="color: #666666">=</span> [];
-        <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> items.directories.length; i<span style="color: #666666">++</span>) {
-            <span style="color: #008000; font-weight: bold">var</span> directory <span style="color: #666666">=</span> items.directories[i];
-            <span style="color: #008000; font-weight: bold">if</span> (directory <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;.&#39;</span>) {
-            } <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (directory <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;..&#39;</span>) {
-                <span style="color: #008000; font-weight: bold">if</span> (directories.length <span style="color: #666666">&amp;&amp;</span> directories[directories.length <span style="color: #666666">-</span> <span style="color: #666666">1</span>] <span style="color: #666666">!=</span> <span style="color: #BA2121">&#39;..&#39;</span>)
-                    directories.<span style="color: #0000FF">pop</span>();
-                <span style="color: #008000; font-weight: bold">else</span>
-                    directories.<span style="color: #0000FF">push</span>(<span style="color: #BA2121">&#39;..&#39;</span>);
-            } <span style="color: #008000; font-weight: bold">else</span> {
-                directories.<span style="color: #0000FF">push</span>(directory);
-            }
-        }
-        items.directories <span style="color: #666666">=</span> directories;
+        <span class="cm">/* normalize */</span>
+        <span class="kd">var</span> <span class="n">directories</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">items</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="n">directory</span> <span class="o">=</span> <span class="n">items</span><span class="p">.</span><span class="n">directories</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">directory</span> <span class="o">==</span> <span class="sc">&#39;.&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">directory</span> <span class="o">==</span> <span class="s1">&#39;..&#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">directories</span><span class="p">.</span><span class="n">length</span> <span class="o">&amp;&amp;</span> <span class="n">directories</span><span class="p">[</span><span class="n">directories</span><span class="p">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;..&#39;</span><span class="p">)</span>
+                    <span class="n">directories</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span>
+                <span class="k">else</span>
+                    <span class="n">directories</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">directories</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="n">directory</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">items</span><span class="p">.</span><span class="n">directories</span> <span class="o">=</span> <span class="n">directories</span><span class="p">;</span>
 
-        items.domains <span style="color: #666666">=</span> items.domain.<span style="color: #0000FF">split</span>(<span style="color: #BA2121">&quot;.&quot;</span>);
+        <span class="n">items</span><span class="p">.</span><span class="n">domains</span> <span class="o">=</span> <span class="n">items</span><span class="p">.</span><span class="n">domain</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">);</span>
 
-        <span style="color: #008000; font-weight: bold">return</span> items;
-    };
-};
+        <span class="k">return</span> <span class="n">items</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
 
-<span style="color: #408080; font-style: italic">/**** parse</span>
-<span style="color: #408080; font-style: italic">    a strict URI parser.</span>
-<span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> parse <span style="color: #666666">=</span> <span style="color: #0000FF">Parser</span>(strictExpression);
+<span class="cm">/**** parse</span>
+<span class="cm">    a strict URI parser.</span>
+<span class="cm">*/</span>
+<span class="kd">var</span> <span class="n">parse</span> <span class="o">=</span> <span class="nf">Parser</span><span class="p">(</span><span class="n">strictExpression</span><span class="p">);</span>
 
-<span style="color: #408080; font-style: italic">/**** format</span>
-<span style="color: #408080; font-style: italic">    accepts a parsed URI object and returns</span>
-<span style="color: #408080; font-style: italic">    the corresponding string.</span>
-<span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> format <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> (object) {
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000; font-weight: bold">typeof</span>(object) <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;undefined&#39;</span>)
-        <span style="color: #008000; font-weight: bold">throw</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #008000">Error</span>(<span style="color: #BA2121">&quot;UrlError: URL undefined for urls#format&quot;</span>);
-    <span style="color: #008000; font-weight: bold">if</span> (object <span style="color: #008000; font-weight: bold">instanceof</span> <span style="color: #008000">String</span> <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">typeof</span>(object) <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;string&#39;</span>)
-        <span style="color: #008000; font-weight: bold">return</span> object;
-    <span style="color: #008000; font-weight: bold">var</span> domain <span style="color: #666666">=</span>
-        object.domains <span style="color: #666666">?</span>
-        object.domains.<span style="color: #0000FF">join</span>(<span style="color: #BA2121">&quot;.&quot;</span>) <span style="color: #666666">:</span>
-        object.domain;
-    <span style="color: #008000; font-weight: bold">var</span> userInfo <span style="color: #666666">=</span> (
-            object.user <span style="color: #666666">||</span>
-            object.password 
-        ) <span style="color: #666666">?</span>
-        (
-            (object.user <span style="color: #666666">||</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span> 
-            (object.password <span style="color: #666666">?</span> <span style="color: #BA2121">&quot;:&quot;</span> <span style="color: #666666">+</span> object.password <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>) 
-        ) <span style="color: #666666">:</span>
-        object.userInfo;
-    <span style="color: #008000; font-weight: bold">var</span> authority <span style="color: #666666">=</span> (
-            userInfo <span style="color: #666666">||</span>
-            domain <span style="color: #666666">||</span>
-            object.port
-        ) <span style="color: #666666">?</span> (
-            (userInfo <span style="color: #666666">?</span> userInfo <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;@&quot;</span> <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span>
-            (domain <span style="color: #666666">||</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span> 
-            (object.port <span style="color: #666666">?</span> <span style="color: #BA2121">&quot;:&quot;</span> <span style="color: #666666">+</span> object.port <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>)
-        ) <span style="color: #666666">:</span>
-        object.authority;
-    <span style="color: #008000; font-weight: bold">var</span> directory <span style="color: #666666">=</span>
-        object.directories <span style="color: #666666">?</span>
-        object.directories.<span style="color: #0000FF">join</span>(<span style="color: #BA2121">&quot;/&quot;</span>) <span style="color: #666666">:</span>
-        object.directory;
-    <span style="color: #008000; font-weight: bold">var</span> path <span style="color: #666666">=</span>
-        directory <span style="color: #666666">||</span> object.file <span style="color: #666666">?</span>
-        (
-            (directory <span style="color: #666666">?</span> directory <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;/&quot;</span> <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span>
-            (object.file <span style="color: #666666">||</span> <span style="color: #BA2121">&quot;&quot;</span>)
-        ) <span style="color: #666666">:</span>
-        object.path;
-    <span style="color: #008000; font-weight: bold">return</span> (
-        (object.protocol <span style="color: #666666">?</span> object.protocol <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;:&quot;</span> <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span>
-        (authority <span style="color: #666666">?</span> <span style="color: #BA2121">&quot;//&quot;</span> <span style="color: #666666">+</span> authority <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span>
-        (object.root <span style="color: #666666">||</span> (authority <span style="color: #666666">&amp;&amp;</span> path) <span style="color: #666666">?</span> <span style="color: #BA2121">&quot;/&quot;</span> <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span>
-        (path <span style="color: #666666">?</span> path <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span>
-        (object.query <span style="color: #666666">?</span> <span style="color: #BA2121">&quot;?&quot;</span> <span style="color: #666666">+</span> object.query <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span>
-        (object.anchor <span style="color: #666666">?</span> <span style="color: #BA2121">&quot;#&quot;</span> <span style="color: #666666">+</span> object.anchor <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>)
-    ) <span style="color: #666666">||</span> object.url <span style="color: #666666">||</span> <span style="color: #BA2121">&quot;&quot;</span>;
-};
+<span class="cm">/**** format</span>
+<span class="cm">    accepts a parsed URI object and returns</span>
+<span class="cm">    the corresponding string.</span>
+<span class="cm">*/</span>
+<span class="kd">var</span> <span class="n">format</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="n">object</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">object</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s">&quot;UrlError: URL undefined for urls#format&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">object</span> <span class="k">instanceof</span> <span class="nb">String</span> <span class="o">||</span> <span class="k">typeof</span><span class="p">(</span><span class="n">object</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">object</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">domain</span> <span class="o">=</span>
+        <span class="n">object</span><span class="p">.</span><span class="n">domains</span> <span class="o">?</span>
+        <span class="n">object</span><span class="p">.</span><span class="n">domains</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span> <span class="o">:</span>
+        <span class="n">object</span><span class="p">.</span><span class="n">domain</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">userInfo</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">object</span><span class="p">.</span><span class="n">user</span> <span class="o">||</span>
+            <span class="n">object</span><span class="p">.</span><span class="n">password</span> 
+        <span class="p">)</span> <span class="o">?</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">user</span> <span class="o">||</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> 
+            <span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">password</span> <span class="o">?</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">object</span><span class="p">.</span><span class="n">password</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> 
+        <span class="p">)</span> <span class="o">:</span>
+        <span class="n">object</span><span class="p">.</span><span class="n">userInfo</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">authority</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">userInfo</span> <span class="o">||</span>
+            <span class="n">domain</span> <span class="o">||</span>
+            <span class="n">object</span><span class="p">.</span><span class="n">port</span>
+        <span class="p">)</span> <span class="o">?</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">userInfo</span> <span class="o">?</span> <span class="n">userInfo</span> <span class="o">+</span> <span class="s">&quot;@&quot;</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+            <span class="p">(</span><span class="n">domain</span> <span class="o">||</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> 
+            <span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">port</span> <span class="o">?</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">object</span><span class="p">.</span><span class="n">port</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">:</span>
+        <span class="n">object</span><span class="p">.</span><span class="n">authority</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">directory</span> <span class="o">=</span>
+        <span class="n">object</span><span class="p">.</span><span class="n">directories</span> <span class="o">?</span>
+        <span class="n">object</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span> <span class="o">:</span>
+        <span class="n">object</span><span class="p">.</span><span class="n">directory</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">path</span> <span class="o">=</span>
+        <span class="n">directory</span> <span class="o">||</span> <span class="n">object</span><span class="p">.</span><span class="n">file</span> <span class="o">?</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">directory</span> <span class="o">?</span> <span class="n">directory</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+            <span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">file</span> <span class="o">||</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">:</span>
+        <span class="n">object</span><span class="p">.</span><span class="n">path</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">protocol</span> <span class="o">?</span> <span class="n">object</span><span class="p">.</span><span class="n">protocol</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+        <span class="p">(</span><span class="n">authority</span> <span class="o">?</span> <span class="s">&quot;//&quot;</span> <span class="o">+</span> <span class="n">authority</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+        <span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">root</span> <span class="o">||</span> <span class="p">(</span><span class="n">authority</span> <span class="o">&amp;&amp;</span> <span class="n">path</span><span class="p">)</span> <span class="o">?</span> <span class="s">&quot;/&quot;</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+        <span class="p">(</span><span class="n">path</span> <span class="o">?</span> <span class="n">path</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+        <span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">query</span> <span class="o">?</span> <span class="s">&quot;?&quot;</span> <span class="o">+</span> <span class="n">object</span><span class="p">.</span><span class="n">query</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+        <span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">anchor</span> <span class="o">?</span> <span class="s">&quot;#&quot;</span> <span class="o">+</span> <span class="n">object</span><span class="p">.</span><span class="n">anchor</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+    <span class="p">)</span> <span class="o">||</span> <span class="n">object</span><span class="p">.</span><span class="n">url</span> <span class="o">||</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span style="color: #408080; font-style: italic">/**** resolveObject</span>
-<span style="color: #408080; font-style: italic">    returns an object representing a URL resolved from</span>
-<span style="color: #408080; font-style: italic">    a relative location and a source location.</span>
-<span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> resolveObject <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> (source, relative) {
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>source) 
-        <span style="color: #008000; font-weight: bold">return</span> relative;
+<span class="cm">/**** resolveObject</span>
+<span class="cm">    returns an object representing a URL resolved from</span>
+<span class="cm">    a relative location and a source location.</span>
+<span class="cm">*/</span>
+<span class="kd">var</span> <span class="n">resolveObject</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">relative</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">source</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="n">relative</span><span class="p">;</span>
 
-    source <span style="color: #666666">=</span> <span style="color: #0000FF">parse</span>(source);
-    relative <span style="color: #666666">=</span> <span style="color: #0000FF">parse</span>(relative);
+    <span class="n">source</span> <span class="o">=</span> <span class="nf">parse</span><span class="p">(</span><span class="n">source</span><span class="p">);</span>
+    <span class="n">relative</span> <span class="o">=</span> <span class="nf">parse</span><span class="p">(</span><span class="n">relative</span><span class="p">);</span>
 
-    <span style="color: #008000; font-weight: bold">if</span> (relative.url <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;&quot;</span>)
-        <span style="color: #008000; font-weight: bold">return</span> source;
+    <span class="k">if</span> <span class="p">(</span><span class="n">relative</span><span class="p">.</span><span class="n">url</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">source</span><span class="p">;</span>
 
-    <span style="color: #008000; font-weight: bold">delete</span> source.url;
-    <span style="color: #008000; font-weight: bold">delete</span> source.authority;
-    <span style="color: #008000; font-weight: bold">delete</span> source.domain;
-    <span style="color: #008000; font-weight: bold">delete</span> source.userInfo;
-    <span style="color: #008000; font-weight: bold">delete</span> source.path;
-    <span style="color: #008000; font-weight: bold">delete</span> source.directory;
+    <span class="k">delete</span> <span class="n">source</span><span class="p">.</span><span class="n">url</span><span class="p">;</span>
+    <span class="k">delete</span> <span class="n">source</span><span class="p">.</span><span class="n">authority</span><span class="p">;</span>
+    <span class="k">delete</span> <span class="n">source</span><span class="p">.</span><span class="n">domain</span><span class="p">;</span>
+    <span class="k">delete</span> <span class="n">source</span><span class="p">.</span><span class="n">userInfo</span><span class="p">;</span>
+    <span class="k">delete</span> <span class="n">source</span><span class="p">.</span><span class="n">path</span><span class="p">;</span>
+    <span class="k">delete</span> <span class="n">source</span><span class="p">.</span><span class="n">directory</span><span class="p">;</span>
 
-    <span style="color: #008000; font-weight: bold">if</span> (
-        relative.protocol <span style="color: #666666">&amp;&amp;</span> relative.protocol <span style="color: #666666">!=</span> source.protocol <span style="color: #666666">||</span>
-        relative.authority <span style="color: #666666">&amp;&amp;</span> relative.authority <span style="color: #666666">!=</span> source.authority
-    ) {
-        source <span style="color: #666666">=</span> relative;
-    } <span style="color: #008000; font-weight: bold">else</span> {
-        <span style="color: #008000; font-weight: bold">if</span> (relative.root) {
-            source.directories <span style="color: #666666">=</span> relative.directories;
-        } <span style="color: #008000; font-weight: bold">else</span> {
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">relative</span><span class="p">.</span><span class="n">protocol</span> <span class="o">&amp;&amp;</span> <span class="n">relative</span><span class="p">.</span><span class="n">protocol</span> <span class="o">!=</span> <span class="n">source</span><span class="p">.</span><span class="n">protocol</span> <span class="o">||</span>
+        <span class="n">relative</span><span class="p">.</span><span class="n">authority</span> <span class="o">&amp;&amp;</span> <span class="n">relative</span><span class="p">.</span><span class="n">authority</span> <span class="o">!=</span> <span class="n">source</span><span class="p">.</span><span class="n">authority</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">relative</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">relative</span><span class="p">.</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">source</span><span class="p">.</span><span class="n">directories</span> <span class="o">=</span> <span class="n">relative</span><span class="p">.</span><span class="n">directories</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 
-            <span style="color: #008000; font-weight: bold">var</span> directories <span style="color: #666666">=</span> relative.directories;
-            <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> directories.length; i<span style="color: #666666">++</span>) {
-                <span style="color: #008000; font-weight: bold">var</span> directory <span style="color: #666666">=</span> directories[i];
-                <span style="color: #008000; font-weight: bold">if</span> (directory <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;.&quot;</span>) {
-                } <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (directory <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;..&quot;</span>) {
-                    <span style="color: #008000; font-weight: bold">if</span> (source.directories.length) {
-                        source.directories.<span style="color: #0000FF">pop</span>();
-                    } <span style="color: #008000; font-weight: bold">else</span> {
-                        source.directories.<span style="color: #0000FF">push</span>(<span style="color: #BA2121">&#39;..&#39;</span>);
-                    }
-                } <span style="color: #008000; font-weight: bold">else</span> {
-                    source.directories.<span style="color: #0000FF">push</span>(directory);
-                }
-            }
+            <span class="kd">var</span> <span class="n">directories</span> <span class="o">=</span> <span class="n">relative</span><span class="p">.</span><span class="n">directories</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">directories</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="n">directory</span> <span class="o">=</span> <span class="n">directories</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">directory</span> <span class="o">==</span> <span class="s">&quot;.&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">directory</span> <span class="o">==</span> <span class="s">&quot;..&quot;</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="n">directory</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
 
-            <span style="color: #008000; font-weight: bold">if</span> (relative.file <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;.&quot;</span>) {
-                relative.file <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
-            } <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (relative.file <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;..&quot;</span>) {
-                source.directories.<span style="color: #0000FF">pop</span>();
-                relative.file <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
-            }
-        }
-    }
+            <span class="k">if</span> <span class="p">(</span><span class="n">relative</span><span class="p">.</span><span class="n">file</span> <span class="o">==</span> <span class="s">&quot;.&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">relative</span><span class="p">.</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">relative</span><span class="p">.</span><span class="n">file</span> <span class="o">==</span> <span class="s">&quot;..&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span>
+                <span class="n">relative</span><span class="p">.</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    <span style="color: #008000; font-weight: bold">if</span> (relative.root)
-        source.root <span style="color: #666666">=</span> relative.root;
-    <span style="color: #008000; font-weight: bold">if</span> (relative.protcol)
-        source.protocol <span style="color: #666666">=</span> relative.protocol;
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>(<span style="color: #666666">!</span>relative.path <span style="color: #666666">&amp;&amp;</span> relative.anchor))
-        source.file <span style="color: #666666">=</span> relative.file;
-    source.query <span style="color: #666666">=</span> relative.query;
-    source.anchor <span style="color: #666666">=</span> relative.anchor;
+    <span class="k">if</span> <span class="p">(</span><span class="n">relative</span><span class="p">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="n">source</span><span class="p">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">relative</span><span class="p">.</span><span class="n">root</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">relative</span><span class="p">.</span><span class="n">protcol</span><span class="p">)</span>
+        <span class="n">source</span><span class="p">.</span><span class="n">protocol</span> <span class="o">=</span> <span class="n">relative</span><span class="p">.</span><span class="n">protocol</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="n">relative</span><span class="p">.</span><span class="n">path</span> <span class="o">&amp;&amp;</span> <span class="n">relative</span><span class="p">.</span><span class="n">anchor</span><span class="p">))</span>
+        <span class="n">source</span><span class="p">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">relative</span><span class="p">.</span><span class="n">file</span><span class="p">;</span>
+    <span class="n">source</span><span class="p">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">relative</span><span class="p">.</span><span class="n">query</span><span class="p">;</span>
+    <span class="n">source</span><span class="p">.</span><span class="n">anchor</span> <span class="o">=</span> <span class="n">relative</span><span class="p">.</span><span class="n">anchor</span><span class="p">;</span>
 
-    <span style="color: #008000; font-weight: bold">return</span> source;
-};
+    <span class="k">return</span> <span class="n">source</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span style="color: #408080; font-style: italic">/**** relativeObject</span>
-<span style="color: #408080; font-style: italic">    returns an object representing a relative URL to</span>
-<span style="color: #408080; font-style: italic">    a given target URL from a source URL.</span>
-<span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> relativeObject <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> (source, target) {
-    target <span style="color: #666666">=</span> <span style="color: #0000FF">parse</span>(target);
-    source <span style="color: #666666">=</span> <span style="color: #0000FF">parse</span>(source);
+<span class="cm">/**** relativeObject</span>
+<span class="cm">    returns an object representing a relative URL to</span>
+<span class="cm">    a given target URL from a source URL.</span>
+<span class="cm">*/</span>
+<span class="kd">var</span> <span class="n">relativeObject</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="nf">parse</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="nf">parse</span><span class="p">(</span><span class="n">source</span><span class="p">);</span>
 
-    <span style="color: #008000; font-weight: bold">delete</span> target.url;
+    <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">url</span><span class="p">;</span>
 
-    <span style="color: #008000; font-weight: bold">if</span> (
-        target.protocol <span style="color: #666666">==</span> source.protocol <span style="color: #666666">&amp;&amp;</span>
-        target.authority <span style="color: #666666">==</span> source.authority
-    ) {
-        <span style="color: #008000; font-weight: bold">delete</span> target.protocol;
-        <span style="color: #008000; font-weight: bold">delete</span> target.authority;
-        <span style="color: #008000; font-weight: bold">delete</span> target.userInfo;
-        <span style="color: #008000; font-weight: bold">delete</span> target.user;
-        <span style="color: #008000; font-weight: bold">delete</span> target.password;
-        <span style="color: #008000; font-weight: bold">delete</span> target.domain;
-        <span style="color: #008000; font-weight: bold">delete</span> target.domains;
-        <span style="color: #008000; font-weight: bold">delete</span> target.port;
-        <span style="color: #008000; font-weight: bold">if</span> (
-            <span style="color: #666666">!!</span>target.root <span style="color: #666666">==</span> <span style="color: #666666">!!</span>source.root <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>(
-                target.root <span style="color: #666666">&amp;&amp;</span>
-                target.directories[<span style="color: #666666">0</span>] <span style="color: #666666">!=</span> source.directories[<span style="color: #666666">0</span>]
-            )
-        ) {
-            <span style="color: #008000; font-weight: bold">delete</span> target.path;
-            <span style="color: #008000; font-weight: bold">delete</span> target.root;
-            <span style="color: #008000; font-weight: bold">delete</span> target.directory;
-            <span style="color: #008000; font-weight: bold">while</span> (
-                source.directories.length <span style="color: #666666">&amp;&amp;</span>
-                target.directories.length <span style="color: #666666">&amp;&amp;</span>
-                target.directories[<span style="color: #666666">0</span>] <span style="color: #666666">==</span> source.directories[<span style="color: #666666">0</span>]
-            ) {
-                target.directories.<span style="color: #0000FF">shift</span>();
-                source.directories.<span style="color: #0000FF">shift</span>();
-            }
-            <span style="color: #008000; font-weight: bold">while</span> (source.directories.length) {
-                source.directories.<span style="color: #0000FF">shift</span>();
-                target.directories.<span style="color: #0000FF">unshift</span>(<span style="color: #BA2121">&#39;..&#39;</span>);
-            }
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">target</span><span class="p">.</span><span class="n">protocol</span> <span class="o">==</span> <span class="n">source</span><span class="p">.</span><span class="n">protocol</span> <span class="o">&amp;&amp;</span>
+        <span class="n">target</span><span class="p">.</span><span class="n">authority</span> <span class="o">==</span> <span class="n">source</span><span class="p">.</span><span class="n">authority</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">protocol</span><span class="p">;</span>
+        <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">authority</span><span class="p">;</span>
+        <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">userInfo</span><span class="p">;</span>
+        <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">user</span><span class="p">;</span>
+        <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">password</span><span class="p">;</span>
+        <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">domain</span><span class="p">;</span>
+        <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">domains</span><span class="p">;</span>
+        <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">port</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="o">!!</span><span class="n">target</span><span class="p">.</span><span class="n">root</span> <span class="o">==</span> <span class="o">!!</span><span class="n">source</span><span class="p">.</span><span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span>
+                <span class="n">target</span><span class="p">.</span><span class="n">root</span> <span class="o">&amp;&amp;</span>
+                <span class="n">target</span><span class="p">.</span><span class="n">directories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">path</span><span class="p">;</span>
+            <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">root</span><span class="p">;</span>
+            <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">directory</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span>
+                <span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="n">length</span> <span class="o">&amp;&amp;</span>
+                <span class="n">target</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="n">length</span> <span class="o">&amp;&amp;</span>
+                <span class="n">target</span><span class="p">.</span><span class="n">directories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="p">)</span> <span class="p">{</span>
+                <span class="n">target</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">shift</span><span class="p">();</span>
+                <span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">shift</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">source</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">shift</span><span class="p">();</span>
+                <span class="n">target</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">unshift</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
 
-            <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>target.root <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>target.directories.length <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>target.file <span style="color: #666666">&amp;&amp;</span> source.file)
-                target.directories.<span style="color: #0000FF">push</span>(<span style="color: #BA2121">&#39;.&#39;</span>);
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">target</span><span class="p">.</span><span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">target</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="n">length</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">target</span><span class="p">.</span><span class="n">file</span> <span class="o">&amp;&amp;</span> <span class="n">source</span><span class="p">.</span><span class="n">file</span><span class="p">)</span>
+                <span class="n">target</span><span class="p">.</span><span class="n">directories</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="sc">&#39;.&#39;</span><span class="p">);</span>
 
-            <span style="color: #008000; font-weight: bold">if</span> (source.file <span style="color: #666666">==</span> target.file)
-                <span style="color: #008000; font-weight: bold">delete</span> target.file;
-            <span style="color: #008000; font-weight: bold">if</span> (source.query <span style="color: #666666">==</span> target.query)
-                <span style="color: #008000; font-weight: bold">delete</span> target.query;
-            <span style="color: #008000; font-weight: bold">if</span> (source.anchor <span style="color: #666666">==</span> target.anchor)
-                <span style="color: #008000; font-weight: bold">delete</span> target.anchor;
-        }
-    }
+            <span class="k">if</span> <span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">file</span> <span class="o">==</span> <span class="n">target</span><span class="p">.</span><span class="n">file</span><span class="p">)</span>
+                <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">file</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">query</span> <span class="o">==</span> <span class="n">target</span><span class="p">.</span><span class="n">query</span><span class="p">)</span>
+                <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">query</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">anchor</span> <span class="o">==</span> <span class="n">target</span><span class="p">.</span><span class="n">anchor</span><span class="p">)</span>
+                <span class="k">delete</span> <span class="n">target</span><span class="p">.</span><span class="n">anchor</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    <span style="color: #008000; font-weight: bold">return</span> target;
-};
+    <span class="k">return</span> <span class="n">target</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span style="color: #408080; font-style: italic">/**** resolve</span>
-<span style="color: #408080; font-style: italic">    returns a URL resovled to a relative URL from a source URL.</span>
-<span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> resolve <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> (source, relative) {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">format</span>(<span style="color: #0000FF">resolveObject</span>(source, relative));
-};
+<span class="cm">/**** resolve</span>
+<span class="cm">    returns a URL resovled to a relative URL from a source URL.</span>
+<span class="cm">*/</span>
+<span class="kd">var</span> <span class="n">resolve</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">relative</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">format</span><span class="p">(</span><span class="nf">resolveObject</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">relative</span><span class="p">));</span>
+<span class="p">};</span>
 
-<span style="color: #408080; font-style: italic">/**** relative</span>
-<span style="color: #408080; font-style: italic">    returns a relative URL to a target from a source.</span>
-<span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> relative <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> (source, target) {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">format</span>(<span style="color: #0000FF">relativeObject</span>(source, target));
-};
+<span class="cm">/**** relative</span>
+<span class="cm">    returns a relative URL to a target from a source.</span>
+<span class="cm">*/</span>
+<span class="kd">var</span> <span class="n">relative</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">format</span><span class="p">(</span><span class="nf">relativeObject</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">));</span>
+<span class="p">};</span>
 </pre></div>
+</body>
+</html>

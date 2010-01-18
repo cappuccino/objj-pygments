@@ -20,21 +20,21 @@
 <span style="color: #408080; font-style: italic"> * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA</span>
 <span style="color: #408080; font-style: italic"> */</span>
 
-<span style="color: #008000; font-weight: bold">@import</span> <span style="color: #008000; font-weight: bold">&quot;CPObject.j&quot;</span>
-<span style="color: #008000; font-weight: bold">@import</span> <span style="color: #008000; font-weight: bold">&quot;CPRange.j&quot;</span>
-<span style="color: #008000; font-weight: bold">@import</span> <span style="color: #008000; font-weight: bold">&quot;CPEnumerator.j&quot;</span>
-<span style="color: #008000; font-weight: bold">@import</span> <span style="color: #008000; font-weight: bold">&quot;CPSortDescriptor.j&quot;</span>
-<span style="color: #008000; font-weight: bold">@import</span> <span style="color: #008000; font-weight: bold">&quot;CPException.j&quot;</span>
+<span style="color: #BC7A00">@import &quot;CPObject.j&quot;</span>
+<span style="color: #BC7A00">@import &quot;CPRange.j&quot;</span>
+<span style="color: #BC7A00">@import &quot;CPEnumerator.j&quot;</span>
+<span style="color: #BC7A00">@import &quot;CPSortDescriptor.j&quot;</span>
+<span style="color: #BC7A00">@import &quot;CPException.j&quot;</span>
 
 
 <span style="color: #408080; font-style: italic">/* @ignore */</span>
-<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">_CPArrayEnumerator</span> : <span style="color: #0000FF; font-weight: bold">CPEnumerator</span>
+<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">_CPArrayEnumerator</span> <span style="color: #666666">:</span> <span style="color: #0000FF; font-weight: bold">CPEnumerator</span>
 {
     CPArray _array;
     <span style="color: #B00040">int</span>     _index;
 }
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
     <span style="color: #008000">self</span> <span style="color: #666666">=</span> [<span style="color: #008000">super</span> init];
     
@@ -47,7 +47,7 @@
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
 }
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">nextObject</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">nextObject</span>
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">++</span>_index <span style="color: #666666">&gt;=</span> [_array count])
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">nil</span>;
@@ -57,14 +57,14 @@
 
 <span style="color: #008000; font-weight: bold">@end</span>
 
-/* @ignore */
-<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">_CPReverseArrayEnumerator</span> : <span style="color: #0000FF; font-weight: bold">CPEnumerator</span>
+<span style="color: #408080; font-style: italic">/* @ignore */</span>
+<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">_CPReverseArrayEnumerator</span> <span style="color: #666666">:</span> <span style="color: #0000FF; font-weight: bold">CPEnumerator</span>
 {
     CPArray _array;
     <span style="color: #B00040">int</span>     _index;
 }
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
     <span style="color: #008000">self</span> <span style="color: #666666">=</span> [<span style="color: #008000">super</span> init];
     
@@ -77,7 +77,7 @@
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
 }
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">nextObject</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">nextObject</span>
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">--</span>_index <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>)
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">nil</span>;
@@ -98,12 +98,12 @@
 <span style="color: #408080; font-style: italic">    empty implementation. All mutable functionality is</span>
 <span style="color: #408080; font-style: italic">    implemented directly in CPArray.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPArray</span> : <span style="color: #0000FF; font-weight: bold">CPObject</span>
+<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPArray</span> <span style="color: #666666">:</span> <span style="color: #0000FF; font-weight: bold">CPObject</span>
 
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    Returns a new uninitialized CPArray.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-+ (<span style="color: #B00040">id</span>)<span style="color: #0000FF">alloc</span>
+<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">alloc</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> [];
 }
@@ -111,7 +111,7 @@
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    Returns a new initialized CPArray.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-+ (<span style="color: #B00040">id</span>)<span style="color: #0000FF">array</span>
+<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">array</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> [[<span style="color: #008000">self</span> alloc] init];
 }
@@ -121,7 +121,7 @@
 <span style="color: #408080; font-style: italic">    @param anArray Objects in this array will be added to the new array</span>
 <span style="color: #408080; font-style: italic">    @return a new CPArray of the provided objects</span>
 <span style="color: #408080; font-style: italic">*/</span>
-+ (<span style="color: #B00040">id</span>)<span style="color: #0000FF">arrayWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
+<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">arrayWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
     <span style="color: #008000; font-weight: bold">return</span> [[<span style="color: #008000">self</span> alloc] initWithArray<span style="color: #666666">:</span>anArray];
 }
@@ -131,7 +131,7 @@
 <span style="color: #408080; font-style: italic">    @param anObject the object to be added to the array</span>
 <span style="color: #408080; font-style: italic">    @return a new CPArray containing a single object</span>
 <span style="color: #408080; font-style: italic">*/</span>
-+ (<span style="color: #B00040">id</span>)<span style="color: #0000FF">arrayWithObject:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">arrayWithObject:</span>(<span style="color: #B00040">id</span>)anObject
 {
     <span style="color: #008000; font-weight: bold">return</span> [[<span style="color: #008000">self</span> alloc] initWithObjects<span style="color: #666666">:</span>anObject];
 }
@@ -141,7 +141,7 @@
 <span style="color: #408080; font-style: italic">    @param anObject the objects that will be added to the new array</span>
 <span style="color: #408080; font-style: italic">    @return a new CPArray containing the argument objects</span>
 <span style="color: #408080; font-style: italic">*/</span>
-+ (<span style="color: #B00040">id</span>)<span style="color: #0000FF">arrayWithObjects:</span>(<span style="color: #B00040">id</span>)anObject, <span style="color: #0000FF">...</span>
+<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">arrayWithObjects:</span>(<span style="color: #B00040">id</span>)anObject<span style="border: 1px solid #FF0000">,</span> <span style="border: 1px solid #FF0000">...</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">2</span>,
         array <span style="color: #666666">=</span> [[<span style="color: #008000">self</span> alloc] init],
@@ -159,7 +159,7 @@
 <span style="color: #408080; font-style: italic">    @param aCount the number of objects in the JS Array</span>
 <span style="color: #408080; font-style: italic">    @return a new CPArray containing the specified objects</span>
 <span style="color: #408080; font-style: italic">*/</span>
-+ (<span style="color: #B00040">id</span>)<span style="color: #0000FF">arrayWithObjects:</span>(<span style="color: #B00040">id</span>)objects <span style="color: #0000FF">count:</span>(<span style="color: #B00040">unsigned</span>)aCount
+<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">arrayWithObjects:</span>(<span style="color: #B00040">id</span>)objects <span style="color: #0000FF">count:</span>(<span style="color: #B00040">unsigned</span>)aCount
 {
     <span style="color: #008000; font-weight: bold">return</span> [[<span style="color: #008000">self</span> alloc] initWithObjects<span style="color: #666666">:</span>objects count<span style="color: #666666">:</span>aCount];
 }
@@ -168,7 +168,7 @@
 <span style="color: #408080; font-style: italic">    Initializes the CPArray.</span>
 <span style="color: #408080; font-style: italic">    @return the initialized array</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">init</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">init</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
 }
@@ -179,7 +179,7 @@
 <span style="color: #408080; font-style: italic">    @param anArray objects in this array will be added to the new array</span>
 <span style="color: #408080; font-style: italic">    @return a new CPArray containing the objects of \c anArray</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
     <span style="color: #008000">self</span> <span style="color: #666666">=</span> [<span style="color: #008000">super</span> init];
     
@@ -197,7 +197,7 @@
 <span style="color: #408080; font-style: italic">    returned object will be added to the receiver. Otherwise, no copying will be performed.</span>
 <span style="color: #408080; font-style: italic">    @return the initialized array of objects</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray <span style="color: #0000FF">copyItems:</span>(<span style="color: #B00040">BOOL</span>)copyItems
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray <span style="color: #0000FF">copyItems:</span>(<span style="color: #B00040">BOOL</span>)copyItems
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>copyItems)
         <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> initWithArray<span style="color: #666666">:</span>anArray];
@@ -225,7 +225,7 @@
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    initializes an array with the contents of anArray</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithObjects:</span>(<span style="color: #B00040">Array</span>)anArray, <span style="color: #0000FF">...</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithObjects:</span>(<span style="color: #B00040">Array</span>)anArray<span style="border: 1px solid #FF0000">,</span> <span style="border: 1px solid #FF0000">...</span>
 {
     <span style="color: #408080; font-style: italic">// The arguments array contains self and _cmd, so the first object is at position 2.</span>
     <span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">2</span>,
@@ -243,7 +243,7 @@
 <span style="color: #408080; font-style: italic">    @param aCount the number of objects in \c objects</span>
 <span style="color: #408080; font-style: italic">    @return the initialized CPArray</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithObjects:</span>(<span style="color: #B00040">id</span>)objects <span style="color: #0000FF">count:</span>(<span style="color: #B00040">unsigned</span>)aCount
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithObjects:</span>(<span style="color: #B00040">id</span>)objects <span style="color: #0000FF">count:</span>(<span style="color: #B00040">unsigned</span>)aCount
 {
     <span style="color: #008000">self</span> <span style="color: #666666">=</span> [<span style="color: #008000">super</span> init];
     
@@ -263,7 +263,7 @@
 <span style="color: #408080; font-style: italic">    Returns \c YES if the array contains \c anObject. Otherwise, it returns \c NO.</span>
 <span style="color: #408080; font-style: italic">    @param anObject the method checks if this object is already in the array</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">containsObject:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">containsObject:</span>(<span style="color: #B00040">id</span>)anObject
 {
     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> indexOfObject<span style="color: #666666">:</span>anObject] <span style="color: #666666">!=</span> CPNotFound;
 }
@@ -271,7 +271,7 @@
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    Returns the number of elements in the array</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">int</span>)<span style="color: #0000FF">count</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">int</span>)<span style="color: #0000FF">count</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> length;
 }
@@ -283,7 +283,7 @@
 <span style="color: #408080; font-style: italic">    a match using \c -isEqual:, then \c ==.</span>
 <span style="color: #408080; font-style: italic">    @param anObject the object to search for</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">int</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">int</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject
 {
     <span style="color: #008000; font-weight: bold">if</span> (anObject <span style="color: #666666">===</span> <span style="color: #008000; font-weight: bold">nil</span>)
         <span style="color: #008000; font-weight: bold">return</span> CPNotFound;
@@ -319,7 +319,7 @@
 <span style="color: #408080; font-style: italic">    @param aRange the range to search within</span>
 <span style="color: #408080; font-style: italic">    @return the index of the object, or \c CPNotFound if it was not found.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">int</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">inRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
+<span style="color: #666666">-</span> (<span style="color: #B00040">int</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">inRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
 {
     <span style="color: #008000; font-weight: bold">if</span> (anObject <span style="color: #666666">===</span> <span style="color: #008000; font-weight: bold">nil</span>)
         <span style="color: #008000; font-weight: bold">return</span> CPNotFound;
@@ -348,7 +348,7 @@
 <span style="color: #408080; font-style: italic">    @param anObject the object to search for</span>
 <span style="color: #408080; font-style: italic">    @return the index of the object in the array. \c CPNotFound if the object is not in the array.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">int</span>)<span style="color: #0000FF">indexOfObjectIdenticalTo:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">int</span>)<span style="color: #0000FF">indexOfObjectIdenticalTo:</span>(<span style="color: #B00040">id</span>)anObject
 {
     <span style="color: #008000; font-weight: bold">if</span> (anObject <span style="color: #666666">===</span> <span style="color: #008000; font-weight: bold">nil</span>)
         <span style="color: #008000; font-weight: bold">return</span> CPNotFound;
@@ -365,7 +365,7 @@
             count <span style="color: #666666">=</span> length;
         
         <span style="color: #008000; font-weight: bold">for</span>(; index <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>index)
-            <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">self</span>[index] <span style="color: #666666">==</span> anObject)
+            <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">self</span>[index] <span style="color: #666666">===</span> anObject)
                 <span style="color: #008000; font-weight: bold">return</span> index;
     }
     
@@ -380,7 +380,7 @@
 <span style="color: #408080; font-style: italic">    @param aRange the range to search within</span>
 <span style="color: #408080; font-style: italic">    @return the index of the object, or \c CPNotFound if it was not found.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">int</span>)<span style="color: #0000FF">indexOfObjectIdenticalTo:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">inRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
+<span style="color: #666666">-</span> (<span style="color: #B00040">int</span>)<span style="color: #0000FF">indexOfObjectIdenticalTo:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">inRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
 {
     <span style="color: #008000; font-weight: bold">if</span> (anObject <span style="color: #666666">===</span> <span style="color: #008000; font-weight: bold">nil</span>)
         <span style="color: #008000; font-weight: bold">return</span> CPNotFound;
@@ -417,7 +417,7 @@
 <span style="color: #408080; font-style: italic">    selector should have been used to sort the array (or to maintain its sorted order).</span>
 <span style="color: #408080; font-style: italic">    @return the index of the object, or \c CPNotFound if it was not found.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">unsigned</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">sortedBySelector:</span>(<span style="color: #B00040">SEL</span>)aSelector
+<span style="color: #666666">-</span> (<span style="color: #B00040">unsigned</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">sortedBySelector:</span>(<span style="color: #B00040">SEL</span>)aSelector
 {
     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> indexOfObject<span style="color: #666666">:</span>anObject sortedByFunction<span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">function</span>(lhs, rhs) { objj_msgSend(lhs, aSelector, rhs); }];
 }
@@ -434,7 +434,7 @@
 <span style="color: #408080; font-style: italic">    selector should have been used to sort the array (or to maintain its sorted order).</span>
 <span style="color: #408080; font-style: italic">    @return the index of the object, or \c CPNotFound if it was not found.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">unsigned</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">sortedByFunction:</span>(<span style="color: #B00040">Function</span>)aFunction
+<span style="color: #666666">-</span> (<span style="color: #B00040">unsigned</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">sortedByFunction:</span>(<span style="color: #B00040">Function</span>)aFunction
 {
     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> indexOfObject<span style="color: #666666">:</span>anObject sortedByFunction<span style="color: #666666">:</span>aFunction context<span style="color: #666666">:</span><span style="color: #008000; font-weight: bold">nil</span>];
 }
@@ -452,7 +452,7 @@
 <span style="color: #408080; font-style: italic">    @param aContext a context object that will be passed to the sort function</span>
 <span style="color: #408080; font-style: italic">    @return the index of the object, or \c CPNotFound if it was not found.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">unsigned</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">sortedByFunction:</span>(<span style="color: #B00040">Function</span>)aFunction <span style="color: #0000FF">context:</span>(<span style="color: #B00040">id</span>)aContext
+<span style="color: #666666">-</span> (<span style="color: #B00040">unsigned</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">sortedByFunction:</span>(<span style="color: #B00040">Function</span>)aFunction <span style="color: #0000FF">context:</span>(<span style="color: #B00040">id</span>)aContext
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aFunction <span style="color: #666666">||</span> anObject <span style="color: #666666">===</span> <span style="color: #008000; font-weight: bold">undefined</span>)
         <span style="color: #008000; font-weight: bold">return</span> CPNotFound;
@@ -487,7 +487,7 @@
 <span style="color: #408080; font-style: italic">    descriptors should have been used to sort the array (or to maintain its sorted order).</span>
 <span style="color: #408080; font-style: italic">    @return the index of the object, or \c CPNotFound if it was not found.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">unsigned</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">sortedByDescriptors:</span>(<span style="color: #B00040">CPArray</span>)descriptors
+<span style="color: #666666">-</span> (<span style="color: #B00040">unsigned</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">sortedByDescriptors:</span>(<span style="color: #B00040">CPArray</span>)descriptors
 {
     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> indexOfObject<span style="color: #666666">:</span>anObject sortedByFunction<span style="color: #666666">:</span><span style="color: #008000; font-weight: bold">function</span>(lhs, rhs)
     {
@@ -506,7 +506,7 @@
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    Returns the last object in the array. If the array is empty, returns \c nil/</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">lastObject</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">lastObject</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> count <span style="color: #666666">=</span> [<span style="color: #008000">self</span> count];
     
@@ -519,9 +519,9 @@
 <span style="color: #408080; font-style: italic">    Returns the object at index \c anIndex.</span>
 <span style="color: #408080; font-style: italic">    @throws CPRangeException if \c anIndex is out of bounds</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">objectAtIndex:</span>(<span style="color: #B00040">int</span>)anIndex
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">objectAtIndex:</span>(<span style="color: #B00040">int</span>)anIndex
 {
-    <span style="color: #008000; font-weight: bold">if</span> (anIndex <span style="color: #666666">&gt;=</span> length)
+    <span style="color: #008000; font-weight: bold">if</span> (anIndex <span style="color: #666666">&gt;=</span> length <span style="color: #666666">||</span> anIndex <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>)
         [CPException raise<span style="color: #666666">:</span>CPRangeException reason<span style="color: #666666">:</span><span style="color: #BA2121">@&quot;index (&quot;</span> <span style="color: #666666">+</span> anIndex <span style="color: #666666">+</span> <span style="color: #BA2121">@&quot;) beyond bounds (&quot;</span> <span style="color: #666666">+</span> length <span style="color: #666666">+</span> <span style="color: #BA2121">@&quot;)&quot;</span>];
 
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>[anIndex];
@@ -532,16 +532,13 @@
 <span style="color: #408080; font-style: italic">    @param indexes the set of indices</span>
 <span style="color: #408080; font-style: italic">    @throws CPRangeException if any of the indices is greater than or equal to the length of the array</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">objectsAtIndexes:</span>(<span style="color: #B00040">CPIndexSet</span>)indexes
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">objectsAtIndexes:</span>(<span style="color: #B00040">CPIndexSet</span>)indexes
 {
-    <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> [indexes firstIndex],
+    <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> CPNotFound,
         objects <span style="color: #666666">=</span> [];
 
-    <span style="color: #008000; font-weight: bold">while</span>(index <span style="color: #666666">!=</span> CPNotFound)
-    { 
-        [objects addObject<span style="color: #666666">:</span><span style="color: #008000">self</span>[index]];
-        index <span style="color: #666666">=</span> [indexes indexGreaterThanIndex<span style="color: #666666">:</span>index];
-    }
+    <span style="color: #008000; font-weight: bold">while</span>((index <span style="color: #666666">=</span> [indexes indexGreaterThanIndex<span style="color: #666666">:</span>index]) <span style="color: #666666">!==</span> CPNotFound)
+        [objects addObject<span style="color: #666666">:</span>[<span style="color: #008000">self</span> objectAtIndex<span style="color: #666666">:</span>index]];
 
     <span style="color: #008000; font-weight: bold">return</span> objects;
 }
@@ -551,7 +548,7 @@
 <span style="color: #408080; font-style: italic">    from the first to the last element. You should not modify</span>
 <span style="color: #408080; font-style: italic">    the array during enumeration.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPEnumerator</span>)<span style="color: #0000FF">objectEnumerator</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPEnumerator</span>)<span style="color: #0000FF">objectEnumerator</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> [[_CPArrayEnumerator alloc] initWithArray<span style="color: #666666">:</span><span style="color: #008000">self</span>];
 }
@@ -561,7 +558,7 @@
 <span style="color: #408080; font-style: italic">    from the last to the first element. You should not modify</span>
 <span style="color: #408080; font-style: italic">    the array during enumeration.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPEnumerator</span>)<span style="color: #0000FF">reverseObjectEnumerator</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPEnumerator</span>)<span style="color: #0000FF">reverseObjectEnumerator</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> [[_CPReverseArrayEnumerator alloc] initWithArray<span style="color: #666666">:</span><span style="color: #008000">self</span>];
 }
@@ -572,7 +569,7 @@
 <span style="color: #408080; font-style: italic">    @param aSelector the selector of the message to send</span>
 <span style="color: #408080; font-style: italic">    @throws CPInvalidArgumentException if \c aSelector is \c nil</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">makeObjectsPerformSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">makeObjectsPerformSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aSelector)
         [CPException raise<span style="color: #666666">:</span>CPInvalidArgumentException reason<span style="color: #666666">:</span><span style="color: #BA2121">&quot;makeObjectsPerformSelector: &#39;aSelector&#39; can&#39;t be nil&quot;</span>];
@@ -590,7 +587,7 @@
 <span style="color: #408080; font-style: italic">    @param anObject the first argument of the message</span>
 <span style="color: #408080; font-style: italic">    @throws CPInvalidArgumentException if \c aSelector is \c nil</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">makeObjectsPerformSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector <span style="color: #0000FF">withObject:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">makeObjectsPerformSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector <span style="color: #0000FF">withObject:</span>(<span style="color: #B00040">id</span>)anObject
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aSelector)
         [CPException raise<span style="color: #666666">:</span>CPInvalidArgumentException reason<span style="color: #666666">:</span><span style="color: #BA2121">&quot;makeObjectsPerformSelector:withObject &#39;aSelector&#39; can&#39;t be nil&quot;</span>];
@@ -602,7 +599,7 @@
         objj_msgSend(<span style="color: #008000">self</span>[index], aSelector, anObject);
 }
 
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">makeObjectsPerformSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector <span style="color: #0000FF">withObjects:</span>(<span style="color: #B00040">CPArray</span>)objects
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">makeObjectsPerformSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector <span style="color: #0000FF">withObjects:</span>(<span style="color: #B00040">CPArray</span>)objects
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aSelector)
         [CPException raise<span style="color: #666666">:</span>CPInvalidArgumentException reason<span style="color: #666666">:</span><span style="color: #BA2121">&quot;makeObjectsPerformSelector:withObjects: &#39;aSelector&#39; can&#39;t be nil&quot;</span>];
@@ -625,7 +622,7 @@
 <span style="color: #408080; font-style: italic">    \c otherArray as determined by using the \c -containsObject: method.</span>
 <span style="color: #408080; font-style: italic">    @return the first object found, or \c nil if no common object was found.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">firstObjectCommonWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">firstObjectCommonWithArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>[anArray count] <span style="color: #666666">||</span> <span style="color: #666666">!</span>[<span style="color: #008000">self</span> count])
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">nil</span>;
@@ -643,7 +640,7 @@
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    Returns true if anArray contains exactly the same objects as the reciever.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isEqualToArray:</span>(<span style="color: #B00040">id</span>)anArray
+<span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isEqualToArray:</span>(<span style="color: #B00040">id</span>)anArray
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">self</span> <span style="color: #666666">===</span> anArray)
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">YES</span>;
@@ -667,7 +664,7 @@
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">YES</span>;
 }
 
-- (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isEqual:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isEqual:</span>(<span style="color: #B00040">id</span>)anObject
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">self</span> <span style="color: #666666">===</span> anObject)
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">YES</span>;
@@ -685,7 +682,7 @@
 <span style="color: #408080; font-style: italic">    @throws CPInvalidArgumentException if \c anObject is \c nil</span>
 <span style="color: #408080; font-style: italic">    @return a new array that should be n+1 in size compared to the receiver.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">arrayByAddingObject:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">arrayByAddingObject:</span>(<span style="color: #B00040">id</span>)anObject
 {
     <span style="color: #008000; font-weight: bold">if</span> (anObject <span style="color: #666666">===</span> <span style="color: #008000; font-weight: bold">nil</span> <span style="color: #666666">||</span> anObject <span style="color: #666666">===</span> <span style="color: #008000; font-weight: bold">undefined</span>)
         [CPException raise<span style="color: #666666">:</span>CPInvalidArgumentException
@@ -702,7 +699,7 @@
 <span style="color: #408080; font-style: italic">    Returns a new array which is the concatenation of \c self and otherArray (in this precise order).</span>
 <span style="color: #408080; font-style: italic">    @param anArray the array that will be concatenated to the receiver&#39;s copy</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">arrayByAddingObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">arrayByAddingObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
     <span style="color: #008000; font-weight: bold">return</span> slice(<span style="color: #666666">0</span>).concat(anArray);
 }
@@ -727,7 +724,7 @@
 <span style="color: #408080; font-style: italic">    @param aRange the range of objects to be copied into the subarray</span>
 <span style="color: #408080; font-style: italic">    @throws CPRangeException if the specified range exceeds the bounds of the array</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">subarrayWithRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">subarrayWithRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
 {
     <span style="color: #008000; font-weight: bold">if</span> (aRange.location <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span> <span style="color: #666666">||</span> CPMaxRange(aRange) <span style="color: #666666">&gt;</span> length)
         [CPException raise<span style="color: #666666">:</span>CPRangeException reason<span style="color: #666666">:</span><span style="color: #BA2121">&quot;subarrayWithRange: aRange out of bounds&quot;</span>];
@@ -739,7 +736,7 @@
 <span style="color: #408080; font-style: italic">/*</span>
 <span style="color: #408080; font-style: italic">    Not yet described.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortedArrayUsingDescriptors:</span>(<span style="color: #B00040">CPArray</span>)descriptors
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortedArrayUsingDescriptors:</span>(<span style="color: #B00040">CPArray</span>)descriptors
 {
     <span style="color: #008000; font-weight: bold">var</span> sorted <span style="color: #666666">=</span> [<span style="color: #008000">self</span> copy];
     
@@ -751,7 +748,7 @@
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    Return a copy of the receiver sorted using the function passed into the first parameter.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortedArrayUsingFunction:</span>(<span style="color: #B00040">Function</span>)aFunction
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortedArrayUsingFunction:</span>(<span style="color: #B00040">Function</span>)aFunction
 {
     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> sortedArrayUsingFunction<span style="color: #666666">:</span>aFunction context<span style="color: #666666">:</span><span style="color: #008000; font-weight: bold">nil</span>];
 }
@@ -764,7 +761,7 @@
 <span style="color: #408080; font-style: italic">    @param aContext context information</span>
 <span style="color: #408080; font-style: italic">    @return a new sorted array</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortedArrayUsingFunction:</span>(<span style="color: #B00040">Function</span>)aFunction <span style="color: #0000FF">context:</span>(<span style="color: #B00040">id</span>)aContext
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortedArrayUsingFunction:</span>(<span style="color: #B00040">Function</span>)aFunction <span style="color: #0000FF">context:</span>(<span style="color: #B00040">id</span>)aContext
 {
     <span style="color: #008000; font-weight: bold">var</span> sorted <span style="color: #666666">=</span> [<span style="color: #008000">self</span> copy];
     
@@ -777,7 +774,7 @@
 <span style="color: #408080; font-style: italic">    Returns a new array in which the objects are ordered according to a sort with \c aSelector.</span>
 <span style="color: #408080; font-style: italic">    @param aSelector the selector that will perform object comparisons</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortedArrayUsingSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortedArrayUsingSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector
 {
     <span style="color: #008000; font-weight: bold">var</span> sorted <span style="color: #666666">=</span> [<span style="color: #008000">self</span> copy]
     
@@ -796,7 +793,7 @@
 <span style="color: #408080; font-style: italic">    @param aString the separator that will separate each object string</span>
 <span style="color: #408080; font-style: italic">    @return the string representation of the array</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">componentsJoinedByString:</span>(<span style="color: #B00040">CPString</span>)aString
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">componentsJoinedByString:</span>(<span style="color: #B00040">CPString</span>)aString
 {
     <span style="color: #408080; font-style: italic">// Objective-J objects get &quot;description&quot; called on them automatically when coerced to strings</span>
     <span style="color: #408080; font-style: italic">// (see &quot;objj_object.prototype.toString&quot; at bottom of CPObject.j)</span>
@@ -808,7 +805,7 @@
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    Returns a human readable description of this array and it&#39;s elements.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">description</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">description</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
         count <span style="color: #666666">=</span> [<span style="color: #008000">self</span> count],
@@ -816,15 +813,18 @@
 
     <span style="color: #008000; font-weight: bold">for</span>(; index <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>index)
     {
-        <span style="color: #008000; font-weight: bold">var</span> object <span style="color: #666666">=</span> <span style="color: #008000">self</span>[index];
+        <span style="color: #008000; font-weight: bold">if</span> (index <span style="color: #666666">===</span> <span style="color: #666666">0</span>)
+            description <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39;\n&#39;</span>;
 
-        <span style="color: #008000; font-weight: bold">if</span> (object <span style="color: #666666">&amp;&amp;</span> object.isa)
-            description <span style="color: #666666">+=</span> [object description];
-        <span style="color: #008000; font-weight: bold">else</span>
-            description <span style="color: #666666">+=</span> object;
+        <span style="color: #008000; font-weight: bold">var</span> object <span style="color: #666666">=</span> <span style="color: #008000">self</span>[index],
+            objectDescription <span style="color: #666666">=</span> object <span style="color: #666666">&amp;&amp;</span> object.isa <span style="color: #666666">?</span> [object description] <span style="color: #666666">:</span> object <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;&quot;</span>;
+
+        description <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> objectDescription.split(<span style="color: #BA2121">&#39;\n&#39;</span>).join(<span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\n\t</span><span style="color: #BA2121">&quot;</span>);
 
         <span style="color: #008000; font-weight: bold">if</span> (index <span style="color: #666666">!==</span> count <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
             description <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;, &quot;</span>;
+
+        description <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39;\n&#39;</span>;
     }
 
     <span style="color: #008000; font-weight: bold">return</span> description <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;)&#39;</span>;
@@ -838,7 +838,7 @@
 <span style="color: #408080; font-style: italic">    @param filterTypes an array of CPString objects that contain file extensions (without the &#39;.&#39;)</span>
 <span style="color: #408080; font-style: italic">    @return a new array with matching paths</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">pathsMatchingExtensions:</span>(<span style="color: #B00040">CPArray</span>)filterTypes
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">pathsMatchingExtensions:</span>(<span style="color: #B00040">CPArray</span>)filterTypes
 {
     <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
         count <span style="color: #666666">=</span> [<span style="color: #008000">self</span> count],
@@ -857,7 +857,7 @@
 <span style="color: #408080; font-style: italic">    @param aValue the value for the coding</span>
 <span style="color: #408080; font-style: italic">    @param aKey the key for the coding</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">setValue:</span>(<span style="color: #B00040">id</span>)aValue <span style="color: #0000FF">forKey:</span>(<span style="color: #B00040">CPString</span>)aKey
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">setValue:</span>(<span style="color: #B00040">id</span>)aValue <span style="color: #0000FF">forKey:</span>(<span style="color: #B00040">CPString</span>)aKey
 {
     <span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
         count <span style="color: #666666">=</span> [<span style="color: #008000">self</span> count];
@@ -871,7 +871,7 @@
 <span style="color: #408080; font-style: italic">    @param aKey the key to return the value for</span>
 <span style="color: #408080; font-style: italic">    @return an array of containing a value for each element in the array</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">valueForKey:</span>(<span style="color: #B00040">CPString</span>)aKey
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">valueForKey:</span>(<span style="color: #B00040">CPString</span>)aKey
 {
     <span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
         count <span style="color: #666666">=</span> [<span style="color: #008000">self</span> count],
@@ -889,14 +889,14 @@
 <span style="color: #408080; font-style: italic">    Makes a copy of the receiver.</span>
 <span style="color: #408080; font-style: italic">    @return a new CPArray copy</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">copy</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">copy</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> slice(<span style="color: #666666">0</span>);
 }
     
 <span style="color: #008000; font-weight: bold">@end</span>
 
-<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPArray</span><span style="color: #A0A000">(CPMutableArray)</span>
+<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPArray</span>(<span style="color: #A0A000">CPMutableArray</span>)
 
 <span style="color: #408080; font-style: italic">// Creating arrays</span>
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -904,7 +904,7 @@
 <span style="color: #408080; font-style: italic">    items. Because CPArray is backed by JavaScript arrays,</span>
 <span style="color: #408080; font-style: italic">    this method ends up simply returning a regular array.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-+ (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">arrayWithCapacity:</span>(<span style="color: #B00040">unsigned</span>)aCapacity
+<span style="color: #666666">+</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">arrayWithCapacity:</span>(<span style="color: #B00040">unsigned</span>)aCapacity
 {
     <span style="color: #008000; font-weight: bold">return</span> [[<span style="color: #008000">self</span> alloc] initWithCapacity<span style="color: #666666">:</span>aCapacity];
 }
@@ -913,7 +913,7 @@
 <span style="color: #408080; font-style: italic">    Initializes an array able to store at least \c aCapacity items. Because CPArray</span>
 <span style="color: #408080; font-style: italic">    is backed by JavaScript arrays, this method ends up simply returning a regular array.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithCapacity:</span>(<span style="color: #B00040">unsigned</span>)aCapacity
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithCapacity:</span>(<span style="color: #B00040">unsigned</span>)aCapacity
 {
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
 }
@@ -923,7 +923,7 @@
 <span style="color: #408080; font-style: italic">    Adds \c anObject to the end of the array.</span>
 <span style="color: #408080; font-style: italic">    @param anObject the object to add to the array</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">addObject:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">addObject:</span>(<span style="color: #B00040">id</span>)anObject
 {
     push(anObject);
 }
@@ -932,7 +932,7 @@
 <span style="color: #408080; font-style: italic">    Adds the objects in \c anArray to the receiver array.</span>
 <span style="color: #408080; font-style: italic">    @param anArray the array of objects to add to the end of the receiver</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">addObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">addObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
     splice.apply(<span style="color: #008000">self</span>, [length, <span style="color: #666666">0</span>].concat(anArray));
 }
@@ -942,7 +942,7 @@
 <span style="color: #408080; font-style: italic">    @param anObject the object to insert into the array</span>
 <span style="color: #408080; font-style: italic">    @param anIndex the location to insert \c anObject at</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">insertObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">atIndex:</span>(<span style="color: #B00040">int</span>)anIndex
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">insertObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">atIndex:</span>(<span style="color: #B00040">int</span>)anIndex
 {
     splice(anIndex, <span style="color: #666666">0</span>, anObject);
 }
@@ -952,7 +952,7 @@
 <span style="color: #408080; font-style: italic">    @param objects the objects to add to this array</span>
 <span style="color: #408080; font-style: italic">    @param anIndexSet the indices for the objects</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">insertObjects:</span>(<span style="color: #B00040">CPArray</span>)objects <span style="color: #0000FF">atIndexes:</span>(<span style="color: #B00040">CPIndexSet</span>)indexes
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">insertObjects:</span>(<span style="color: #B00040">CPArray</span>)objects <span style="color: #0000FF">atIndexes:</span>(<span style="color: #B00040">CPIndexSet</span>)indexes
 {
     <span style="color: #008000; font-weight: bold">var</span> indexesCount <span style="color: #666666">=</span> [indexes count],
         objectsCount <span style="color: #666666">=</span> [objects count];
@@ -977,7 +977,7 @@
 <span style="color: #408080; font-style: italic">    The current element at position \c anIndex will be removed from the array.</span>
 <span style="color: #408080; font-style: italic">    @param anIndex the position in the array to place \c anObject</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">replaceObjectAtIndex:</span>(<span style="color: #B00040">int</span>)anIndex <span style="color: #0000FF">withObject:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">replaceObjectAtIndex:</span>(<span style="color: #B00040">int</span>)anIndex <span style="color: #0000FF">withObject:</span>(<span style="color: #B00040">id</span>)anObject
 {
     <span style="color: #008000">self</span>[anIndex] <span style="color: #666666">=</span> anObject;
 }
@@ -988,7 +988,7 @@
 <span style="color: #408080; font-style: italic">    @param anIndexSet the set of indices to array positions that will be replaced</span>
 <span style="color: #408080; font-style: italic">    @param objects the array of objects to place in the specified indices</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">replaceObjectsAtIndexes:</span>(<span style="color: #B00040">CPIndexSet</span>)anIndexSet <span style="color: #0000FF">withObjects:</span>(<span style="color: #B00040">CPArray</span>)objects
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">replaceObjectsAtIndexes:</span>(<span style="color: #B00040">CPIndexSet</span>)anIndexSet <span style="color: #0000FF">withObjects:</span>(<span style="color: #B00040">CPArray</span>)objects
 {
     <span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>, 
         index <span style="color: #666666">=</span> [anIndexSet firstIndex];
@@ -1008,7 +1008,7 @@
 <span style="color: #408080; font-style: italic">    @param anArray the array to retrieve objects for placement into the receiver</span>
 <span style="color: #408080; font-style: italic">    @param otherRange the range of objects in \c anArray to pull from for placement into the receiver</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">replaceObjectsInRange:</span>(<span style="color: #B00040">CPRange</span>)aRange <span style="color: #0000FF">withObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray <span style="color: #0000FF">range:</span>(<span style="color: #B00040">CPRange</span>)otherRange
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">replaceObjectsInRange:</span>(<span style="color: #B00040">CPRange</span>)aRange <span style="color: #0000FF">withObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray <span style="color: #0000FF">range:</span>(<span style="color: #B00040">CPRange</span>)otherRange
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>otherRange.location <span style="color: #666666">&amp;&amp;</span> otherRange.length <span style="color: #666666">==</span> [anArray count])
         [<span style="color: #008000">self</span> replaceObjectsInRange<span style="color: #666666">:</span>aRange withObjectsFromArray<span style="color: #666666">:</span>anArray];
@@ -1023,7 +1023,7 @@
 <span style="color: #408080; font-style: italic">    @param aRange the range of elements to be replaced in the receiver</span>
 <span style="color: #408080; font-style: italic">    @param anArray the array to retrieve objects for placement into the receiver</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">replaceObjectsInRange:</span>(<span style="color: #B00040">CPRange</span>)aRange <span style="color: #0000FF">withObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">replaceObjectsInRange:</span>(<span style="color: #B00040">CPRange</span>)aRange <span style="color: #0000FF">withObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
     splice.apply(<span style="color: #008000">self</span>, [aRange.location, aRange.length].concat(anArray));
 }
@@ -1032,7 +1032,7 @@
 <span style="color: #408080; font-style: italic">    Sets the contents of the receiver to be identical to the contents of \c anArray.</span>
 <span style="color: #408080; font-style: italic">    @param anArray the array of objects used to replace the receiver&#39;s objects</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">setArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">setArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
     <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">self</span> <span style="color: #666666">==</span> anArray) <span style="color: #008000; font-weight: bold">return</span>;
     
@@ -1043,7 +1043,7 @@
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    Removes all objects from this array.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeAllObjects</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeAllObjects</span>
 {
     splice(<span style="color: #666666">0</span>, length);
 }
@@ -1051,7 +1051,7 @@
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    Removes the last object from the array.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeLastObject</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeLastObject</span>
 {
     pop();
 }
@@ -1060,7 +1060,7 @@
 <span style="color: #408080; font-style: italic">    Removes all entries of \c anObject from the array.</span>
 <span style="color: #408080; font-style: italic">    @param anObject the object whose entries are to be removed</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObject:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObject:</span>(<span style="color: #B00040">id</span>)anObject
 {
     [<span style="color: #008000">self</span> removeObject<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span>CPMakeRange(<span style="color: #666666">0</span>, length)];
 }
@@ -1070,7 +1070,7 @@
 <span style="color: #408080; font-style: italic">    @param anObject the object to remove</span>
 <span style="color: #408080; font-style: italic">    @param aRange the range to search in the receiver for the object</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">inRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">inRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
 {
     <span style="color: #008000; font-weight: bold">var</span> index;
     
@@ -1085,7 +1085,7 @@
 <span style="color: #408080; font-style: italic">    Removes the object at \c anIndex.</span>
 <span style="color: #408080; font-style: italic">    @param anIndex the location of the element to be removed</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectAtIndex:</span>(<span style="color: #B00040">int</span>)anIndex
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectAtIndex:</span>(<span style="color: #B00040">int</span>)anIndex
 {
     splice(anIndex, <span style="color: #666666">1</span>);
 }
@@ -1094,7 +1094,7 @@
 <span style="color: #408080; font-style: italic">    Removes the objects at the indices specified by \c CPIndexSet.</span>
 <span style="color: #408080; font-style: italic">    @param anIndexSet the indices of the elements to be removed from the array</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectsAtIndexes:</span>(<span style="color: #B00040">CPIndexSet</span>)anIndexSet
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectsAtIndexes:</span>(<span style="color: #B00040">CPIndexSet</span>)anIndexSet
 {
     <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> [anIndexSet lastIndex];
    
@@ -1110,9 +1110,9 @@
 <span style="color: #408080; font-style: italic">    The search for the object is done using \c ==.</span>
 <span style="color: #408080; font-style: italic">    @param anObject the object to remove</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectIdenticalTo:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectIdenticalTo:</span>(<span style="color: #B00040">id</span>)anObject
 {
-    [<span style="color: #008000">self</span> removeObjectIdenticalTo<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span>CPMakeRange(<span style="color: #666666">0</span>, length)];
+    [<span style="color: #008000">self</span> removeObjectIdenticalTo<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span>CPMakeRange(<span style="color: #666666">0</span>, [<span style="color: #008000">self</span> count])];
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1122,14 +1122,15 @@
 <span style="color: #408080; font-style: italic">    @param anObject the object to remove</span>
 <span style="color: #408080; font-style: italic">    @param aRange the range in the array to search for the object</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectIdenticalTo:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">inRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectIdenticalTo:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">inRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
 {
-    <span style="color: #008000; font-weight: bold">var</span> index;
+    <span style="color: #008000; font-weight: bold">var</span> index,
+        count <span style="color: #666666">=</span> [<span style="color: #008000">self</span> count];
     
-    <span style="color: #008000; font-weight: bold">while</span> ((index <span style="color: #666666">=</span> [<span style="color: #008000">self</span> indexOfObjectIdenticalTo<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span>aRange]) <span style="color: #666666">!=</span> CPNotFound)
+    <span style="color: #008000; font-weight: bold">while</span> ((index <span style="color: #666666">=</span> [<span style="color: #008000">self</span> indexOfObjectIdenticalTo<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span>aRange]) <span style="color: #666666">!==</span> CPNotFound)
     {
         [<span style="color: #008000">self</span> removeObjectAtIndex<span style="color: #666666">:</span>index];
-        aRange <span style="color: #666666">=</span> CPIntersectionRange(CPMakeRange(index, length <span style="color: #666666">-</span> index), aRange);
+        aRange <span style="color: #666666">=</span> CPIntersectionRange(CPMakeRange(index, (<span style="color: #666666">--</span>count) <span style="color: #666666">-</span> index), aRange);
     }
 }
 
@@ -1137,7 +1138,7 @@
 <span style="color: #408080; font-style: italic">    Remove the objects in \c anArray from the receiver array.</span>
 <span style="color: #408080; font-style: italic">    @param anArray the array of objects to remove from the receiver</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectsInArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectsInArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
     <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
         count <span style="color: #666666">=</span> [anArray count];
@@ -1150,7 +1151,7 @@
 <span style="color: #408080; font-style: italic">    Removes all the objects in the specified range from the receiver.</span>
 <span style="color: #408080; font-style: italic">    @param aRange the range of objects to remove</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectsInRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectsInRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
 {
     splice(aRange.location, aRange.length);
 }
@@ -1161,14 +1162,14 @@
 <span style="color: #408080; font-style: italic">    @param anIndex the first index to swap from</span>
 <span style="color: #408080; font-style: italic">    @param otherIndex the second index to swap from</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">exchangeObjectAtIndex:</span>(<span style="color: #B00040">unsigned</span>)anIndex <span style="color: #0000FF">withObjectAtIndex:</span>(<span style="color: #B00040">unsigned</span>)otherIndex
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">exchangeObjectAtIndex:</span>(<span style="color: #B00040">unsigned</span>)anIndex <span style="color: #0000FF">withObjectAtIndex:</span>(<span style="color: #B00040">unsigned</span>)otherIndex
 {
     <span style="color: #008000; font-weight: bold">var</span> temporary <span style="color: #666666">=</span> <span style="color: #008000">self</span>[anIndex];
     <span style="color: #008000">self</span>[anIndex] <span style="color: #666666">=</span> <span style="color: #008000">self</span>[otherIndex];
     <span style="color: #008000">self</span>[otherIndex] <span style="color: #666666">=</span> temporary;
 }
 
-- (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortUsingDescriptors:</span>(<span style="color: #B00040">CPArray</span>)descriptors
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortUsingDescriptors:</span>(<span style="color: #B00040">CPArray</span>)descriptors
 {
     sort(<span style="color: #008000; font-weight: bold">function</span>(lhs, rhs)
     {
@@ -1189,7 +1190,7 @@
 <span style="color: #408080; font-style: italic">    @param aFunction a JavaScript function that will be called to compare objects</span>
 <span style="color: #408080; font-style: italic">    @param aContext an object that will be passed to \c aFunction with comparison</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">sortUsingFunction:</span>(<span style="color: #B00040">Function</span>)aFunction <span style="color: #0000FF">context:</span>(<span style="color: #B00040">id</span>)aContext
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">sortUsingFunction:</span>(<span style="color: #B00040">Function</span>)aFunction <span style="color: #0000FF">context:</span>(<span style="color: #B00040">id</span>)aContext
 {
     sort(<span style="color: #008000; font-weight: bold">function</span>(lhs, rhs) { <span style="color: #008000; font-weight: bold">return</span> aFunction(lhs, rhs, aContext); });
 }
@@ -1198,21 +1199,21 @@
 <span style="color: #408080; font-style: italic">    Sorts the receiver array using an Objective-J method as a comparator.</span>
 <span style="color: #408080; font-style: italic">    @param aSelector the selector for the method to call for comparison</span>
 <span style="color: #408080; font-style: italic">*/</span>
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">sortUsingSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">sortUsingSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector
 {
     sort(<span style="color: #008000; font-weight: bold">function</span>(lhs, rhs) { <span style="color: #008000; font-weight: bold">return</span> objj_msgSend(lhs, aSelector, rhs); });
 }
 
 <span style="color: #008000; font-weight: bold">@end</span>
 
-<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPArray</span> <span style="color: #A0A000">(CPCoding)</span>
+<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPArray</span> (<span style="color: #A0A000">CPCoding</span>)
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithCoder:</span>(<span style="color: #B00040">CPCoder</span>)aCoder
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithCoder:</span>(<span style="color: #B00040">CPCoder</span>)aCoder
 {
     <span style="color: #008000; font-weight: bold">return</span> [aCoder decodeObjectForKey<span style="color: #666666">:</span><span style="color: #BA2121">@&quot;CP.objects&quot;</span>];
 }
 
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">encodeWithCoder:</span>(<span style="color: #B00040">CPCoder</span>)aCoder
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">encodeWithCoder:</span>(<span style="color: #B00040">CPCoder</span>)aCoder
 {
     [aCoder _encodeArrayOfObjects<span style="color: #666666">:</span><span style="color: #008000">self</span> forKey<span style="color: #666666">:</span><span style="color: #BA2121">@&quot;CP.objects&quot;</span>];
 }
@@ -1227,7 +1228,7 @@
 <span style="color: #408080; font-style: italic">    CPArray already implements mutable methods and</span>
 <span style="color: #408080; font-style: italic">    this class only exists for source compatability.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPMutableArray</span> : <span style="color: #0000FF; font-weight: bold">CPArray</span>
+<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPMutableArray</span> <span style="color: #666666">:</span> <span style="color: #0000FF; font-weight: bold">CPArray</span>
 
 <span style="color: #008000; font-weight: bold">@end</span>
 

@@ -1,4 +1,4 @@
-<div class="highlight"><pre><span style="color: #008000; font-weight: bold">@import</span> <span style="color: #008000; font-weight: bold">&lt;Foundation/CPObject.j&gt;</span>
+<div class="highlight"><pre><span style="color: #BC7A00">@import &lt;Foundation/CPObject.j&gt;</span>
 
 CPURLNameKey                        <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLNameKey&quot;</span>;
 CPURLLocalizedNameKey               <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLLocalizedNameKey&quot;</span>;
@@ -26,7 +26,7 @@ CPURLLocalizedLabelKey              <span style="color: #666666">=</span> <span 
 CPURLEffectiveIconKey               <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLEffectiveIconKey&quot;</span>;
 CPURLCustomIconKey                  <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLCustomIconKey&quot;</span>;
 
-<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPURL</span> : <span style="color: #0000FF; font-weight: bold">CPObject</span>
+<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPURL</span> <span style="color: #666666">:</span> <span style="color: #0000FF; font-weight: bold">CPObject</span>
 {
     CPURL       _base <span style="color: #008000; font-weight: bold">@accessors</span>(readonly, property<span style="color: #666666">=</span>baseURL);
     CPString    _relative <span style="color: #008000; font-weight: bold">@accessors</span>(readonly, property<span style="color: #666666">=</span>relativeString);
@@ -34,7 +34,7 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
     CPDictionary    _resourceValues;
 }
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithScheme:</span>(<span style="color: #B00040">CPString</span>)scheme <span style="color: #0000FF">host:</span>(<span style="color: #B00040">CPString</span>)host <span style="color: #0000FF">path:</span>(<span style="color: #B00040">CPString</span>)path
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithScheme:</span>(<span style="color: #B00040">CPString</span>)scheme <span style="color: #0000FF">host:</span>(<span style="color: #B00040">CPString</span>)host <span style="color: #0000FF">path:</span>(<span style="color: #B00040">CPString</span>)path
 {
     <span style="color: #008000; font-weight: bold">var</span> uri <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> URI();
     uri.scheme <span style="color: #666666">=</span> scheme;
@@ -43,17 +43,17 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
     [<span style="color: #008000">self</span> initWithString<span style="color: #666666">:</span>uri.toString()];
 }
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithString:</span>(<span style="color: #B00040">CPString</span>)URLString
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithString:</span>(<span style="color: #B00040">CPString</span>)URLString
 {
     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> initWithString<span style="color: #666666">:</span>URLString relativeToURL<span style="color: #666666">:</span><span style="color: #008000; font-weight: bold">nil</span>];
 }
 
-+ (<span style="color: #B00040">id</span>)<span style="color: #0000FF">URLWithString:</span>(<span style="color: #B00040">CPString</span>)URLString
+<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">URLWithString:</span>(<span style="color: #B00040">CPString</span>)URLString
 {
     <span style="color: #008000; font-weight: bold">return</span> [[<span style="color: #008000">self</span> alloc] initWithString<span style="color: #666666">:</span>URLString];
 }
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithString:</span>(<span style="color: #B00040">CPString</span>)URLString <span style="color: #0000FF">relativeToURL:</span>(<span style="color: #B00040">CPURL</span>)baseURL
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithString:</span>(<span style="color: #B00040">CPString</span>)URLString <span style="color: #0000FF">relativeToURL:</span>(<span style="color: #B00040">CPURL</span>)baseURL
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>URI_RE.test(URLString))
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">nil</span>;
@@ -68,12 +68,12 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
 }
 
-+ (<span style="color: #B00040">id</span>)<span style="color: #0000FF">URLWithString:</span>(<span style="color: #B00040">CPString</span>)URLString <span style="color: #0000FF">relativeToURL:</span>(<span style="color: #B00040">CPURL</span>)baseURL
+<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">URLWithString:</span>(<span style="color: #B00040">CPString</span>)URLString <span style="color: #0000FF">relativeToURL:</span>(<span style="color: #B00040">CPURL</span>)baseURL
 {
     <span style="color: #008000; font-weight: bold">return</span> [[<span style="color: #008000">self</span> alloc] initWithString<span style="color: #666666">:</span>URLString relativeToURL<span style="color: #666666">:</span>baseURL];
 }
 
-- (<span style="color: #B00040">CPURL</span>)<span style="color: #0000FF">absoluteURL</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPURL</span>)<span style="color: #0000FF">absoluteURL</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> absStr <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
     
@@ -83,55 +83,55 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">absoluteString</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">absoluteString</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> resolve([_base absoluteString] <span style="color: #666666">||</span> <span style="color: #BA2121">&quot;&quot;</span>, _relative);
 }
 
 <span style="color: #408080; font-style: italic">// if absolute, returns same as absoluteString</span>
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">relativeString</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">relativeString</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> _relative;
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">path</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">path</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
     <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).path <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 <span style="color: #408080; font-style: italic">// if absolute, returns the same as path</span>
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">relativePath</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">relativePath</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(_relative) <span style="color: #666666">?</span> (parse(_relative).path <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">scheme</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">scheme</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
     <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).protocol <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">user</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">user</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
     <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).user <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">password</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">password</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
     <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).password <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">host</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">host</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
     <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).domain <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">port</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">port</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
     <span style="color: #008000; font-weight: bold">if</span> (URI_RE.test(str)) {
@@ -142,75 +142,75 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">parameterString</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">parameterString</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
     <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).query <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">fragment</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">fragment</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
     <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).anchor <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
-- (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isEqual:</span>(<span style="color: #B00040">id</span>)anObject
+<span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isEqual:</span>(<span style="color: #B00040">id</span>)anObject
 {
     <span style="color: #408080; font-style: italic">// Is checking if baseURL isEqual correct? Does &quot;identical&quot; mean same object or equivalent values?</span>
     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> relativeString] <span style="color: #666666">===</span> [anObject relativeString] <span style="color: #666666">&amp;&amp;</span>
         ([<span style="color: #008000">self</span> baseURL] <span style="color: #666666">===</span> [anObject baseURL] <span style="color: #666666">||</span> [[<span style="color: #008000">self</span> baseURL] isEqual<span style="color: #666666">:</span>[anObject baseURL]]);
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">lastPathComponent</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">lastPathComponent</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> path <span style="color: #666666">=</span> [<span style="color: #008000">self</span> path];
     <span style="color: #008000; font-weight: bold">return</span> path <span style="color: #666666">?</span> path.split(<span style="color: #BA2121">&quot;/&quot;</span>).pop() <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">pathExtension</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">pathExtension</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> path <span style="color: #666666">=</span> [<span style="color: #008000">self</span> path],
         ext <span style="color: #666666">=</span> path.match(<span style="color: #BB6688">/\.(\w+)$/</span>);
     <span style="color: #008000; font-weight: bold">return</span> ext <span style="color: #666666">?</span> ext[<span style="color: #666666">1</span>] <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>;
 }
 
-- (<span style="color: #B00040">CPURL</span>)<span style="color: #0000FF">standardizedURL</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPURL</span>)<span style="color: #0000FF">standardizedURL</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> [CPURL URLWithString<span style="color: #666666">:</span>format(parse(_relative)) relativeToURL<span style="color: #666666">:</span>_base];
 }
 
-- (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isFileURL</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isFileURL</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> scheme] <span style="color: #666666">===</span> <span style="color: #BA2121">&quot;file&quot;</span>;
 }
 
-- (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">description</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">description</span>
 {
     <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> absoluteString];
 }
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">resourceValueForKey:</span>(<span style="color: #B00040">CPString</span>)aKey
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">resourceValueForKey:</span>(<span style="color: #B00040">CPString</span>)aKey
 {
     <span style="color: #008000; font-weight: bold">return</span> [_resourceValues objectForKey<span style="color: #666666">:</span>aKey];
 }
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">setResourceValue:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">forKey:</span>(<span style="color: #B00040">CPString</span>)aKey
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">setResourceValue:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">forKey:</span>(<span style="color: #B00040">CPString</span>)aKey
 {
     [_resourceValues setObject<span style="color: #666666">:</span>anObject forKey<span style="color: #666666">:</span>aKey];
 }
 
 <span style="color: #008000; font-weight: bold">@end</span>
 
-<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPURL</span> <span style="color: #A0A000">(CPCoding)</span>
+<span style="color: #008000; font-weight: bold">@implementation</span> <span style="color: #0000FF; font-weight: bold">CPURL</span> (<span style="color: #A0A000">CPCoding</span>)
 
-- (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithCoder:</span>(<span style="color: #B00040">CPCoder</span>)aCoder
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithCoder:</span>(<span style="color: #B00040">CPCoder</span>)aCoder
 {
     _base <span style="color: #666666">=</span> [aCoder decodeObjectForKey<span style="color: #666666">:</span><span style="color: #BA2121">&quot;CPURLBaseKey&quot;</span>];
     _relative <span style="color: #666666">=</span> [aCoder decodeObjectForKey<span style="color: #666666">:</span><span style="color: #BA2121">&quot;CPURLRelativeKey&quot;</span>];
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
 }
 
-- (<span style="color: #B00040">void</span>)<span style="color: #0000FF">encodeWithCoder:</span>(<span style="color: #B00040">CPCoder</span>)aCoder
+<span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">encodeWithCoder:</span>(<span style="color: #B00040">CPCoder</span>)aCoder
 {
     [aCoder encodeObject<span style="color: #666666">:</span>_base forKey<span style="color: #666666">:</span><span style="color: #BA2121">&quot;CPURLBaseKey&quot;</span>];
     [aCoder encodeObject<span style="color: #666666">:</span>_relative forKey<span style="color: #666666">:</span><span style="color: #BA2121">&quot;CPURLRelativeKey&quot;</span>];
@@ -218,9 +218,9 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
 
 <span style="color: #008000; font-weight: bold">@end</span>
 
-// original code: http://code.google.com/p/js-uri/
+<span style="color: #408080; font-style: italic">// original code: http://code.google.com/p/js-uri/</span>
 
-// Based on the regex in RFC2396 Appendix B.
+<span style="color: #408080; font-style: italic">// Based on the regex in RFC2396 Appendix B.</span>
 <span style="color: #008000; font-weight: bold">var</span> URI_RE <span style="color: #666666">=</span> <span style="color: #BB6688">/^(?:([^:\/?\#]+):)?(?:\/\/([^\/?\#]*))?([^?\#]*)(?:\?([^\#]*))?(?:\#(.*))?/</span>;
 
 <span style="color: #408080; font-style: italic">/**</span>

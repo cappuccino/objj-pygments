@@ -74,10 +74,10 @@
     TOKEN_NUMBER            <span style="color: #666666">=</span> <span style="color: #BB6688">/^[+-]?\d+(([.]\d+)*([eE][+-]?\d+))?$/</span>,
     TOKEN_IDENTIFIER        <span style="color: #666666">=</span> <span style="color: #BB6688">/^[a-zA-Z_$](\w|$)*$/</span>;
     
-<span style="color: #BC7A00">#define IS_WORD(token) /^\w+$/.test(token)</span>
+<span style="border: 1px solid #FF0000">#</span>define IS_WORD(token) <span style="color: #666666">/^</span><span style="border: 1px solid #FF0000">\</span>w<span style="color: #666666">+</span>$<span style="color: #666666">/</span>.test(token)
 
-<span style="color: #BC7A00">#define IS_NOT_EMPTY(buffer) buffer.atoms.length !== 0</span>
-<span style="color: #BC7A00">#define CONCAT(buffer, atom) buffer.atoms[buffer.atoms.length] = atom</span>
+<span style="border: 1px solid #FF0000">#</span>define IS_NOT_EMPTY(buffer) buffer.atoms.length <span style="color: #666666">!==</span> <span style="color: #666666">0</span>
+<span style="border: 1px solid #FF0000">#</span>define CONCAT(buffer, atom) buffer.atoms[buffer.atoms.length] <span style="color: #666666">=</span> atom
 
 <span style="color: #008000; font-weight: bold">var</span> SUPER_CLASSES           <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> objj_dictionary();
 
@@ -851,8 +851,8 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
             <span style="color: #408080; font-style: italic">// If it&#39;s not a parenthesis, we know we have a non-supported function declaration, so fix it:</span>
             <span style="color: #008000; font-weight: bold">else</span>
             {
-                CONCAT(buffer, token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;= function&quot;</span>);
-            
+                CONCAT(buffer, token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;= function&quot;</span>);<span style="color: #BC7A00"></span>
+<span style="color: #BC7A00">            </span>
 <span style="color: #BC7A00">#if FIREBUG</span>
                 <span style="color: #008000; font-weight: bold">var</span> functionName <span style="color: #666666">=</span> token;
 
@@ -871,7 +871,7 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
                     <span style="color: #666666">++</span>closures[<span style="color: #666666">2</span>];
                 
                 <span style="color: #408080; font-style: italic">// Place the open curly brace as well, and the function name</span>
-                CONCAT(buffer, token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">__FIREBUG_FNAME__&quot;</span> <span style="color: #666666">+</span> functionName <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.length;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+                CONCAT(buffer, token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">__FIREBUG_FNAME__&quot;</span> <span style="color: #666666">+</span> functionName <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.length;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
             }
         }

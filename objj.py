@@ -48,8 +48,8 @@ class ObjectiveJLexer(RegexLexer):
             (';', Punctuation)
         ],
         'whitespace': [
-            (r'^(\s*)(#if\s+0)', bygroups(Text, Comment.Preproc), 'if0'),
-            (r'^(\s*)(#)', bygroups(Text, Comment.Preproc), 'macro'),
+            (r'\s*(#(?:include|if|pragma).*?\n)', Comment.Preproc),
+            (r'\s*#(else|endif)', Comment.Preproc),
             (r'\n', Text),
             (r'\s+', Text),
             (r'\\\n', Text), # line continuation
@@ -84,7 +84,7 @@ class ObjectiveJLexer(RegexLexer):
             (r'[{(\[;,]', Punctuation, 'slashstartsregex'),
             (r'[})\].]', Punctuation),
 
-            (r'(@import)(\s+)([^\s]+)', bygroups(Keyword, Text, Keyword)),
+            (r'(@import\s+[^\s]+)', bygroups(Comment.Preproc)),
 
             (r'(for|in|while|do|break|return|continue|switch|case|default|if|else|'
              r'throw|try|catch|finally|new|delete|typeof|instanceof|void'

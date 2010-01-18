@@ -48,8 +48,14 @@ class ObjectiveJLexer(RegexLexer):
             (';', Punctuation)
         ],
         'whitespace': [
-            (r'\s*(#(?:include|if|pragma).*?\n)', Comment.Preproc),
+            (r'\s*(#(?:if|pragma|define).*?\n)', Comment.Preproc),
             (r'\s*#(else|endif)', Comment.Preproc),
+
+            (r'(@import)(\s+)("(\\\\|\\"|[^"])*")', bygroups(Comment.Preproc, Text, String.Double)),
+            (r'(@import)(\s+)(<(\\\\|\\>|[^>])*>)', bygroups(Comment.Preproc, Text, String.Double)),
+            (r'(#include)(\s+)("(\\\\|\\"|[^"])*")', bygroups(Comment.Preproc, Text, String.Double)),
+            (r'(#include)(\s+)(<(\\\\|\\>|[^>])*>)', bygroups(Comment.Preproc, Text, String.Double)),
+
             (r'\n', Text),
             (r'\s+', Text),
             (r'\\\n', Text), # line continuation
@@ -79,12 +85,11 @@ class ObjectiveJLexer(RegexLexer):
             (r'\d+[Ll]?', Number.Integer),
 
             (r'^(?=\s|/|<!--)', Text, 'slashstartsregex'),
+
             (r'\+\+|--|~|&&|\?|:|\|\||\\(?=\n)|'
              r'(<<|>>>?|==?|!=?|[-<>+*%&\|\^/])=?', Operator, 'slashstartsregex'),
             (r'[{(\[;,]', Punctuation, 'slashstartsregex'),
             (r'[})\].]', Punctuation),
-
-            (r'(@import\s+[^\s]+)', bygroups(Comment.Preproc)),
 
             (r'(for|in|while|do|break|return|continue|switch|case|default|if|else|'
              r'throw|try|catch|finally|new|delete|typeof|instanceof|void'
@@ -111,6 +116,8 @@ class ObjectiveJLexer(RegexLexer):
              r'decodeURIComponent|encodeURI|encodeURIComponent|'
              r'Error|eval|isFinite|isNaN|parseFloat|parseInt|document|this|'
              r'window)\b', Name.Builtin),
+
+            (r'([$a-zA-Z_][a-zA-Z0-9_]*)(?=\()', Name.Function),
 
             (r'[$a-zA-Z_][a-zA-Z0-9_]*', Name),
         ],
@@ -167,7 +174,14 @@ class ObjectiveJLexer(RegexLexer):
             (r'([$a-zA-Z_][a-zA-Z0-9_]+:)',     # function name
              Name.Function),
 
+            # var args
+            (r'(,' + _ws + r'...)', using(this)),
+
             ('{', Punctuation, "#pop")
+        ],
+        'expression' : [
+            (r'([$a-zA-Z_][a-zA-Z0-9_]*)(\()', bygroups(Name.Function, Punctuation)),
+            (r'(\))', Punctuation, "#pop")
         ],
         'string': [
             (r'"', String, '#pop'),

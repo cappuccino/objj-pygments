@@ -1,4 +1,4 @@
-<div class="highlight"><pre><span style="color: #BC7A00">@import &lt;Foundation/CPObject.j&gt;</span>
+<div class="highlight"><pre><span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&lt;Foundation/CPObject.j&gt;</span>
 
 CPURLNameKey                        <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLNameKey&quot;</span>;
 CPURLLocalizedNameKey               <span style="color: #666666">=</span> <span style="color: #BA2121">@&quot;CPURLLocalizedNameKey&quot;</span>;
@@ -36,11 +36,11 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithScheme:</span>(<span style="color: #B00040">CPString</span>)scheme <span style="color: #0000FF">host:</span>(<span style="color: #B00040">CPString</span>)host <span style="color: #0000FF">path:</span>(<span style="color: #B00040">CPString</span>)path
 {
-    <span style="color: #008000; font-weight: bold">var</span> uri <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> URI();
+    <span style="color: #008000; font-weight: bold">var</span> uri <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">URI</span>();
     uri.scheme <span style="color: #666666">=</span> scheme;
     uri.authority <span style="color: #666666">=</span> host;
     uri.path <span style="color: #666666">=</span> path;
-    [<span style="color: #008000">self</span> initWithString<span style="color: #666666">:</span>uri.toString()];
+    [<span style="color: #008000">self</span> initWithString<span style="color: #666666">:</span>uri.<span style="color: #0000FF">toString</span>()];
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithString:</span>(<span style="color: #B00040">CPString</span>)URLString
@@ -55,7 +55,7 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithString:</span>(<span style="color: #B00040">CPString</span>)URLString <span style="color: #0000FF">relativeToURL:</span>(<span style="color: #B00040">CPURL</span>)baseURL
 {
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>URI_RE.test(URLString))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>URI_RE.<span style="color: #0000FF">test</span>(URLString))
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">nil</span>;
     
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">self</span>)
@@ -85,7 +85,7 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">absoluteString</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> resolve([_base absoluteString] <span style="color: #666666">||</span> <span style="color: #BA2121">&quot;&quot;</span>, _relative);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">resolve</span>([_base absoluteString] <span style="color: #666666">||</span> <span style="color: #BA2121">&quot;&quot;</span>, _relative);
 }
 
 <span style="color: #408080; font-style: italic">// if absolute, returns same as absoluteString</span>
@@ -97,45 +97,45 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">path</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).path <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
+    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).path <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 <span style="color: #408080; font-style: italic">// if absolute, returns the same as path</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">relativePath</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(_relative) <span style="color: #666666">?</span> (parse(_relative).path <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
+    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(_relative) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(_relative).path <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">scheme</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).protocol <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
+    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).protocol <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">user</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).user <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
+    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).user <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">password</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).password <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
+    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).password <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">host</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).domain <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
+    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).domain <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">port</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">if</span> (URI_RE.test(str)) {
-        <span style="color: #008000; font-weight: bold">var</span> port <span style="color: #666666">=</span> parse(str).port;
+    <span style="color: #008000; font-weight: bold">if</span> (URI_RE.<span style="color: #0000FF">test</span>(str)) {
+        <span style="color: #008000; font-weight: bold">var</span> port <span style="color: #666666">=</span> <span style="color: #0000FF">parse</span>(str).port;
         <span style="color: #008000; font-weight: bold">if</span> (port)
             <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">parseInt</span>(port, <span style="color: #666666">10</span>);
     }
@@ -145,13 +145,13 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">parameterString</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).query <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
+    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).query <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">fragment</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> str <span style="color: #666666">=</span> [<span style="color: #008000">self</span> absoluteString];
-    <span style="color: #008000; font-weight: bold">return</span> URI_RE.test(str) <span style="color: #666666">?</span> (parse(str).anchor <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
+    <span style="color: #008000; font-weight: bold">return</span> URI_RE.<span style="color: #0000FF">test</span>(str) <span style="color: #666666">?</span> (<span style="color: #0000FF">parse</span>(str).anchor <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">nil</span>) <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isEqual:</span>(<span style="color: #B00040">id</span>)anObject
@@ -164,19 +164,19 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">lastPathComponent</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> path <span style="color: #666666">=</span> [<span style="color: #008000">self</span> path];
-    <span style="color: #008000; font-weight: bold">return</span> path <span style="color: #666666">?</span> path.split(<span style="color: #BA2121">&quot;/&quot;</span>).pop() <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
+    <span style="color: #008000; font-weight: bold">return</span> path <span style="color: #666666">?</span> path.<span style="color: #0000FF">split</span>(<span style="color: #BA2121">&quot;/&quot;</span>).<span style="color: #0000FF">pop</span>() <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">nil</span>;
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPString</span>)<span style="color: #0000FF">pathExtension</span>
 {
     <span style="color: #008000; font-weight: bold">var</span> path <span style="color: #666666">=</span> [<span style="color: #008000">self</span> path],
-        ext <span style="color: #666666">=</span> path.match(<span style="color: #BB6688">/\.(\w+)$/</span>);
+        ext <span style="color: #666666">=</span> path.<span style="color: #0000FF">match</span>(<span style="color: #BB6688">/\.(\w+)$/</span>);
     <span style="color: #008000; font-weight: bold">return</span> ext <span style="color: #666666">?</span> ext[<span style="color: #666666">1</span>] <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>;
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPURL</span>)<span style="color: #0000FF">standardizedURL</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> [CPURL URLWithString<span style="color: #666666">:</span>format(parse(_relative)) relativeToURL<span style="color: #666666">:</span>_base];
+    <span style="color: #008000; font-weight: bold">return</span> [CPURL URLWithString<span style="color: #666666">:</span><span style="color: #0000FF">format</span>(<span style="color: #0000FF">parse</span>(_relative)) relativeToURL<span style="color: #666666">:</span>_base];
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">isFileURL</span>
@@ -228,7 +228,7 @@ CPURLCustomIconKey                  <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic"> */</span>
 <span style="color: #008000; font-weight: bold">var</span> URI <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(str) {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>str) str <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
-    <span style="color: #008000; font-weight: bold">var</span> result <span style="color: #666666">=</span> str.match(URI_RE);
+    <span style="color: #008000; font-weight: bold">var</span> result <span style="color: #666666">=</span> str.<span style="color: #0000FF">match</span>(URI_RE);
     <span style="color: #008000">this</span>.scheme <span style="color: #666666">=</span> result[<span style="color: #666666">1</span>] <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">null</span>;
     <span style="color: #008000">this</span>.authority <span style="color: #666666">=</span> result[<span style="color: #666666">2</span>] <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">null</span>;
     <span style="color: #008000">this</span>.path <span style="color: #666666">=</span> result[<span style="color: #666666">3</span>] <span style="color: #666666">||</span> <span style="color: #008000; font-weight: bold">null</span>;
@@ -261,15 +261,15 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
 }
 
 <span style="color: #008000; font-weight: bold">var</span> parse <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(uri) {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">new</span> URI(uri);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">URI</span>(uri);
 }
 
 <span style="color: #008000; font-weight: bold">var</span> unescape <span style="color: #666666">=</span>  <span style="color: #008000; font-weight: bold">function</span>(str, plus) {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">decodeURI</span>(str).replace(<span style="color: #BB6688">/\+/g</span>, <span style="color: #BA2121">&quot; &quot;</span>);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">decodeURI</span>(str).<span style="color: #0000FF">replace</span>(<span style="color: #BB6688">/\+/g</span>, <span style="color: #BA2121">&quot; &quot;</span>);
 }
 
 <span style="color: #008000; font-weight: bold">var</span> unescapeComponent <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(str, plus) {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">decodeURIComponent</span>(str).replace(<span style="color: #BB6688">/\+/g</span>, <span style="color: #BA2121">&quot; &quot;</span>);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">decodeURIComponent</span>(str).<span style="color: #0000FF">replace</span>(<span style="color: #BB6688">/\+/g</span>, <span style="color: #BA2121">&quot; &quot;</span>);
 }
 
 <span style="color: #408080; font-style: italic">// from Chiron&#39;s HTTP module:</span>
@@ -363,7 +363,7 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
         <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000; font-weight: bold">typeof</span> url <span style="color: #666666">!=</span> <span style="color: #BA2121">&quot;string&quot;</span>) <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #008000">Object</span>(url);
 
         <span style="color: #008000; font-weight: bold">var</span> items <span style="color: #666666">=</span> {};
-        <span style="color: #008000; font-weight: bold">var</span> parts <span style="color: #666666">=</span> expression.exec(url);
+        <span style="color: #008000; font-weight: bold">var</span> parts <span style="color: #666666">=</span> expression.<span style="color: #0000FF">exec</span>(url);
 
         <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> parts.length; i<span style="color: #666666">++</span>) {
             items[expressionKeys[i]] <span style="color: #666666">=</span> parts[i] <span style="color: #666666">?</span> parts[i] <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>;
@@ -371,9 +371,9 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
 
         items.root <span style="color: #666666">=</span> (items.root <span style="color: #666666">||</span> items.authorityRoot) <span style="color: #666666">?</span> <span style="color: #BA2121">&#39;/&#39;</span> <span style="color: #666666">:</span> <span style="color: #BA2121">&#39;&#39;</span>;
 
-        items.directories <span style="color: #666666">=</span> items.directory.split(<span style="color: #BA2121">&quot;/&quot;</span>);
+        items.directories <span style="color: #666666">=</span> items.directory.<span style="color: #0000FF">split</span>(<span style="color: #BA2121">&quot;/&quot;</span>);
         <span style="color: #008000; font-weight: bold">if</span> (items.directories[items.directories.length <span style="color: #666666">-</span> <span style="color: #666666">1</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;&quot;</span>) {
-            items.directories.pop();
+            items.directories.<span style="color: #0000FF">pop</span>();
         }
 
         <span style="color: #408080; font-style: italic">/* normalize */</span>
@@ -383,16 +383,16 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
             <span style="color: #008000; font-weight: bold">if</span> (directory <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;.&#39;</span>) {
             } <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (directory <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;..&#39;</span>) {
                 <span style="color: #008000; font-weight: bold">if</span> (directories.length <span style="color: #666666">&amp;&amp;</span> directories[directories.length <span style="color: #666666">-</span> <span style="color: #666666">1</span>] <span style="color: #666666">!=</span> <span style="color: #BA2121">&#39;..&#39;</span>)
-                    directories.pop();
+                    directories.<span style="color: #0000FF">pop</span>();
                 <span style="color: #008000; font-weight: bold">else</span>
-                    directories.push(<span style="color: #BA2121">&#39;..&#39;</span>);
+                    directories.<span style="color: #0000FF">push</span>(<span style="color: #BA2121">&#39;..&#39;</span>);
             } <span style="color: #008000; font-weight: bold">else</span> {
-                directories.push(directory);
+                directories.<span style="color: #0000FF">push</span>(directory);
             }
         }
         items.directories <span style="color: #666666">=</span> directories;
 
-        items.domains <span style="color: #666666">=</span> items.domain.split(<span style="color: #BA2121">&quot;.&quot;</span>);
+        items.domains <span style="color: #666666">=</span> items.domain.<span style="color: #0000FF">split</span>(<span style="color: #BA2121">&quot;.&quot;</span>);
 
         <span style="color: #008000; font-weight: bold">return</span> items;
     };
@@ -401,7 +401,7 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
 <span style="color: #408080; font-style: italic">/**** parse</span>
 <span style="color: #408080; font-style: italic">    a strict URI parser.</span>
 <span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #008000; font-weight: bold">var</span> parse <span style="color: #666666">=</span> Parser(strictExpression);
+<span style="color: #008000; font-weight: bold">var</span> parse <span style="color: #666666">=</span> <span style="color: #0000FF">Parser</span>(strictExpression);
 
 <span style="color: #408080; font-style: italic">/**** format</span>
 <span style="color: #408080; font-style: italic">    accepts a parsed URI object and returns</span>
@@ -414,7 +414,7 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
         <span style="color: #008000; font-weight: bold">return</span> object;
     <span style="color: #008000; font-weight: bold">var</span> domain <span style="color: #666666">=</span>
         object.domains <span style="color: #666666">?</span>
-        object.domains.join(<span style="color: #BA2121">&quot;.&quot;</span>) <span style="color: #666666">:</span>
+        object.domains.<span style="color: #0000FF">join</span>(<span style="color: #BA2121">&quot;.&quot;</span>) <span style="color: #666666">:</span>
         object.domain;
     <span style="color: #008000; font-weight: bold">var</span> userInfo <span style="color: #666666">=</span> (
             object.user <span style="color: #666666">||</span>
@@ -437,7 +437,7 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
         object.authority;
     <span style="color: #008000; font-weight: bold">var</span> directory <span style="color: #666666">=</span>
         object.directories <span style="color: #666666">?</span>
-        object.directories.join(<span style="color: #BA2121">&quot;/&quot;</span>) <span style="color: #666666">:</span>
+        object.directories.<span style="color: #0000FF">join</span>(<span style="color: #BA2121">&quot;/&quot;</span>) <span style="color: #666666">:</span>
         object.directory;
     <span style="color: #008000; font-weight: bold">var</span> path <span style="color: #666666">=</span>
         directory <span style="color: #666666">||</span> object.file <span style="color: #666666">?</span>
@@ -464,8 +464,8 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>source) 
         <span style="color: #008000; font-weight: bold">return</span> relative;
 
-    source <span style="color: #666666">=</span> parse(source);
-    relative <span style="color: #666666">=</span> parse(relative);
+    source <span style="color: #666666">=</span> <span style="color: #0000FF">parse</span>(source);
+    relative <span style="color: #666666">=</span> <span style="color: #0000FF">parse</span>(relative);
 
     <span style="color: #008000; font-weight: bold">if</span> (relative.url <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;&quot;</span>)
         <span style="color: #008000; font-weight: bold">return</span> source;
@@ -493,19 +493,19 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
                 <span style="color: #008000; font-weight: bold">if</span> (directory <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;.&quot;</span>) {
                 } <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (directory <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;..&quot;</span>) {
                     <span style="color: #008000; font-weight: bold">if</span> (source.directories.length) {
-                        source.directories.pop();
+                        source.directories.<span style="color: #0000FF">pop</span>();
                     } <span style="color: #008000; font-weight: bold">else</span> {
-                        source.directories.push(<span style="color: #BA2121">&#39;..&#39;</span>);
+                        source.directories.<span style="color: #0000FF">push</span>(<span style="color: #BA2121">&#39;..&#39;</span>);
                     }
                 } <span style="color: #008000; font-weight: bold">else</span> {
-                    source.directories.push(directory);
+                    source.directories.<span style="color: #0000FF">push</span>(directory);
                 }
             }
 
             <span style="color: #008000; font-weight: bold">if</span> (relative.file <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;.&quot;</span>) {
                 relative.file <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
             } <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (relative.file <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;..&quot;</span>) {
-                source.directories.pop();
+                source.directories.<span style="color: #0000FF">pop</span>();
                 relative.file <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
             }
         }
@@ -528,8 +528,8 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
 <span style="color: #408080; font-style: italic">    a given target URL from a source URL.</span>
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #008000; font-weight: bold">var</span> relativeObject <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> (source, target) {
-    target <span style="color: #666666">=</span> parse(target);
-    source <span style="color: #666666">=</span> parse(source);
+    target <span style="color: #666666">=</span> <span style="color: #0000FF">parse</span>(target);
+    source <span style="color: #666666">=</span> <span style="color: #0000FF">parse</span>(source);
 
     <span style="color: #008000; font-weight: bold">delete</span> target.url;
 
@@ -559,16 +559,16 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
                 target.directories.length <span style="color: #666666">&amp;&amp;</span>
                 target.directories[<span style="color: #666666">0</span>] <span style="color: #666666">==</span> source.directories[<span style="color: #666666">0</span>]
             ) {
-                target.directories.shift();
-                source.directories.shift();
+                target.directories.<span style="color: #0000FF">shift</span>();
+                source.directories.<span style="color: #0000FF">shift</span>();
             }
             <span style="color: #008000; font-weight: bold">while</span> (source.directories.length) {
-                source.directories.shift();
-                target.directories.unshift(<span style="color: #BA2121">&#39;..&#39;</span>);
+                source.directories.<span style="color: #0000FF">shift</span>();
+                target.directories.<span style="color: #0000FF">unshift</span>(<span style="color: #BA2121">&#39;..&#39;</span>);
             }
 
             <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>target.root <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>target.directories.length <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>target.file <span style="color: #666666">&amp;&amp;</span> source.file)
-                target.directories.push(<span style="color: #BA2121">&#39;.&#39;</span>);
+                target.directories.<span style="color: #0000FF">push</span>(<span style="color: #BA2121">&#39;.&#39;</span>);
 
             <span style="color: #008000; font-weight: bold">if</span> (source.file <span style="color: #666666">==</span> target.file)
                 <span style="color: #008000; font-weight: bold">delete</span> target.file;
@@ -586,13 +586,13 @@ URI.<span style="color: #008000; font-weight: bold">prototype</span>.toString <s
 <span style="color: #408080; font-style: italic">    returns a URL resovled to a relative URL from a source URL.</span>
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #008000; font-weight: bold">var</span> resolve <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> (source, relative) {
-    <span style="color: #008000; font-weight: bold">return</span> format(resolveObject(source, relative));
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">format</span>(<span style="color: #0000FF">resolveObject</span>(source, relative));
 };
 
 <span style="color: #408080; font-style: italic">/**** relative</span>
 <span style="color: #408080; font-style: italic">    returns a relative URL to a target from a source.</span>
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #008000; font-weight: bold">var</span> relative <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> (source, target) {
-    <span style="color: #008000; font-weight: bold">return</span> format(relativeObject(source, target));
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">format</span>(<span style="color: #0000FF">relativeObject</span>(source, target));
 };
 </pre></div>

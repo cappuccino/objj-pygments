@@ -20,11 +20,11 @@
 <span style="color: #408080; font-style: italic"> * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA</span>
 <span style="color: #408080; font-style: italic"> */</span>
 
-<span style="color: #BC7A00">@import &quot;CPObject.j&quot;</span>
-<span style="color: #BC7A00">@import &quot;CPRange.j&quot;</span>
-<span style="color: #BC7A00">@import &quot;CPEnumerator.j&quot;</span>
-<span style="color: #BC7A00">@import &quot;CPSortDescriptor.j&quot;</span>
-<span style="color: #BC7A00">@import &quot;CPException.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CPObject.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CPRange.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CPEnumerator.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CPSortDescriptor.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CPException.j&quot;</span>
 
 
 <span style="color: #408080; font-style: italic">/* @ignore */</span>
@@ -141,14 +141,14 @@
 <span style="color: #408080; font-style: italic">    @param anObject the objects that will be added to the new array</span>
 <span style="color: #408080; font-style: italic">    @return a new CPArray containing the argument objects</span>
 <span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">arrayWithObjects:</span>(<span style="color: #B00040">id</span>)anObject<span style="border: 1px solid #FF0000">,</span> <span style="border: 1px solid #FF0000">...</span>
+<span style="color: #666666">+</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">arrayWithObjects:</span>(<span style="color: #B00040">id</span>)anObject, ...
 {
     <span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">2</span>,
         array <span style="color: #666666">=</span> [[<span style="color: #008000">self</span> alloc] init],
         argument;
 
     <span style="color: #008000; font-weight: bold">for</span>(; i <span style="color: #666666">&lt;</span> arguments.length <span style="color: #666666">&amp;&amp;</span> (argument <span style="color: #666666">=</span> arguments[i]) <span style="color: #666666">!=</span> <span style="color: #008000; font-weight: bold">nil</span>; <span style="color: #666666">++</span>i)
-        array.push(argument);
+        array.<span style="color: #0000FF">push</span>(argument);
 
     <span style="color: #008000; font-weight: bold">return</span> array;
 }
@@ -225,14 +225,14 @@
 <span style="color: #408080; font-style: italic">/*!</span>
 <span style="color: #408080; font-style: italic">    initializes an array with the contents of anArray</span>
 <span style="color: #408080; font-style: italic">*/</span>
-<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithObjects:</span>(<span style="color: #B00040">Array</span>)anArray<span style="border: 1px solid #FF0000">,</span> <span style="border: 1px solid #FF0000">...</span>
+<span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">initWithObjects:</span>(<span style="color: #B00040">Array</span>)anArray, ...
 {
     <span style="color: #408080; font-style: italic">// The arguments array contains self and _cmd, so the first object is at position 2.</span>
     <span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">2</span>,
         argument;
     
     <span style="color: #008000; font-weight: bold">for</span>(; i <span style="color: #666666">&lt;</span> arguments.length <span style="color: #666666">&amp;&amp;</span> (argument <span style="color: #666666">=</span> arguments[i]) <span style="color: #666666">!=</span> <span style="color: #008000; font-weight: bold">nil</span>; <span style="color: #666666">++</span>i)
-        push(argument);
+        <span style="color: #0000FF">push</span>(argument);
 
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>; 
 }
@@ -252,7 +252,7 @@
         <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> <span style="color: #666666">0</span>;
     
         <span style="color: #008000; font-weight: bold">for</span>(; index <span style="color: #666666">&lt;</span> aCount; <span style="color: #666666">++</span>index)
-            push(objects[index]);
+            <span style="color: #0000FF">push</span>(objects[index]);
     }
 
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span>;
@@ -301,7 +301,7 @@
     <span style="color: #408080; font-style: italic">// If indexOf exists, use it since it&#39;s probably </span>
     <span style="color: #408080; font-style: italic">// faster than anything we can implement.</span>
     <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">self</span>.indexOf)
-        <span style="color: #008000; font-weight: bold">return</span> indexOf(anObject);
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">indexOf</span>(anObject);
     <span style="color: #408080; font-style: italic">// Last resort, do a straight forward linear O(N) search.</span>
     <span style="color: #008000; font-weight: bold">else</span>
         <span style="color: #008000; font-weight: bold">for</span>(; i <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>i)
@@ -325,7 +325,7 @@
         <span style="color: #008000; font-weight: bold">return</span> CPNotFound;
     
     <span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> aRange.location, 
-        count <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">MIN</span>(CPMaxRange(aRange), length);
+        count <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">MIN</span>(<span style="color: #0000FF">CPMaxRange</span>(aRange), length);
     
     <span style="color: #408080; font-style: italic">// Only use isEqual: if our object is a CPObject.</span>
     <span style="color: #008000; font-weight: bold">if</span> (anObject.isa)
@@ -356,7 +356,7 @@
     <span style="color: #408080; font-style: italic">// If indexOf exists, use it since it&#39;s probably </span>
     <span style="color: #408080; font-style: italic">// faster than anything we can implement.</span>
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">self</span>.indexOf)
-        <span style="color: #008000; font-weight: bold">return</span> indexOf(anObject);
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">indexOf</span>(anObject);
     
     <span style="color: #408080; font-style: italic">// Last resort, do a straight forward linear O(N) search.</span>
     <span style="color: #008000; font-weight: bold">else</span>
@@ -389,9 +389,9 @@
     <span style="color: #408080; font-style: italic">// faster than anything we can implement.</span>
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">self</span>.indexOf)
     {
-        <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> indexOf(anObject, aRange.location);
+        <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> <span style="color: #0000FF">indexOf</span>(anObject, aRange.location);
         
-        <span style="color: #008000; font-weight: bold">if</span> (CPLocationInRange(index, aRange))
+        <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">CPLocationInRange</span>(index, aRange))
             <span style="color: #008000; font-weight: bold">return</span> index;
     }
     
@@ -399,7 +399,7 @@
     <span style="color: #008000; font-weight: bold">else</span>
     {
         <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> aRange.location, 
-            count <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">MIN</span>(CPMaxRange(aRange), length);
+            count <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">MIN</span>(<span style="color: #0000FF">CPMaxRange</span>(aRange), length);
         
         <span style="color: #008000; font-weight: bold">for</span>(; index <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>index)
             <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">self</span>[index] <span style="color: #666666">==</span> anObject)
@@ -419,7 +419,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">unsigned</span>)<span style="color: #0000FF">indexOfObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">sortedBySelector:</span>(<span style="color: #B00040">SEL</span>)aSelector
 {
-    <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> indexOfObject<span style="color: #666666">:</span>anObject sortedByFunction<span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">function</span>(lhs, rhs) { objj_msgSend(lhs, aSelector, rhs); }];
+    <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> indexOfObject<span style="color: #666666">:</span>anObject sortedByFunction<span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">function</span>(lhs, rhs) { <span style="color: #0000FF">objj_msgSend</span>(lhs, aSelector, rhs); }];
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -461,7 +461,7 @@
     <span style="color: #008000; font-weight: bold">while</span> (first <span style="color: #666666">&lt;=</span> last)
     {
         mid <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">FLOOR</span>((first <span style="color: #666666">+</span> last) <span style="color: #666666">/</span> <span style="color: #666666">2</span>);
-          c <span style="color: #666666">=</span> aFunction(anObject, <span style="color: #008000">self</span>[mid], aContext);
+          c <span style="color: #666666">=</span> <span style="color: #0000FF">aFunction</span>(anObject, <span style="color: #008000">self</span>[mid], aContext);
 
         <span style="color: #008000; font-weight: bold">if</span> (c <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>)
             first <span style="color: #666666">=</span> mid <span style="color: #666666">+</span> <span style="color: #666666">1</span>;
@@ -469,7 +469,7 @@
             last <span style="color: #666666">=</span> mid <span style="color: #666666">-</span> <span style="color: #666666">1</span>;
         <span style="color: #008000; font-weight: bold">else</span>
         {
-            <span style="color: #008000; font-weight: bold">while</span> (mid <span style="color: #666666">&lt;</span> length <span style="color: #666666">-</span> <span style="color: #666666">1</span> <span style="color: #666666">&amp;&amp;</span> aFunction(anObject, <span style="color: #008000">self</span>[mid<span style="color: #666666">+1</span>], aContext) <span style="color: #666666">==</span> CPOrderedSame)
+            <span style="color: #008000; font-weight: bold">while</span> (mid <span style="color: #666666">&lt;</span> length <span style="color: #666666">-</span> <span style="color: #666666">1</span> <span style="color: #666666">&amp;&amp;</span> <span style="color: #0000FF">aFunction</span>(anObject, <span style="color: #008000">self</span>[mid<span style="color: #666666">+1</span>], aContext) <span style="color: #666666">==</span> CPOrderedSame)
                 mid<span style="color: #666666">++</span>;
 
             <span style="color: #008000; font-weight: bold">return</span> mid;
@@ -578,7 +578,7 @@
         count <span style="color: #666666">=</span> length;
         
     <span style="color: #008000; font-weight: bold">for</span>(; index <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>index)
-        objj_msgSend(<span style="color: #008000">self</span>[index], aSelector);
+        <span style="color: #0000FF">objj_msgSend</span>(<span style="color: #008000">self</span>[index], aSelector);
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -596,7 +596,7 @@
         count <span style="color: #666666">=</span> length;
         
     <span style="color: #008000; font-weight: bold">for</span>(; index <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>index) 
-        objj_msgSend(<span style="color: #008000">self</span>[index], aSelector, anObject);
+        <span style="color: #0000FF">objj_msgSend</span>(<span style="color: #008000">self</span>[index], aSelector, anObject);
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">makeObjectsPerformSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector <span style="color: #0000FF">withObjects:</span>(<span style="color: #B00040">CPArray</span>)objects
@@ -606,12 +606,12 @@
 
     <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
         count <span style="color: #666666">=</span> length,
-        argumentsArray <span style="color: #666666">=</span> [<span style="color: #008000; font-weight: bold">nil</span>, aSelector].concat(objects <span style="color: #666666">||</span> []);
+        argumentsArray <span style="color: #666666">=</span> [<span style="color: #008000; font-weight: bold">nil</span>, aSelector].<span style="color: #0000FF">concat</span>(objects <span style="color: #666666">||</span> []);
 
     <span style="color: #008000; font-weight: bold">for</span>(; index <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>index)
     {
         argumentsArray[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #008000">self</span>[index];
-        objj_msgSend.apply(<span style="color: #008000">this</span>, argumentsArray);
+        objj_msgSend.<span style="color: #0000FF">apply</span>(<span style="color: #008000">this</span>, argumentsArray);
     }
 }
 
@@ -690,7 +690,7 @@
 
     <span style="color: #008000; font-weight: bold">var</span> array <span style="color: #666666">=</span> [<span style="color: #008000">self</span> copy];
     
-    array.push(anObject);
+    array.<span style="color: #0000FF">push</span>(anObject);
     
     <span style="color: #008000; font-weight: bold">return</span> array;
 }
@@ -701,7 +701,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">arrayByAddingObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
-    <span style="color: #008000; font-weight: bold">return</span> slice(<span style="color: #666666">0</span>).concat(anArray);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">slice</span>(<span style="color: #666666">0</span>).<span style="color: #0000FF">concat</span>(anArray);
 }
 
 <span style="color: #408080; font-style: italic">/*  </span>
@@ -726,10 +726,10 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">subarrayWithRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
 {
-    <span style="color: #008000; font-weight: bold">if</span> (aRange.location <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span> <span style="color: #666666">||</span> CPMaxRange(aRange) <span style="color: #666666">&gt;</span> length)
+    <span style="color: #008000; font-weight: bold">if</span> (aRange.location <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span> <span style="color: #666666">||</span> <span style="color: #0000FF">CPMaxRange</span>(aRange) <span style="color: #666666">&gt;</span> length)
         [CPException raise<span style="color: #666666">:</span>CPRangeException reason<span style="color: #666666">:</span><span style="color: #BA2121">&quot;subarrayWithRange: aRange out of bounds&quot;</span>];
 
-    <span style="color: #008000; font-weight: bold">return</span> slice(aRange.location, CPMaxRange(aRange));
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">slice</span>(aRange.location, <span style="color: #0000FF">CPMaxRange</span>(aRange));
 }
 
 <span style="color: #408080; font-style: italic">// Sorting arrays</span>
@@ -797,7 +797,7 @@
 {
     <span style="color: #408080; font-style: italic">// Objective-J objects get &quot;description&quot; called on them automatically when coerced to strings</span>
     <span style="color: #408080; font-style: italic">// (see &quot;objj_object.prototype.toString&quot; at bottom of CPObject.j)</span>
-    <span style="color: #008000; font-weight: bold">return</span> join(aString);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">join</span>(aString);
 }
 
 <span style="color: #408080; font-style: italic">// Creating a description of the array</span>
@@ -819,7 +819,7 @@
         <span style="color: #008000; font-weight: bold">var</span> object <span style="color: #666666">=</span> <span style="color: #008000">self</span>[index],
             objectDescription <span style="color: #666666">=</span> object <span style="color: #666666">&amp;&amp;</span> object.isa <span style="color: #666666">?</span> [object description] <span style="color: #666666">:</span> object <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;&quot;</span>;
 
-        description <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> objectDescription.split(<span style="color: #BA2121">&#39;\n&#39;</span>).join(<span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\n\t</span><span style="color: #BA2121">&quot;</span>);
+        description <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> objectDescription.<span style="color: #0000FF">split</span>(<span style="color: #BA2121">&#39;\n&#39;</span>).<span style="color: #0000FF">join</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\n\t</span><span style="color: #BA2121">&quot;</span>);
 
         <span style="color: #008000; font-weight: bold">if</span> (index <span style="color: #666666">!==</span> count <span style="color: #666666">-</span> <span style="color: #666666">1</span>)
             description <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;, &quot;</span>;
@@ -846,7 +846,7 @@
     
     <span style="color: #008000; font-weight: bold">for</span>(; index <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>index)
         <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">self</span>[index].isa <span style="color: #666666">&amp;&amp;</span> [<span style="color: #008000">self</span>[index] isKindOfClass<span style="color: #666666">:</span>[CPString class]] <span style="color: #666666">&amp;&amp;</span> [filterTypes containsObject<span style="color: #666666">:</span>[<span style="color: #008000">self</span>[index] pathExtension]])
-            array.push(<span style="color: #008000">self</span>[index]);
+            array.<span style="color: #0000FF">push</span>(<span style="color: #008000">self</span>[index]);
     
     <span style="color: #008000; font-weight: bold">return</span> array;
 }
@@ -878,7 +878,7 @@
         array <span style="color: #666666">=</span> [];
     
     <span style="color: #008000; font-weight: bold">for</span>(; i <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>i)
-        array.push([<span style="color: #008000">self</span>[i] valueForKey<span style="color: #666666">:</span>aKey]);
+        array.<span style="color: #0000FF">push</span>([<span style="color: #008000">self</span>[i] valueForKey<span style="color: #666666">:</span>aKey]);
     
     <span style="color: #008000; font-weight: bold">return</span> array;
 }
@@ -891,7 +891,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">copy</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> slice(<span style="color: #666666">0</span>);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">slice</span>(<span style="color: #666666">0</span>);
 }
     
 <span style="color: #008000; font-weight: bold">@end</span>
@@ -925,7 +925,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">addObject:</span>(<span style="color: #B00040">id</span>)anObject
 {
-    push(anObject);
+    <span style="color: #0000FF">push</span>(anObject);
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -934,7 +934,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">addObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
-    splice.apply(<span style="color: #008000">self</span>, [length, <span style="color: #666666">0</span>].concat(anArray));
+    splice.<span style="color: #0000FF">apply</span>(<span style="color: #008000">self</span>, [length, <span style="color: #666666">0</span>].<span style="color: #0000FF">concat</span>(anArray));
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -944,7 +944,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">insertObject:</span>(<span style="color: #B00040">id</span>)anObject <span style="color: #0000FF">atIndex:</span>(<span style="color: #B00040">int</span>)anIndex
 {
-    splice(anIndex, <span style="color: #666666">0</span>, anObject);
+    <span style="color: #0000FF">splice</span>(anIndex, <span style="color: #666666">0</span>, anObject);
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1013,7 +1013,7 @@
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>otherRange.location <span style="color: #666666">&amp;&amp;</span> otherRange.length <span style="color: #666666">==</span> [anArray count])
         [<span style="color: #008000">self</span> replaceObjectsInRange<span style="color: #666666">:</span>aRange withObjectsFromArray<span style="color: #666666">:</span>anArray];
     <span style="color: #008000; font-weight: bold">else</span>
-        splice.apply(<span style="color: #008000">self</span>, [aRange.location, aRange.length].concat([anArray subarrayWithRange<span style="color: #666666">:</span>otherRange]));
+        splice.<span style="color: #0000FF">apply</span>(<span style="color: #008000">self</span>, [aRange.location, aRange.length].<span style="color: #0000FF">concat</span>([anArray subarrayWithRange<span style="color: #666666">:</span>otherRange]));
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1025,7 +1025,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">replaceObjectsInRange:</span>(<span style="color: #B00040">CPRange</span>)aRange <span style="color: #0000FF">withObjectsFromArray:</span>(<span style="color: #B00040">CPArray</span>)anArray
 {
-    splice.apply(<span style="color: #008000">self</span>, [aRange.location, aRange.length].concat(anArray));
+    splice.<span style="color: #0000FF">apply</span>(<span style="color: #008000">self</span>, [aRange.location, aRange.length].<span style="color: #0000FF">concat</span>(anArray));
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1036,7 +1036,7 @@
 {
     <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">self</span> <span style="color: #666666">==</span> anArray) <span style="color: #008000; font-weight: bold">return</span>;
     
-    splice.apply(<span style="color: #008000">self</span>, [<span style="color: #666666">0</span>, length].concat(anArray));
+    splice.<span style="color: #0000FF">apply</span>(<span style="color: #008000">self</span>, [<span style="color: #666666">0</span>, length].<span style="color: #0000FF">concat</span>(anArray));
 }
 
 <span style="color: #408080; font-style: italic">// Removing Objects</span>
@@ -1045,7 +1045,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeAllObjects</span>
 {
-    splice(<span style="color: #666666">0</span>, length);
+    <span style="color: #0000FF">splice</span>(<span style="color: #666666">0</span>, length);
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1053,7 +1053,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeLastObject</span>
 {
-    pop();
+    <span style="color: #0000FF">pop</span>();
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1062,7 +1062,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObject:</span>(<span style="color: #B00040">id</span>)anObject
 {
-    [<span style="color: #008000">self</span> removeObject<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span>CPMakeRange(<span style="color: #666666">0</span>, length)];
+    [<span style="color: #008000">self</span> removeObject<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span><span style="color: #0000FF">CPMakeRange</span>(<span style="color: #666666">0</span>, length)];
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1077,7 +1077,7 @@
     <span style="color: #008000; font-weight: bold">while</span> ((index <span style="color: #666666">=</span> [<span style="color: #008000">self</span> indexOfObject<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span>aRange]) <span style="color: #666666">!=</span> CPNotFound)
     {
         [<span style="color: #008000">self</span> removeObjectAtIndex<span style="color: #666666">:</span>index];
-        aRange <span style="color: #666666">=</span> CPIntersectionRange(CPMakeRange(index, length <span style="color: #666666">-</span> index), aRange);
+        aRange <span style="color: #666666">=</span> <span style="color: #0000FF">CPIntersectionRange</span>(<span style="color: #0000FF">CPMakeRange</span>(index, length <span style="color: #666666">-</span> index), aRange);
     }
 }
 
@@ -1087,7 +1087,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectAtIndex:</span>(<span style="color: #B00040">int</span>)anIndex
 {
-    splice(anIndex, <span style="color: #666666">1</span>);
+    <span style="color: #0000FF">splice</span>(anIndex, <span style="color: #666666">1</span>);
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1112,7 +1112,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectIdenticalTo:</span>(<span style="color: #B00040">id</span>)anObject
 {
-    [<span style="color: #008000">self</span> removeObjectIdenticalTo<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span>CPMakeRange(<span style="color: #666666">0</span>, [<span style="color: #008000">self</span> count])];
+    [<span style="color: #008000">self</span> removeObjectIdenticalTo<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span><span style="color: #0000FF">CPMakeRange</span>(<span style="color: #666666">0</span>, [<span style="color: #008000">self</span> count])];
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1130,7 +1130,7 @@
     <span style="color: #008000; font-weight: bold">while</span> ((index <span style="color: #666666">=</span> [<span style="color: #008000">self</span> indexOfObjectIdenticalTo<span style="color: #666666">:</span>anObject inRange<span style="color: #666666">:</span>aRange]) <span style="color: #666666">!==</span> CPNotFound)
     {
         [<span style="color: #008000">self</span> removeObjectAtIndex<span style="color: #666666">:</span>index];
-        aRange <span style="color: #666666">=</span> CPIntersectionRange(CPMakeRange(index, (<span style="color: #666666">--</span>count) <span style="color: #666666">-</span> index), aRange);
+        aRange <span style="color: #666666">=</span> <span style="color: #0000FF">CPIntersectionRange</span>(<span style="color: #0000FF">CPMakeRange</span>(index, (<span style="color: #666666">--</span>count) <span style="color: #666666">-</span> index), aRange);
     }
 }
 
@@ -1153,7 +1153,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">removeObjectsInRange:</span>(<span style="color: #B00040">CPRange</span>)aRange
 {
-    splice(aRange.location, aRange.length);
+    <span style="color: #0000FF">splice</span>(aRange.location, aRange.length);
 }
 
 <span style="color: #408080; font-style: italic">// Rearranging objects</span>
@@ -1171,7 +1171,7 @@
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPArray</span>)<span style="color: #0000FF">sortUsingDescriptors:</span>(<span style="color: #B00040">CPArray</span>)descriptors
 {
-    sort(<span style="color: #008000; font-weight: bold">function</span>(lhs, rhs)
+    <span style="color: #0000FF">sort</span>(<span style="color: #008000; font-weight: bold">function</span>(lhs, rhs)
     {
         <span style="color: #008000; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
             count <span style="color: #666666">=</span> [descriptors count],
@@ -1192,7 +1192,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">sortUsingFunction:</span>(<span style="color: #B00040">Function</span>)aFunction <span style="color: #0000FF">context:</span>(<span style="color: #B00040">id</span>)aContext
 {
-    sort(<span style="color: #008000; font-weight: bold">function</span>(lhs, rhs) { <span style="color: #008000; font-weight: bold">return</span> aFunction(lhs, rhs, aContext); });
+    <span style="color: #0000FF">sort</span>(<span style="color: #008000; font-weight: bold">function</span>(lhs, rhs) { <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">aFunction</span>(lhs, rhs, aContext); });
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1201,7 +1201,7 @@
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">sortUsingSelector:</span>(<span style="color: #B00040">SEL</span>)aSelector
 {
-    sort(<span style="color: #008000; font-weight: bold">function</span>(lhs, rhs) { <span style="color: #008000; font-weight: bold">return</span> objj_msgSend(lhs, aSelector, rhs); });
+    <span style="color: #0000FF">sort</span>(<span style="color: #008000; font-weight: bold">function</span>(lhs, rhs) { <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">objj_msgSend</span>(lhs, aSelector, rhs); });
 }
 
 <span style="color: #008000; font-weight: bold">@end</span>

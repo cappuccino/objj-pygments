@@ -23,15 +23,15 @@
 <span style="color: #008000; font-weight: bold">var</span> OBJJ_PREPROCESSOR_DEBUG_SYMBOLS <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">0</span>,
     OBJJ_PREPROCESSOR_TYPE_SIGNATURES <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">&lt;&lt;</span> <span style="color: #666666">1</span>;
 
-<span style="color: #008000; font-weight: bold">function</span> objj_preprocess(<span style="color: #408080; font-style: italic">/*String*/</span> aString, <span style="color: #408080; font-style: italic">/*objj_bundle*/</span> aBundle, <span style="color: #408080; font-style: italic">/*objj_file*/</span> aSourceFile, <span style="color: #408080; font-style: italic">/*unsigned*/</span> flags) 
+<span style="color: #008000; font-weight: bold">function</span> <span style="color: #0000FF">objj_preprocess</span>(<span style="color: #408080; font-style: italic">/*String*/</span> aString, <span style="color: #408080; font-style: italic">/*objj_bundle*/</span> aBundle, <span style="color: #408080; font-style: italic">/*objj_file*/</span> aSourceFile, <span style="color: #408080; font-style: italic">/*unsigned*/</span> flags) 
 {    
     <span style="color: #008000; font-weight: bold">try</span>
     {
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">new</span> objj_preprocessor(aString.replace(<span style="color: #BB6688">/^#[^\n]+\n/</span>, <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>), aSourceFile, aBundle, flags).fragments();
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_preprocessor</span>(aString.<span style="color: #0000FF">replace</span>(<span style="color: #BB6688">/^#[^\n]+\n/</span>, <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>), aSourceFile, aBundle, flags).<span style="color: #0000FF">fragments</span>();
     }
     <span style="color: #008000; font-weight: bold">catch</span> (anException)
     {
-        objj_exception_report(anException, aSourceFile);
+        <span style="color: #0000FF">objj_exception_report</span>(anException, aSourceFile);
     }
     
     <span style="color: #008000; font-weight: bold">return</span> [];
@@ -72,14 +72,14 @@
     
     TOKEN_WHITESPACE        <span style="color: #666666">=</span> <span style="color: #BB6688">/^(?:(?:\s+$)|(?:\/(?:\/|\*)))/</span>,
     TOKEN_NUMBER            <span style="color: #666666">=</span> <span style="color: #BB6688">/^[+-]?\d+(([.]\d+)*([eE][+-]?\d+))?$/</span>,
-    TOKEN_IDENTIFIER        <span style="color: #666666">=</span> <span style="color: #BB6688">/^[a-zA-Z_$](\w|$)*$/</span>;
-    
-<span style="border: 1px solid #FF0000">#</span>define IS_WORD(token) <span style="color: #666666">/^</span><span style="border: 1px solid #FF0000">\</span>w<span style="color: #666666">+</span>$<span style="color: #666666">/</span>.test(token)
+    TOKEN_IDENTIFIER        <span style="color: #666666">=</span> <span style="color: #BB6688">/^[a-zA-Z_$](\w|$)*$/</span>;<span style="color: #BC7A00"></span>
+<span style="color: #BC7A00">    </span>
+<span style="color: #BC7A00">#define IS_WORD(token) /^\w+$/.test(token)</span>
 
-<span style="border: 1px solid #FF0000">#</span>define IS_NOT_EMPTY(buffer) buffer.atoms.length <span style="color: #666666">!==</span> <span style="color: #666666">0</span>
-<span style="border: 1px solid #FF0000">#</span>define CONCAT(buffer, atom) buffer.atoms[buffer.atoms.length] <span style="color: #666666">=</span> atom
+<span style="color: #BC7A00">#define IS_NOT_EMPTY(buffer) buffer.atoms.length !== 0</span>
+<span style="color: #BC7A00">#define CONCAT(buffer, atom) buffer.atoms[buffer.atoms.length] = atom</span>
 
-<span style="color: #008000; font-weight: bold">var</span> SUPER_CLASSES           <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> objj_dictionary();
+<span style="color: #008000; font-weight: bold">var</span> SUPER_CLASSES           <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_dictionary</span>();
 
 <span style="color: #008000; font-weight: bold">var</span> OBJJ_CURRENT_BUNDLE     <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">NULL</span>;
 
@@ -87,7 +87,7 @@
 <span style="color: #008000; font-weight: bold">var</span> objj_lexer <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(aString)
 {
     <span style="color: #008000">this</span>._index <span style="color: #666666">=</span> <span style="color: #666666">-1</span>;
-    <span style="color: #008000">this</span>._tokens <span style="color: #666666">=</span> (aString <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;\n&#39;</span>).match(<span style="color: #BB6688">/\/\/.*(\r|\n)?|\/\*(?:.|\n|\r)*?\*\/|\w+\b|[+-]?\d+(([.]\d+)*([eE][+-]?\d+))?|&quot;[^&quot;\\]*(\\[\s\S][^&quot;\\]*)*&quot;|&#39;[^&#39;\\]*(\\[\s\S][^&#39;\\]*)*&#39;|\s+|./g</span>);
+    <span style="color: #008000">this</span>._tokens <span style="color: #666666">=</span> (aString <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;\n&#39;</span>).<span style="color: #0000FF">match</span>(<span style="color: #BB6688">/\/\/.*(\r|\n)?|\/\*(?:.|\n|\r)*?\*\/|\w+\b|[+-]?\d+(([.]\d+)*([eE][+-]?\d+))?|&quot;[^&quot;\\]*(\\[\s\S][^&quot;\\]*)*&quot;|&#39;[^&#39;\\]*(\\[\s\S][^&#39;\\]*)*&#39;|\s+|./g</span>);
     <span style="color: #008000">this</span>._context <span style="color: #666666">=</span> [];
     
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">this</span>;
@@ -95,21 +95,21 @@
 
 objj_lexer.<span style="color: #008000; font-weight: bold">prototype</span>.push <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>()
 {
-    <span style="color: #008000">this</span>._context.push(<span style="color: #008000">this</span>._index);
+    <span style="color: #008000">this</span>._context.<span style="color: #0000FF">push</span>(<span style="color: #008000">this</span>._index);
 }
 
 objj_lexer.<span style="color: #008000; font-weight: bold">prototype</span>.pop <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>()
 {
-    <span style="color: #008000">this</span>._index <span style="color: #666666">=</span> <span style="color: #008000">this</span>._context.pop();
+    <span style="color: #008000">this</span>._index <span style="color: #666666">=</span> <span style="color: #008000">this</span>._context.<span style="color: #0000FF">pop</span>();
 }
 
 objj_lexer.<span style="color: #008000; font-weight: bold">prototype</span>.peak <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(shouldSkipWhitespace)
 {
     <span style="color: #008000; font-weight: bold">if</span> (shouldSkipWhitespace)
     {
-        <span style="color: #008000">this</span>.push();
-        <span style="color: #008000; font-weight: bold">var</span> token <span style="color: #666666">=</span> <span style="color: #008000">this</span>.skip_whitespace();
-        <span style="color: #008000">this</span>.pop();
+        <span style="color: #008000">this</span>.<span style="color: #0000FF">push</span>();
+        <span style="color: #008000; font-weight: bold">var</span> token <span style="color: #666666">=</span> <span style="color: #008000">this</span>.<span style="color: #0000FF">skip_whitespace</span>();
+        <span style="color: #008000">this</span>.<span style="color: #0000FF">pop</span>();
         
         <span style="color: #008000; font-weight: bold">return</span> token;
     }
@@ -140,9 +140,9 @@ objj_lexer.<span style="color: #008000; font-weight: bold">prototype</span>.skip
     <span style="color: #008000; font-weight: bold">var</span> token;
     
     <span style="color: #008000; font-weight: bold">if</span> (shouldMoveBackwards)
-        <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> <span style="color: #008000">this</span>.previous()) <span style="color: #666666">&amp;&amp;</span> TOKEN_WHITESPACE.test(token)) ;
+        <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> <span style="color: #008000">this</span>.<span style="color: #0000FF">previous</span>()) <span style="color: #666666">&amp;&amp;</span> TOKEN_WHITESPACE.<span style="color: #0000FF">test</span>(token)) ;
     <span style="color: #008000; font-weight: bold">else</span>
-        <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> <span style="color: #008000">this</span>.next()) <span style="color: #666666">&amp;&amp;</span> TOKEN_WHITESPACE.test(token)) ;
+        <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> <span style="color: #008000">this</span>.<span style="color: #0000FF">next</span>()) <span style="color: #666666">&amp;&amp;</span> TOKEN_WHITESPACE.<span style="color: #0000FF">test</span>(token)) ;
 
     <span style="color: #008000; font-weight: bold">return</span> token;
 }
@@ -154,7 +154,7 @@ objj_lexer.<span style="color: #008000; font-weight: bold">prototype</span>.skip
 
 objj_stringBuffer.<span style="color: #008000; font-weight: bold">prototype</span>.toString <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>()
 {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">this</span>.atoms.join(<span style="color: #BA2121">&quot;&quot;</span>);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">this</span>.atoms.<span style="color: #0000FF">join</span>(<span style="color: #BA2121">&quot;&quot;</span>);
 }
 
 objj_stringBuffer.<span style="color: #008000; font-weight: bold">prototype</span>.clear <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>()
@@ -176,15 +176,15 @@ objj_stringBuffer.<span style="color: #008000; font-weight: bold">prototype</spa
     
     <span style="color: #008000">this</span>._file <span style="color: #666666">=</span> aSourceFile;
     <span style="color: #008000">this</span>._fragments <span style="color: #666666">=</span> [];
-    <span style="color: #008000">this</span>._preprocessed <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> objj_stringBuffer();
-    <span style="color: #008000">this</span>._tokens <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> objj_lexer(aString);
+    <span style="color: #008000">this</span>._preprocessed <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_stringBuffer</span>();
+    <span style="color: #008000">this</span>._tokens <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_lexer</span>(aString);
     <span style="color: #008000">this</span>._flags <span style="color: #666666">=</span> flags;
     <span style="color: #008000">this</span>._bundle <span style="color: #666666">=</span> aBundle;
     <span style="color: #008000">this</span>._classMethod <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">false</span>;
     
-    <span style="color: #008000">this</span>.preprocess(<span style="color: #008000">this</span>._tokens, <span style="color: #008000">this</span>._preprocessed);
+    <span style="color: #008000">this</span>.<span style="color: #0000FF">preprocess</span>(<span style="color: #008000">this</span>._tokens, <span style="color: #008000">this</span>._preprocessed);
     <span style="color: #408080; font-style: italic">//alert(this._preprocessed + &quot;&quot;);</span>
-    <span style="color: #008000">this</span>.fragment();
+    <span style="color: #008000">this</span>.<span style="color: #0000FF">fragment</span>();
 }
 
 objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</span>.fragments <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>()
@@ -194,40 +194,40 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
 
 objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</span>.accessors <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(tokens)
 {
-    <span style="color: #008000; font-weight: bold">var</span> token <span style="color: #666666">=</span> tokens.skip_whitespace(),
+    <span style="color: #008000; font-weight: bold">var</span> token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>(),
         attributes <span style="color: #666666">=</span> {};
 
     <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">!=</span> TOKEN_OPEN_PARENTHESIS)
     {
-        tokens.previous();
+        tokens.<span style="color: #0000FF">previous</span>();
         
         <span style="color: #008000; font-weight: bold">return</span> attributes;
     }
 
-    <span style="color: #008000; font-weight: bold">while</span> ((token <span style="color: #666666">=</span> tokens.skip_whitespace()) <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
+    <span style="color: #008000; font-weight: bold">while</span> ((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>()) <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
     {
         <span style="color: #008000; font-weight: bold">var</span> name <span style="color: #666666">=</span> token,
             value <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">true</span>;
 
-        <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>IS_WORD(name))
-            objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** @property attribute name not valid.&quot;</span>)));
+        <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span><span style="color: #0000FF">IS_WORD</span>(name))
+            <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** @property attribute name not valid.&quot;</span>)));
 
-        <span style="color: #008000; font-weight: bold">if</span> ((token <span style="color: #666666">=</span> tokens.skip_whitespace()) <span style="color: #666666">==</span> TOKEN_EQUAL)
+        <span style="color: #008000; font-weight: bold">if</span> ((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>()) <span style="color: #666666">==</span> TOKEN_EQUAL)
         {
-            value <span style="color: #666666">=</span> tokens.skip_whitespace();
+            value <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>();
             
-            <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>IS_WORD(value))
-                objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** @property attribute value not valid.&quot;</span>)));
+            <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span><span style="color: #0000FF">IS_WORD</span>(value))
+                <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** @property attribute value not valid.&quot;</span>)));
 
             <span style="color: #008000; font-weight: bold">if</span> (name <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;setter&quot;</span>)
             {
-                <span style="color: #008000; font-weight: bold">if</span> ((token <span style="color: #666666">=</span> tokens.next()) <span style="color: #666666">!=</span> TOKEN_COLON)
-                    objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** @property setter attribute requires argument with </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">:</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121"> at end of selector name.&quot;</span>)));
+                <span style="color: #008000; font-weight: bold">if</span> ((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">next</span>()) <span style="color: #666666">!=</span> TOKEN_COLON)
+                    <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** @property setter attribute requires argument with </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">:</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121"> at end of selector name.&quot;</span>)));
                 
                 value <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;:&quot;</span>;
             }
 
-            token <span style="color: #666666">=</span> tokens.skip_whitespace();
+            token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>();
         }
 
         attributes[name] <span style="color: #666666">=</span> value;
@@ -236,7 +236,7 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
             <span style="color: #008000; font-weight: bold">break</span>;
         
         <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">!=</span> TOKEN_COMMA)
-            objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Expected &#39;,&#39; or &#39;)&#39; in @property attribute list.&quot;</span>)));
+            <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Expected &#39;,&#39; or &#39;)&#39; in @property attribute list.&quot;</span>)));
     }
     
     <span style="color: #008000; font-weight: bold">return</span> attributes;
@@ -246,90 +246,90 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
 {
     <span style="color: #008000; font-weight: bold">var</span> tuples <span style="color: #666666">=</span> [];
         
-    <span style="color: #008000; font-weight: bold">while</span> (<span style="color: #008000">this</span>.preprocess(tokens, <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #008000; font-weight: bold">NULL</span>, tuples[tuples.length] <span style="color: #666666">=</span> [])) ;
+    <span style="color: #008000; font-weight: bold">while</span> (<span style="color: #008000">this</span>.<span style="color: #0000FF">preprocess</span>(tokens, <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #008000; font-weight: bold">NULL</span>, tuples[tuples.length] <span style="color: #666666">=</span> [])) ;
 
     <span style="color: #008000; font-weight: bold">if</span> (tuples[<span style="color: #666666">0</span>].length <span style="color: #666666">===</span> <span style="color: #666666">1</span>)
     {
-        CONCAT(aStringBuffer, <span style="color: #BA2121">&#39;[&#39;</span>);
+        <span style="color: #0000FF">CONCAT</span>(aStringBuffer, <span style="color: #BA2121">&#39;[&#39;</span>);
         
         <span style="color: #408080; font-style: italic">// When we have an empty array literal ([]), tuples[0][0] will be an empty objj_stringBuffer</span>
-        CONCAT(aStringBuffer, tuples[<span style="color: #666666">0</span>][<span style="color: #666666">0</span>]);
+        <span style="color: #0000FF">CONCAT</span>(aStringBuffer, tuples[<span style="color: #666666">0</span>][<span style="color: #666666">0</span>]);
         
-        CONCAT(aStringBuffer, <span style="color: #BA2121">&#39;]&#39;</span>);
+        <span style="color: #0000FF">CONCAT</span>(aStringBuffer, <span style="color: #BA2121">&#39;]&#39;</span>);
     }
     
     <span style="color: #008000; font-weight: bold">else</span>
     {
-        <span style="color: #008000; font-weight: bold">var</span> selector <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> objj_stringBuffer();
+        <span style="color: #008000; font-weight: bold">var</span> selector <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_stringBuffer</span>();
         <span style="color: #408080; font-style: italic">//alert(tuples[0][0].toString() + &quot;]&quot; );</span>
         <span style="color: #408080; font-style: italic">// The first two arguments are always the receiver and the selector.</span>
         <span style="color: #008000; font-weight: bold">if</span> (tuples[<span style="color: #666666">0</span>][<span style="color: #666666">0</span>].atoms[<span style="color: #666666">0</span>] <span style="color: #666666">==</span> TOKEN_SUPER)
         {
-            CONCAT(aStringBuffer, <span style="color: #BA2121">&quot;objj_msgSendSuper(&quot;</span>);
-            CONCAT(aStringBuffer, <span style="color: #BA2121">&quot;{ receiver:self, super_class:&quot;</span> <span style="color: #666666">+</span> (<span style="color: #008000">this</span>._classMethod <span style="color: #666666">?</span> <span style="color: #008000">this</span>._currentSuperMetaClass <span style="color: #666666">:</span> <span style="color: #008000">this</span>._currentSuperClass ) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot; }&quot;</span>);
+            <span style="color: #0000FF">CONCAT</span>(aStringBuffer, <span style="color: #BA2121">&quot;objj_msgSendSuper(&quot;</span>);
+            <span style="color: #0000FF">CONCAT</span>(aStringBuffer, <span style="color: #BA2121">&quot;{ receiver:self, super_class:&quot;</span> <span style="color: #666666">+</span> (<span style="color: #008000">this</span>._classMethod <span style="color: #666666">?</span> <span style="color: #008000">this</span>._currentSuperMetaClass <span style="color: #666666">:</span> <span style="color: #008000">this</span>._currentSuperClass ) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot; }&quot;</span>);
         }
         <span style="color: #008000; font-weight: bold">else</span>
         {
-            CONCAT(aStringBuffer, <span style="color: #BA2121">&quot;objj_msgSend(&quot;</span>);
-            CONCAT(aStringBuffer, tuples[<span style="color: #666666">0</span>][<span style="color: #666666">0</span>]);
+            <span style="color: #0000FF">CONCAT</span>(aStringBuffer, <span style="color: #BA2121">&quot;objj_msgSend(&quot;</span>);
+            <span style="color: #0000FF">CONCAT</span>(aStringBuffer, tuples[<span style="color: #666666">0</span>][<span style="color: #666666">0</span>]);
         }
         
-        CONCAT(selector, tuples[<span style="color: #666666">0</span>][<span style="color: #666666">1</span>]);
+        <span style="color: #0000FF">CONCAT</span>(selector, tuples[<span style="color: #666666">0</span>][<span style="color: #666666">1</span>]);
         
         <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> <span style="color: #666666">1</span>,
             count <span style="color: #666666">=</span> tuples.length,
-            marg_list <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> objj_stringBuffer();
+            marg_list <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_stringBuffer</span>();
         
         <span style="color: #008000; font-weight: bold">for</span>(; index <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>index)
         {
             <span style="color: #008000; font-weight: bold">var</span> pair <span style="color: #666666">=</span> tuples[index];
             
-            CONCAT(selector, pair[<span style="color: #666666">1</span>])
-            CONCAT(marg_list, <span style="color: #BA2121">&quot;, &quot;</span> <span style="color: #666666">+</span> pair[<span style="color: #666666">0</span>]);
+            <span style="color: #0000FF">CONCAT</span>(selector, pair[<span style="color: #666666">1</span>])
+            <span style="color: #0000FF">CONCAT</span>(marg_list, <span style="color: #BA2121">&quot;, &quot;</span> <span style="color: #666666">+</span> pair[<span style="color: #666666">0</span>]);
         }
         
-        CONCAT(aStringBuffer, <span style="color: #BA2121">&quot;, </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span>);
-        CONCAT(aStringBuffer, selector); <span style="color: #408080; font-style: italic">// FIXME: sel_getUid(selector + &quot;&quot;) ?</span>
-        CONCAT(aStringBuffer, <span style="color: #BA2121">&#39;\&quot;&#39;</span>);
-        CONCAT(aStringBuffer, marg_list);
-        CONCAT(aStringBuffer, <span style="color: #BA2121">&#39;)&#39;</span>);
+        <span style="color: #0000FF">CONCAT</span>(aStringBuffer, <span style="color: #BA2121">&quot;, </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(aStringBuffer, selector); <span style="color: #408080; font-style: italic">// FIXME: sel_getUid(selector + &quot;&quot;) ?</span>
+        <span style="color: #0000FF">CONCAT</span>(aStringBuffer, <span style="color: #BA2121">&#39;\&quot;&#39;</span>);
+        <span style="color: #0000FF">CONCAT</span>(aStringBuffer, marg_list);
+        <span style="color: #0000FF">CONCAT</span>(aStringBuffer, <span style="color: #BA2121">&#39;)&#39;</span>);
     }
 }
 
 objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</span>.directive <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(tokens, aStringBuffer, allowedDirectivesFlags)
 {
     <span style="color: #408080; font-style: italic">// Grab the next token, preprocessor directives follow &#39;@&#39; immediately.</span>
-    <span style="color: #008000; font-weight: bold">var</span> buffer <span style="color: #666666">=</span> aStringBuffer <span style="color: #666666">?</span> aStringBuffer <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">new</span> objj_stringBuffer(),
-        token <span style="color: #666666">=</span> tokens.next();
+    <span style="color: #008000; font-weight: bold">var</span> buffer <span style="color: #666666">=</span> aStringBuffer <span style="color: #666666">?</span> aStringBuffer <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_stringBuffer</span>(),
+        token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">next</span>();
             
     <span style="color: #408080; font-style: italic">// To provide compatibility with Objective-C files, we convert NSString literals into </span>
     <span style="color: #408080; font-style: italic">// toll-freed JavaScript/CPString strings.</span>
-    <span style="color: #008000; font-weight: bold">if</span> (token.charAt(<span style="color: #666666">0</span>) <span style="color: #666666">==</span> TOKEN_DOUBLE_QUOTE)
-        CONCAT(buffer, token);
+    <span style="color: #008000; font-weight: bold">if</span> (token.<span style="color: #0000FF">charAt</span>(<span style="color: #666666">0</span>) <span style="color: #666666">==</span> TOKEN_DOUBLE_QUOTE)
+        <span style="color: #0000FF">CONCAT</span>(buffer, token);
     
     <span style="color: #408080; font-style: italic">// Currently we simply swallow forward declarations and only provide them to allow </span>
     <span style="color: #408080; font-style: italic">// compatibility with Objective-C files.</span>
     <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_CLASS)
     {
-        tokens.skip_whitespace();
+        tokens.<span style="color: #0000FF">skip_whitespace</span>();
         
         <span style="color: #008000; font-weight: bold">return</span>;
     }
     
     <span style="color: #408080; font-style: italic">// @implementation Class implementations</span>
     <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_IMPLEMENTATION)
-        <span style="color: #008000">this</span>.implementation(tokens, buffer);
+        <span style="color: #008000">this</span>.<span style="color: #0000FF">implementation</span>(tokens, buffer);
 
     <span style="color: #408080; font-style: italic">// @import</span>
     <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_IMPORT)
-        <span style="color: #008000">this</span>._import(tokens);
+        <span style="color: #008000">this</span>.<span style="color: #0000FF">_import</span>(tokens);
 
     <span style="color: #408080; font-style: italic">// @selector</span>
     <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_SELECTOR)
-        <span style="color: #008000">this</span>.selector(tokens, buffer);
+        <span style="color: #008000">this</span>.<span style="color: #0000FF">selector</span>(tokens, buffer);
     
     <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_ACCESSORS)
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">this</span>.accessors(tokens);
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">this</span>.<span style="color: #0000FF">accessors</span>(tokens);
     
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aStringBuffer)
         <span style="color: #008000; font-weight: bold">return</span> buffer;
@@ -337,13 +337,13 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
 
 objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</span>.fragment <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>()
 {
-    <span style="color: #008000; font-weight: bold">var</span> preprocessed <span style="color: #666666">=</span> <span style="color: #008000">this</span>._preprocessed.toString();
+    <span style="color: #008000; font-weight: bold">var</span> preprocessed <span style="color: #666666">=</span> <span style="color: #008000">this</span>._preprocessed.<span style="color: #0000FF">toString</span>();
     
     <span style="color: #408080; font-style: italic">// But make sure it&#39;s not just all whitespace!</span>
-    <span style="color: #008000; font-weight: bold">if</span> ((<span style="color: #BB6688">/[^\s]/</span>).test(preprocessed))
-        <span style="color: #008000">this</span>._fragments.push(fragment_create_code(preprocessed, <span style="color: #008000">this</span>._bundle, <span style="color: #008000">this</span>._file));
+    <span style="color: #008000; font-weight: bold">if</span> ((<span style="color: #BB6688">/[^\s]/</span>).<span style="color: #0000FF">test</span>(preprocessed))
+        <span style="color: #008000">this</span>._fragments.<span style="color: #0000FF">push</span>(<span style="color: #0000FF">fragment_create_code</span>(preprocessed, <span style="color: #008000">this</span>._bundle, <span style="color: #008000">this</span>._file));
     
-    <span style="color: #008000">this</span>._preprocessed.clear();
+    <span style="color: #008000">this</span>._preprocessed.<span style="color: #0000FF">clear</span>();
 }
 
 objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</span>.implementation <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(tokens, <span style="color: #408080; font-style: italic">/*objj_stringBuffer*/</span> aStringBuffer)
@@ -351,14 +351,14 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
     <span style="color: #008000; font-weight: bold">var</span> buffer <span style="color: #666666">=</span> aStringBuffer,
         token <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>,
         category <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">NO</span>,
-        class_name <span style="color: #666666">=</span> tokens.skip_whitespace(),
+        class_name <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>(),
         superclass_name <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;Nil&quot;</span>,
 
-        instance_methods <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> objj_stringBuffer(),
-        class_methods <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> objj_stringBuffer();
+        instance_methods <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_stringBuffer</span>(),
+        class_methods <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_stringBuffer</span>();
     
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>(<span style="color: #BB6688">/^\w/</span>).test(class_name))
-        objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Expected class name, found </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>(<span style="color: #BB6688">/^\w/</span>).<span style="color: #0000FF">test</span>(class_name))
+        <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Expected class name, found </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
     
     <span style="color: #008000">this</span>._currentSuperClass <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">NULL</span>;
     <span style="color: #008000">this</span>._currentSuperMetaClass <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">NULL</span>;
@@ -366,21 +366,21 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
     <span style="color: #008000">this</span>._currentSelector <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
 
     <span style="color: #408080; font-style: italic">// If we reach an open parenthesis, we are declaring a category.</span>
-    <span style="color: #008000; font-weight: bold">if</span>((token <span style="color: #666666">=</span> tokens.skip_whitespace()) <span style="color: #666666">==</span> TOKEN_OPEN_PARENTHESIS)
+    <span style="color: #008000; font-weight: bold">if</span>((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>()) <span style="color: #666666">==</span> TOKEN_OPEN_PARENTHESIS)
     {
-        token <span style="color: #666666">=</span> tokens.skip_whitespace();
+        token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>();
         
         <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_CLOSE_PARENTHESIS)
-            objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Can&#39;t Have Empty Category Name for class </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
+            <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Can&#39;t Have Empty Category Name for class </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
         
-        <span style="color: #008000; font-weight: bold">if</span> (tokens.skip_whitespace() <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
-            objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Improper Category Definition for class </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
+        <span style="color: #008000; font-weight: bold">if</span> (tokens.<span style="color: #0000FF">skip_whitespace</span>() <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
+            <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Improper Category Definition for class </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
         
-        CONCAT(buffer, <span style="color: #BA2121">&quot;{</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">var the_class = objj_getClass(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">)</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
-        CONCAT(buffer, <span style="color: #BA2121">&quot;if(!the_class) objj_exception_throw(new objj_exception(OBJJClassNotFoundException, </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">*** Could not find definition for class </span><span style="color: #BB6622; font-weight: bold">\\\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\\\&quot;\&quot;</span><span style="color: #BA2121">));</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
-        CONCAT(buffer, <span style="color: #BA2121">&quot;var meta_class = the_class.isa;&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;{</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">var the_class = objj_getClass(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">)</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;if(!the_class) objj_exception_throw(new objj_exception(OBJJClassNotFoundException, </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">*** Could not find definition for class </span><span style="color: #BB6622; font-weight: bold">\\\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\\\&quot;\&quot;</span><span style="color: #BA2121">));</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;var meta_class = the_class.isa;&quot;</span>);
         
-        <span style="color: #008000; font-weight: bold">var</span> superclass_name <span style="color: #666666">=</span> dictionary_getValue(SUPER_CLASSES, class_name);
+        <span style="color: #008000; font-weight: bold">var</span> superclass_name <span style="color: #666666">=</span> <span style="color: #0000FF">dictionary_getValue</span>(SUPER_CLASSES, class_name);
 
         <span style="color: #408080; font-style: italic">// FIXME: We should have a better solution for this case, although it&#39;s actually not much slower than the real case.</span>
         <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>superclass_name)
@@ -399,22 +399,22 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
         <span style="color: #408080; font-style: italic">// If we reach a colon (&#39;:&#39;), then a superclass is being declared.</span>
         <span style="color: #008000; font-weight: bold">if</span>(token <span style="color: #666666">==</span> TOKEN_COLON)
         {
-            token <span style="color: #666666">=</span> tokens.skip_whitespace();
+            token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>();
             
-            <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>TOKEN_IDENTIFIER.test(token))
-                objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Expected class name, found </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
+            <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>TOKEN_IDENTIFIER.<span style="color: #0000FF">test</span>(token))
+                <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Expected class name, found </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
             
             superclass_name <span style="color: #666666">=</span> token;
 
             <span style="color: #008000">this</span>._currentSuperClass <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;objj_getClass(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> superclass_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">)&quot;</span>;
             <span style="color: #008000">this</span>._currentSuperMetaClass <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;objj_getMetaClass(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> superclass_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">)&quot;</span>;
             
-            dictionary_setValue(SUPER_CLASSES, class_name, superclass_name);
+            <span style="color: #0000FF">dictionary_setValue</span>(SUPER_CLASSES, class_name, superclass_name);
 
-            token <span style="color: #666666">=</span> tokens.skip_whitespace();
+            token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>();
         }
         
-        CONCAT(buffer, <span style="color: #BA2121">&quot;{var the_class = objj_allocateClassPair(&quot;</span> <span style="color: #666666">+</span> superclass_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;, </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">),</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">meta_class = the_class.isa;&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;{var the_class = objj_allocateClassPair(&quot;</span> <span style="color: #666666">+</span> superclass_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;, </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> class_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">),</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">meta_class = the_class.isa;&quot;</span>);
         
         <span style="color: #408080; font-style: italic">// If we are at an opening curly brace (&#39;{&#39;), then we have an ivar declaration.</span>
         <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_OPEN_BRACE)
@@ -425,21 +425,21 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
                 attributes,
                 accessors <span style="color: #666666">=</span> {};
             
-            <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.skip_whitespace()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_CLOSE_BRACE)
+            <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_CLOSE_BRACE)
             {
                 <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_PREPROCESSOR)
-                    attributes <span style="color: #666666">=</span> <span style="color: #008000">this</span>.directive(tokens);
+                    attributes <span style="color: #666666">=</span> <span style="color: #008000">this</span>.<span style="color: #0000FF">directive</span>(tokens);
                 
                 <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_SEMICOLON)
                 {
                     <span style="color: #008000; font-weight: bold">if</span> (ivar_count<span style="color: #666666">++</span> <span style="color: #666666">==</span> <span style="color: #666666">0</span>)
-                        CONCAT(buffer, <span style="color: #BA2121">&quot;class_addIvars(the_class, [&quot;</span>);
+                        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;class_addIvars(the_class, [&quot;</span>);
                     <span style="color: #008000; font-weight: bold">else</span>
-                        CONCAT(buffer, <span style="color: #BA2121">&quot;, &quot;</span>);
+                        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;, &quot;</span>);
                     
                     <span style="color: #008000; font-weight: bold">var</span> name <span style="color: #666666">=</span> declaration[declaration.length <span style="color: #666666">-</span> <span style="color: #666666">1</span>];
                     
-                    CONCAT(buffer, <span style="color: #BA2121">&quot;new objj_ivar(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">)&quot;</span>);
+                    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;new objj_ivar(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">)&quot;</span>);
                     
                     declaration <span style="color: #666666">=</span> [];
                     
@@ -450,18 +450,18 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
                     }
                 }
                 <span style="color: #008000; font-weight: bold">else</span>
-                    declaration.push(token);
+                    declaration.<span style="color: #0000FF">push</span>(token);
             }
             
             <span style="color: #408080; font-style: italic">// If we have objects in our declaration, the user forgot a &#39;;&#39;.</span>
             <span style="color: #008000; font-weight: bold">if</span> (declaration.length)
-                objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Expected &#39;;&#39; in ivar declaration, found &#39;}&#39;.&quot;</span>)));
+                <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Expected &#39;;&#39; in ivar declaration, found &#39;}&#39;.&quot;</span>)));
 
             <span style="color: #008000; font-weight: bold">if</span> (ivar_count)
-                CONCAT(buffer, <span style="color: #BA2121">&quot;]);</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+                <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;]);</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
             
             <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>token)
-                objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Expected &#39;}&#39;&quot;</span>)));
+                <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Expected &#39;}&#39;&quot;</span>)));
             
             <span style="color: #008000; font-weight: bold">for</span> (ivar_name <span style="color: #008000; font-weight: bold">in</span> accessors)
             {
@@ -472,10 +472,10 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
                 <span style="color: #008000; font-weight: bold">var</span> getterName <span style="color: #666666">=</span> accessor[<span style="color: #BA2121">&quot;getter&quot;</span>] <span style="color: #666666">||</span> property,
                     getterCode <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;(id)&quot;</span> <span style="color: #666666">+</span> getterName <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">{</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">return &quot;</span> <span style="color: #666666">+</span> ivar_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">}&quot;</span>;
 
-                <span style="color: #008000; font-weight: bold">if</span> (IS_NOT_EMPTY(instance_methods))
-                    CONCAT(instance_methods, <span style="color: #BA2121">&quot;,</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+                <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">IS_NOT_EMPTY</span>(instance_methods))
+                    <span style="color: #0000FF">CONCAT</span>(instance_methods, <span style="color: #BA2121">&quot;,</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
                 
-                CONCAT(instance_methods, <span style="color: #008000">this</span>.method(<span style="color: #008000; font-weight: bold">new</span> objj_lexer(getterCode)));
+                <span style="color: #0000FF">CONCAT</span>(instance_methods, <span style="color: #008000">this</span>.<span style="color: #0000FF">method</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_lexer</span>(getterCode)));
                 
                 <span style="color: #408080; font-style: italic">// setter</span>
                 <span style="color: #008000; font-weight: bold">if</span> (accessor[<span style="color: #BA2121">&quot;readonly&quot;</span>])
@@ -485,8 +485,8 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
                 
                 <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>setterName)
                 {
-                    <span style="color: #008000; font-weight: bold">var</span> start <span style="color: #666666">=</span> property.charAt(<span style="color: #666666">0</span>) <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;_&#39;</span> <span style="color: #666666">?</span> <span style="color: #666666">1</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span>;
-                    setterName <span style="color: #666666">=</span> (start <span style="color: #666666">?</span> <span style="color: #BA2121">&quot;_&quot;</span> <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;set&quot;</span> <span style="color: #666666">+</span> property.substr(start, <span style="color: #666666">1</span>).toUpperCase() <span style="color: #666666">+</span> property.substring(start <span style="color: #666666">+</span> <span style="color: #666666">1</span>) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;:&quot;</span>;
+                    <span style="color: #008000; font-weight: bold">var</span> start <span style="color: #666666">=</span> property.<span style="color: #0000FF">charAt</span>(<span style="color: #666666">0</span>) <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;_&#39;</span> <span style="color: #666666">?</span> <span style="color: #666666">1</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span>;
+                    setterName <span style="color: #666666">=</span> (start <span style="color: #666666">?</span> <span style="color: #BA2121">&quot;_&quot;</span> <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;set&quot;</span> <span style="color: #666666">+</span> property.<span style="color: #0000FF">substr</span>(start, <span style="color: #666666">1</span>).<span style="color: #0000FF">toUpperCase</span>() <span style="color: #666666">+</span> property.<span style="color: #0000FF">substring</span>(start <span style="color: #666666">+</span> <span style="color: #666666">1</span>) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;:&quot;</span>;
                 }
                 
                 <span style="color: #008000; font-weight: bold">var</span> setterCode <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;(void)&quot;</span> <span style="color: #666666">+</span> setterName <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;(id)newValue</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">{</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>;
@@ -496,71 +496,71 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
                 <span style="color: #008000; font-weight: bold">else</span>
                     setterCode <span style="color: #666666">+=</span> ivar_name <span style="color: #666666">+</span> <span style="color: #BA2121">&quot; = newValue;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">}&quot;</span>;
                 
-                <span style="color: #008000; font-weight: bold">if</span> (IS_NOT_EMPTY(instance_methods))
-                    CONCAT(instance_methods, <span style="color: #BA2121">&quot;,</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+                <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">IS_NOT_EMPTY</span>(instance_methods))
+                    <span style="color: #0000FF">CONCAT</span>(instance_methods, <span style="color: #BA2121">&quot;,</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
                 
-                CONCAT(instance_methods, <span style="color: #008000">this</span>.method(<span style="color: #008000; font-weight: bold">new</span> objj_lexer(setterCode)));
+                <span style="color: #0000FF">CONCAT</span>(instance_methods, <span style="color: #008000">this</span>.<span style="color: #0000FF">method</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_lexer</span>(setterCode)));
             }
         }
         <span style="color: #008000; font-weight: bold">else</span>
-            tokens.previous();
+            tokens.<span style="color: #0000FF">previous</span>();
         
         <span style="color: #408080; font-style: italic">// We must make a new class object for our class definition.</span>
-        CONCAT(buffer, <span style="color: #BA2121">&quot;objj_registerClassPair(the_class);</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;objj_registerClassPair(the_class);</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
 
         <span style="color: #408080; font-style: italic">// Add this class to the current bundle.</span>
-        CONCAT(buffer, <span style="color: #BA2121">&quot;objj_addClassForBundle(the_class, objj_getBundleWithPath(OBJJ_CURRENT_BUNDLE.path));</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;objj_addClassForBundle(the_class, objj_getBundleWithPath(OBJJ_CURRENT_BUNDLE.path));</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
     }
     
-    <span style="color: #008000; font-weight: bold">while</span> ((token <span style="color: #666666">=</span> tokens.skip_whitespace()))
+    <span style="color: #008000; font-weight: bold">while</span> ((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>()))
     {
         <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_PLUS)
         {
             <span style="color: #008000">this</span>._classMethod <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">true</span>;
 
-            <span style="color: #008000; font-weight: bold">if</span> (IS_NOT_EMPTY(class_methods))
-                CONCAT(class_methods, <span style="color: #BA2121">&quot;, &quot;</span>);
+            <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">IS_NOT_EMPTY</span>(class_methods))
+                <span style="color: #0000FF">CONCAT</span>(class_methods, <span style="color: #BA2121">&quot;, &quot;</span>);
             
-            CONCAT(class_methods, <span style="color: #008000">this</span>.method(tokens));
+            <span style="color: #0000FF">CONCAT</span>(class_methods, <span style="color: #008000">this</span>.<span style="color: #0000FF">method</span>(tokens));
         }
         
         <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_MINUS)
         {
             <span style="color: #008000">this</span>._classMethod <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">false</span>;
 
-            <span style="color: #008000; font-weight: bold">if</span> (IS_NOT_EMPTY(instance_methods))
-                CONCAT(instance_methods, <span style="color: #BA2121">&quot;, &quot;</span>);
+            <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">IS_NOT_EMPTY</span>(instance_methods))
+                <span style="color: #0000FF">CONCAT</span>(instance_methods, <span style="color: #BA2121">&quot;, &quot;</span>);
             
-            CONCAT(instance_methods, <span style="color: #008000">this</span>.method(tokens));
+            <span style="color: #0000FF">CONCAT</span>(instance_methods, <span style="color: #008000">this</span>.<span style="color: #0000FF">method</span>(tokens));
         }
         
         <span style="color: #408080; font-style: italic">// Check if we&#39;ve reached @end...</span>
         <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_PREPROCESSOR)
         {
             <span style="color: #408080; font-style: italic">// The only preprocessor directive we should ever encounter at this point is @end.</span>
-            <span style="color: #008000; font-weight: bold">if</span> ((token <span style="color: #666666">=</span> tokens.next()) <span style="color: #666666">==</span> TOKEN_END)
+            <span style="color: #008000; font-weight: bold">if</span> ((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">next</span>()) <span style="color: #666666">==</span> TOKEN_END)
                 <span style="color: #008000; font-weight: bold">break</span>;
             
             <span style="color: #008000; font-weight: bold">else</span>
-                objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Expected </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">@end</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">, found </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">@&quot;</span> <span style="color: #666666">+</span> token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
+                <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Expected </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">@end</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">, found </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">@&quot;</span> <span style="color: #666666">+</span> token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
         }
     }
     
-    <span style="color: #008000; font-weight: bold">if</span> (IS_NOT_EMPTY(instance_methods))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">IS_NOT_EMPTY</span>(instance_methods))
     {
-        CONCAT(buffer, <span style="color: #BA2121">&quot;class_addMethods(the_class, [&quot;</span>);
-        CONCAT(buffer, instance_methods);
-        CONCAT(buffer, <span style="color: #BA2121">&quot;]);</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;class_addMethods(the_class, [&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, instance_methods);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;]);</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
     }
     
-    <span style="color: #008000; font-weight: bold">if</span> (IS_NOT_EMPTY(class_methods))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">IS_NOT_EMPTY</span>(class_methods))
     {
-        CONCAT(buffer, <span style="color: #BA2121">&quot;class_addMethods(meta_class, [&quot;</span>);
-        CONCAT(buffer, class_methods);
-        CONCAT(buffer, <span style="color: #BA2121">&quot;]);</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;class_addMethods(meta_class, [&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, class_methods);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;]);</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
     }
     
-    CONCAT(buffer, <span style="color: #BA2121">&#39;}&#39;</span>);
+    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&#39;}&#39;</span>);
 
     <span style="color: #008000">this</span>._currentClass <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
 }
@@ -568,39 +568,39 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
 objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</span>._import <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(tokens)
 {
     <span style="color: #408080; font-style: italic">// The introduction of an import statement forces the creation of a code fragment.</span>
-    <span style="color: #008000">this</span>.fragment();
+    <span style="color: #008000">this</span>.<span style="color: #0000FF">fragment</span>();
     
     <span style="color: #008000; font-weight: bold">var</span> path <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>,
-        token <span style="color: #666666">=</span> tokens.skip_whitespace(),
+        token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>(),
         isLocal <span style="color: #666666">=</span> (token <span style="color: #666666">!=</span> TOKEN_LESS_THAN);
 
     <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_LESS_THAN)
     {
-        <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.next()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_GREATER_THAN)
+        <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">next</span>()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_GREATER_THAN)
             path <span style="color: #666666">+=</span> token;
         
         <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #666666">!</span>token)
-            objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Unterminated import statement.&quot;</span>)));
+            <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Unterminated import statement.&quot;</span>)));
     }
     
-    <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token.charAt(<span style="color: #666666">0</span>) <span style="color: #666666">==</span> TOKEN_DOUBLE_QUOTE)
-        path <span style="color: #666666">=</span> token.substr(<span style="color: #666666">1</span>, token.length <span style="color: #666666">-</span> <span style="color: #666666">2</span>);
+    <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token.<span style="color: #0000FF">charAt</span>(<span style="color: #666666">0</span>) <span style="color: #666666">==</span> TOKEN_DOUBLE_QUOTE)
+        path <span style="color: #666666">=</span> token.<span style="color: #0000FF">substr</span>(<span style="color: #666666">1</span>, token.length <span style="color: #666666">-</span> <span style="color: #666666">2</span>);
     
     <span style="color: #008000; font-weight: bold">else</span>
-        objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Expecting &#39;&lt;&#39; or &#39;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&#39;, found </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
+        <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Expecting &#39;&lt;&#39; or &#39;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&#39;, found </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.&quot;</span>)));
     
-    <span style="color: #008000">this</span>._fragments.push(fragment_create_file(path, <span style="color: #008000; font-weight: bold">NULL</span>, isLocal, <span style="color: #008000">this</span>._file));
+    <span style="color: #008000">this</span>._fragments.<span style="color: #0000FF">push</span>(<span style="color: #0000FF">fragment_create_file</span>(path, <span style="color: #008000; font-weight: bold">NULL</span>, isLocal, <span style="color: #008000">this</span>._file));
 }
 
 objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</span>.method <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(tokens)
 {
-    <span style="color: #008000; font-weight: bold">var</span> buffer <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> objj_stringBuffer(),
+    <span style="color: #008000; font-weight: bold">var</span> buffer <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_stringBuffer</span>(),
         token,
         selector <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>,
         parameters <span style="color: #666666">=</span> [],
         types <span style="color: #666666">=</span> [<span style="color: #008000; font-weight: bold">null</span>];
     
-    <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.skip_whitespace()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_OPEN_BRACE)
+    <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_OPEN_BRACE)
     {
         <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_COLON)
         {
@@ -609,15 +609,15 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
             <span style="color: #408080; font-style: italic">// Colons are part of the selector name</span>
             selector <span style="color: #666666">+=</span> token;
             
-            token <span style="color: #666666">=</span> tokens.skip_whitespace();
+            token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>();
             
             <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_OPEN_PARENTHESIS)
             {
                 <span style="color: #408080; font-style: italic">// Swallow parameter/return type.  Perhaps later we can use this for debugging?</span>
-                <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.skip_whitespace()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
+                <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
                     type <span style="color: #666666">+=</span> token;
     
-                token <span style="color: #666666">=</span> tokens.skip_whitespace();
+                token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>();
             }
             
             <span style="color: #408080; font-style: italic">// Add the type. If it&#39;s empty, add null instead.</span>
@@ -632,7 +632,7 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
             <span style="color: #008000; font-weight: bold">var</span> type <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
 
             <span style="color: #408080; font-style: italic">// Since :( is handled above, this must be the return type, just swallow it.</span>
-            <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.skip_whitespace()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
+            <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
                 type <span style="color: #666666">+=</span> token;
 
             <span style="color: #408080; font-style: italic">// types[0] is the return argument</span>
@@ -643,8 +643,8 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
         <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_COMMA)
         {
             <span style="color: #408080; font-style: italic">// At this point, &quot;...&quot; MUST follow.</span>
-            <span style="color: #008000; font-weight: bold">if</span> ((token <span style="color: #666666">=</span> tokens.skip_whitespace()) <span style="color: #666666">!=</span> TOKEN_PERIOD <span style="color: #666666">||</span> tokens.next() <span style="color: #666666">!=</span> TOKEN_PERIOD <span style="color: #666666">||</span> tokens.next() <span style="color: #666666">!=</span> TOKEN_PERIOD)
-                objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Argument list expected after &#39;,&#39;.&quot;</span>)));
+            <span style="color: #008000; font-weight: bold">if</span> ((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>()) <span style="color: #666666">!=</span> TOKEN_PERIOD <span style="color: #666666">||</span> tokens.<span style="color: #0000FF">next</span>() <span style="color: #666666">!=</span> TOKEN_PERIOD <span style="color: #666666">||</span> tokens.<span style="color: #0000FF">next</span>() <span style="color: #666666">!=</span> TOKEN_PERIOD)
+                <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Argument list expected after &#39;,&#39;.&quot;</span>)));
             
             <span style="color: #408080; font-style: italic">// FIXME: Shouldn&#39;t allow any more after this.</span>
         }
@@ -657,30 +657,30 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
     <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
         count <span style="color: #666666">=</span> parameters.length;
     
-    CONCAT(buffer, <span style="color: #BA2121">&quot;new objj_method(sel_getUid(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span>);
-    CONCAT(buffer, selector);
-    CONCAT(buffer, <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">), function&quot;</span>);
+    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;new objj_method(sel_getUid(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span>);
+    <span style="color: #0000FF">CONCAT</span>(buffer, selector);
+    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">), function&quot;</span>);
 
     <span style="color: #008000">this</span>._currentSelector <span style="color: #666666">=</span> selector;
 
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">this</span>._flags <span style="color: #666666">&amp;</span> OBJJ_PREPROCESSOR_DEBUG_SYMBOLS)
-        CONCAT(buffer, <span style="color: #BA2121">&quot; $&quot;</span> <span style="color: #666666">+</span> <span style="color: #008000">this</span>._currentClass <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;__&quot;</span> <span style="color: #666666">+</span> selector.replace(<span style="color: #BB6688">/:/g</span>, <span style="color: #BA2121">&quot;_&quot;</span>));
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot; $&quot;</span> <span style="color: #666666">+</span> <span style="color: #008000">this</span>._currentClass <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;__&quot;</span> <span style="color: #666666">+</span> selector.<span style="color: #0000FF">replace</span>(<span style="color: #BB6688">/:/g</span>, <span style="color: #BA2121">&quot;_&quot;</span>));
     
-    CONCAT(buffer, <span style="color: #BA2121">&quot;(self, _cmd&quot;</span>);
+    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;(self, _cmd&quot;</span>);
     
     <span style="color: #008000; font-weight: bold">for</span>(; index <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>index)
     {
-        CONCAT(buffer, <span style="color: #BA2121">&quot;, &quot;</span>);
-        CONCAT(buffer, parameters[index]);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;, &quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, parameters[index]);
     }
 
-    CONCAT(buffer, <span style="color: #BA2121">&quot;)</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">{ with(self)</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">{&quot;</span>);
-    CONCAT(buffer, <span style="color: #008000">this</span>.preprocess(tokens, <span style="color: #008000; font-weight: bold">NULL</span>, TOKEN_CLOSE_BRACE, TOKEN_OPEN_BRACE));
-    CONCAT(buffer, <span style="color: #BA2121">&quot;}</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">}&quot;</span>);
+    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;)</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">{ with(self)</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">{&quot;</span>);
+    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #008000">this</span>.<span style="color: #0000FF">preprocess</span>(tokens, <span style="color: #008000; font-weight: bold">NULL</span>, TOKEN_CLOSE_BRACE, TOKEN_OPEN_BRACE));
+    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;}</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">}&quot;</span>);
     <span style="color: #408080; font-style: italic">// TODO: actually use OBJJ_PREPROCESSOR_TYPE_SIGNATURES flag instead of tying to OBJJ_PREPROCESSOR_DEBUG_SYMBOLS</span>
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">this</span>._flags <span style="color: #666666">&amp;</span> OBJJ_PREPROCESSOR_DEBUG_SYMBOLS) <span style="color: #408080; font-style: italic">//OBJJ_PREPROCESSOR_TYPE_SIGNATURES)</span>
-        CONCAT(buffer, <span style="color: #BA2121">&quot;,&quot;</span><span style="color: #666666">+</span>JSON.stringify(types));
-    CONCAT(buffer, <span style="color: #BA2121">&quot;)&quot;</span>);
+        <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;,&quot;</span><span style="color: #666666">+</span>JSON.<span style="color: #0000FF">stringify</span>(types));
+    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;)&quot;</span>);
 
     <span style="color: #008000">this</span>._currentSelector <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
 
@@ -689,7 +689,7 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
 
 objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</span>.preprocess <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(tokens, <span style="color: #408080; font-style: italic">/*objj_stringBuffer*/</span> aStringBuffer, terminator, instigator, tuple)
 {
-    <span style="color: #008000; font-weight: bold">var</span> buffer <span style="color: #666666">=</span> aStringBuffer <span style="color: #666666">?</span> aStringBuffer <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">new</span> objj_stringBuffer(),
+    <span style="color: #008000; font-weight: bold">var</span> buffer <span style="color: #666666">=</span> aStringBuffer <span style="color: #666666">?</span> aStringBuffer <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_stringBuffer</span>(),
         count <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
         token <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
 
@@ -701,7 +701,7 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
             closures <span style="color: #666666">=</span> [<span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>];
     }
     
-    <span style="color: #008000; font-weight: bold">while</span> ((token <span style="color: #666666">=</span> tokens.next()) <span style="color: #666666">&amp;&amp;</span> ((token <span style="color: #666666">!=</span> terminator) <span style="color: #666666">||</span> count))
+    <span style="color: #008000; font-weight: bold">while</span> ((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">next</span>()) <span style="color: #666666">&amp;&amp;</span> ((token <span style="color: #666666">!=</span> terminator) <span style="color: #666666">||</span> count))
     {
         <span style="color: #008000; font-weight: bold">if</span> (tuple)
         {
@@ -727,19 +727,19 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
                     (bracket <span style="color: #666666">=</span> (token <span style="color: #666666">===</span> TOKEN_CLOSE_BRACKET))) <span style="color: #666666">&amp;&amp;</span>
                     closures[<span style="color: #666666">0</span>] <span style="color: #666666">===</span> <span style="color: #666666">0</span> <span style="color: #666666">&amp;&amp;</span> closures[<span style="color: #666666">1</span>] <span style="color: #666666">===</span> <span style="color: #666666">0</span>)
             {
-                tokens.push(); <span style="color: #408080; font-style: italic">// 1</span>
+                tokens.<span style="color: #0000FF">push</span>(); <span style="color: #408080; font-style: italic">// 1</span>
                 
                 <span style="color: #408080; font-style: italic">// If a bracket made us enter, go backwards skipping whitespace ([a b   ] allowed), </span>
                 <span style="color: #408080; font-style: italic">// if not grab token immediately behind us ([a b  : c] not allowed</span>
-                <span style="color: #008000; font-weight: bold">var</span> label <span style="color: #666666">=</span> bracket <span style="color: #666666">?</span> tokens.skip_whitespace(<span style="color: #008000; font-weight: bold">true</span>) <span style="color: #666666">:</span> tokens.previous(),
-                    isEmptyLabel <span style="color: #666666">=</span> TOKEN_WHITESPACE.test(label);
+                <span style="color: #008000; font-weight: bold">var</span> label <span style="color: #666666">=</span> bracket <span style="color: #666666">?</span> tokens.<span style="color: #0000FF">skip_whitespace</span>(<span style="color: #008000; font-weight: bold">true</span>) <span style="color: #666666">:</span> tokens.<span style="color: #0000FF">previous</span>(),
+                    isEmptyLabel <span style="color: #666666">=</span> TOKEN_WHITESPACE.<span style="color: #0000FF">test</span>(label);
                 
                 <span style="color: #408080; font-style: italic">// The label must be an identifier, and preceded by whitespace, or whitespace itself (the &quot;empty label&quot;)</span>
-                <span style="color: #008000; font-weight: bold">if</span> (isEmptyLabel <span style="color: #666666">||</span> TOKEN_IDENTIFIER.test(label) <span style="color: #666666">&amp;&amp;</span> TOKEN_WHITESPACE.test(tokens.previous()))
+                <span style="color: #008000; font-weight: bold">if</span> (isEmptyLabel <span style="color: #666666">||</span> TOKEN_IDENTIFIER.<span style="color: #0000FF">test</span>(label) <span style="color: #666666">&amp;&amp;</span> TOKEN_WHITESPACE.<span style="color: #0000FF">test</span>(tokens.<span style="color: #0000FF">previous</span>()))
                 {
-                    tokens.push(); <span style="color: #408080; font-style: italic">// 2</span>
+                    tokens.<span style="color: #0000FF">push</span>(); <span style="color: #408080; font-style: italic">// 2</span>
                     
-                    <span style="color: #008000; font-weight: bold">var</span> last <span style="color: #666666">=</span> tokens.skip_whitespace(<span style="color: #008000; font-weight: bold">true</span>),
+                    <span style="color: #008000; font-weight: bold">var</span> last <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>(<span style="color: #008000; font-weight: bold">true</span>),
                         operatorCheck <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">true</span>,
                         isDoubleOperator <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">false</span>;
                     
@@ -747,17 +747,17 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
                     <span style="color: #408080; font-style: italic">// + - + x is bad because it could be (+ - + x) or (a + - + x)</span>
                     <span style="color: #408080; font-style: italic">// the only good is unbroken chain</span>
                     <span style="color: #008000; font-weight: bold">if</span> (last <span style="color: #666666">===</span> <span style="color: #BA2121">&#39;+&#39;</span> <span style="color: #666666">||</span> last <span style="color: #666666">===</span> <span style="color: #BA2121">&#39;-&#39;</span>){<span style="color: #408080; font-style: italic">//alert(tokens.last())</span>
-                        <span style="color: #008000; font-weight: bold">if</span> (tokens.previous() <span style="color: #666666">!==</span> last)
+                        <span style="color: #008000; font-weight: bold">if</span> (tokens.<span style="color: #0000FF">previous</span>() <span style="color: #666666">!==</span> last)
                             operatorCheck <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">false</span>;
                         <span style="color: #008000; font-weight: bold">else</span>
                         {
-                            last <span style="color: #666666">=</span> tokens.skip_whitespace(<span style="color: #008000; font-weight: bold">true</span>);
+                            last <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>(<span style="color: #008000; font-weight: bold">true</span>);
                             isDoubleOperator <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">true</span>;
                         }}
                         
-                    tokens.pop(); <span style="color: #408080; font-style: italic">// 2</span>
+                    tokens.<span style="color: #0000FF">pop</span>(); <span style="color: #408080; font-style: italic">// 2</span>
                     
-                    tokens.pop(); <span style="color: #408080; font-style: italic">// 1</span>
+                    tokens.<span style="color: #0000FF">pop</span>(); <span style="color: #408080; font-style: italic">// 1</span>
                     
                     <span style="color: #408080; font-style: italic">//alert(operatorCheck + &quot;operatorCheck for &quot; + label + &quot; and &quot; + last);</span>
                     <span style="color: #008000; font-weight: bold">if</span> (operatorCheck <span style="color: #666666">&amp;&amp;</span> (
@@ -771,13 +771,13 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
                     
                     <span style="color: #408080; font-style: italic">// &lt;.&gt; label&lt;:|]&gt; --&gt; 5. label</span>
                     <span style="color: #408080; font-style: italic">// &lt;5&gt; label&lt;:|]&gt;</span>
-                        last <span style="color: #666666">===</span> TOKEN_PERIOD <span style="color: #666666">||</span> TOKEN_NUMBER.test(last) <span style="color: #666666">||</span>
+                        last <span style="color: #666666">===</span> TOKEN_PERIOD <span style="color: #666666">||</span> TOKEN_NUMBER.<span style="color: #0000FF">test</span>(last) <span style="color: #666666">||</span>
                         
                     <span style="color: #408080; font-style: italic">// &lt;string&gt; &lt;label&gt;&lt;:\]&gt;/</span>
-                        last.charAt(last.length <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">===</span> <span style="color: #BA2121">&#39;\&quot;&#39;</span> <span style="color: #666666">||</span> last.charAt(last.length <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">===</span> <span style="color: #BA2121">&#39;\&#39;&#39;</span> <span style="color: #666666">||</span> 
+                        last.<span style="color: #0000FF">charAt</span>(last.length <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">===</span> <span style="color: #BA2121">&#39;\&quot;&#39;</span> <span style="color: #666666">||</span> last.<span style="color: #0000FF">charAt</span>(last.length <span style="color: #666666">-</span> <span style="color: #666666">1</span>) <span style="color: #666666">===</span> <span style="color: #BA2121">&#39;\&#39;&#39;</span> <span style="color: #666666">||</span> 
                     
                     <span style="color: #408080; font-style: italic">// &lt;identifier-not&gt; &lt;label&gt;&lt;:|]&gt;</span>
-                        TOKEN_IDENTIFIER.test(last) <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span><span style="color: #BB6688">/^(new|return|case|var)$/</span>.test(last)))
+                        TOKEN_IDENTIFIER.<span style="color: #0000FF">test</span>(last) <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span><span style="color: #BB6688">/^(new|return|case|var)$/</span>.<span style="color: #0000FF">test</span>(last)))
                     {
                         <span style="color: #008000; font-weight: bold">if</span> (isEmptyLabel)
                             tuple[<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;:&#39;</span>;
@@ -802,13 +802,13 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
                         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">NO</span>;
                 }
                 
-                tokens.pop(); <span style="color: #408080; font-style: italic">// 2</span>
+                tokens.<span style="color: #0000FF">pop</span>(); <span style="color: #408080; font-style: italic">// 2</span>
                 
                 <span style="color: #008000; font-weight: bold">if</span> (bracket)
                     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">NO</span>;    
             }
             
-            closures[<span style="color: #666666">2</span>] <span style="color: #666666">=</span> MAX(closures[<span style="color: #666666">2</span>], <span style="color: #666666">0</span>);
+            closures[<span style="color: #666666">2</span>] <span style="color: #666666">=</span> <span style="color: #0000FF">MAX</span>(closures[<span style="color: #666666">2</span>], <span style="color: #666666">0</span>);
         }
             
         <span style="color: #008000; font-weight: bold">if</span> (instigator)
@@ -823,9 +823,9 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
         <span style="color: #408080; font-style: italic">// imports are deprecated in favor of @imort</span>
         <span style="color: #008000; font-weight: bold">if</span>(token <span style="color: #666666">==</span> TOKEN_IMPORT)
         {
-            objj_fprintf(warning_stream, <span style="color: #008000">this</span>._file.path <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;: import keyword is deprecated, use @import instead.&quot;</span>);
+            <span style="color: #0000FF">objj_fprintf</span>(warning_stream, <span style="color: #008000">this</span>._file.path <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;: import keyword is deprecated, use @import instead.&quot;</span>);
             
-            <span style="color: #008000">this</span>._import(tokens);
+            <span style="color: #008000">this</span>.<span style="color: #0000FF">_import</span>(tokens);
         }
         
         <span style="color: #408080; font-style: italic">// Safari can&#39;t handle function declarations of the form function [name]([arguments]) { } </span>
@@ -836,14 +836,14 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
             <span style="color: #008000; font-weight: bold">var</span> accumulator <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;</span>;
         
             <span style="color: #408080; font-style: italic">// Following the function identifier we can either have an open parenthesis or an identifier:</span>
-            <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.next()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_OPEN_PARENTHESIS <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>(<span style="color: #BB6688">/^\w/</span>).test(token))
+            <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">next</span>()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_OPEN_PARENTHESIS <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>(<span style="color: #BB6688">/^\w/</span>).<span style="color: #0000FF">test</span>(token))
                 accumulator <span style="color: #666666">+=</span> token;
             
             <span style="color: #408080; font-style: italic">// If the next token is an open parenthesis, we have a standard function and we don&#39;t have to </span>
             <span style="color: #408080; font-style: italic">// change it:</span>
             <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">===</span> TOKEN_OPEN_PARENTHESIS)
             {
-                CONCAT(buffer, <span style="color: #BA2121">&quot;function&quot;</span> <span style="color: #666666">+</span> accumulator <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;(&#39;</span>);
+                <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;function&quot;</span> <span style="color: #666666">+</span> accumulator <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;(&#39;</span>);
                 
                 <span style="color: #008000; font-weight: bold">if</span> (tuple)
                     <span style="color: #666666">++</span>closures[<span style="color: #666666">1</span>];
@@ -851,48 +851,48 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
             <span style="color: #408080; font-style: italic">// If it&#39;s not a parenthesis, we know we have a non-supported function declaration, so fix it:</span>
             <span style="color: #008000; font-weight: bold">else</span>
             {
-                CONCAT(buffer, token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;= function&quot;</span>);<span style="color: #BC7A00"></span>
+                <span style="color: #0000FF">CONCAT</span>(buffer, token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;= function&quot;</span>);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">            </span>
 <span style="color: #BC7A00">#if FIREBUG</span>
                 <span style="color: #008000; font-weight: bold">var</span> functionName <span style="color: #666666">=</span> token;
 
                 <span style="color: #408080; font-style: italic">// Skip everything until the next close parenthesis.</span>
-                <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.next()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
-                    CONCAT(buffer, token);
+                <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">next</span>()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
+                    <span style="color: #0000FF">CONCAT</span>(buffer, token);
                     
                 <span style="color: #408080; font-style: italic">// Don&#39;t forget the last token!</span>
-                CONCAT(buffer, token);
+                <span style="color: #0000FF">CONCAT</span>(buffer, token);
                 
                 <span style="color: #408080; font-style: italic">// Skip everything until the next open curly brace. </span>
-                <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.next()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_OPEN_BRACE)
-                    CONCAT(buffer, token);
+                <span style="color: #008000; font-weight: bold">while</span>((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">next</span>()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_OPEN_BRACE)
+                    <span style="color: #0000FF">CONCAT</span>(buffer, token);
                 
                 <span style="color: #008000; font-weight: bold">if</span> (tuple)
                     <span style="color: #666666">++</span>closures[<span style="color: #666666">2</span>];
                 
                 <span style="color: #408080; font-style: italic">// Place the open curly brace as well, and the function name</span>
-                CONCAT(buffer, token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">__FIREBUG_FNAME__&quot;</span> <span style="color: #666666">+</span> functionName <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.length;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #BC7A00"></span>
+                <span style="color: #0000FF">CONCAT</span>(buffer, token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">__FIREBUG_FNAME__&quot;</span> <span style="color: #666666">+</span> functionName <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">.length;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
             }
         }
         
         <span style="color: #408080; font-style: italic">// If we reach an @ symbol, we are at a preprocessor directive.</span>
         <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_PREPROCESSOR)
-            <span style="color: #008000">this</span>.directive(tokens, buffer);
+            <span style="color: #008000">this</span>.<span style="color: #0000FF">directive</span>(tokens, buffer);
         
         <span style="color: #408080; font-style: italic">// If we reach a bracket, we will either be preprocessing a message send, a literal </span>
         <span style="color: #408080; font-style: italic">// array, or an array index.</span>
         <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (token <span style="color: #666666">==</span> TOKEN_OPEN_BRACKET)
-            <span style="color: #008000">this</span>.brackets(tokens, buffer);
+            <span style="color: #008000">this</span>.<span style="color: #0000FF">brackets</span>(tokens, buffer);
                 
         <span style="color: #408080; font-style: italic">// If not simply append the token.</span>
         <span style="color: #008000; font-weight: bold">else</span>
-            CONCAT(buffer, token);
+            <span style="color: #0000FF">CONCAT</span>(buffer, token);
     }
     
     <span style="color: #408080; font-style: italic">// If we get this far and we&#39;re parsing an objj_msgSend (or array), then we have a problem.</span>
     <span style="color: #008000; font-weight: bold">if</span> (tuple)
-        objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Expected &#39;]&#39; - Unterminated message send or array.&quot;</span>)));
+        <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Expected &#39;]&#39; - Unterminated message send or array.&quot;</span>)));
     
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aStringBuffer)
         <span style="color: #008000; font-weight: bold">return</span> buffer;
@@ -900,44 +900,44 @@ objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</spa
 
 objj_preprocessor.<span style="color: #008000; font-weight: bold">prototype</span>.selector <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(tokens, aStringBuffer)
 {
-    <span style="color: #008000; font-weight: bold">var</span> buffer <span style="color: #666666">=</span> aStringBuffer <span style="color: #666666">?</span> aStringBuffer <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">new</span> objj_stringBuffer();
+    <span style="color: #008000; font-weight: bold">var</span> buffer <span style="color: #666666">=</span> aStringBuffer <span style="color: #666666">?</span> aStringBuffer <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_stringBuffer</span>();
     
-    CONCAT(buffer, <span style="color: #BA2121">&quot;sel_getUid(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span>);
+    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;sel_getUid(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span>);
     
     <span style="color: #408080; font-style: italic">// Swallow open parenthesis.</span>
-    <span style="color: #008000; font-weight: bold">if</span> (tokens.skip_whitespace() <span style="color: #666666">!=</span> TOKEN_OPEN_PARENTHESIS)
-        objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Expected &#39;(&#39;&quot;</span>)));
+    <span style="color: #008000; font-weight: bold">if</span> (tokens.<span style="color: #0000FF">skip_whitespace</span>() <span style="color: #666666">!=</span> TOKEN_OPEN_PARENTHESIS)
+        <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Expected &#39;(&#39;&quot;</span>)));
     
     <span style="color: #408080; font-style: italic">// Eat leading whitespace</span>
-    <span style="color: #008000; font-weight: bold">var</span> selector <span style="color: #666666">=</span> tokens.skip_whitespace();
+    <span style="color: #008000; font-weight: bold">var</span> selector <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">skip_whitespace</span>();
     
     <span style="color: #008000; font-weight: bold">if</span> (selector <span style="color: #666666">==</span> TOKEN_CLOSE_PARENTHESIS)
-        objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Unexpected &#39;)&#39;, can&#39;t have empty @selector()&quot;</span>)));
+        <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Unexpected &#39;)&#39;, can&#39;t have empty @selector()&quot;</span>)));
     
-    CONCAT(aStringBuffer, selector);
+    <span style="color: #0000FF">CONCAT</span>(aStringBuffer, selector);
     
     <span style="color: #008000; font-weight: bold">var</span> token,
         starting <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">true</span>;
     
-    <span style="color: #008000; font-weight: bold">while</span> ((token <span style="color: #666666">=</span> tokens.next()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
+    <span style="color: #008000; font-weight: bold">while</span> ((token <span style="color: #666666">=</span> tokens.<span style="color: #0000FF">next</span>()) <span style="color: #666666">&amp;&amp;</span> token <span style="color: #666666">!=</span> TOKEN_CLOSE_PARENTHESIS)
     {
-        <span style="color: #008000; font-weight: bold">if</span> (starting <span style="color: #666666">&amp;&amp;</span> <span style="color: #BB6688">/^\d+$/</span>.test(token) <span style="color: #666666">||</span> <span style="color: #666666">!</span>(<span style="color: #BB6688">/^(\w|$|\:)/</span>.test(token)))
+        <span style="color: #008000; font-weight: bold">if</span> (starting <span style="color: #666666">&amp;&amp;</span> <span style="color: #BB6688">/^\d+$/</span>.<span style="color: #0000FF">test</span>(token) <span style="color: #666666">||</span> <span style="color: #666666">!</span>(<span style="color: #BB6688">/^(\w|$|\:)/</span>.<span style="color: #0000FF">test</span>(token)))
         {
             <span style="color: #408080; font-style: italic">// Only allow tail whitespace</span>
-            <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>(<span style="color: #BB6688">/\S/</span>).test(token))
-                <span style="color: #008000; font-weight: bold">if</span> (tokens.skip_whitespace() <span style="color: #666666">==</span> TOKEN_CLOSE_PARENTHESIS)
+            <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>(<span style="color: #BB6688">/\S/</span>).<span style="color: #0000FF">test</span>(token))
+                <span style="color: #008000; font-weight: bold">if</span> (tokens.<span style="color: #0000FF">skip_whitespace</span>() <span style="color: #666666">==</span> TOKEN_CLOSE_PARENTHESIS)
                     <span style="color: #008000; font-weight: bold">break</span>;
                 <span style="color: #008000; font-weight: bold">else</span>
-                    objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Unexpected whitespace in @selector().&quot;</span>)));
+                    <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Unexpected whitespace in @selector().&quot;</span>)));
             <span style="color: #008000; font-weight: bold">else</span>
-                objj_exception_throw(<span style="color: #008000; font-weight: bold">new</span> objj_exception(OBJJParseException, <span style="color: #008000">this</span>.error_message(<span style="color: #BA2121">&quot;*** Illegal character &#39;&quot;</span> <span style="color: #666666">+</span> token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;&#39; in @selector().&quot;</span>)));
+                <span style="color: #0000FF">objj_exception_throw</span>(<span style="color: #008000; font-weight: bold">new</span> <span style="color: #0000FF">objj_exception</span>(OBJJParseException, <span style="color: #008000">this</span>.<span style="color: #0000FF">error_message</span>(<span style="color: #BA2121">&quot;*** Illegal character &#39;&quot;</span> <span style="color: #666666">+</span> token <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;&#39; in @selector().&quot;</span>)));
         }
         
-        CONCAT(buffer, token);
+        <span style="color: #0000FF">CONCAT</span>(buffer, token);
         starting <span style="color: #666666">=</span> (token <span style="color: #666666">==</span> TOKEN_COLON);
     }
     
-    CONCAT(buffer, <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">)&quot;</span>);
+    <span style="color: #0000FF">CONCAT</span>(buffer, <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">)&quot;</span>);
 
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aStringBuffer)
         <span style="color: #008000; font-weight: bold">return</span> buffer;

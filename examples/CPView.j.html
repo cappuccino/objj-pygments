@@ -20,24 +20,24 @@
 <span style="color: #408080; font-style: italic"> * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA</span>
 <span style="color: #408080; font-style: italic"> */</span>
 
-<span style="color: #BC7A00">@import &lt;Foundation/CPArray.j&gt;</span>
-<span style="color: #BC7A00">@import &lt;Foundation/CPObjJRuntime.j&gt;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&lt;Foundation/CPArray.j&gt;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&lt;Foundation/CPObjJRuntime.j&gt;</span>
 
-<span style="color: #BC7A00">@import &quot;CGAffineTransform.j&quot;</span>
-<span style="color: #BC7A00">@import &quot;CGGeometry.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CGAffineTransform.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CGGeometry.j&quot;</span>
 
-<span style="color: #BC7A00">@import &quot;CPColor.j&quot;</span>
-<span style="color: #BC7A00">@import &quot;CPGeometry.j&quot;</span>
-<span style="color: #BC7A00">@import &quot;CPGraphicsContext.j&quot;</span>
-<span style="color: #BC7A00">@import &quot;CPResponder.j&quot;</span>
-<span style="color: #BC7A00">@import &quot;CPTheme.j&quot;</span>
-<span style="color: #BC7A00">@import &quot;_CPDisplayServer.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CPColor.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CPGeometry.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CPGraphicsContext.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CPResponder.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;CPTheme.j&quot;</span>
+<span style="color: #BC7A00">@import</span> <span style="color: #BA2121">&quot;_CPDisplayServer.j&quot;</span>
 
 
-<span style="color: #BC7A00">#include &quot;Platform/Platform.h&quot;</span>
-<span style="color: #BC7A00">#include &quot;CoreGraphics/CGAffineTransform.h&quot;</span>
-<span style="color: #BC7A00">#include &quot;CoreGraphics/CGGeometry.h&quot;</span>
-<span style="color: #BC7A00">#include &quot;Platform/DOM/CPDOMDisplayServer.h&quot;</span>
+<span style="color: #BC7A00">#include</span> <span style="color: #BA2121">&quot;Platform/Platform.h&quot;</span>
+<span style="color: #BC7A00">#include</span> <span style="color: #BA2121">&quot;CoreGraphics/CGAffineTransform.h&quot;</span>
+<span style="color: #BC7A00">#include</span> <span style="color: #BA2121">&quot;CoreGraphics/CGGeometry.h&quot;</span>
+<span style="color: #BC7A00">#include</span> <span style="color: #BA2121">&quot;Platform/DOM/CPDOMDisplayServer.h&quot;</span>
 
 <span style="color: #408080; font-style: italic">/*</span>
 <span style="color: #408080; font-style: italic">    @global</span>
@@ -199,7 +199,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         <span style="color: #008000; font-weight: bold">return</span>;<span style="color: #BC7A00"></span>
 
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
-    DOMElementPrototype <span style="color: #666666">=</span>  <span style="color: #008000">document</span>.createElement(<span style="color: #BA2121">&quot;div&quot;</span>);
+    DOMElementPrototype <span style="color: #666666">=</span>  <span style="color: #008000">document</span>.<span style="color: #0000FF">createElement</span>(<span style="color: #BA2121">&quot;div&quot;</span>);
     
     <span style="color: #008000; font-weight: bold">var</span> style <span style="color: #666666">=</span> DOMElementPrototype.style;
     
@@ -245,7 +245,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">id</span>)<span style="color: #0000FF">init</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> initWithFrame<span style="color: #666666">:</span>CGRectMakeZero()];
+    <span style="color: #008000; font-weight: bold">return</span> [<span style="color: #008000">self</span> initWithFrame<span style="color: #666666">:</span><span style="color: #0000FF">CGRectMakeZero</span>()];
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -258,8 +258,8 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">self</span>)
     {
-        <span style="color: #008000; font-weight: bold">var</span> width <span style="color: #666666">=</span> _CGRectGetWidth(aFrame),
-            height <span style="color: #666666">=</span> _CGRectGetHeight(aFrame);
+        <span style="color: #008000; font-weight: bold">var</span> width <span style="color: #666666">=</span> <span style="color: #0000FF">_CGRectGetWidth</span>(aFrame),
+            height <span style="color: #666666">=</span> <span style="color: #0000FF">_CGRectGetHeight</span>(aFrame);
         
         _subviews <span style="color: #666666">=</span> [];
         _registeredDraggedTypes <span style="color: #666666">=</span> [CPSet set];
@@ -267,8 +267,8 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 
         _tag <span style="color: #666666">=</span> <span style="color: #666666">-1</span>;
 
-        _frame <span style="color: #666666">=</span> _CGRectMakeCopy(aFrame);
-        _bounds <span style="color: #666666">=</span> _CGRectMake(<span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>, width, height);
+        _frame <span style="color: #666666">=</span> <span style="color: #0000FF">_CGRectMakeCopy</span>(aFrame);
+        _bounds <span style="color: #666666">=</span> <span style="color: #0000FF">_CGRectMake</span>(<span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>, width, height);
 
         _autoresizingMask <span style="color: #666666">=</span> CPViewNotSizable;
         _autoresizesSubviews <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">YES</span>;
@@ -278,10 +278,10 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         _hitTests <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">YES</span>;<span style="color: #BC7A00"></span>
 
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
-        _DOMElement <span style="color: #666666">=</span> DOMElementPrototype.cloneNode(<span style="color: #008000; font-weight: bold">false</span>);
+        _DOMElement <span style="color: #666666">=</span> DOMElementPrototype.<span style="color: #0000FF">cloneNode</span>(<span style="color: #008000; font-weight: bold">false</span>);
 
-        CPDOMDisplayServerSetStyleLeftTop(_DOMElement, <span style="color: #008000; font-weight: bold">NULL</span>, _CGRectGetMinX(aFrame), _CGRectGetMinY(aFrame));
-        CPDOMDisplayServerSetStyleSize(_DOMElement, width, height);
+        <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMElement, <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #0000FF">_CGRectGetMinX</span>(aFrame), <span style="color: #0000FF">_CGRectGetMinY</span>(aFrame));
+        <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMElement, width, height);
         
         _DOMImageParts <span style="color: #666666">=</span> [];
         _DOMImageSizes <span style="color: #666666">=</span> [];<span style="color: #BC7A00"></span>
@@ -375,7 +375,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         [_subviews removeObjectAtIndex<span style="color: #666666">:</span>index];<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">        </span>
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
-        CPDOMDisplayServerRemoveChild(_DOMElement, aSubview._DOMElement);<span style="color: #BC7A00"></span>
+        <span style="color: #0000FF">CPDOMDisplayServerRemoveChild</span>(_DOMElement, aSubview._DOMElement);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
 
         <span style="color: #008000; font-weight: bold">if</span> (anIndex <span style="color: #666666">&gt;</span> index)
@@ -401,20 +401,20 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     
     <span style="color: #008000; font-weight: bold">if</span> (anIndex <span style="color: #666666">===</span> CPNotFound <span style="color: #666666">||</span> anIndex <span style="color: #666666">&gt;=</span> count)
     {
-        _subviews.push(aSubview);<span style="color: #BC7A00"></span>
+        _subviews.<span style="color: #0000FF">push</span>(aSubview);<span style="color: #BC7A00"></span>
 
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
         <span style="color: #408080; font-style: italic">// Attach the actual node.</span>
-        CPDOMDisplayServerAppendChild(_DOMElement, aSubview._DOMElement);<span style="color: #BC7A00"></span>
+        <span style="color: #0000FF">CPDOMDisplayServerAppendChild</span>(_DOMElement, aSubview._DOMElement);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
     }
     <span style="color: #008000; font-weight: bold">else</span>
     {
-        _subviews.splice(anIndex, <span style="color: #666666">0</span>, aSubview);<span style="color: #BC7A00"></span>
+        _subviews.<span style="color: #0000FF">splice</span>(anIndex, <span style="color: #666666">0</span>, aSubview);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">    </span>
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
         <span style="color: #408080; font-style: italic">// Attach the actual node.</span>
-        CPDOMDisplayServerInsertBefore(_DOMElement, aSubview._DOMElement, _subviews[anIndex <span style="color: #666666">+</span> <span style="color: #666666">1</span>]._DOMElement);<span style="color: #BC7A00"></span>
+        <span style="color: #0000FF">CPDOMDisplayServerInsertBefore</span>(_DOMElement, aSubview._DOMElement, _subviews[anIndex <span style="color: #666666">+</span> <span style="color: #666666">1</span>]._DOMElement);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
     }
     
@@ -449,7 +449,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     [_superview._subviews removeObject<span style="color: #666666">:</span><span style="color: #008000">self</span>];<span style="color: #BC7A00"></span>
 
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
-        CPDOMDisplayServerRemoveChild(_superview._DOMElement, _DOMElement);<span style="color: #BC7A00"></span>
+        <span style="color: #0000FF">CPDOMDisplayServerRemoveChild</span>(_superview._DOMElement, _DOMElement);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
     _superview <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">nil</span>;
     
@@ -535,8 +535,8 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     {
         <span style="color: #008000; font-weight: bold">var</span> subview <span style="color: #666666">=</span> _subviews[index];
 
-        CPDOMDisplayServerRemoveChild(_DOMElement, subview._DOMElement);
-        CPDOMDisplayServerAppendChild(_DOMElement, subview._DOMElement);
+        <span style="color: #0000FF">CPDOMDisplayServerRemoveChild</span>(_DOMElement, subview._DOMElement);
+        <span style="color: #0000FF">CPDOMDisplayServerAppendChild</span>(_DOMElement, subview._DOMElement);
     }
 }
 
@@ -703,7 +703,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">setFrame:</span>(<span style="color: #B00040">CGRect</span>)aFrame
 {
-    <span style="color: #008000; font-weight: bold">if</span> (_CGRectEqualToRect(_frame, aFrame))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">_CGRectEqualToRect</span>(_frame, aFrame))
         <span style="color: #008000; font-weight: bold">return</span>;
         
     _inhibitFrameAndBoundsChangedNotifications <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">YES</span>;
@@ -723,17 +723,17 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGRect</span>)<span style="color: #0000FF">frame</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> _CGRectMakeCopy(_frame);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">_CGRectMakeCopy</span>(_frame);
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGPoint</span>)<span style="color: #0000FF">frameOrigin</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> _CGPointMakeCopy(_frame.origin);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">_CGPointMakeCopy</span>(_frame.origin);
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGSize</span>)<span style="color: #0000FF">frameSize</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> _CGSizeMakeCopy(_frame.size);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">_CGSizeMakeCopy</span>(_frame.size);
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -745,7 +745,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">setCenter:</span>(<span style="color: #B00040">CGPoint</span>)aPoint
 {
-    [<span style="color: #008000">self</span> setFrameOrigin<span style="color: #666666">:</span>CGPointMake(aPoint.x <span style="color: #666666">-</span> _frame.size.width <span style="color: #666666">/</span> <span style="color: #666666">2.0</span>, aPoint.y <span style="color: #666666">-</span> _frame.size.height <span style="color: #666666">/</span> <span style="color: #666666">2.0</span>)]; 
+    [<span style="color: #008000">self</span> setFrameOrigin<span style="color: #666666">:</span><span style="color: #0000FF">CGPointMake</span>(aPoint.x <span style="color: #666666">-</span> _frame.size.width <span style="color: #666666">/</span> <span style="color: #666666">2.0</span>, aPoint.y <span style="color: #666666">-</span> _frame.size.height <span style="color: #666666">/</span> <span style="color: #666666">2.0</span>)]; 
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -754,7 +754,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGPoint</span>)<span style="color: #0000FF">center</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> CGPointMake(_frame.size.width <span style="color: #666666">/</span> <span style="color: #666666">2.0</span> <span style="color: #666666">+</span> _frame.origin.x, _frame.size.height <span style="color: #666666">/</span> <span style="color: #666666">2.0</span> <span style="color: #666666">+</span> _frame.origin.y);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">CGPointMake</span>(_frame.size.width <span style="color: #666666">/</span> <span style="color: #666666">2.0</span> <span style="color: #666666">+</span> _frame.origin.x, _frame.size.height <span style="color: #666666">/</span> <span style="color: #666666">2.0</span> <span style="color: #666666">+</span> _frame.origin.y);
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -768,7 +768,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 {
     <span style="color: #008000; font-weight: bold">var</span> origin <span style="color: #666666">=</span> _frame.origin;
     
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aPoint <span style="color: #666666">||</span> _CGPointEqualToPoint(origin, aPoint))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aPoint <span style="color: #666666">||</span> <span style="color: #0000FF">_CGPointEqualToPoint</span>(origin, aPoint))
         <span style="color: #008000; font-weight: bold">return</span>;
 
     origin.x <span style="color: #666666">=</span> aPoint.x;
@@ -780,7 +780,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
     <span style="color: #008000; font-weight: bold">var</span> transform <span style="color: #666666">=</span> _superview <span style="color: #666666">?</span> _superview._boundsTransform <span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">NULL</span>;
 
-    CPDOMDisplayServerSetStyleLeftTop(_DOMElement, transform, origin.x, origin.y);<span style="color: #BC7A00"></span>
+    <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMElement, transform, origin.x, origin.y);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
 }
 
@@ -794,10 +794,10 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 {
     <span style="color: #008000; font-weight: bold">var</span> size <span style="color: #666666">=</span> _frame.size;
     
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aSize <span style="color: #666666">||</span> _CGSizeEqualToSize(size, aSize))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>aSize <span style="color: #666666">||</span> <span style="color: #0000FF">_CGSizeEqualToSize</span>(size, aSize))
         <span style="color: #008000; font-weight: bold">return</span>;
 
-    <span style="color: #008000; font-weight: bold">var</span> oldSize <span style="color: #666666">=</span> _CGSizeMakeCopy(size);
+    <span style="color: #008000; font-weight: bold">var</span> oldSize <span style="color: #666666">=</span> <span style="color: #0000FF">_CGSizeMakeCopy</span>(size);
 
     size.width <span style="color: #666666">=</span> aSize.width;
     size.height <span style="color: #666666">=</span> aSize.height;
@@ -818,12 +818,12 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     [<span style="color: #008000">self</span> setNeedsDisplay<span style="color: #666666">:</span><span style="color: #008000; font-weight: bold">YES</span>];<span style="color: #BC7A00"></span>
 
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
-    CPDOMDisplayServerSetStyleSize(_DOMElement, size.width, size.height);
+    <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMElement, size.width, size.height);
 
     <span style="color: #008000; font-weight: bold">if</span> (_DOMContentsElement)
     {
-        CPDOMDisplayServerSetSize(_DOMContentsElement, size.width, size.height);
-        CPDOMDisplayServerSetStyleSize(_DOMContentsElement, size.width, size.height);
+        <span style="color: #0000FF">CPDOMDisplayServerSetSize</span>(_DOMContentsElement, size.width, size.height);
+        <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMContentsElement, size.width, size.height);
     }
 
     <span style="color: #008000; font-weight: bold">if</span> (_backgroundType <span style="color: #666666">!==</span> BackgroundTrivialColor)
@@ -832,12 +832,12 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 
         <span style="color: #008000; font-weight: bold">if</span> (_backgroundType <span style="color: #666666">===</span> BackgroundVerticalThreePartImage)
         {
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">1</span>], size.width, size.height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">2</span>].height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">1</span>], size.width, size.height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">2</span>].height);
         }
 
         <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (_backgroundType <span style="color: #666666">===</span> BackgroundHorizontalThreePartImage)
         {
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">1</span>], size.width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">2</span>].width, size.height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">1</span>], size.width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">2</span>].width, size.height);
         }
 
         <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (_backgroundType <span style="color: #666666">===</span> BackgroundNinePartImage)
@@ -845,11 +845,11 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
             <span style="color: #008000; font-weight: bold">var</span> width <span style="color: #666666">=</span> size.width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">2</span>].width,
                 height <span style="color: #666666">=</span> size.height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">6</span>].height;
 
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">1</span>], width, _DOMImageSizes[<span style="color: #666666">0</span>].height);
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">3</span>], _DOMImageSizes[<span style="color: #666666">3</span>].width, height);
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">4</span>], width, height);
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">5</span>], _DOMImageSizes[<span style="color: #666666">5</span>].width, height);
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">7</span>], width, _DOMImageSizes[<span style="color: #666666">7</span>].height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">1</span>], width, _DOMImageSizes[<span style="color: #666666">0</span>].height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">3</span>], _DOMImageSizes[<span style="color: #666666">3</span>].width, height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">4</span>], width, height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">5</span>], _DOMImageSizes[<span style="color: #666666">5</span>].width, height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">7</span>], width, _DOMImageSizes[<span style="color: #666666">7</span>].height);
         }
     }<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
@@ -865,7 +865,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">setBounds:</span>(<span style="color: #B00040">CGRect</span>)bounds
 {
-    <span style="color: #008000; font-weight: bold">if</span> (_CGRectEqualToRect(_bounds, bounds))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">_CGRectEqualToRect</span>(_bounds, bounds))
         <span style="color: #008000; font-weight: bold">return</span>;
         
     _inhibitFrameAndBoundsChangedNotifications <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">YES</span>;
@@ -885,17 +885,17 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGRect</span>)<span style="color: #0000FF">bounds</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> _CGRectMakeCopy(_bounds);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">_CGRectMakeCopy</span>(_bounds);
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGPoint</span>)<span style="color: #0000FF">boundsOrigin</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> _CGPointMakeCopy(_bounds.origin);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">_CGPointMakeCopy</span>(_bounds.origin);
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGSize</span>)<span style="color: #0000FF">boundsSize</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> _CGSizeMakeCopy(_bounds.size);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">_CGSizeMakeCopy</span>(_bounds.size);
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -908,7 +908,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 {
     <span style="color: #008000; font-weight: bold">var</span> origin <span style="color: #666666">=</span> _bounds.origin;
     
-    <span style="color: #008000; font-weight: bold">if</span> (_CGPointEqualToPoint(origin, aPoint))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">_CGPointEqualToPoint</span>(origin, aPoint))
         <span style="color: #008000; font-weight: bold">return</span>;
         
     origin.x <span style="color: #666666">=</span> aPoint.x;
@@ -916,8 +916,8 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     
     <span style="color: #008000; font-weight: bold">if</span> (origin.x <span style="color: #666666">!=</span> <span style="color: #666666">0</span> <span style="color: #666666">||</span> origin.y <span style="color: #666666">!=</span> <span style="color: #666666">0</span>)
     {
-        _boundsTransform <span style="color: #666666">=</span> _CGAffineTransformMakeTranslation(<span style="color: #666666">-</span>origin.x, <span style="color: #666666">-</span>origin.y);
-        _inverseBoundsTransform <span style="color: #666666">=</span> CGAffineTransformInvert(_boundsTransform);
+        _boundsTransform <span style="color: #666666">=</span> <span style="color: #0000FF">_CGAffineTransformMakeTranslation</span>(<span style="color: #666666">-</span>origin.x, <span style="color: #666666">-</span>origin.y);
+        _inverseBoundsTransform <span style="color: #666666">=</span> <span style="color: #0000FF">CGAffineTransformInvert</span>(_boundsTransform);
     }
     <span style="color: #008000; font-weight: bold">else</span>
     {
@@ -933,7 +933,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         <span style="color: #008000; font-weight: bold">var</span> view <span style="color: #666666">=</span> _subviews[index],
             origin <span style="color: #666666">=</span> view._frame.origin;
         
-        CPDOMDisplayServerSetStyleLeftTop(view._DOMElement, _boundsTransform, origin.x, origin.y);
+        <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(view._DOMElement, _boundsTransform, origin.x, origin.y);
     }<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
     
@@ -951,12 +951,12 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 {
     <span style="color: #008000; font-weight: bold">var</span> size <span style="color: #666666">=</span> _bounds.size;
     
-    <span style="color: #008000; font-weight: bold">if</span> (_CGSizeEqualToSize(size, aSize))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">_CGSizeEqualToSize</span>(size, aSize))
         <span style="color: #008000; font-weight: bold">return</span>;
 
     <span style="color: #008000; font-weight: bold">var</span> frameSize <span style="color: #666666">=</span> _frame.size;
 
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>_CGSizeEqualToSize(size, frameSize))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span><span style="color: #0000FF">_CGSizeEqualToSize</span>(size, frameSize))
     {
         <span style="color: #008000; font-weight: bold">var</span> origin <span style="color: #666666">=</span> _bounds.origin;
         
@@ -967,7 +967,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     size.width <span style="color: #666666">=</span> aSize.width;
     size.height <span style="color: #666666">=</span> aSize.height;
     
-    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>_CGSizeEqualToSize(size, frameSize))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span><span style="color: #0000FF">_CGSizeEqualToSize</span>(size, frameSize))
     {
         <span style="color: #008000; font-weight: bold">var</span> origin <span style="color: #666666">=</span> _bounds.origin;
         
@@ -992,10 +992,10 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         <span style="color: #008000; font-weight: bold">return</span>;
 
     <span style="color: #008000; font-weight: bold">var</span> frame <span style="color: #666666">=</span> _superview._frame,
-        newFrame <span style="color: #666666">=</span> _CGRectMakeCopy(_frame),
-        dX <span style="color: #666666">=</span> (_CGRectGetWidth(frame) <span style="color: #666666">-</span> aSize.width) <span style="color: #666666">/</span>
+        newFrame <span style="color: #666666">=</span> <span style="color: #0000FF">_CGRectMakeCopy</span>(_frame),
+        dX <span style="color: #666666">=</span> (<span style="color: #0000FF">_CGRectGetWidth</span>(frame) <span style="color: #666666">-</span> aSize.width) <span style="color: #666666">/</span>
             (((mask <span style="color: #666666">&amp;</span> CPViewMinXMargin) <span style="color: #666666">?</span> <span style="color: #666666">1</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span>) <span style="color: #666666">+</span> (mask <span style="color: #666666">&amp;</span> CPViewWidthSizable <span style="color: #666666">?</span> <span style="color: #666666">1</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span>) <span style="color: #666666">+</span> (mask <span style="color: #666666">&amp;</span> CPViewMaxXMargin <span style="color: #666666">?</span> <span style="color: #666666">1</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span>)),
-        dY <span style="color: #666666">=</span> (_CGRectGetHeight(frame) <span style="color: #666666">-</span> aSize.height) <span style="color: #666666">/</span>
+        dY <span style="color: #666666">=</span> (<span style="color: #0000FF">_CGRectGetHeight</span>(frame) <span style="color: #666666">-</span> aSize.height) <span style="color: #666666">/</span>
             ((mask <span style="color: #666666">&amp;</span> CPViewMinYMargin <span style="color: #666666">?</span> <span style="color: #666666">1</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span>) <span style="color: #666666">+</span> (mask <span style="color: #666666">&amp;</span> CPViewHeightSizable <span style="color: #666666">?</span> <span style="color: #666666">1</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span>) <span style="color: #666666">+</span> (mask <span style="color: #666666">&amp;</span> CPViewMaxYMargin <span style="color: #666666">?</span> <span style="color: #666666">1</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span>));
 
     <span style="color: #008000; font-weight: bold">if</span> (mask <span style="color: #666666">&amp;</span> CPViewMinXMargin)
@@ -1078,7 +1078,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">enterFullScreenMode:</span>(<span style="color: #B00040">CPScreen</span>)aScreen <span style="color: #0000FF">withOptions:</span>(<span style="color: #B00040">CPDictionary</span>)options
 {
-    _fullScreenModeState <span style="color: #666666">=</span> _CPViewFullScreenModeStateMake(<span style="color: #008000">self</span>);
+    _fullScreenModeState <span style="color: #666666">=</span> <span style="color: #0000FF">_CPViewFullScreenModeStateMake</span>(<span style="color: #008000">self</span>);
     
     <span style="color: #008000; font-weight: bold">var</span> fullScreenWindow <span style="color: #666666">=</span> [[CPWindow alloc] initWithContentRect<span style="color: #666666">:</span>[[CPPlatformWindow primaryPlatformWindow] contentBounds] styleMask<span style="color: #666666">:</span>CPBorderlessWindowMask];
     
@@ -1091,7 +1091,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     [contentView addSubview<span style="color: #666666">:</span><span style="color: #008000">self</span>];
 
     [<span style="color: #008000">self</span> setAutoresizingMask<span style="color: #666666">:</span>CPViewWidthSizable <span style="color: #666666">|</span> CPViewHeightSizable];
-    [<span style="color: #008000">self</span> setFrame<span style="color: #666666">:</span>CGRectMakeCopy([contentView bounds])];
+    [<span style="color: #008000">self</span> setFrame<span style="color: #666666">:</span><span style="color: #0000FF">CGRectMakeCopy</span>([contentView bounds])];
 
     [fullScreenWindow makeKeyAndOrderFront<span style="color: #666666">:</span><span style="color: #008000">self</span>];
     
@@ -1195,10 +1195,10 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #BC7A00">    </span>
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
     
-    <span style="color: #008000; font-weight: bold">if</span> (CPFeatureIsCompatible(CPOpacityRequiresFilterFeature))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">CPFeatureIsCompatible</span>(CPOpacityRequiresFilterFeature))
     {
         <span style="color: #008000; font-weight: bold">if</span> (anAlphaValue <span style="color: #666666">==</span> <span style="color: #666666">1.0</span>)
-            <span style="color: #008000; font-weight: bold">try</span> { _DOMElement.style.removeAttribute(<span style="color: #BA2121">&quot;filter&quot;</span>) } <span style="color: #008000; font-weight: bold">catch</span> (anException) { }
+            <span style="color: #008000; font-weight: bold">try</span> { _DOMElement.style.<span style="color: #0000FF">removeAttribute</span>(<span style="color: #BA2121">&quot;filter&quot;</span>) } <span style="color: #008000; font-weight: bold">catch</span> (anException) { }
         <span style="color: #008000; font-weight: bold">else</span>
             _DOMElement.style.filter <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;alpha(opacity=&quot;</span> <span style="color: #666666">+</span> anAlphaValue <span style="color: #666666">*</span> <span style="color: #666666">100</span> <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;)&quot;</span>;
     }
@@ -1267,15 +1267,15 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPView</span>)<span style="color: #0000FF">hitTest:</span>(<span style="color: #B00040">CPPoint</span>)aPoint
 {
-    <span style="color: #008000; font-weight: bold">if</span>(_isHidden <span style="color: #666666">||</span> <span style="color: #666666">!</span>_hitTests <span style="color: #666666">||</span> <span style="color: #666666">!</span>CPRectContainsPoint(_frame, aPoint))
+    <span style="color: #008000; font-weight: bold">if</span>(_isHidden <span style="color: #666666">||</span> <span style="color: #666666">!</span>_hitTests <span style="color: #666666">||</span> <span style="color: #666666">!</span><span style="color: #0000FF">CPRectContainsPoint</span>(_frame, aPoint))
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">nil</span>;
     
     <span style="color: #008000; font-weight: bold">var</span> view <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">nil</span>,
         i <span style="color: #666666">=</span> _subviews.length,
-        adjustedPoint <span style="color: #666666">=</span> _CGPointMake(aPoint.x <span style="color: #666666">-</span> _CGRectGetMinX(_frame), aPoint.y <span style="color: #666666">-</span> _CGRectGetMinY(_frame));
+        adjustedPoint <span style="color: #666666">=</span> <span style="color: #0000FF">_CGPointMake</span>(aPoint.x <span style="color: #666666">-</span> <span style="color: #0000FF">_CGRectGetMinX</span>(_frame), aPoint.y <span style="color: #666666">-</span> <span style="color: #0000FF">_CGRectGetMinY</span>(_frame));
 
     <span style="color: #008000; font-weight: bold">if</span> (_inverseBoundsTransform)
-        adjustedPoint <span style="color: #666666">=</span> _CGPointApplyAffineTransform(adjustedPoint, _inverseBoundsTransform);
+        adjustedPoint <span style="color: #666666">=</span> <span style="color: #0000FF">_CGPointApplyAffineTransform</span>(adjustedPoint, _inverseBoundsTransform);
 
     <span style="color: #008000; font-weight: bold">while</span> (i<span style="color: #666666">--</span>)
         <span style="color: #008000; font-weight: bold">if</span> (view <span style="color: #666666">=</span> [_subviews[i] hitTest<span style="color: #666666">:</span>adjustedPoint])
@@ -1336,19 +1336,19 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     <span style="color: #008000; font-weight: bold">if</span> (amount <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>)
         <span style="color: #008000; font-weight: bold">while</span> (amount<span style="color: #666666">--</span>)
         {
-            <span style="color: #008000; font-weight: bold">var</span> DOMElement <span style="color: #666666">=</span> DOMElementPrototype.cloneNode(<span style="color: #008000; font-weight: bold">false</span>);
+            <span style="color: #008000; font-weight: bold">var</span> DOMElement <span style="color: #666666">=</span> DOMElementPrototype.<span style="color: #0000FF">cloneNode</span>(<span style="color: #008000; font-weight: bold">false</span>);
             
             DOMElement.style.zIndex <span style="color: #666666">=</span> <span style="color: #666666">-1000</span>;
             
-            _DOMImageParts.push(DOMElement);
-            _DOMElement.appendChild(DOMElement);
+            _DOMImageParts.<span style="color: #0000FF">push</span>(DOMElement);
+            _DOMElement.<span style="color: #0000FF">appendChild</span>(DOMElement);
         }
     <span style="color: #008000; font-weight: bold">else</span>
     {
         amount <span style="color: #666666">=</span> <span style="color: #666666">-</span>amount;
         
         <span style="color: #008000; font-weight: bold">while</span> (amount<span style="color: #666666">--</span>)
-            _DOMElement.removeChild(_DOMImageParts.pop());
+            _DOMElement.<span style="color: #0000FF">removeChild</span>(_DOMImageParts.<span style="color: #0000FF">pop</span>());
     }
     
     <span style="color: #008000; font-weight: bold">if</span> (_backgroundType <span style="color: #666666">==</span> BackgroundTrivialColor)
@@ -1366,9 +1366,9 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         <span style="color: #008000; font-weight: bold">while</span> (count<span style="color: #666666">--</span>)
         {
             <span style="color: #008000; font-weight: bold">var</span> image <span style="color: #666666">=</span> slices[count],
-                size <span style="color: #666666">=</span> _DOMImageSizes[count] <span style="color: #666666">=</span> image <span style="color: #666666">?</span> [image size] <span style="color: #666666">:</span> _CGSizeMakeZero();
+                size <span style="color: #666666">=</span> _DOMImageSizes[count] <span style="color: #666666">=</span> image <span style="color: #666666">?</span> [image size] <span style="color: #666666">:</span> <span style="color: #0000FF">_CGSizeMakeZero</span>();
             
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[count], size.width, size.height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[count], size.width, size.height);
 
             _DOMImageParts[count].style.background <span style="color: #666666">=</span> image <span style="color: #666666">?</span> <span style="color: #BA2121">&quot;url(</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">+</span> [image filename] <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;</span><span style="color: #BB6622; font-weight: bold">\&quot;</span><span style="color: #BA2121">)&quot;</span> <span style="color: #666666">:</span> <span style="color: #BA2121">&quot;&quot;</span>;
         }
@@ -1378,37 +1378,37 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
             <span style="color: #008000; font-weight: bold">var</span> width <span style="color: #666666">=</span> frameSize.width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">2</span>].width,
                 height <span style="color: #666666">=</span> frameSize.height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">6</span>].height;
             
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">1</span>], width, _DOMImageSizes[<span style="color: #666666">0</span>].height);
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">3</span>], _DOMImageSizes[<span style="color: #666666">3</span>].width, height);
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">4</span>], width, height);
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">5</span>], _DOMImageSizes[<span style="color: #666666">5</span>].width, height);
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">7</span>], width, _DOMImageSizes[<span style="color: #666666">7</span>].height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">1</span>], width, _DOMImageSizes[<span style="color: #666666">0</span>].height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">3</span>], _DOMImageSizes[<span style="color: #666666">3</span>].width, height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">4</span>], width, height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">5</span>], _DOMImageSizes[<span style="color: #666666">5</span>].width, height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">7</span>], width, _DOMImageSizes[<span style="color: #666666">7</span>].height);
                 
-            CPDOMDisplayServerSetStyleLeftTop(_DOMImageParts[<span style="color: #666666">0</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);            
-            CPDOMDisplayServerSetStyleLeftTop(_DOMImageParts[<span style="color: #666666">1</span>], <span style="color: #008000; font-weight: bold">NULL</span>, _DOMImageSizes[<span style="color: #666666">0</span>].width, <span style="color: #666666">0.0</span>);
-            CPDOMDisplayServerSetStyleRightTop(_DOMImageParts[<span style="color: #666666">2</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
-            CPDOMDisplayServerSetStyleLeftTop(_DOMImageParts[<span style="color: #666666">3</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, _DOMImageSizes[<span style="color: #666666">1</span>].height);
-            CPDOMDisplayServerSetStyleLeftTop(_DOMImageParts[<span style="color: #666666">4</span>], <span style="color: #008000; font-weight: bold">NULL</span>, _DOMImageSizes[<span style="color: #666666">0</span>].width, _DOMImageSizes[<span style="color: #666666">0</span>].height);
-            CPDOMDisplayServerSetStyleRightTop(_DOMImageParts[<span style="color: #666666">5</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, _DOMImageSizes[<span style="color: #666666">1</span>].height);
-            CPDOMDisplayServerSetStyleLeftBottom(_DOMImageParts[<span style="color: #666666">6</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
-            CPDOMDisplayServerSetStyleLeftBottom(_DOMImageParts[<span style="color: #666666">7</span>], <span style="color: #008000; font-weight: bold">NULL</span>, _DOMImageSizes[<span style="color: #666666">6</span>].width, <span style="color: #666666">0.0</span>);
-            CPDOMDisplayServerSetStyleRightBottom(_DOMImageParts[<span style="color: #666666">8</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);      
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMImageParts[<span style="color: #666666">0</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);            
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMImageParts[<span style="color: #666666">1</span>], <span style="color: #008000; font-weight: bold">NULL</span>, _DOMImageSizes[<span style="color: #666666">0</span>].width, <span style="color: #666666">0.0</span>);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleRightTop</span>(_DOMImageParts[<span style="color: #666666">2</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMImageParts[<span style="color: #666666">3</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, _DOMImageSizes[<span style="color: #666666">1</span>].height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMImageParts[<span style="color: #666666">4</span>], <span style="color: #008000; font-weight: bold">NULL</span>, _DOMImageSizes[<span style="color: #666666">0</span>].width, _DOMImageSizes[<span style="color: #666666">0</span>].height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleRightTop</span>(_DOMImageParts[<span style="color: #666666">5</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, _DOMImageSizes[<span style="color: #666666">1</span>].height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftBottom</span>(_DOMImageParts[<span style="color: #666666">6</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftBottom</span>(_DOMImageParts[<span style="color: #666666">7</span>], <span style="color: #008000; font-weight: bold">NULL</span>, _DOMImageSizes[<span style="color: #666666">6</span>].width, <span style="color: #666666">0.0</span>);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleRightBottom</span>(_DOMImageParts[<span style="color: #666666">8</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);      
         }
         <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (_backgroundType <span style="color: #666666">==</span> BackgroundVerticalThreePartImage)
         {    
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">1</span>], frameSize.width, frameSize.height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">2</span>].height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">1</span>], frameSize.width, frameSize.height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].height <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">2</span>].height);
             
-            CPDOMDisplayServerSetStyleLeftTop(_DOMImageParts[<span style="color: #666666">0</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
-            CPDOMDisplayServerSetStyleLeftTop(_DOMImageParts[<span style="color: #666666">1</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, _DOMImageSizes[<span style="color: #666666">0</span>].height);        
-            CPDOMDisplayServerSetStyleLeftBottom(_DOMImageParts[<span style="color: #666666">2</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMImageParts[<span style="color: #666666">0</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMImageParts[<span style="color: #666666">1</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, _DOMImageSizes[<span style="color: #666666">0</span>].height);        
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftBottom</span>(_DOMImageParts[<span style="color: #666666">2</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
         }
         <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (_backgroundType <span style="color: #666666">==</span> BackgroundHorizontalThreePartImage)
         {
-            CPDOMDisplayServerSetStyleSize(_DOMImageParts[<span style="color: #666666">1</span>], frameSize.width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">2</span>].width, frameSize.height);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMImageParts[<span style="color: #666666">1</span>], frameSize.width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">0</span>].width <span style="color: #666666">-</span> _DOMImageSizes[<span style="color: #666666">2</span>].width, frameSize.height);
         
-            CPDOMDisplayServerSetStyleLeftTop(_DOMImageParts[<span style="color: #666666">0</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
-            CPDOMDisplayServerSetStyleLeftTop(_DOMImageParts[<span style="color: #666666">1</span>], <span style="color: #008000; font-weight: bold">NULL</span>, _DOMImageSizes[<span style="color: #666666">0</span>].width, <span style="color: #666666">0.0</span>);        
-            CPDOMDisplayServerSetStyleRightTop(_DOMImageParts[<span style="color: #666666">2</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMImageParts[<span style="color: #666666">0</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMImageParts[<span style="color: #666666">1</span>], <span style="color: #008000; font-weight: bold">NULL</span>, _DOMImageSizes[<span style="color: #666666">0</span>].width, <span style="color: #666666">0.0</span>);        
+            <span style="color: #0000FF">CPDOMDisplayServerSetStyleRightTop</span>(_DOMImageParts[<span style="color: #666666">2</span>], <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>);
         }
     }<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
@@ -1431,7 +1431,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGPoint</span>)<span style="color: #0000FF">convertPoint:</span>(<span style="color: #B00040">CGPoint</span>)aPoint <span style="color: #0000FF">fromView:</span>(<span style="color: #B00040">CPView</span>)aView
 {
-    <span style="color: #008000; font-weight: bold">return</span> CGPointApplyAffineTransform(aPoint, _CPViewGetTransform(aView, <span style="color: #008000">self</span>));
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">CGPointApplyAffineTransform</span>(aPoint, <span style="color: #0000FF">_CPViewGetTransform</span>(aView, <span style="color: #008000">self</span>));
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1442,7 +1442,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGPoint</span>)<span style="color: #0000FF">convertPoint:</span>(<span style="color: #B00040">CGPoint</span>)aPoint <span style="color: #0000FF">toView:</span>(<span style="color: #B00040">CPView</span>)aView
 {
-    <span style="color: #008000; font-weight: bold">return</span> CGPointApplyAffineTransform(aPoint, _CPViewGetTransform(<span style="color: #008000">self</span>, aView));
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">CGPointApplyAffineTransform</span>(aPoint, <span style="color: #0000FF">_CPViewGetTransform</span>(<span style="color: #008000">self</span>, aView));
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1453,7 +1453,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGSize</span>)<span style="color: #0000FF">convertSize:</span>(<span style="color: #B00040">CGSize</span>)aSize <span style="color: #0000FF">fromView:</span>(<span style="color: #B00040">CPView</span>)aView
 {
-    <span style="color: #008000; font-weight: bold">return</span> CGSizeApplyAffineTransform(aSize, _CPViewGetTransform(aView, <span style="color: #008000">self</span>));
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">CGSizeApplyAffineTransform</span>(aSize, <span style="color: #0000FF">_CPViewGetTransform</span>(aView, <span style="color: #008000">self</span>));
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1464,7 +1464,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGSize</span>)<span style="color: #0000FF">convertSize:</span>(<span style="color: #B00040">CGSize</span>)aSize <span style="color: #0000FF">toView:</span>(<span style="color: #B00040">CPView</span>)aView
 {
-    <span style="color: #008000; font-weight: bold">return</span> CGSizeApplyAffineTransform(aSize, _CPViewGetTransform(<span style="color: #008000">self</span>, aView));
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">CGSizeApplyAffineTransform</span>(aSize, <span style="color: #0000FF">_CPViewGetTransform</span>(<span style="color: #008000">self</span>, aView));
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1475,7 +1475,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGRect</span>)<span style="color: #0000FF">convertRect:</span>(<span style="color: #B00040">CGRect</span>)aRect <span style="color: #0000FF">fromView:</span>(<span style="color: #B00040">CPView</span>)aView
 {
-    <span style="color: #008000; font-weight: bold">return</span> CGRectApplyAffineTransform(aRect, _CPViewGetTransform(aView, <span style="color: #008000">self</span>));
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">CGRectApplyAffineTransform</span>(aRect, <span style="color: #0000FF">_CPViewGetTransform</span>(aView, <span style="color: #008000">self</span>));
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1486,7 +1486,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGRect</span>)<span style="color: #0000FF">convertRect:</span>(<span style="color: #B00040">CGRect</span>)aRect <span style="color: #0000FF">toView:</span>(<span style="color: #B00040">CPView</span>)aView
 {
-    <span style="color: #008000; font-weight: bold">return</span> CGRectApplyAffineTransform(aRect, _CPViewGetTransform(<span style="color: #008000">self</span>, aView));
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">CGRectApplyAffineTransform</span>(aRect, <span style="color: #0000FF">_CPViewGetTransform</span>(<span style="color: #008000">self</span>, aView));
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1657,20 +1657,20 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>(_viewClassFlags <span style="color: #666666">&amp;</span> CPViewHasCustomDrawRect))
         <span style="color: #008000; font-weight: bold">return</span>;
 
-    <span style="color: #008000; font-weight: bold">if</span> (_CGRectIsEmpty(aRect))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">_CGRectIsEmpty</span>(aRect))
         <span style="color: #008000; font-weight: bold">return</span>;
 
-    <span style="color: #008000; font-weight: bold">if</span> (_dirtyRect <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>_CGRectIsEmpty(_dirtyRect))
-        _dirtyRect <span style="color: #666666">=</span> CGRectUnion(aRect, _dirtyRect);
+    <span style="color: #008000; font-weight: bold">if</span> (_dirtyRect <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span><span style="color: #0000FF">_CGRectIsEmpty</span>(_dirtyRect))
+        _dirtyRect <span style="color: #666666">=</span> <span style="color: #0000FF">CGRectUnion</span>(aRect, _dirtyRect);
     <span style="color: #008000; font-weight: bold">else</span>
-        _dirtyRect <span style="color: #666666">=</span> _CGRectMakeCopy(aRect);
+        _dirtyRect <span style="color: #666666">=</span> <span style="color: #0000FF">_CGRectMakeCopy</span>(aRect);
 
-    _CPDisplayServerAddDisplayObject(<span style="color: #008000">self</span>);
+    <span style="color: #0000FF">_CPDisplayServerAddDisplayObject</span>(<span style="color: #008000">self</span>);
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">needsDisplay</span>
 {
-    <span style="color: #008000; font-weight: bold">return</span> _dirtyRect <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>_CGRectIsEmpty(_dirtyRect);
+    <span style="color: #008000; font-weight: bold">return</span> _dirtyRect <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span><span style="color: #0000FF">_CGRectIsEmpty</span>(_dirtyRect);
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1713,7 +1713,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 {
     [<span style="color: #008000">self</span> lockFocus];
     
-    CGContextClearRect([[CPGraphicsContext currentContext] graphicsPort], aRect);
+    <span style="color: #0000FF">CGContextClearRect</span>([[CPGraphicsContext currentContext] graphicsPort], aRect);
     
     [<span style="color: #008000">self</span> drawRect<span style="color: #666666">:</span>aRect];
     [<span style="color: #008000">self</span> unlockFocus];
@@ -1730,7 +1730,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 {
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>_graphicsContext)
     {
-        <span style="color: #008000; font-weight: bold">var</span> graphicsPort <span style="color: #666666">=</span> CGBitmapGraphicsContextCreate();
+        <span style="color: #008000; font-weight: bold">var</span> graphicsPort <span style="color: #666666">=</span> <span style="color: #0000FF">CGBitmapGraphicsContextCreate</span>();
         
         _DOMContentsElement <span style="color: #666666">=</span> graphicsPort.DOMElement;
         
@@ -1740,22 +1740,22 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         _DOMContentsElement.style.position <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;absolute&quot;</span>;
         _DOMContentsElement.style.visibility <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;visible&quot;</span>;
         
-        _DOMContentsElement.width <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">ROUND</span>(_CGRectGetWidth(_frame));
-        _DOMContentsElement.height <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">ROUND</span>(_CGRectGetHeight(_frame));
+        _DOMContentsElement.width <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">ROUND</span>(<span style="color: #0000FF">_CGRectGetWidth</span>(_frame));
+        _DOMContentsElement.height <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">ROUND</span>(<span style="color: #0000FF">_CGRectGetHeight</span>(_frame));
         
         _DOMContentsElement.style.top <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;0px&quot;</span>;
         _DOMContentsElement.style.left <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;0px&quot;</span>;
-        _DOMContentsElement.style.width <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">ROUND</span>(_CGRectGetWidth(_frame)) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;px&quot;</span>;
-        _DOMContentsElement.style.height <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">ROUND</span>(_CGRectGetHeight(_frame)) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;px&quot;</span>;
+        _DOMContentsElement.style.width <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">ROUND</span>(<span style="color: #0000FF">_CGRectGetWidth</span>(_frame)) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;px&quot;</span>;
+        _DOMContentsElement.style.height <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">ROUND</span>(<span style="color: #0000FF">_CGRectGetHeight</span>(_frame)) <span style="color: #666666">+</span> <span style="color: #BA2121">&quot;px&quot;</span>;
 
-        CPDOMDisplayServerAppendChild(_DOMElement, _DOMContentsElement);
+        <span style="color: #0000FF">CPDOMDisplayServerAppendChild</span>(_DOMElement, _DOMContentsElement);
         
         _graphicsContext <span style="color: #666666">=</span> [CPGraphicsContext graphicsContextWithGraphicsPort<span style="color: #666666">:</span>graphicsPort flipped<span style="color: #666666">:</span><span style="color: #008000; font-weight: bold">YES</span>];
     }
     
     [CPGraphicsContext setCurrentContext<span style="color: #666666">:</span>_graphicsContext];
     
-    CGContextSaveGState([_graphicsContext graphicsPort]);
+    <span style="color: #0000FF">CGContextSaveGState</span>([_graphicsContext graphicsPort]);
 }
 
 <span style="color: #408080; font-style: italic">/*!</span>
@@ -1763,7 +1763,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 <span style="color: #408080; font-style: italic">*/</span>
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">unlockFocus</span>
 {
-    CGContextRestoreGState([_graphicsContext graphicsPort]);
+    <span style="color: #0000FF">CGContextRestoreGState</span>([_graphicsContext graphicsPort]);
     
     [CPGraphicsContext setCurrentContext<span style="color: #666666">:</span><span style="color: #008000; font-weight: bold">nil</span>];
 }
@@ -1775,7 +1775,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 
     _needsLayout <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">YES</span>;
 
-    _CPDisplayServerAddLayoutObject(<span style="color: #008000">self</span>);
+    <span style="color: #0000FF">_CPDisplayServerAddLayoutObject</span>(<span style="color: #008000">self</span>);
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">void</span>)<span style="color: #0000FF">layoutIfNeeded</span>
@@ -1808,7 +1808,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>_superview)
         <span style="color: #008000; font-weight: bold">return</span> _bounds;
     
-    <span style="color: #008000; font-weight: bold">return</span> CGRectIntersection([<span style="color: #008000">self</span> convertRect<span style="color: #666666">:</span>[_superview visibleRect] fromView<span style="color: #666666">:</span>_superview], _bounds);
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">CGRectIntersection</span>([<span style="color: #008000">self</span> convertRect<span style="color: #666666">:</span>[_superview visibleRect] fromView<span style="color: #666666">:</span>_superview], _bounds);
 }
 
 <span style="color: #408080; font-style: italic">// Scrolling</span>
@@ -1848,10 +1848,10 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     <span style="color: #008000; font-weight: bold">var</span> visibleRect <span style="color: #666666">=</span> [<span style="color: #008000">self</span> visibleRect];
     
     <span style="color: #408080; font-style: italic">// Make sure we have a rect that exists.</span>
-    aRect <span style="color: #666666">=</span> CGRectIntersection(aRect, _bounds);
+    aRect <span style="color: #666666">=</span> <span style="color: #0000FF">CGRectIntersection</span>(aRect, _bounds);
     
     <span style="color: #408080; font-style: italic">// If aRect is empty or is already visible then no scrolling required.</span>
-    <span style="color: #008000; font-weight: bold">if</span> (_CGRectIsEmpty(aRect) <span style="color: #666666">||</span> CGRectContainsRect(visibleRect, aRect))
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">_CGRectIsEmpty</span>(aRect) <span style="color: #666666">||</span> <span style="color: #0000FF">CGRectContainsRect</span>(visibleRect, aRect))
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">NO</span>;
 
     <span style="color: #008000; font-weight: bold">var</span> enclosingClipView <span style="color: #666666">=</span> [<span style="color: #008000">self</span> _enclosingClipView];
@@ -1860,20 +1860,20 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>enclosingClipView)
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">NO</span>;
     
-    <span style="color: #008000; font-weight: bold">var</span> scrollPoint <span style="color: #666666">=</span> _CGPointMakeCopy(visibleRect.origin);
+    <span style="color: #008000; font-weight: bold">var</span> scrollPoint <span style="color: #666666">=</span> <span style="color: #0000FF">_CGPointMakeCopy</span>(visibleRect.origin);
             
     <span style="color: #408080; font-style: italic">// One of the following has to be true since our current visible rect didn&#39;t contain aRect.</span>
-    <span style="color: #008000; font-weight: bold">if</span> (_CGRectGetMinX(aRect) <span style="color: #666666">&lt;=</span> _CGRectGetMinX(visibleRect))
-        scrollPoint.x <span style="color: #666666">=</span> _CGRectGetMinX(aRect);
-    <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (_CGRectGetMaxX(aRect) <span style="color: #666666">&gt;</span> _CGRectGetMaxX(visibleRect))
-        scrollPoint.x <span style="color: #666666">+=</span> _CGRectGetMaxX(aRect) <span style="color: #666666">-</span> _CGRectGetMaxX(visibleRect);
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">_CGRectGetMinX</span>(aRect) <span style="color: #666666">&lt;=</span> <span style="color: #0000FF">_CGRectGetMinX</span>(visibleRect))
+        scrollPoint.x <span style="color: #666666">=</span> <span style="color: #0000FF">_CGRectGetMinX</span>(aRect);
+    <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">_CGRectGetMaxX</span>(aRect) <span style="color: #666666">&gt;</span> <span style="color: #0000FF">_CGRectGetMaxX</span>(visibleRect))
+        scrollPoint.x <span style="color: #666666">+=</span> <span style="color: #0000FF">_CGRectGetMaxX</span>(aRect) <span style="color: #666666">-</span> <span style="color: #0000FF">_CGRectGetMaxX</span>(visibleRect);
     
-    <span style="color: #008000; font-weight: bold">if</span> (_CGRectGetMinY(aRect) <span style="color: #666666">&lt;=</span> _CGRectGetMinY(visibleRect))
-        scrollPoint.y <span style="color: #666666">=</span> CGRectGetMinY(aRect);
-    <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (_CGRectGetMaxY(aRect) <span style="color: #666666">&gt;</span> _CGRectGetMaxY(visibleRect))
-        scrollPoint.y <span style="color: #666666">+=</span> _CGRectGetMaxY(aRect) <span style="color: #666666">-</span> _CGRectGetMaxY(visibleRect);
+    <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">_CGRectGetMinY</span>(aRect) <span style="color: #666666">&lt;=</span> <span style="color: #0000FF">_CGRectGetMinY</span>(visibleRect))
+        scrollPoint.y <span style="color: #666666">=</span> <span style="color: #0000FF">CGRectGetMinY</span>(aRect);
+    <span style="color: #008000; font-weight: bold">else</span> <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #0000FF">_CGRectGetMaxY</span>(aRect) <span style="color: #666666">&gt;</span> <span style="color: #0000FF">_CGRectGetMaxY</span>(visibleRect))
+        scrollPoint.y <span style="color: #666666">+=</span> <span style="color: #0000FF">_CGRectGetMaxY</span>(aRect) <span style="color: #666666">-</span> <span style="color: #0000FF">_CGRectGetMaxY</span>(visibleRect);
     
-    [enclosingClipView scrollToPoint<span style="color: #666666">:</span>CGPointMake(scrollPoint.x, scrollPoint.y)];
+    [enclosingClipView scrollToPoint<span style="color: #666666">:</span><span style="color: #0000FF">CGPointMake</span>(scrollPoint.x, scrollPoint.y)];
     
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">YES</span>;
 }
@@ -2017,7 +2017,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     {
         _layer._owningView <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">nil</span>;<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
-        _DOMElement.removeChild(_layer._DOMElement);<span style="color: #BC7A00"></span>
+        _DOMElement.<span style="color: #0000FF">removeChild</span>(_layer._DOMElement);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
     }
     
@@ -2025,14 +2025,14 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     
     <span style="color: #008000; font-weight: bold">if</span> (_layer)
     {
-        <span style="color: #008000; font-weight: bold">var</span> bounds <span style="color: #666666">=</span> CGRectMakeCopy([<span style="color: #008000">self</span> bounds]);
+        <span style="color: #008000; font-weight: bold">var</span> bounds <span style="color: #666666">=</span> <span style="color: #0000FF">CGRectMakeCopy</span>([<span style="color: #008000">self</span> bounds]);
         
         [_layer _setOwningView<span style="color: #666666">:</span><span style="color: #008000">self</span>];<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">        </span>
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
         _layer._DOMElement.style.zIndex <span style="color: #666666">=</span> <span style="color: #666666">100</span>;
         
-        _DOMElement.appendChild(_layer._DOMElement);<span style="color: #BC7A00"></span>
+        _DOMElement.<span style="color: #0000FF">appendChild</span>(_layer._DOMElement);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
     }
 }
@@ -2075,12 +2075,12 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">hasThemeState:</span>(<span style="color: #B00040">CPThemeState</span>)aState
 {
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">!!</span>(_themeState <span style="color: #666666">&amp;</span> ((<span style="color: #008000; font-weight: bold">typeof</span> aState <span style="color: #666666">===</span> <span style="color: #BA2121">&quot;string&quot;</span>) <span style="color: #666666">?</span> CPThemeState(aState) <span style="color: #666666">:</span> aState));
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">!!</span>(_themeState <span style="color: #666666">&amp;</span> ((<span style="color: #008000; font-weight: bold">typeof</span> aState <span style="color: #666666">===</span> <span style="color: #BA2121">&quot;string&quot;</span>) <span style="color: #666666">?</span> <span style="color: #0000FF">CPThemeState</span>(aState) <span style="color: #666666">:</span> aState));
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">setThemeState:</span>(<span style="color: #B00040">CPThemeState</span>)aState
 {
-    <span style="color: #008000; font-weight: bold">var</span> newState <span style="color: #666666">=</span> (<span style="color: #008000; font-weight: bold">typeof</span> aState <span style="color: #666666">===</span> <span style="color: #BA2121">&quot;string&quot;</span>) <span style="color: #666666">?</span> CPThemeState(aState) <span style="color: #666666">:</span> aState;
+    <span style="color: #008000; font-weight: bold">var</span> newState <span style="color: #666666">=</span> (<span style="color: #008000; font-weight: bold">typeof</span> aState <span style="color: #666666">===</span> <span style="color: #BA2121">&quot;string&quot;</span>) <span style="color: #666666">?</span> <span style="color: #0000FF">CPThemeState</span>(aState) <span style="color: #666666">:</span> aState;
 
     <span style="color: #008000; font-weight: bold">if</span> (_themeState <span style="color: #666666">&amp;</span> newState)
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">NO</span>;
@@ -2095,7 +2095,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">BOOL</span>)<span style="color: #0000FF">unsetThemeState:</span>(<span style="color: #B00040">CPThemeState</span>)aState
 {
-    <span style="color: #008000; font-weight: bold">var</span> newState <span style="color: #666666">=</span> ((<span style="color: #008000; font-weight: bold">typeof</span> aState <span style="color: #666666">===</span> <span style="color: #BA2121">&quot;string&quot;</span>) <span style="color: #666666">?</span> CPThemeState(aState) <span style="color: #666666">:</span> aState);
+    <span style="color: #008000; font-weight: bold">var</span> newState <span style="color: #666666">=</span> ((<span style="color: #008000; font-weight: bold">typeof</span> aState <span style="color: #666666">===</span> <span style="color: #BA2121">&quot;string&quot;</span>) <span style="color: #666666">?</span> <span style="color: #0000FF">CPThemeState</span>(aState) <span style="color: #666666">:</span> aState);
 
     <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>(_themeState <span style="color: #666666">&amp;</span> newState))
         <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">NO</span>;
@@ -2131,11 +2131,11 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 
     <span style="color: #008000; font-weight: bold">for</span> (; theClass <span style="color: #666666">&amp;&amp;</span> theClass <span style="color: #666666">!==</span> CPViewClass; theClass <span style="color: #666666">=</span> [theClass superclass])
     {
-        <span style="color: #008000; font-weight: bold">var</span> cachedAttributes <span style="color: #666666">=</span> CachedThemeAttributes[class_getName(theClass)];
+        <span style="color: #008000; font-weight: bold">var</span> cachedAttributes <span style="color: #666666">=</span> CachedThemeAttributes[<span style="color: #0000FF">class_getName</span>(theClass)];
 
         <span style="color: #008000; font-weight: bold">if</span> (cachedAttributes)
         {
-            attributes <span style="color: #666666">=</span> attributes.length <span style="color: #666666">?</span> attributes.concat(cachedAttributes) <span style="color: #666666">:</span> attributes;
+            attributes <span style="color: #666666">=</span> attributes.length <span style="color: #666666">?</span> attributes.<span style="color: #0000FF">concat</span>(cachedAttributes) <span style="color: #666666">:</span> attributes;
             CachedThemeAttributes[[<span style="color: #008000">self</span> className]] <span style="color: #666666">=</span> attributes;
 
             <span style="color: #008000; font-weight: bold">break</span>;
@@ -2153,8 +2153,8 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         {
             <span style="color: #008000; font-weight: bold">var</span> attributeName <span style="color: #666666">=</span> attributeKeys[attributeCount];
 
-            attributes.push([attributeDictionary objectForKey<span style="color: #666666">:</span>attributeName]);
-            attributes.push(attributeName);
+            attributes.<span style="color: #0000FF">push</span>([attributeDictionary objectForKey<span style="color: #666666">:</span>attributeName]);
+            attributes.<span style="color: #0000FF">push</span>(attributeName);
         }
     }
 
@@ -2210,7 +2210,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         themeClass <span style="color: #666666">=</span> [[<span style="color: #008000">self</span> class] themeClass];
 
     <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #008000; font-weight: bold">var</span> attributeName <span style="color: #008000; font-weight: bold">in</span> _themeAttributes)
-        <span style="color: #008000; font-weight: bold">if</span> (_themeAttributes.hasOwnProperty(attributeName))
+        <span style="color: #008000; font-weight: bold">if</span> (_themeAttributes.<span style="color: #0000FF">hasOwnProperty</span>(attributeName))
             [_themeAttributes[attributeName] setParentAttribute<span style="color: #666666">:</span>[theme _attributeWithName<span style="color: #666666">:</span>attributeName forClass<span style="color: #666666">:</span>themeClass]];
 
     [<span style="color: #008000">self</span> setNeedsLayout];
@@ -2226,7 +2226,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         <span style="color: #008000; font-weight: bold">var</span> theme <span style="color: #666666">=</span> [<span style="color: #008000">self</span> theme];
 
         <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #008000; font-weight: bold">var</span> attributeName <span style="color: #008000; font-weight: bold">in</span> _themeAttributes)
-            <span style="color: #008000; font-weight: bold">if</span> (_themeAttributes.hasOwnProperty(attributeName))
+            <span style="color: #008000; font-weight: bold">if</span> (_themeAttributes.<span style="color: #0000FF">hasOwnProperty</span>(attributeName))
                 [dictionary setObject<span style="color: #666666">:</span>_themeAttributes[attributeName] forKey<span style="color: #666666">:</span>attributeName];
     }
 
@@ -2296,7 +2296,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CGRect</span>)<span style="color: #0000FF">rectForEphemeralSubviewNamed:</span>(<span style="color: #B00040">CPString</span>)aViewName
 {
-    <span style="color: #008000; font-weight: bold">return</span> _CGRectMakeZero();
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #0000FF">_CGRectMakeZero</span>();
 }
 
 <span style="color: #666666">-</span> (<span style="color: #B00040">CPView</span>)<span style="color: #0000FF">layoutEphemeralSubviewNamed:</span>(<span style="color: #B00040">CPString</span>)aViewName 
@@ -2311,7 +2311,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 
     <span style="color: #008000; font-weight: bold">var</span> frame <span style="color: #666666">=</span> [<span style="color: #008000">self</span> rectForEphemeralSubviewNamed<span style="color: #666666">:</span>aViewName];
 
-    <span style="color: #008000; font-weight: bold">if</span> (frame <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>_CGRectIsEmpty(frame))
+    <span style="color: #008000; font-weight: bold">if</span> (frame <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span><span style="color: #0000FF">_CGRectIsEmpty</span>(frame))
     {
         <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #666666">!</span>_ephemeralSubviewsForNames[aViewName])
         {
@@ -2369,7 +2369,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     <span style="color: #408080; font-style: italic">// we have to have an element to place in the tree.  Perhaps there is </span>
     <span style="color: #408080; font-style: italic">// a more &quot;elegant&quot; way to do this...?</span>
 <span style="color: #BC7A00">#if PLATFORM(DOM)</span>
-    _DOMElement <span style="color: #666666">=</span> DOMElementPrototype.cloneNode(<span style="color: #008000; font-weight: bold">false</span>);<span style="color: #BC7A00"></span>
+    _DOMElement <span style="color: #666666">=</span> DOMElementPrototype.<span style="color: #0000FF">cloneNode</span>(<span style="color: #008000; font-weight: bold">false</span>);<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
 
     <span style="color: #408080; font-style: italic">// Also decode these &quot;early&quot;.</span>
@@ -2401,15 +2401,15 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         _DOMImageParts <span style="color: #666666">=</span> [];
         _DOMImageSizes <span style="color: #666666">=</span> [];
 
-        CPDOMDisplayServerSetStyleLeftTop(_DOMElement, <span style="color: #008000; font-weight: bold">NULL</span>, _CGRectGetMinX(_frame), _CGRectGetMinY(_frame));
-        CPDOMDisplayServerSetStyleSize(_DOMElement, _CGRectGetWidth(_frame), _CGRectGetHeight(_frame));
+        <span style="color: #0000FF">CPDOMDisplayServerSetStyleLeftTop</span>(_DOMElement, <span style="color: #008000; font-weight: bold">NULL</span>, <span style="color: #0000FF">_CGRectGetMinX</span>(_frame), <span style="color: #0000FF">_CGRectGetMinY</span>(_frame));
+        <span style="color: #0000FF">CPDOMDisplayServerSetStyleSize</span>(_DOMElement, <span style="color: #0000FF">_CGRectGetWidth</span>(_frame), <span style="color: #0000FF">_CGRectGetHeight</span>(_frame));
         
         <span style="color: #008000; font-weight: bold">var</span> index <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
             count <span style="color: #666666">=</span> _subviews.length;
     
         <span style="color: #008000; font-weight: bold">for</span> (; index <span style="color: #666666">&lt;</span> count; <span style="color: #666666">++</span>index)
         {
-            CPDOMDisplayServerAppendChild(_DOMElement, _subviews[index]._DOMElement);
+            <span style="color: #0000FF">CPDOMDisplayServerAppendChild</span>(_DOMElement, _subviews[index]._DOMElement);
             <span style="color: #408080; font-style: italic">//_subviews[index]._superview = self;</span>
         }<span style="color: #BC7A00"></span>
 <span style="color: #BC7A00">#endif</span>
@@ -2429,7 +2429,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         [<span style="color: #008000">self</span> setupViewFlags];
 
         _theme <span style="color: #666666">=</span> [CPTheme defaultTheme];
-        _themeState <span style="color: #666666">=</span> CPThemeState([aCoder decodeIntForKey<span style="color: #666666">:</span>CPViewThemeStateKey]);
+        _themeState <span style="color: #666666">=</span> <span style="color: #0000FF">CPThemeState</span>([aCoder decodeIntForKey<span style="color: #666666">:</span>CPViewThemeStateKey]);
         _themeAttributes <span style="color: #666666">=</span> {};
 
         <span style="color: #008000; font-weight: bold">var</span> theClass <span style="color: #666666">=</span> [<span style="color: #008000">self</span> class],
@@ -2441,7 +2441,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         {
             <span style="color: #008000; font-weight: bold">var</span> attributeName <span style="color: #666666">=</span> attributes[count<span style="color: #666666">--</span>];
 
-            _themeAttributes[attributeName] <span style="color: #666666">=</span> CPThemeAttributeDecode(aCoder, attributeName, attributes[count], _theme, themeClass);
+            _themeAttributes[attributeName] <span style="color: #666666">=</span> <span style="color: #0000FF">CPThemeAttributeDecode</span>(aCoder, attributeName, attributes[count], _theme, themeClass);
         }
 
         [<span style="color: #008000">self</span> setNeedsDisplay<span style="color: #666666">:</span><span style="color: #008000; font-weight: bold">YES</span>];
@@ -2478,7 +2478,7 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 
         <span style="color: #008000; font-weight: bold">while</span> (count<span style="color: #666666">--</span>)
             <span style="color: #008000; font-weight: bold">if</span> ([_ephemeralSubviews containsObject<span style="color: #666666">:</span>encodedSubviews[count]])
-                encodedSubviews.splice(count, <span style="color: #666666">1</span>);
+                encodedSubviews.<span style="color: #0000FF">splice</span>(count, <span style="color: #666666">1</span>);
     }
 
     <span style="color: #008000; font-weight: bold">if</span> (encodedSubviews.length <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>)
@@ -2516,11 +2516,11 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     <span style="color: #008000; font-weight: bold">if</span> (previousKeyView <span style="color: #666666">!==</span> <span style="color: #008000; font-weight: bold">nil</span>)
         [aCoder encodeConditionalObject<span style="color: #666666">:</span>previousKeyView forKey<span style="color: #666666">:</span>CPViewPreviousKeyViewKey];
 
-    [aCoder encodeInt<span style="color: #666666">:</span>CPThemeStateName(_themeState) forKey<span style="color: #666666">:</span>CPViewThemeStateKey];
+    [aCoder encodeInt<span style="color: #666666">:</span><span style="color: #0000FF">CPThemeStateName</span>(_themeState) forKey<span style="color: #666666">:</span>CPViewThemeStateKey];
 
     <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #008000; font-weight: bold">var</span> attributeName <span style="color: #008000; font-weight: bold">in</span> _themeAttributes)
-        <span style="color: #008000; font-weight: bold">if</span> (_themeAttributes.hasOwnProperty(attributeName))
-            CPThemeAttributeEncode(aCoder, _themeAttributes[attributeName]);
+        <span style="color: #008000; font-weight: bold">if</span> (_themeAttributes.<span style="color: #0000FF">hasOwnProperty</span>(attributeName))
+            <span style="color: #0000FF">CPThemeAttributeEncode</span>(aCoder, _themeAttributes[attributeName]);
 }
 
 <span style="color: #008000; font-weight: bold">@end</span>
@@ -2529,12 +2529,12 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
 {
     <span style="color: #008000; font-weight: bold">var</span> superview <span style="color: #666666">=</span> aView._superview;
     
-    <span style="color: #008000; font-weight: bold">return</span> { autoresizingMask<span style="color: #666666">:</span>aView._autoresizingMask, frame<span style="color: #666666">:</span>CGRectMakeCopy(aView._frame), index<span style="color: #666666">:</span>(superview <span style="color: #666666">?</span> [superview._subviews indexOfObjectIdenticalTo<span style="color: #666666">:</span>aView] <span style="color: #666666">:</span> <span style="color: #666666">0</span>), superview<span style="color: #666666">:</span>superview };
+    <span style="color: #008000; font-weight: bold">return</span> { autoresizingMask<span style="color: #666666">:</span>aView._autoresizingMask, frame<span style="color: #666666">:</span><span style="color: #0000FF">CGRectMakeCopy</span>(aView._frame), index<span style="color: #666666">:</span>(superview <span style="color: #666666">?</span> [superview._subviews indexOfObjectIdenticalTo<span style="color: #666666">:</span>aView] <span style="color: #666666">:</span> <span style="color: #666666">0</span>), superview<span style="color: #666666">:</span>superview };
 }
 
 <span style="color: #008000; font-weight: bold">var</span> _CPViewGetTransform <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span>(<span style="color: #408080; font-style: italic">/*CPView*/</span> fromView, <span style="color: #408080; font-style: italic">/*CPView */</span> toView)
 {
-    <span style="color: #008000; font-weight: bold">var</span> transform <span style="color: #666666">=</span> CGAffineTransformMakeIdentity(),
+    <span style="color: #008000; font-weight: bold">var</span> transform <span style="color: #666666">=</span> <span style="color: #0000FF">CGAffineTransformMakeIdentity</span>(),
         sameWindow <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">YES</span>,
         fromWindow <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">nil</span>,
         toWindow <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">nil</span>;
@@ -2550,12 +2550,12 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
         {
             <span style="color: #008000; font-weight: bold">var</span> frame <span style="color: #666666">=</span> view._frame;
             
-            transform.tx <span style="color: #666666">+=</span> _CGRectGetMinX(frame);
-            transform.ty <span style="color: #666666">+=</span> _CGRectGetMinY(frame);
+            transform.tx <span style="color: #666666">+=</span> <span style="color: #0000FF">_CGRectGetMinX</span>(frame);
+            transform.ty <span style="color: #666666">+=</span> <span style="color: #0000FF">_CGRectGetMinY</span>(frame);
             
             <span style="color: #008000; font-weight: bold">if</span> (view._boundsTransform)
             {
-                _CGAffineTransformConcatTo(transform, view._boundsTransform, transform);
+                <span style="color: #0000FF">_CGAffineTransformConcatTo</span>(transform, view._boundsTransform, transform);
             }
             
             view <span style="color: #666666">=</span> view._superview;
@@ -2576,8 +2576,8 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
                 
                 <span style="color: #008000; font-weight: bold">var</span> frame <span style="color: #666666">=</span> [fromWindow frame];
                 
-                transform.tx <span style="color: #666666">+=</span> _CGRectGetMinX(frame);
-                transform.ty <span style="color: #666666">+=</span> _CGRectGetMinY(frame);
+                transform.tx <span style="color: #666666">+=</span> <span style="color: #0000FF">_CGRectGetMinX</span>(frame);
+                transform.ty <span style="color: #666666">+=</span> <span style="color: #0000FF">_CGRectGetMinY</span>(frame);
             }
         }
     }
@@ -2589,12 +2589,12 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     {
         <span style="color: #008000; font-weight: bold">var</span> frame <span style="color: #666666">=</span> view._frame;
             
-        transform.tx <span style="color: #666666">-=</span> _CGRectGetMinX(frame);
-        transform.ty <span style="color: #666666">-=</span> _CGRectGetMinY(frame);
+        transform.tx <span style="color: #666666">-=</span> <span style="color: #0000FF">_CGRectGetMinX</span>(frame);
+        transform.ty <span style="color: #666666">-=</span> <span style="color: #0000FF">_CGRectGetMinY</span>(frame);
         
         <span style="color: #008000; font-weight: bold">if</span> (view._boundsTransform)
         {
-            _CGAffineTransformConcatTo(transform, view._inverseBoundsTransform, transform);
+            <span style="color: #0000FF">_CGAffineTransformConcatTo</span>(transform, view._inverseBoundsTransform, transform);
         }
         
         view <span style="color: #666666">=</span> view._superview;
@@ -2604,8 +2604,8 @@ CPViewFrameDidChangeNotification    <span style="color: #666666">=</span> <span 
     {
         <span style="color: #008000; font-weight: bold">var</span> frame <span style="color: #666666">=</span> [toWindow frame];
             
-        transform.tx <span style="color: #666666">-=</span> _CGRectGetMinX(frame);
-        transform.ty <span style="color: #666666">-=</span> _CGRectGetMinY(frame);
+        transform.tx <span style="color: #666666">-=</span> <span style="color: #0000FF">_CGRectGetMinX</span>(frame);
+        transform.ty <span style="color: #666666">-=</span> <span style="color: #0000FF">_CGRectGetMinY</span>(frame);
     }
 <span style="color: #408080; font-style: italic">/*    var views = [],</span>
 <span style="color: #408080; font-style: italic">        view = toView;</span>

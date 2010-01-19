@@ -428,13 +428,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     
     <span class="c1">// else, if we have a view, above if above.</span>
     <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">anOrderingMode</span> <span class="o">===</span> <span class="n">CPWindowAbove</span><span class="p">)</span>
-        +<span class="o">+</span><span class="n">index</span><span class="p">;</span>
+        <span class="o">++</span><span class="n">index</span><span class="p">;</span>
         
     <span class="p">[</span><span class="nb">self</span> <span class="n">_insertSubview</span><span class="o">:</span><span class="n">aSubview</span> <span class="n">atIndex</span><span class="o">:</span><span class="n">index</span><span class="p">];</span>
 <span class="p">}</span>
 
 <span class="cm">/* @ignore */</span>
-<span class="o">-</span> <span class="p">(</span><span class="k">void</span><span class="p">)</span><span class="n">_insertSubview</span><span class="o">:</span><span class="p">(</span><span class="n">CPView</span><span class="p">)</span><span class="n">aSubview</span> <span class="n">atIndex</span><span class="o">:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">anIndex</span>
+- <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_insertSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview <span class="nf">atIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex
 <span class="p">{</span>
     <span class="c1">// We will have to adjust the z-index of all views starting at this index.</span>
     <span class="kd">var</span> <span class="n">count</span> <span class="o">=</span> <span class="n">_subviews</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
@@ -458,7 +458,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cp">#endif</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">anIndex</span> <span class="o">&gt;</span> <span class="n">index</span><span class="p">)</span>
-            -<span class="o">-</span><span class="n">anIndex</span><span class="p">;</span>
+            <span class="o">--</span><span class="n">anIndex</span><span class="p">;</span>
         
         <span class="c1">//We&#39;ve effectively made the subviews array shorter, so represent that.</span>
         <span class="o">--</span><span class="n">count</span><span class="p">;</span>
@@ -1300,7 +1300,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Returns \c YES if the receiver is hidden, or one</span>
 <span class="cm">    of it&#39;s ancestor views is hidden. \c NO, otherwise.</span>
 <span class="cm">*/</span>   
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="n">isHiddenOrHasHiddenAncestor</span>
+- <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isHiddenOrHasHiddenAncestor</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">view</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
     
@@ -1316,7 +1316,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @return \c YES, if the view object accepts first mouse-down event. \c NO, otherwise.</span>
 <span class="cm">*/</span>
 <span class="c1">//FIXME: should be NO by default? </span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="n">acceptsFirstMouse</span><span class="o">:</span><span class="p">(</span><span class="n">CPEvent</span><span class="p">)</span><span class="n">anEvent</span>
+- <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">acceptsFirstMouse:</span><span class="p">(</span><span class="kt">CPEvent</span><span class="p">)</span>anEvent
 <span class="p">{</span>
     <span class="k">return</span> <span class="kc">YES</span><span class="p">;</span>
 <span class="p">}</span>

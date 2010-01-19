@@ -168,7 +168,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="p">}</span>
 
 <span class="c1">// if absolute, returns same as absoluteString</span>
-<span class="o">-</span> <span class="p">(</span><span class="n">CPString</span><span class="p">)</span><span class="n">relativeString</span>
+- <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">relativeString</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_relative</span><span class="p">;</span>
 <span class="p">}</span>
@@ -180,7 +180,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="p">}</span>
 
 <span class="c1">// if absolute, returns the same as path</span>
-<span class="o">-</span> <span class="p">(</span><span class="n">CPString</span><span class="p">)</span><span class="n">relativePath</span>
+- <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">relativePath</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">_relative</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">_relative</span><span class="p">).</span><span class="n">path</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>

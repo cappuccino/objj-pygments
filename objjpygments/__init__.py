@@ -26,15 +26,16 @@ class ObjectiveJLexer(RegexLexer):
     #: optional Comment or Whitespace
     _ws = r'(?:\s|//.*?\n|/[*].*?[*]/)*'
 
-    flags = re.DOTALL
+    flags = re.DOTALL | re.MULTILINE
 
     tokens = {
-        'root': [           
-            # function definition
-            (r'(\n\s*[\+-]\s*)(.*?)(?=[^\(]{)', # ugly lookahead hack to handle types w/ curly braces
-             bygroups(Text, using(this, state='function_signature'))),
-            
+        'root': [                       
             include('whitespace'),
+
+            # function definition
+            (r'^(\s*[\+-]\s*)(.*?)(?=[^\(]{)', # ugly lookahead hack to handle types w/ curly braces
+             bygroups(Text, using(this, state='function_signature'))),
+
 
             # class definition
             (r'(@interface|@implementation)(\s+)', bygroups(Keyword, Text),
@@ -55,7 +56,6 @@ class ObjectiveJLexer(RegexLexer):
             
             (r'#if\s+0', Comment.Preproc, 'if0'),
             (r'#', Comment.Preproc, 'macro'),
-
 
             (r'\n', Text),
             (r'\s+', Text),
@@ -156,7 +156,6 @@ class ObjectiveJLexer(RegexLexer):
              r'([$a-zA-Z_][a-zA-Z0-9_]+)',      # function name
              bygroups(using(this), Keyword.Type, using(this),
                  Name.Function), "#pop"),
-
  
             # no return type given, start of a selector w/ parameters
             (r'([$a-zA-Z_][a-zA-Z0-9_]+' + _ws + r':)', # function name

@@ -786,11 +786,11 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
         <span class="p">{</span>
             <span class="c1">// Ignore :&#39;s the belong to tertiary operators (?:) </span>
             <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_QUESTION_MARK</span><span class="p">)</span>
-                +<span class="o">+</span><span class="n">closures</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+                <span class="o">++</span><span class="n">closures</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
             
-            <span class="err">// Ingore anything between</span> <span class="p">{</span> <span class="p">}</span> <span class="nf">and</span> <span class="p">()</span>                
+            <span class="c1">// Ingore anything between { } and ()                </span>
             <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_OPEN_BRACE</span><span class="p">)</span>
-                +<span class="o">+</span><span class="n">closures</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+                <span class="o">++</span><span class="n">closures</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
                 
             <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_BRACE</span><span class="p">)</span>
                 <span class="o">--</span><span class="n">closures</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
@@ -801,59 +801,59 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
             <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
                 <span class="o">--</span><span class="n">closures</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
             
-            <span class="err">// If not in</span> <span class="p">{}</span> <span class="n">and</span> <span class="n">not</span> <span class="k">in</span> <span class="p">()</span> <span class="n">and</span> <span class="nb">this</span> <span class="n">is</span> <span class="n">a</span> <span class="n">colon</span> <span class="n">and</span> <span class="n">we</span> <span class="n">don</span><span class="s1">&#39;t belong to a tertiary operator OR this is a closing bracket...</span>
-<span class="s1">            else if ((token === TOKEN_COLON &amp;&amp; closures[2]-- === 0 || </span>
-<span class="s1">                    (bracket = (token === TOKEN_CLOSE_BRACKET))) &amp;&amp;</span>
-<span class="s1">                    closures[0] === 0 &amp;&amp; closures[1] === 0)</span>
-<span class="s1">            {</span>
-<span class="s1">                tokens.push(); // 1</span>
-<span class="s1">                </span>
-<span class="s1">                // If a bracket made us enter, go backwards skipping whitespace ([a b   ] allowed), </span>
-<span class="s1">                // if not grab token immediately behind us ([a b  : c] not allowed</span>
-<span class="s1">                var label = bracket ? tokens.skip_whitespace(true) : tokens.previous(),</span>
-<span class="s1">                    isEmptyLabel = TOKEN_WHITESPACE.test(label);</span>
-<span class="s1">                </span>
-<span class="s1">                // The label must be an identifier, and preceded by whitespace, or whitespace itself (the &quot;empty label&quot;)</span>
-<span class="s1">                if (isEmptyLabel || TOKEN_IDENTIFIER.test(label) &amp;&amp; TOKEN_WHITESPACE.test(tokens.previous()))</span>
-<span class="s1">                {</span>
-<span class="s1">                    tokens.push(); // 2</span>
-<span class="s1">                    </span>
-<span class="s1">                    var last = tokens.skip_whitespace(true),</span>
-<span class="s1">                        operatorCheck = true,</span>
-<span class="s1">                        isDoubleOperator = false;</span>
-<span class="s1">                    </span>
-<span class="s1">                    // unary or binary, still disables.</span>
-<span class="s1">                    // + - + x is bad because it could be (+ - + x) or (a + - + x)</span>
-<span class="s1">                    // the only good is unbroken chain</span>
-<span class="s1">                    if (last === &#39;</span><span class="o">+</span><span class="s1">&#39; || last === &#39;</span><span class="o">-</span><span class="s1">&#39;){//alert(tokens.last())</span>
-<span class="s1">                        if (tokens.previous() !== last)</span>
-<span class="s1">                            operatorCheck = false;</span>
-<span class="s1">                        else</span>
-<span class="s1">                        {</span>
-<span class="s1">                            last = tokens.skip_whitespace(true);</span>
-<span class="s1">                            isDoubleOperator = true;</span>
-<span class="s1">                        }}</span>
-<span class="s1">                        </span>
-<span class="s1">                    tokens.pop(); // 2</span>
-<span class="s1">                    </span>
-<span class="s1">                    tokens.pop(); // 1</span>
-<span class="s1">                    </span>
-<span class="s1">                    //alert(operatorCheck + &quot;operatorCheck for &quot; + label + &quot; and &quot; + last);</span>
-<span class="s1">                    if (operatorCheck &amp;&amp; (</span>
-<span class="s1">                    </span>
-<span class="s1">                        // &lt;)&gt; &lt;label&gt;&lt;:|]&gt;</span>
-<span class="s1">                        // &lt;}&gt; &lt;label&gt;&lt;:|]&gt;</span>
-<span class="s1">                        // &lt;]&gt; &lt;label&gt;&lt;:|]&gt;                        </span>
-<span class="s1">                        (!isDoubleOperator &amp;&amp; (last === TOKEN_CLOSE_BRACE)) || </span>
-<span class="s1">                        </span>
-<span class="s1">                        last === TOKEN_CLOSE_PARENTHESIS || last === TOKEN_CLOSE_BRACKET || </span>
-<span class="s1">                    </span>
-<span class="s1">                    // &lt;.&gt; label&lt;:|]&gt; --&gt; 5. label</span>
-<span class="s1">                    // &lt;5&gt; label&lt;:|]&gt;</span>
-<span class="s1">                        last === TOKEN_PERIOD || TOKEN_NUMBER.test(last) ||</span>
-<span class="s1">                        </span>
-<span class="s1">                    // &lt;string&gt; &lt;label&gt;&lt;:\]&gt;/</span>
-<span class="s1">                        last.charAt(last.length - 1) === &#39;</span><span class="err">\</span><span class="s">&quot;&#39; || last.charAt(last.length - 1) === &#39;</span><span class="se">\&#39;</span><span class="s">&#39; || </span>
+            <span class="c1">// If not in {} and not in () and this is a colon and we don&#39;t belong to a tertiary operator OR this is a closing bracket...</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_COLON</span> <span class="o">&amp;&amp;</span> <span class="n">closures</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">--</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">||</span> 
+                    <span class="p">(</span><span class="n">bracket</span> <span class="o">=</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_BRACKET</span><span class="p">)))</span> <span class="o">&amp;&amp;</span>
+                    <span class="n">closures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">closures</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">tokens</span><span class="p">.</span><span class="nf">push</span><span class="p">();</span> <span class="c1">// 1</span>
+                
+                <span class="c1">// If a bracket made us enter, go backwards skipping whitespace ([a b   ] allowed), </span>
+                <span class="c1">// if not grab token immediately behind us ([a b  : c] not allowed</span>
+                <span class="kd">var</span> <span class="n">label</span> <span class="o">=</span> <span class="n">bracket</span> <span class="o">?</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">previous</span><span class="p">(),</span>
+                    <span class="n">isEmptyLabel</span> <span class="o">=</span> <span class="n">TOKEN_WHITESPACE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
+                
+                <span class="c1">// The label must be an identifier, and preceded by whitespace, or whitespace itself (the &quot;empty label&quot;)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">isEmptyLabel</span> <span class="o">||</span> <span class="n">TOKEN_IDENTIFIER</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">TOKEN_WHITESPACE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="nf">previous</span><span class="p">()))</span>
+                <span class="p">{</span>
+                    <span class="n">tokens</span><span class="p">.</span><span class="nf">push</span><span class="p">();</span> <span class="c1">// 2</span>
+                    
+                    <span class="kd">var</span> <span class="n">last</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+                        <span class="n">operatorCheck</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+                        <span class="n">isDoubleOperator</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                    
+                    <span class="c1">// unary or binary, still disables.</span>
+                    <span class="c1">// + - + x is bad because it could be (+ - + x) or (a + - + x)</span>
+                    <span class="c1">// the only good is unbroken chain</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">last</span> <span class="o">===</span> <span class="sc">&#39;+&#39;</span> <span class="o">||</span> <span class="n">last</span> <span class="o">===</span> <span class="sc">&#39;-&#39;</span><span class="p">){</span><span class="c1">//alert(tokens.last())</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="nf">previous</span><span class="p">()</span> <span class="o">!==</span> <span class="n">last</span><span class="p">)</span>
+                            <span class="n">operatorCheck</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                        <span class="k">else</span>
+                        <span class="p">{</span>
+                            <span class="n">last</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+                            <span class="n">isDoubleOperator</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                        <span class="p">}}</span>
+                        
+                    <span class="n">tokens</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span> <span class="c1">// 2</span>
+                    
+                    <span class="n">tokens</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span> <span class="c1">// 1</span>
+                    
+                    <span class="c1">//alert(operatorCheck + &quot;operatorCheck for &quot; + label + &quot; and &quot; + last);</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">operatorCheck</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+                    
+                        <span class="c1">// &lt;)&gt; &lt;label&gt;&lt;:|]&gt;</span>
+                        <span class="c1">// &lt;}&gt; &lt;label&gt;&lt;:|]&gt;</span>
+                        <span class="c1">// &lt;]&gt; &lt;label&gt;&lt;:|]&gt;                        </span>
+                        <span class="p">(</span><span class="o">!</span><span class="n">isDoubleOperator</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">last</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_BRACE</span><span class="p">))</span> <span class="o">||</span> 
+                        
+                        <span class="n">last</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span> <span class="o">||</span> <span class="n">last</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_BRACKET</span> <span class="o">||</span> 
+                    
+                    <span class="c1">// &lt;.&gt; label&lt;:|]&gt; --&gt; 5. label</span>
+                    <span class="c1">// &lt;5&gt; label&lt;:|]&gt;</span>
+                        <span class="n">last</span> <span class="o">===</span> <span class="n">TOKEN_PERIOD</span> <span class="o">||</span> <span class="n">TOKEN_NUMBER</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">last</span><span class="p">)</span> <span class="o">||</span>
+                        
+                    <span class="c1">// &lt;string&gt; &lt;label&gt;&lt;:\]&gt;/</span>
+                        <span class="n">last</span><span class="p">.</span><span class="nf">charAt</span><span class="p">(</span><span class="n">last</span><span class="p">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">===</span> <span class="sc">&#39;\&quot;&#39;</span> <span class="o">||</span> <span class="n">last</span><span class="p">.</span><span class="nf">charAt</span><span class="p">(</span><span class="n">last</span><span class="p">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">===</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">||</span> 
                     
                     <span class="c1">// &lt;identifier-not&gt; &lt;label&gt;&lt;:|]&gt;</span>
                         <span class="n">TOKEN_IDENTIFIER</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">last</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="sr">/^(new|return|case|var)$/</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">last</span><span class="p">)))</span>
@@ -893,7 +893,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
         <span class="k">if</span> <span class="p">(</span><span class="n">instigator</span><span class="p">)</span>
         <span class="p">{</span> 
             <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">instigator</span><span class="p">)</span>
-                +<span class="o">+</span><span class="n">count</span><span class="p">;</span>
+                <span class="o">++</span><span class="n">count</span><span class="p">;</span>
             
             <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">terminator</span><span class="p">)</span> 
                 <span class="o">--</span><span class="n">count</span><span class="p">;</span>    
@@ -925,7 +925,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
                 <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;function&quot;</span> <span class="o">+</span> <span class="n">accumulator</span> <span class="o">+</span> <span class="sc">&#39;(&#39;</span><span class="p">);</span>
                 
                 <span class="k">if</span> <span class="p">(</span><span class="n">tuple</span><span class="p">)</span>
-                    +<span class="o">+</span><span class="n">closures</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+                    <span class="o">++</span><span class="n">closures</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
             <span class="p">}</span>
             <span class="c1">// If it&#39;s not a parenthesis, we know we have a non-supported function declaration, so fix it:</span>
             <span class="k">else</span>
@@ -947,7 +947,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
                     <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
                 
                 <span class="k">if</span> <span class="p">(</span><span class="n">tuple</span><span class="p">)</span>
-                    +<span class="o">+</span><span class="n">closures</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+                    <span class="o">++</span><span class="n">closures</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
                 
                 <span class="c1">// Place the open curly brace as well, and the function name</span>
                 <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">token</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s"> </span><span class="se">\&quot;</span><span class="s">__FIREBUG_FNAME__&quot;</span> <span class="o">+</span> <span class="n">functionName</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">.length;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>

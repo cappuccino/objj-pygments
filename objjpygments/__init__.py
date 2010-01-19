@@ -31,8 +31,8 @@ class ObjectiveJLexer(RegexLexer):
     tokens = {
         'root': [           
             # function definition
-            (r'\n([\+-]' + _ws + r')(.*?)(?=[^\(]{)', # ugly lookahead hack to handle types w/ curly braces
-             bygroups(using(this), using(this, state='function_signature'))),
+            (r'(\n\s*[\+-]\s*)(.*?)(?=[^\(]{)', # ugly lookahead hack to handle types w/ curly braces
+             bygroups(Text, using(this, state='function_signature'))),
             
             include('whitespace'),
 

@@ -112,7 +112,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="n">CPDictionary</span>    <span class="n">_resourceValues</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithScheme:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>scheme <span class="nf">host:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>host <span class="nf">path:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>path
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">uri</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">URI</span><span class="p">();</span>
@@ -121,17 +120,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="n">uri</span><span class="p">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="p">;</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">initWithString</span><span class="o">:</span><span class="n">uri</span><span class="p">.</span><span class="nf">toString</span><span class="p">()];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithString:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>URLString
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">initWithString</span><span class="o">:</span><span class="n">URLString</span> <span class="n">relativeToURL</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">URLWithString:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>URLString
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithString</span><span class="o">:</span><span class="n">URLString</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithString:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>URLString <span class="nf">relativeToURL:</span><span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span>baseURL
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">URLString</span><span class="p">))</span>
@@ -146,12 +142,10 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">URLWithString:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>URLString <span class="nf">relativeToURL:</span><span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span>baseURL
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithString</span><span class="o">:</span><span class="n">URLString</span> <span class="n">relativeToURL</span><span class="o">:</span><span class="n">baseURL</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span><span class="nf">absoluteURL</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">absStr</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
@@ -161,18 +155,16 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     
     <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">absoluteString</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">resolve</span><span class="p">([</span><span class="n">_base</span> <span class="n">absoluteString</span><span class="p">]</span> <span class="o">||</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">_relative</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="c1">// if absolute, returns same as absoluteString</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">relativeString</span>
+<span class="o">-</span> <span class="p">(</span><span class="n">CPString</span><span class="p">)</span><span class="n">relativeString</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_relative</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">path</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
@@ -180,36 +172,31 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="p">}</span>
 
 <span class="c1">// if absolute, returns the same as path</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">relativePath</span>
+<span class="o">-</span> <span class="p">(</span><span class="n">CPString</span><span class="p">)</span><span class="n">relativePath</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">_relative</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">_relative</span><span class="p">).</span><span class="n">path</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">scheme</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
     <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">protocol</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">user</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
     <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">user</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">password</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
     <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">password</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">host</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
     <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">domain</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">port</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
@@ -220,59 +207,49 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="p">}</span>
     <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">parameterString</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
     <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">query</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">fragment</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
     <span class="k">return</span> <span class="n">URI_RE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="n">anchor</span> <span class="o">||</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isEqual:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="c1">// Is checking if baseURL isEqual correct? Does &quot;identical&quot; mean same object or equivalent values?</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">relativeString</span><span class="p">]</span> <span class="o">===</span> <span class="p">[</span><span class="n">anObject</span> <span class="n">relativeString</span><span class="p">]</span> <span class="o">&amp;&amp;</span>
         <span class="p">([</span><span class="nb">self</span> <span class="n">baseURL</span><span class="p">]</span> <span class="o">===</span> <span class="p">[</span><span class="n">anObject</span> <span class="n">baseURL</span><span class="p">]</span> <span class="o">||</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">baseURL</span><span class="p">]</span> <span class="n">isEqual</span><span class="o">:</span><span class="p">[</span><span class="n">anObject</span> <span class="n">baseURL</span><span class="p">]]);</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">lastPathComponent</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">path</span><span class="p">];</span>
     <span class="k">return</span> <span class="n">path</span> <span class="o">?</span> <span class="n">path</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">).</span><span class="nf">pop</span><span class="p">()</span> <span class="o">:</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">pathExtension</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">path</span><span class="p">],</span>
         <span class="n">ext</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sr">/\.(\w+)$/</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">ext</span> <span class="o">?</span> <span class="n">ext</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span><span class="nf">standardizedURL</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">CPURL</span> <span class="n">URLWithString</span><span class="o">:</span><span class="nf">format</span><span class="p">(</span><span class="nf">parse</span><span class="p">(</span><span class="n">_relative</span><span class="p">))</span> <span class="n">relativeToURL</span><span class="o">:</span><span class="n">_base</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isFileURL</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">scheme</span><span class="p">]</span> <span class="o">===</span> <span class="s">&quot;file&quot;</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">description</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">absoluteString</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">resourceValueForKey:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aKey
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">_resourceValues</span> <span class="n">objectForKey</span><span class="o">:</span><span class="n">aKey</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">setResourceValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">forKey:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aKey
 <span class="p">{</span>
     <span class="p">[</span><span class="n">_resourceValues</span> <span class="n">setObject</span><span class="o">:</span><span class="n">anObject</span> <span class="n">forKey</span><span class="o">:</span><span class="n">aKey</span><span class="p">];</span>
@@ -281,14 +258,12 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="k">@end</span>
 
 <span class="k">@implementation</span> <span class="nc">CPURL</span> <span class="p">(</span><span class="nl">CPCoding</span>)
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithCoder:</span><span class="p">(</span><span class="kt">CPCoder</span><span class="p">)</span>aCoder
 <span class="p">{</span>
     <span class="n">_base</span> <span class="o">=</span> <span class="p">[</span><span class="n">aCoder</span> <span class="n">decodeObjectForKey</span><span class="o">:</span><span class="s">&quot;CPURLBaseKey&quot;</span><span class="p">];</span>
     <span class="n">_relative</span> <span class="o">=</span> <span class="p">[</span><span class="n">aCoder</span> <span class="n">decodeObjectForKey</span><span class="o">:</span><span class="s">&quot;CPURLRelativeKey&quot;</span><span class="p">];</span>
     <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">encodeWithCoder:</span><span class="p">(</span><span class="kt">CPCoder</span><span class="p">)</span>aCoder
 <span class="p">{</span>
     <span class="p">[</span><span class="n">aCoder</span> <span class="n">encodeObject</span><span class="o">:</span><span class="n">_base</span> <span class="n">forKey</span><span class="o">:</span><span class="s">&quot;CPURLBaseKey&quot;</span><span class="p">];</span>

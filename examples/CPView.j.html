@@ -165,7 +165,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="n">CPViewFrameDidChangeNotification</span>    <span class="o">=</span> <span class="s">@&quot;CPViewFrameDidChangeNotification&quot;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="n">CachedNotificationCenter</span>    <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="n">CachedThemeAttributes</span>       <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span><span class="cp"></span>
+    <span class="n">CachedThemeAttributes</span>       <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
 
 <span class="cp">#if PLATFORM(DOM)</span>
 <span class="kd">var</span> <span class="n">DOMElementPrototype</span>         <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -173,7 +173,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="n">BackgroundTrivialColor</span>              <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">BackgroundVerticalThreePartImage</span>    <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">BackgroundHorizontalThreePartImage</span>  <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="n">BackgroundNinePartImage</span>             <span class="o">=</span> <span class="mi">3</span><span class="p">;</span><span class="cp"></span>
+    <span class="n">BackgroundNinePartImage</span>             <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="cp">#endif</span>
 
 <span class="kd">var</span> <span class="n">CPViewFlags</span>                     <span class="o">=</span> <span class="p">{</span> <span class="p">},</span>
@@ -221,8 +221,8 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     
     <span class="kt">BOOL</span>                <span class="n">_postsFrameChangedNotifications</span><span class="p">;</span>
     <span class="kt">BOOL</span>                <span class="n">_postsBoundsChangedNotifications</span><span class="p">;</span>
-    <span class="kt">BOOL</span>                <span class="n">_inhibitFrameAndBoundsChangedNotifications</span><span class="p">;</span><span class="cp"></span>
-<span class="cp">    </span>
+    <span class="kt">BOOL</span>                <span class="n">_inhibitFrameAndBoundsChangedNotifications</span><span class="p">;</span>
+    
 <span class="cp">#if PLATFORM(DOM)</span>
     <span class="n">DOMElement</span>          <span class="n">_DOMElement</span><span class="p">;</span>
     <span class="n">DOMElement</span>          <span class="n">_DOMContentsElement</span><span class="p">;</span>
@@ -230,7 +230,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="n">CPArray</span>             <span class="n">_DOMImageParts</span><span class="p">;</span>
     <span class="n">CPArray</span>             <span class="n">_DOMImageSizes</span><span class="p">;</span>
     
-    <span class="kt">unsigned</span>            <span class="n">_backgroundType</span><span class="p">;</span><span class="cp"></span>
+    <span class="kt">unsigned</span>            <span class="n">_backgroundType</span><span class="p">;</span>
 <span class="cp">#endif</span>
 
     <span class="n">CGRect</span>              <span class="n">_dirtyRect</span><span class="p">;</span>
@@ -271,11 +271,10 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*</span>
 <span class="cm">    Private method for Objective-J.</span>
 <span class="cm">    @ignore</span>
-<span class="cm">*/</span>
-<span class="o">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initialize</span>
+<span class="cm">*/</span><span class="o">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initialize</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">self</span> <span class="o">!==</span> <span class="p">[</span><span class="n">CPView</span> <span class="n">class</span><span class="p">])</span>
-        <span class="k">return</span><span class="p">;</span><span class="cp"></span>
+        <span class="k">return</span><span class="p">;</span>
 
 <span class="cp">#if PLATFORM(DOM)</span>
     <span class="n">DOMElementPrototype</span> <span class="o">=</span>  <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="s">&quot;div&quot;</span><span class="p">);</span>
@@ -285,12 +284,11 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="n">style</span><span class="p">.</span><span class="n">overflow</span> <span class="o">=</span> <span class="s">&quot;hidden&quot;</span><span class="p">;</span>
     <span class="n">style</span><span class="p">.</span><span class="n">position</span> <span class="o">=</span> <span class="s">&quot;absolute&quot;</span><span class="p">;</span>
     <span class="n">style</span><span class="p">.</span><span class="n">visibility</span> <span class="o">=</span> <span class="s">&quot;visible&quot;</span><span class="p">;</span>
-    <span class="n">style</span><span class="p">.</span><span class="n">zIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="cp"></span>
+    <span class="n">style</span><span class="p">.</span><span class="n">zIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="cp">#endif</span>
 
     <span class="n">CachedNotificationCenter</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setupViewFlags</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">theClass</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">class</span><span class="p">],</span>
@@ -311,17 +309,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="n">_viewClassFlags</span> <span class="o">=</span> <span class="n">CPViewFlags</span><span class="p">[</span><span class="n">classUID</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">+</span> <span class="p">(</span><span class="kt">CPSet</span><span class="p">)</span><span class="nf">keyPathsForValuesAffectingFrame</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">CPSet</span> <span class="n">setWithObjects</span><span class="o">:</span><span class="s">@&quot;frameOrigin&quot;</span><span class="p">,</span> <span class="s">@&quot;frameSize&quot;</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">+</span> <span class="p">(</span><span class="kt">CPSet</span><span class="p">)</span><span class="nf">keyPathsForValuesAffectingBounds</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">CPSet</span> <span class="n">setWithObjects</span><span class="o">:</span><span class="s">@&quot;boundsOrigin&quot;</span><span class="p">,</span> <span class="s">@&quot;boundsSize&quot;</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">initWithFrame</span><span class="o">:</span><span class="nf">CGRectMakeZero</span><span class="p">()];</span>
@@ -330,8 +325,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Initializes the receiver for usage with the specified bounding rectangle</span>
 <span class="cm">    @return the initialized view</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithFrame:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aFrame
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithFrame:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aFrame
 <span class="p">{</span>
     <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">];</span>
     
@@ -354,7 +348,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     
         <span class="n">_opacity</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
         <span class="n">_isHidden</span> <span class="o">=</span> <span class="kc">NO</span><span class="p">;</span>
-        <span class="n">_hitTests</span> <span class="o">=</span> <span class="kc">YES</span><span class="p">;</span><span class="cp"></span>
+        <span class="n">_hitTests</span> <span class="o">=</span> <span class="kc">YES</span><span class="p">;</span>
 
 <span class="cp">#if PLATFORM(DOM)</span>
         <span class="n">_DOMElement</span> <span class="o">=</span> <span class="n">DOMElementPrototype</span><span class="p">.</span><span class="nf">cloneNode</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
@@ -363,7 +357,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
         <span class="nf">CPDOMDisplayServerSetStyleSize</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
         
         <span class="n">_DOMImageParts</span> <span class="o">=</span> <span class="p">[];</span>
-        <span class="n">_DOMImageSizes</span> <span class="o">=</span> <span class="p">[];</span><span class="cp"></span>
+        <span class="n">_DOMImageSizes</span> <span class="o">=</span> <span class="p">[];</span>
 <span class="cp">#endif</span>
         
         <span class="n">_theme</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPTheme</span> <span class="n">defaultTheme</span><span class="p">];</span>
@@ -380,8 +374,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns the container view of the receiver</span>
 <span class="cm">    @return the receiver&#39;s containing view</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">superview</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">superview</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_superview</span><span class="p">;</span>
 <span class="p">}</span>
@@ -389,16 +382,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns an array of all the views contained as direct children of the receiver</span>
 <span class="cm">    @return an array of CPViews</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">subviews</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">subviews</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">_subviews</span> <span class="n">copy</span><span class="p">];</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns the window containing this receiver</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPWindow</span><span class="p">)</span><span class="nf">window</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPWindow</span><span class="p">)</span><span class="nf">window</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_window</span><span class="p">;</span>
 <span class="p">}</span>
@@ -406,8 +397,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Makes the argument a subview of the receiver.</span>
 <span class="cm">    @param aSubview the CPView to make a subview</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview
 <span class="p">{</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">_insertSubview</span><span class="o">:</span><span class="n">aSubview</span> <span class="n">atIndex</span><span class="o">:</span><span class="n">CPNotFound</span><span class="p">];</span>
 <span class="p">}</span>
@@ -417,8 +407,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aSubview the view to add as a subview</span>
 <span class="cm">    @param anOrderingMode specifies \c aSubview&#39;s ordering relative to \c anotherView</span>
 <span class="cm">    @param anotherView \c aSubview will be positioned relative to this argument</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview <span class="nf">positioned:</span><span class="p">(</span><span class="kt">CPWindowOrderingMode</span><span class="p">)</span>anOrderingMode <span class="nf">relativeTo:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>anotherView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview <span class="nf">positioned:</span><span class="p">(</span><span class="kt">CPWindowOrderingMode</span><span class="p">)</span>anOrderingMode <span class="nf">relativeTo:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>anotherView
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">index</span> <span class="o">=</span> <span class="n">anotherView</span> <span class="o">?</span> <span class="p">[</span><span class="n">_subviews</span> <span class="n">indexOfObjectIdenticalTo</span><span class="o">:</span><span class="n">anotherView</span><span class="p">]</span> <span class="o">:</span> <span class="n">CPNotFound</span><span class="p">;</span>
     
@@ -433,8 +422,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="p">[</span><span class="nb">self</span> <span class="n">_insertSubview</span><span class="o">:</span><span class="n">aSubview</span> <span class="n">atIndex</span><span class="o">:</span><span class="n">index</span><span class="p">];</span>
 <span class="p">}</span>
 
-<span class="cm">/* @ignore */</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_insertSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview <span class="nf">atIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex
+<span class="cm">/* @ignore */</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_insertSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview <span class="nf">atIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex
 <span class="p">{</span>
     <span class="c1">// We will have to adjust the z-index of all views starting at this index.</span>
     <span class="kd">var</span> <span class="n">count</span> <span class="o">=</span> <span class="n">_subviews</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
@@ -451,10 +439,10 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
         <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">===</span> <span class="n">anIndex</span> <span class="o">||</span> <span class="n">index</span> <span class="o">===</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">anIndex</span> <span class="o">===</span> <span class="n">count</span><span class="p">)</span>
             <span class="k">return</span><span class="p">;</span>
         
-        <span class="p">[</span><span class="n">_subviews</span> <span class="n">removeObjectAtIndex</span><span class="o">:</span><span class="n">index</span><span class="p">];</span><span class="cp"></span>
-<span class="cp">        </span>
+        <span class="p">[</span><span class="n">_subviews</span> <span class="n">removeObjectAtIndex</span><span class="o">:</span><span class="n">index</span><span class="p">];</span>
+        
 <span class="cp">#if PLATFORM(DOM)</span>
-        <span class="nf">CPDOMDisplayServerRemoveChild</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">aSubview</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">);</span><span class="cp"></span>
+        <span class="nf">CPDOMDisplayServerRemoveChild</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">aSubview</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">);</span>
 <span class="cp">#endif</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">anIndex</span> <span class="o">&gt;</span> <span class="n">index</span><span class="p">)</span>
@@ -480,20 +468,20 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     
     <span class="k">if</span> <span class="p">(</span><span class="n">anIndex</span> <span class="o">===</span> <span class="n">CPNotFound</span> <span class="o">||</span> <span class="n">anIndex</span> <span class="o">&gt;=</span> <span class="n">count</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="n">_subviews</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="n">aSubview</span><span class="p">);</span><span class="cp"></span>
+        <span class="n">_subviews</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="n">aSubview</span><span class="p">);</span>
 
 <span class="cp">#if PLATFORM(DOM)</span>
         <span class="c1">// Attach the actual node.</span>
-        <span class="nf">CPDOMDisplayServerAppendChild</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">aSubview</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">);</span><span class="cp"></span>
+        <span class="nf">CPDOMDisplayServerAppendChild</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">aSubview</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">);</span>
 <span class="cp">#endif</span>
     <span class="p">}</span>
     <span class="k">else</span>
     <span class="p">{</span>
-        <span class="n">_subviews</span><span class="p">.</span><span class="nf">splice</span><span class="p">(</span><span class="n">anIndex</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aSubview</span><span class="p">);</span><span class="cp"></span>
-<span class="cp">    </span>
+        <span class="n">_subviews</span><span class="p">.</span><span class="nf">splice</span><span class="p">(</span><span class="n">anIndex</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">aSubview</span><span class="p">);</span>
+    
 <span class="cp">#if PLATFORM(DOM)</span>
         <span class="c1">// Attach the actual node.</span>
-        <span class="nf">CPDOMDisplayServerInsertBefore</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">aSubview</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">_subviews</span><span class="p">[</span><span class="n">anIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">].</span><span class="n">_DOMElement</span><span class="p">);</span><span class="cp"></span>
+        <span class="nf">CPDOMDisplayServerInsertBefore</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">aSubview</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">_subviews</span><span class="p">[</span><span class="n">anIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">].</span><span class="n">_DOMElement</span><span class="p">);</span>
 <span class="cp">#endif</span>
     <span class="p">}</span>
     
@@ -506,16 +494,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Called when the receiver has added \c aSubview to it&#39;s child views.</span>
 <span class="cm">    @param aSubview the view that was added</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">didAddSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">didAddSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview
 <span class="p">{</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Removes the receiver from it&#39;s container view and window.</span>
 <span class="cm">    Does nothing if there&#39;s no container view.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeFromSuperview</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeFromSuperview</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_superview</span><span class="p">)</span>
         <span class="k">return</span><span class="p">;</span>
@@ -525,10 +511,10 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="p">[</span><span class="n">_superview</span> <span class="n">willRemoveSubview</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
     
-    <span class="p">[</span><span class="n">_superview</span><span class="p">.</span><span class="n">_subviews</span> <span class="n">removeObject</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span><span class="cp"></span>
+    <span class="p">[</span><span class="n">_superview</span><span class="p">.</span><span class="n">_subviews</span> <span class="n">removeObject</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
 
 <span class="cp">#if PLATFORM(DOM)</span>
-        <span class="nf">CPDOMDisplayServerRemoveChild</span><span class="p">(</span><span class="n">_superview</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">_DOMElement</span><span class="p">);</span><span class="cp"></span>
+        <span class="nf">CPDOMDisplayServerRemoveChild</span><span class="p">(</span><span class="n">_superview</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">_DOMElement</span><span class="p">);</span>
 <span class="cp">#endif</span>
     <span class="n">_superview</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
     
@@ -539,8 +525,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Replaces the specified child view with another view</span>
 <span class="cm">    @param aSubview the view to replace</span>
 <span class="cm">    @param aView the replacement view</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replaceSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview <span class="nf">with:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replaceSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aSubview <span class="nf">with:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">aSubview</span><span class="p">.</span><span class="n">_superview</span> <span class="o">!=</span> <span class="nb">self</span><span class="p">)</span>
         <span class="k">return</span><span class="p">;</span>
@@ -551,7 +536,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     
     <span class="p">[</span><span class="nb">self</span> <span class="n">_insertSubview</span><span class="o">:</span><span class="n">aView</span> <span class="n">atIndex</span><span class="o">:</span><span class="n">index</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setSubviews:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>newSubviews
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">newSubviews</span><span class="p">)</span>
@@ -619,8 +603,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="cm">/* @ignore */</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_setWindow:</span><span class="p">(</span><span class="kt">CPWindow</span><span class="p">)</span>aWindow
+<span class="cm">/* @ignore */</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_setWindow:</span><span class="p">(</span><span class="kt">CPWindow</span><span class="p">)</span>aWindow
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">_window</span> <span class="o">===</span> <span class="n">aWindow</span><span class="p">)</span>
         <span class="k">return</span><span class="p">;</span>
@@ -657,8 +640,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns \c YES if the receiver is, or is a descendant of, \c aView.</span>
 <span class="cm">    @param aView the view to test for ancestry</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isDescendantOf:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isDescendantOf:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">view</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
     
@@ -673,8 +655,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Called when the receiver&#39;s superview has changed.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidMoveToSuperview</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidMoveToSuperview</span>
 <span class="p">{</span>
 <span class="c1">//    if (_graphicsContext)</span>
         <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsDisplay</span><span class="o">:</span><span class="kc">YES</span><span class="p">];</span>
@@ -682,40 +663,35 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Called when the receiver has been moved to a new CPWindow.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidMoveToWindow</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidMoveToWindow</span>
 <span class="p">{</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Called when the receiver is about to be moved to a new view.</span>
 <span class="cm">    @param aView the view to which the receiver will be moved</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillMoveToSuperview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillMoveToSuperview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
 <span class="p">{</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Called when the receiver is about to be moved to a new window.</span>
 <span class="cm">    @param aWindow the window to which the receiver will be moved.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillMoveToWindow:</span><span class="p">(</span><span class="kt">CPWindow</span><span class="p">)</span>aWindow
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillMoveToWindow:</span><span class="p">(</span><span class="kt">CPWindow</span><span class="p">)</span>aWindow
 <span class="p">{</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Called when the receiver is about to be remove one of its subviews.</span>
 <span class="cm">    @param aView the view that will be removed</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">willRemoveSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">willRemoveSubview:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
 <span class="p">{</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns the menu item containing the receiver or one of its ancestor views.</span>
 <span class="cm">    @return a menu item, or \c nil if the view or one of its ancestors wasn&#39;t found</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPMenuItem</span><span class="p">)</span><span class="nf">enclosingMenuItem</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPMenuItem</span><span class="p">)</span><span class="nf">enclosingMenuItem</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">view</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
     
@@ -734,17 +710,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    </span>
 <span class="cm">    return enclosingMenuItem;*/</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setTag:</span><span class="p">(</span><span class="kt">CPInteger</span><span class="p">)</span>aTag
 <span class="p">{</span>
     <span class="n">_tag</span> <span class="o">=</span> <span class="n">aTag</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPInteger</span><span class="p">)</span><span class="nf">tag</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_tag</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWithTag:</span><span class="p">(</span><span class="kt">CPInteger</span><span class="p">)</span>aTag
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">([</span><span class="nb">self</span> <span class="n">tag</span><span class="p">]</span> <span class="o">==</span> <span class="n">aTag</span><span class="p">)</span>
@@ -767,8 +740,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns whether the view is flipped.</span>
 <span class="cm">    @return \c YES if the view is flipped. \c NO, otherwise.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isFlipped</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isFlipped</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="kc">YES</span><span class="p">;</span>
 <span class="p">}</span>
@@ -779,8 +751,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    center if the receiver is configured to do so. If the frame is the same as the current frame, the method simply</span>
 <span class="cm">    returns (and no notificaion is posted).</span>
 <span class="cm">    @param aFrame the rectangle specifying the new origin and size  of the receiver</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setFrame:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aFrame
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setFrame:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aFrame
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nf">_CGRectEqualToRect</span><span class="p">(</span><span class="n">_frame</span><span class="p">,</span> <span class="n">aFrame</span><span class="p">))</span>
         <span class="k">return</span><span class="p">;</span>
@@ -799,17 +770,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns the receiver&#39;s frame.</span>
 <span class="cm">    @return a copy of the receiver&#39;s frame</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">frame</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">frame</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">_CGRectMakeCopy</span><span class="p">(</span><span class="n">_frame</span><span class="p">);</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span><span class="nf">frameOrigin</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">_CGPointMakeCopy</span><span class="p">(</span><span class="n">_frame</span><span class="p">.</span><span class="n">origin</span><span class="p">);</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span><span class="nf">frameSize</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">_CGSizeMakeCopy</span><span class="p">(</span><span class="n">_frame</span><span class="p">.</span><span class="n">size</span><span class="p">);</span>
@@ -821,8 +789,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    is configured to do so. If the specified origin is the same as the frame&#39;s current origin, the method will </span>
 <span class="cm">    simply return (and no notification will be posted).</span>
 <span class="cm">    @param aPoint the new origin point</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setCenter:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setCenter:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint
 <span class="p">{</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">setFrameOrigin</span><span class="o">:</span><span class="nf">CGPointMake</span><span class="p">(</span><span class="n">aPoint</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">_frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">aPoint</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">_frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)];</span> 
 <span class="p">}</span>
@@ -830,8 +797,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns the center of the receiver&#39;s frame to the provided point. The point is defined in the superview&#39;s coordinate system. </span>
 <span class="cm">    @return CGPoint the center point of the receiver&#39;s frame</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span><span class="nf">center</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span><span class="nf">center</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">CGPointMake</span><span class="p">(</span><span class="n">_frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">_frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">_frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">_frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
 <span class="p">}</span>
@@ -842,8 +808,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    is configured to do so. If the specified origin is the same as the frame&#39;s current origin, the method will </span>
 <span class="cm">    simply return (and no notification will be posted).</span>
 <span class="cm">    @param aPoint the new origin point</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setFrameOrigin:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setFrameOrigin:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">origin</span> <span class="o">=</span> <span class="n">_frame</span><span class="p">.</span><span class="n">origin</span><span class="p">;</span>
     
@@ -854,12 +819,12 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="n">origin</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">aPoint</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">_postsFrameChangedNotifications</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">_inhibitFrameAndBoundsChangedNotifications</span><span class="p">)</span>
-        <span class="p">[</span><span class="n">CachedNotificationCenter</span> <span class="n">postNotificationName</span><span class="o">:</span><span class="n">CPViewFrameDidChangeNotification</span> <span class="n">object</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span><span class="cp"></span>
+        <span class="p">[</span><span class="n">CachedNotificationCenter</span> <span class="n">postNotificationName</span><span class="o">:</span><span class="n">CPViewFrameDidChangeNotification</span> <span class="n">object</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
 
 <span class="cp">#if PLATFORM(DOM)</span>
     <span class="kd">var</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">_superview</span> <span class="o">?</span> <span class="n">_superview</span><span class="p">.</span><span class="n">_boundsTransform</span> <span class="o">:</span> <span class="kc">NULL</span><span class="p">;</span>
 
-    <span class="nf">CPDOMDisplayServerSetStyleLeftTop</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">);</span><span class="cp"></span>
+    <span class="nf">CPDOMDisplayServerSetStyleLeftTop</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
 <span class="cp">#endif</span>
 <span class="p">}</span>
 
@@ -868,8 +833,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    method simply returns. The method posts a CPViewFrameDidChangeNotification to the</span>
 <span class="cm">    default notification center if the receiver is configured to do so.</span>
 <span class="cm">    @param aSize the new size for the frame</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setFrameSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setFrameSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">size</span> <span class="o">=</span> <span class="n">_frame</span><span class="p">.</span><span class="n">size</span><span class="p">;</span>
     
@@ -894,7 +858,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
         <span class="p">[</span><span class="nb">self</span> <span class="n">resizeSubviewsWithOldSize</span><span class="o">:</span><span class="n">oldSize</span><span class="p">];</span>
     
     <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsLayout</span><span class="p">];</span>
-    <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsDisplay</span><span class="o">:</span><span class="kc">YES</span><span class="p">];</span><span class="cp"></span>
+    <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsDisplay</span><span class="o">:</span><span class="kc">YES</span><span class="p">];</span>
 
 <span class="cp">#if PLATFORM(DOM)</span>
     <span class="nf">CPDOMDisplayServerSetStyleSize</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
@@ -930,7 +894,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
             <span class="nf">CPDOMDisplayServerSetStyleSize</span><span class="p">(</span><span class="n">_DOMImageParts</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">_DOMImageSizes</span><span class="p">[</span><span class="mi">5</span><span class="p">].</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
             <span class="nf">CPDOMDisplayServerSetStyleSize</span><span class="p">(</span><span class="n">_DOMImageParts</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">width</span><span class="p">,</span> <span class="n">_DOMImageSizes</span><span class="p">[</span><span class="mi">7</span><span class="p">].</span><span class="n">height</span><span class="p">);</span>
         <span class="p">}</span>
-    <span class="p">}</span><span class="cp"></span>
+    <span class="p">}</span>
 <span class="cp">#endif</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">_postsFrameChangedNotifications</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">_inhibitFrameAndBoundsChangedNotifications</span><span class="p">)</span>
@@ -941,8 +905,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Sets the receiver&#39;s bounds. The bounds define the size and location of the receiver inside it&#39;s frame. Posts a </span>
 <span class="cm">    CPViewBoundsDidChangeNotification to the default notification center if the receiver is configured to do so.</span>
 <span class="cm">    @param bounds the new bounds</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBounds:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>bounds
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBounds:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>bounds
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nf">_CGRectEqualToRect</span><span class="p">(</span><span class="n">_bounds</span><span class="p">,</span> <span class="n">bounds</span><span class="p">))</span>
         <span class="k">return</span><span class="p">;</span>
@@ -961,17 +924,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns the receiver&#39;s bounds. The bounds define the size</span>
 <span class="cm">    and location of the receiver inside its frame.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">bounds</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">bounds</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">_CGRectMakeCopy</span><span class="p">(</span><span class="n">_bounds</span><span class="p">);</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span><span class="nf">boundsOrigin</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">_CGPointMakeCopy</span><span class="p">(</span><span class="n">_bounds</span><span class="p">.</span><span class="n">origin</span><span class="p">);</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span><span class="nf">boundsSize</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">_CGSizeMakeCopy</span><span class="p">(</span><span class="n">_bounds</span><span class="p">.</span><span class="n">size</span><span class="p">);</span>
@@ -982,8 +942,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    posts a CPViewBoundsDidChangeNotification to the</span>
 <span class="cm">    default notification center if the receiver is configured to do so.</span>
 <span class="cm">    @param aPoint the new location for the receiver</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBoundsOrigin:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBoundsOrigin:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">origin</span> <span class="o">=</span> <span class="n">_bounds</span><span class="p">.</span><span class="n">origin</span><span class="p">;</span>
     
@@ -1002,8 +961,8 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="p">{</span>
         <span class="n">_boundsTransform</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
         <span class="n">_inverseBoundsTransform</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
-    <span class="p">}</span><span class="cp"></span>
-<span class="cp">    </span>
+    <span class="p">}</span>
+    
 <span class="cp">#if PLATFORM(DOM)</span>
     <span class="kd">var</span> <span class="n">index</span> <span class="o">=</span> <span class="n">_subviews</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
     
@@ -1013,7 +972,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
             <span class="n">origin</span> <span class="o">=</span> <span class="n">view</span><span class="p">.</span><span class="n">_frame</span><span class="p">.</span><span class="n">origin</span><span class="p">;</span>
         
         <span class="nf">CPDOMDisplayServerSetStyleLeftTop</span><span class="p">(</span><span class="n">view</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">_boundsTransform</span><span class="p">,</span> <span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
-    <span class="p">}</span><span class="cp"></span>
+    <span class="p">}</span>
 <span class="cp">#endif</span>
     
     <span class="k">if</span> <span class="p">(</span><span class="n">_postsBoundsChangedNotifications</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">_inhibitFrameAndBoundsChangedNotifications</span><span class="p">)</span>
@@ -1025,8 +984,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    CPViewBoundsDidChangeNotification to the default</span>
 <span class="cm">    notification center if the receiver is configured to do so.</span>
 <span class="cm">    @param aSize the new size for the receiver</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBoundsSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBoundsSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">size</span> <span class="o">=</span> <span class="n">_bounds</span><span class="p">.</span><span class="n">size</span><span class="p">;</span>
     
@@ -1062,8 +1020,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Notifies subviews that the superview changed size.</span>
 <span class="cm">    @param aSize the size of the old superview</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">resizeWithOldSuperviewSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">resizeWithOldSuperviewSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">autoresizingMask</span><span class="p">];</span>
     
@@ -1093,8 +1050,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Initiates \c -superviewSizeChanged: messages to subviews.</span>
 <span class="cm">    @param aSize the size for the subviews</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="k">void</span><span class="p">)</span><span class="n">resizeSubviewsWithOldSize</span><span class="o">:</span><span class="p">(</span><span class="n">CGSize</span><span class="p">)</span><span class="n">aSize</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">resizeSubviewsWithOldSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">count</span> <span class="o">=</span> <span class="n">_subviews</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
     
@@ -1108,8 +1064,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aFlag If \c YES, then subviews will automatically be resized</span>
 <span class="cm">    when this view is resized. \c NO means the views will not</span>
 <span class="cm">    be resized automatically.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setAutoresizesSubviews:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>aFlag
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setAutoresizesSubviews:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>aFlag
 <span class="p">{</span>
     <span class="n">_autoresizesSubviews</span> <span class="o">=</span> <span class="o">!!</span><span class="n">aFlag</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1117,8 +1072,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Reports whether the receiver automatically resizes its subviews when its frame size changes.</span>
 <span class="cm">    @return \c YES means it resizes its subviews on a frame size change.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">autoresizesSubviews</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">autoresizesSubviews</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_autoresizesSubviews</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1126,16 +1080,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Determines automatic resizing behavior.</span>
 <span class="cm">    @param aMask a bit mask with options</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setAutoresizingMask:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>aMask
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setAutoresizingMask:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>aMask
 <span class="p">{</span>
     <span class="n">_autoresizingMask</span> <span class="o">=</span> <span class="n">aMask</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns the bit mask options for resizing behavior</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">autoresizingMask</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">autoresizingMask</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_autoresizingMask</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1144,8 +1096,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Puts the receiver into full screen mode.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">enterFullScreenMode</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">enterFullScreenMode</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">enterFullScreenMode</span><span class="o">:</span><span class="kc">nil</span> <span class="n">withOptions</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
 <span class="p">}</span>
@@ -1154,8 +1105,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Puts the receiver into full screen mode.</span>
 <span class="cm">    @param aScreen the that should be used</span>
 <span class="cm">    @param options configuration options</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">enterFullScreenMode:</span><span class="p">(</span><span class="kt">CPScreen</span><span class="p">)</span>aScreen <span class="nf">withOptions:</span><span class="p">(</span><span class="kt">CPDictionary</span><span class="p">)</span>options
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">enterFullScreenMode:</span><span class="p">(</span><span class="kt">CPScreen</span><span class="p">)</span>aScreen <span class="nf">withOptions:</span><span class="p">(</span><span class="kt">CPDictionary</span><span class="p">)</span>options
 <span class="p">{</span>
     <span class="n">_fullScreenModeState</span> <span class="o">=</span> <span class="nf">_CPViewFullScreenModeStateMake</span><span class="p">(</span><span class="nb">self</span><span class="p">);</span>
     
@@ -1183,8 +1133,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    The receiver should exit full screen mode.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">exitFullScreenMode</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">exitFullScreenMode</span>
 <span class="p">{</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">exitFullScreenModeWithOptions</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
 <span class="p">}</span>
@@ -1192,8 +1141,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    The receiver should exit full screen mode.</span>
 <span class="cm">    @param options configurations options</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">exitFullScreenModeWithOptions:</span><span class="p">(</span><span class="kt">CPDictionary</span><span class="p">)</span>options
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">exitFullScreenModeWithOptions:</span><span class="p">(</span><span class="kt">CPDictionary</span><span class="p">)</span>options
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_isInFullScreenMode</span><span class="p">)</span>
         <span class="k">return</span><span class="p">;</span>
@@ -1209,8 +1157,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns \c YES if the receiver is currently in full screen mode.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isInFullScreenMode</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isInFullScreenMode</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_isInFullScreenMode</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1218,8 +1165,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Sets whether the receiver should be hidden.</span>
 <span class="cm">    @param aFlag \c YES makes the receiver hidden.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setHidden:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>aFlag
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setHidden:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>aFlag
 <span class="p">{</span>
     <span class="n">aFlag</span> <span class="o">=</span> <span class="o">!!</span><span class="n">aFlag</span><span class="p">;</span>
 
@@ -1228,9 +1174,9 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="c1">//  FIXME: Should we return to visibility?  This breaks in FireFox, Opera, and IE.</span>
 <span class="c1">//    _DOMElement.style.visibility = (_isHidden = aFlag) ? &quot;hidden&quot; : &quot;visible&quot;;</span>
-    <span class="n">_isHidden</span> <span class="o">=</span> <span class="n">aFlag</span><span class="p">;</span><span class="cp"></span>
+    <span class="n">_isHidden</span> <span class="o">=</span> <span class="n">aFlag</span><span class="p">;</span>
 <span class="cp">#if PLATFORM(DOM)</span>
-    <span class="n">_DOMElement</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">display</span> <span class="o">=</span> <span class="n">_isHidden</span> <span class="o">?</span> <span class="s">&quot;none&quot;</span> <span class="o">:</span> <span class="s">&quot;block&quot;</span><span class="p">;</span><span class="cp"></span>
+    <span class="n">_DOMElement</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">display</span> <span class="o">=</span> <span class="n">_isHidden</span> <span class="o">?</span> <span class="s">&quot;none&quot;</span> <span class="o">:</span> <span class="s">&quot;block&quot;</span><span class="p">;</span>
 <span class="cp">#endif</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">aFlag</span><span class="p">)</span>
@@ -1254,8 +1200,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns \c YES if the receiver is hidden.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isHidden</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isHidden</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_isHidden</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1264,14 +1209,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Sets the opacity of the receiver. The value must be in the range of 0.0 to 1.0, where 0.0 is </span>
 <span class="cm">    completely transparent and 1.0 is completely opaque.</span>
 <span class="cm">    @param anAlphaValue an alpha value ranging from 0.0 to 1.0.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setAlphaValue:</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span>anAlphaValue
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setAlphaValue:</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span>anAlphaValue
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">_opacity</span> <span class="o">==</span> <span class="n">anAlphaValue</span><span class="p">)</span>
         <span class="k">return</span><span class="p">;</span>
     
-    <span class="n">_opacity</span> <span class="o">=</span> <span class="n">anAlphaValue</span><span class="p">;</span><span class="cp"></span>
-<span class="cp">    </span>
+    <span class="n">_opacity</span> <span class="o">=</span> <span class="n">anAlphaValue</span><span class="p">;</span>
+    
 <span class="cp">#if PLATFORM(DOM)</span>
     
     <span class="k">if</span> <span class="p">(</span><span class="nf">CPFeatureIsCompatible</span><span class="p">(</span><span class="n">CPOpacityRequiresFilterFeature</span><span class="p">))</span>
@@ -1282,7 +1226,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
             <span class="n">_DOMElement</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">filter</span> <span class="o">=</span> <span class="s">&quot;alpha(opacity=&quot;</span> <span class="o">+</span> <span class="n">anAlphaValue</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">else</span>
-        <span class="n">_DOMElement</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="n">anAlphaValue</span><span class="p">;</span><span class="cp"></span>
+        <span class="n">_DOMElement</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="n">anAlphaValue</span><span class="p">;</span>
 
 <span class="cp">#endif</span>
 <span class="p">}</span>
@@ -1290,8 +1234,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns the alpha value of the receiver. Ranges from 0.0 to</span>
 <span class="cm">    1.0, where 0.0 is completely transparent and 1.0 is completely opaque.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="nf">alphaValue</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="nf">alphaValue</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_opacity</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1300,7 +1243,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Returns \c YES if the receiver is hidden, or one</span>
 <span class="cm">    of it&#39;s ancestor views is hidden. \c NO, otherwise.</span>
 <span class="cm">*/</span>   
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isHiddenOrHasHiddenAncestor</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="n">isHiddenOrHasHiddenAncestor</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">view</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
     
@@ -1316,7 +1259,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @return \c YES, if the view object accepts first mouse-down event. \c NO, otherwise.</span>
 <span class="cm">*/</span>
 <span class="c1">//FIXME: should be NO by default? </span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">acceptsFirstMouse:</span><span class="p">(</span><span class="kt">CPEvent</span><span class="p">)</span>anEvent
+<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="n">acceptsFirstMouse</span><span class="o">:</span><span class="p">(</span><span class="n">CPEvent</span><span class="p">)</span><span class="n">anEvent</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="kc">YES</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1324,8 +1267,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns whether or not the view responds to hit tests.</span>
 <span class="cm">    @return \c YES if this view listens to \c -hitTest messages, \c NO otherwise.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">hitTests</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">hitTests</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_hitTests</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1333,8 +1275,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Set whether or not the view should respond to hit tests.</span>
 <span class="cm">    @param shouldHitTest should be \c YES if this view should respond to hit tests, \c NO otherwise.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setHitTests:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>shouldHitTest
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setHitTests:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>shouldHitTest
 <span class="p">{</span>
     <span class="n">_hitTests</span> <span class="o">=</span> <span class="o">!!</span><span class="n">shouldHitTest</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1343,8 +1284,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Tests whether a point is contained within this view, or one of its subviews.</span>
 <span class="cm">    @param aPoint the point to test</span>
 <span class="cm">    @return returns the containing view, or nil if the point is not contained</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">hitTest:</span><span class="p">(</span><span class="kt">CPPoint</span><span class="p">)</span>aPoint
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">hitTest:</span><span class="p">(</span><span class="kt">CPPoint</span><span class="p">)</span>aPoint
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">_isHidden</span> <span class="o">||</span> <span class="o">!</span><span class="n">_hitTests</span> <span class="o">||</span> <span class="o">!</span><span class="nf">CPRectContainsPoint</span><span class="p">(</span><span class="n">_frame</span><span class="p">,</span> <span class="n">aPoint</span><span class="p">))</span>
         <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
@@ -1366,12 +1306,10 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns \c YES if mouse events aren&#39;t needed by the receiver and can be sent to the superview. The</span>
 <span class="cm">    default implementation returns \c NO if the view is opaque.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">mouseDownCanMoveWindow</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">mouseDownCanMoveWindow</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="o">!</span><span class="p">[</span><span class="nb">self</span> <span class="n">isOpaque</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">mouseDown:</span><span class="p">(</span><span class="kt">CPEvent</span><span class="p">)</span>anEvent
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">([</span><span class="nb">self</span> <span class="n">mouseDownCanMoveWindow</span><span class="p">])</span>
@@ -1381,14 +1319,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Sets the background color of the receiver.</span>
 <span class="cm">    @param aColor the new color for the receiver&#39;s background</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBackgroundColor:</span><span class="p">(</span><span class="kt">CPColor</span><span class="p">)</span>aColor
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setBackgroundColor:</span><span class="p">(</span><span class="kt">CPColor</span><span class="p">)</span>aColor
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">_backgroundColor</span> <span class="o">==</span> <span class="n">aColor</span><span class="p">)</span>
         <span class="k">return</span><span class="p">;</span>
     
-    <span class="n">_backgroundColor</span> <span class="o">=</span> <span class="n">aColor</span><span class="p">;</span><span class="cp"></span>
-<span class="cp">    </span>
+    <span class="n">_backgroundColor</span> <span class="o">=</span> <span class="n">aColor</span><span class="p">;</span>
+    
 <span class="cp">#if PLATFORM(DOM)</span>
     <span class="kd">var</span> <span class="n">patternImage</span> <span class="o">=</span> <span class="p">[</span><span class="n">_backgroundColor</span> <span class="n">patternImage</span><span class="p">],</span>
         <span class="n">amount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -1489,14 +1426,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
             <span class="nf">CPDOMDisplayServerSetStyleLeftTop</span><span class="p">(</span><span class="n">_DOMImageParts</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">_DOMImageSizes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">width</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>        
             <span class="nf">CPDOMDisplayServerSetStyleRightTop</span><span class="p">(</span><span class="n">_DOMImageParts</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kc">NULL</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
         <span class="p">}</span>
-    <span class="p">}</span><span class="cp"></span>
+    <span class="p">}</span>
 <span class="cp">#endif</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns the background color of the receiver</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPColor</span><span class="p">)</span><span class="nf">backgroundColor</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPColor</span><span class="p">)</span><span class="nf">backgroundColor</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_backgroundColor</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1507,8 +1443,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aPoint the point to convert</span>
 <span class="cm">    @param aView the view space to convert from</span>
 <span class="cm">    @return the converted point</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span><span class="nf">convertPoint:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint <span class="nf">fromView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span><span class="nf">convertPoint:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint <span class="nf">fromView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">CGPointApplyAffineTransform</span><span class="p">(</span><span class="n">aPoint</span><span class="p">,</span> <span class="nf">_CPViewGetTransform</span><span class="p">(</span><span class="n">aView</span><span class="p">,</span> <span class="nb">self</span><span class="p">));</span>
 <span class="p">}</span>
@@ -1518,8 +1453,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aPoint the point to convert</span>
 <span class="cm">    @param aView the coordinate space to which the point will be converted</span>
 <span class="cm">    @return the converted point</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span><span class="nf">convertPoint:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint <span class="nf">toView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span><span class="nf">convertPoint:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint <span class="nf">toView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">CGPointApplyAffineTransform</span><span class="p">(</span><span class="n">aPoint</span><span class="p">,</span> <span class="nf">_CPViewGetTransform</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">aView</span><span class="p">));</span>
 <span class="p">}</span>
@@ -1529,8 +1463,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aSize the size to convert</span>
 <span class="cm">    @param aView the coordinate space to convert from</span>
 <span class="cm">    @return the converted size</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span><span class="nf">convertSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize <span class="nf">fromView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span><span class="nf">convertSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize <span class="nf">fromView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">CGSizeApplyAffineTransform</span><span class="p">(</span><span class="n">aSize</span><span class="p">,</span> <span class="nf">_CPViewGetTransform</span><span class="p">(</span><span class="n">aView</span><span class="p">,</span> <span class="nb">self</span><span class="p">));</span>
 <span class="p">}</span>
@@ -1540,8 +1473,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aSize the size to convert</span>
 <span class="cm">    @param the coordinate space to which the size will be converted</span>
 <span class="cm">    @return the converted size</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span><span class="nf">convertSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize <span class="nf">toView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span><span class="nf">convertSize:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>aSize <span class="nf">toView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">CGSizeApplyAffineTransform</span><span class="p">(</span><span class="n">aSize</span><span class="p">,</span> <span class="nf">_CPViewGetTransform</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">aView</span><span class="p">));</span>
 <span class="p">}</span>
@@ -1551,8 +1483,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aRect the rectangle to convert</span>
 <span class="cm">    @param aView the coordinate space from which to convert</span>
 <span class="cm">    @return the converted rectangle</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">convertRect:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aRect <span class="nf">fromView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">convertRect:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aRect <span class="nf">fromView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">CGRectApplyAffineTransform</span><span class="p">(</span><span class="n">aRect</span><span class="p">,</span> <span class="nf">_CPViewGetTransform</span><span class="p">(</span><span class="n">aView</span><span class="p">,</span> <span class="nb">self</span><span class="p">));</span>
 <span class="p">}</span>
@@ -1562,8 +1493,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aRect the rectangle to convert</span>
 <span class="cm">    @param aView the coordinate space to which the rectangle will be converted</span>
 <span class="cm">    @return the converted rectangle</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">convertRect:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aRect <span class="nf">toView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">convertRect:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aRect <span class="nf">toView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">CGRectApplyAffineTransform</span><span class="p">(</span><span class="n">aRect</span><span class="p">,</span> <span class="nf">_CPViewGetTransform</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">aView</span><span class="p">));</span>
 <span class="p">}</span>
@@ -1579,8 +1509,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">&lt;/pre&gt;</span>
 <span class="cm">    @param shouldPostFrameChangedNotifications \c YES makes the receiver post</span>
 <span class="cm">    notifications on frame changes (size or origin)</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setPostsFrameChangedNotifications:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>shouldPostFrameChangedNotifications
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setPostsFrameChangedNotifications:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>shouldPostFrameChangedNotifications
 <span class="p">{</span>
     <span class="n">shouldPostFrameChangedNotifications</span> <span class="o">=</span> <span class="o">!!</span><span class="n">shouldPostFrameChangedNotifications</span><span class="p">;</span>
 
@@ -1595,8 +1524,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns \c YES if the receiver posts a CPViewFrameDidChangeNotification if its frame is changed.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">postsFrameChangedNotifications</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">postsFrameChangedNotifications</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_postsFrameChangedNotifications</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1612,8 +1540,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">&lt;/pre&gt;</span>
 <span class="cm">    @param shouldPostBoundsChangedNotifications \c YES makes the receiver post</span>
 <span class="cm">    notifications on bounds changes</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setPostsBoundsChangedNotifications:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>shouldPostBoundsChangedNotifications
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setPostsBoundsChangedNotifications:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>shouldPostBoundsChangedNotifications
 <span class="p">{</span>
     <span class="n">shouldPostBoundsChangedNotifications</span> <span class="o">=</span> <span class="o">!!</span><span class="n">shouldPostBoundsChangedNotifications</span><span class="p">;</span>
 
@@ -1630,8 +1557,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Returns \c YES if the receiver posts a</span>
 <span class="cm">    CPViewBoundsDidChangeNotification when its</span>
 <span class="cm">    bounds is changed.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">postsBoundsChangedNotifications</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">postsBoundsChangedNotifications</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_postsBoundsChangedNotifications</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1645,8 +1571,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aPastebaord the pasteboard that holds the drag data</span>
 <span class="cm">    @param aSourceObject the drag operation controller</span>
 <span class="cm">    @param slideBack Whether the image should &#39;slide back&#39; if the drag is rejected</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dragImage:</span><span class="p">(</span><span class="kt">CPImage</span><span class="p">)</span>anImage <span class="nf">at:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aLocation <span class="nf">offset:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>mouseOffset <span class="nf">event:</span><span class="p">(</span><span class="kt">CPEvent</span><span class="p">)</span>anEvent <span class="nf">pasteboard:</span><span class="p">(</span><span class="kt">CPPasteboard</span><span class="p">)</span>aPasteboard <span class="nf">source:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aSourceObject <span class="nf">slideBack:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>slideBack
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dragImage:</span><span class="p">(</span><span class="kt">CPImage</span><span class="p">)</span>anImage <span class="nf">at:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aLocation <span class="nf">offset:</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">)</span>mouseOffset <span class="nf">event:</span><span class="p">(</span><span class="kt">CPEvent</span><span class="p">)</span>anEvent <span class="nf">pasteboard:</span><span class="p">(</span><span class="kt">CPPasteboard</span><span class="p">)</span>aPasteboard <span class="nf">source:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aSourceObject <span class="nf">slideBack:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>slideBack
 <span class="p">{</span>
     <span class="p">[</span><span class="n">_window</span> <span class="n">dragImage</span><span class="o">:</span><span class="n">anImage</span> <span class="n">at</span><span class="o">:</span><span class="p">[</span><span class="nb">self</span> <span class="n">convertPoint</span><span class="o">:</span><span class="n">aLocation</span> <span class="n">toView</span><span class="o">:</span><span class="kc">nil</span><span class="p">]</span> <span class="n">offset</span><span class="o">:</span><span class="n">mouseOffset</span> <span class="n">event</span><span class="o">:</span><span class="n">anEvent</span> <span class="n">pasteboard</span><span class="o">:</span><span class="n">aPasteboard</span> <span class="n">source</span><span class="o">:</span><span class="n">aSourceObject</span> <span class="n">slideBack</span><span class="o">:</span><span class="n">slideBack</span><span class="p">];</span>
 <span class="p">}</span>
@@ -1660,8 +1585,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aPastebaord the pasteboard that holds the drag data</span>
 <span class="cm">    @param aSourceObject the drag operation controller</span>
 <span class="cm">    @param slideBack Whether the view should &#39;slide back&#39; if the drag is rejected</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dragView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView <span class="nf">at:</span><span class="p">(</span><span class="kt">CPPoint</span><span class="p">)</span>aLocation <span class="nf">offset:</span><span class="p">(</span><span class="kt">CPSize</span><span class="p">)</span>mouseOffset <span class="nf">event:</span><span class="p">(</span><span class="kt">CPEvent</span><span class="p">)</span>anEvent <span class="nf">pasteboard:</span><span class="p">(</span><span class="kt">CPPasteboard</span><span class="p">)</span>aPasteboard <span class="nf">source:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aSourceObject <span class="nf">slideBack:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>slideBack
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dragView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>aView <span class="nf">at:</span><span class="p">(</span><span class="kt">CPPoint</span><span class="p">)</span>aLocation <span class="nf">offset:</span><span class="p">(</span><span class="kt">CPSize</span><span class="p">)</span>mouseOffset <span class="nf">event:</span><span class="p">(</span><span class="kt">CPEvent</span><span class="p">)</span>anEvent <span class="nf">pasteboard:</span><span class="p">(</span><span class="kt">CPPasteboard</span><span class="p">)</span>aPasteboard <span class="nf">source:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aSourceObject <span class="nf">slideBack:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>slideBack
 <span class="p">{</span>
     <span class="p">[</span><span class="n">_window</span> <span class="n">dragView</span><span class="o">:</span><span class="n">aView</span> <span class="n">at</span><span class="o">:</span><span class="p">[</span><span class="nb">self</span> <span class="n">convertPoint</span><span class="o">:</span><span class="n">aLocation</span> <span class="n">toView</span><span class="o">:</span><span class="kc">nil</span><span class="p">]</span> <span class="n">offset</span><span class="o">:</span><span class="n">mouseOffset</span> <span class="n">event</span><span class="o">:</span><span class="n">anEvent</span> <span class="n">pasteboard</span><span class="o">:</span><span class="n">aPasteboard</span> <span class="n">source</span><span class="o">:</span><span class="n">aSourceObject</span> <span class="n">slideBack</span><span class="o">:</span><span class="n">slideBack</span><span class="p">];</span>
 <span class="p">}</span>
@@ -1669,8 +1593,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Sets the receiver&#39;s list of acceptable data types for a dragging operation.</span>
 <span class="cm">    @param pasteboardTypes an array of CPPasteboards</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">registerForDraggedTypes:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>pasteboardTypes
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">registerForDraggedTypes:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>pasteboardTypes
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">pasteboardTypes</span> <span class="o">||</span> <span class="o">!</span><span class="p">[</span><span class="n">pasteboardTypes</span> <span class="n">count</span><span class="p">])</span>
         <span class="k">return</span><span class="p">;</span>
@@ -1687,8 +1610,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns an array of all types the receiver accepts for dragging operations.</span>
 <span class="cm">    @return an array of CPPasteBoards</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">registeredDraggedTypes</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">registeredDraggedTypes</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_registeredDraggedTypesArray</span><span class="p">)</span>
         <span class="n">_registeredDraggedTypesArray</span> <span class="o">=</span> <span class="p">[</span><span class="n">_registeredDraggedTypes</span> <span class="n">allObjects</span><span class="p">];</span>
@@ -1698,8 +1620,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Resets the array of acceptable data types for a dragging operation.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">unregisterDraggedTypes</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">unregisterDraggedTypes</span>
 <span class="p">{</span>
     <span class="p">[[</span><span class="nb">self</span> <span class="nb">window</span><span class="p">]</span> <span class="n">_noteUnregisteredDraggedTypes</span><span class="o">:</span><span class="n">_registeredDraggedTypes</span><span class="p">];</span>
 
@@ -1710,8 +1631,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Draws the receiver into \c aRect. This method should be overridden by subclasses.</span>
 <span class="cm">    @param aRect the area that should be drawn into</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">drawRect:</span><span class="p">(</span><span class="kt">CPRect</span><span class="p">)</span>aRect
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">drawRect:</span><span class="p">(</span><span class="kt">CPRect</span><span class="p">)</span>aRect
 <span class="p">{</span>
 
 <span class="p">}</span>
@@ -1720,8 +1640,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Marks the entire view as dirty, and needing a redraw.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setNeedsDisplay:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>aFlag
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setNeedsDisplay:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>aFlag
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">aFlag</span><span class="p">)</span>
         <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsDisplayInRect</span><span class="o">:</span><span class="p">[</span><span class="nb">self</span> <span class="n">bounds</span><span class="p">]];</span>
@@ -1730,8 +1649,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Marks the area denoted by \c aRect as dirty, and initiates a redraw on it.</span>
 <span class="cm">    @param aRect the area that needs to be redrawn</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setNeedsDisplayInRect:</span><span class="p">(</span><span class="kt">CPRect</span><span class="p">)</span>aRect
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setNeedsDisplayInRect:</span><span class="p">(</span><span class="kt">CPRect</span><span class="p">)</span>aRect
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">_viewClassFlags</span> <span class="o">&amp;</span> <span class="n">CPViewHasCustomDrawRect</span><span class="p">))</span>
         <span class="k">return</span><span class="p">;</span>
@@ -1746,7 +1664,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="nf">_CPDisplayServerAddDisplayObject</span><span class="p">(</span><span class="nb">self</span><span class="p">);</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">needsDisplay</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_dirtyRect</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nf">_CGRectIsEmpty</span><span class="p">(</span><span class="n">_dirtyRect</span><span class="p">);</span>
@@ -1754,8 +1671,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Displays the receiver and any of its subviews that need to be displayed.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">displayIfNeeded</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">displayIfNeeded</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">([</span><span class="nb">self</span> <span class="n">needsDisplay</span><span class="p">])</span>
         <span class="p">[</span><span class="nb">self</span> <span class="n">displayRect</span><span class="o">:</span><span class="n">_dirtyRect</span><span class="p">];</span>
@@ -1763,12 +1679,10 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Draws the entire area of the receiver as defined by its \c -bounds.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">display</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">display</span>
 <span class="p">{</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">displayRect</span><span class="o">:</span><span class="p">[</span><span class="nb">self</span> <span class="n">visibleRect</span><span class="p">]];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">displayIfNeededInRect:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aRect
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">([</span><span class="nb">self</span> <span class="n">needsDisplay</span><span class="p">])</span>
@@ -1778,8 +1692,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Draws the receiver into the area defined by \c aRect.</span>
 <span class="cm">    @param aRect the area to be drawn</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">displayRect:</span><span class="p">(</span><span class="kt">CPRect</span><span class="p">)</span>aRect
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">displayRect:</span><span class="p">(</span><span class="kt">CPRect</span><span class="p">)</span>aRect
 <span class="p">{</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">viewWillDraw</span><span class="p">];</span>
     
@@ -1787,7 +1700,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     
     <span class="n">_dirtyRect</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">displayRectIgnoringOpacity:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aRect <span class="nf">inContext:</span><span class="p">(</span><span class="kt">CPGraphicsContext</span><span class="p">)</span>aGraphicsContext
 <span class="p">{</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">lockFocus</span><span class="p">];</span>
@@ -1797,15 +1709,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="p">[</span><span class="nb">self</span> <span class="n">drawRect</span><span class="o">:</span><span class="n">aRect</span><span class="p">];</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">unlockFocus</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillDraw</span>
 <span class="p">{</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Locks focus on the receiver, so drawing commands apply to it.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">lockFocus</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">lockFocus</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_graphicsContext</span><span class="p">)</span>
     <span class="p">{</span>
@@ -1839,14 +1749,12 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Takes focus away from the receiver, and restores it to the previous view.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">unlockFocus</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">unlockFocus</span>
 <span class="p">{</span>
     <span class="nf">CGContextRestoreGState</span><span class="p">([</span><span class="n">_graphicsContext</span> <span class="n">graphicsPort</span><span class="p">]);</span>
     
     <span class="p">[</span><span class="n">CPGraphicsContext</span> <span class="n">setCurrentContext</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setNeedsLayout</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">_viewClassFlags</span> <span class="o">&amp;</span> <span class="n">CPViewHasCustomLayoutSubviews</span><span class="p">))</span>
@@ -1856,7 +1764,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="nf">_CPDisplayServerAddLayoutObject</span><span class="p">(</span><span class="nb">self</span><span class="p">);</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">layoutIfNeeded</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">_needsLayout</span><span class="p">)</span>
@@ -1866,23 +1773,20 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
         <span class="p">[</span><span class="nb">self</span> <span class="n">layoutSubviews</span><span class="p">];</span>
     <span class="p">}</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">layoutSubviews</span>
 <span class="p">{</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns whether the receiver is completely opaque. By default, returns \c NO.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isOpaque</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isOpaque</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="kc">NO</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns the rectangle of the receiver not clipped by its superview.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">visibleRect</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">visibleRect</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_superview</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_bounds</span><span class="p">;</span>
@@ -1891,8 +1795,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="p">}</span>
 
 <span class="c1">// Scrolling</span>
-<span class="cm">/* @ignore */</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPScrollView</span><span class="p">)</span><span class="nf">_enclosingClipView</span>
+<span class="cm">/* @ignore */</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPScrollView</span><span class="p">)</span><span class="nf">_enclosingClipView</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">superview</span> <span class="o">=</span> <span class="n">_superview</span><span class="p">,</span>
         <span class="n">clipViewClass</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPClipView</span> <span class="n">class</span><span class="p">];</span>
@@ -1906,8 +1809,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Changes the receiver&#39;s frame origin to a &#39;constrained&#39; \c aPoint.</span>
 <span class="cm">    @param aPoint the proposed frame origin</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">scrollPoint:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">scrollPoint:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">clipView</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">_enclosingClipView</span><span class="p">];</span>
     
@@ -1921,8 +1823,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Scrolls the nearest ancestor CPClipView a minimum amount so \c aRect can become visible.</span>
 <span class="cm">    @param aRect the area to become visible</span>
 <span class="cm">    @return &lt;codeYES if any scrolling occurred, \c NO otherwise.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">scrollRectToVisible:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aRect
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">scrollRectToVisible:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aRect
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">visibleRect</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">visibleRect</span><span class="p">];</span>
     
@@ -1959,8 +1860,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*</span>
 <span class="cm">    FIXME Not yet implemented</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">autoscroll:</span><span class="p">(</span><span class="kt">CPEvent</span><span class="p">)</span>anEvent
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">autoscroll:</span><span class="p">(</span><span class="kt">CPEvent</span><span class="p">)</span>anEvent
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">autoscroll</span><span class="o">:</span><span class="n">anEvent</span><span class="p">];</span>
 <span class="p">}</span>
@@ -1970,16 +1870,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    scrolling operation. The default implementation simply returns the provided rectangle.</span>
 <span class="cm">    @param proposedVisibleRect the rectangle to alter</span>
 <span class="cm">    @return the same adjusted rectangle</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">adjustScroll:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>proposedVisibleRect
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">adjustScroll:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>proposedVisibleRect
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">proposedVisibleRect</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Should be overridden by subclasses.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">scrollRect:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aRect <span class="nf">by:</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span>anAmount
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">scrollRect:</span><span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span>aRect <span class="nf">by:</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span>anAmount
 <span class="p">{</span>
 
 <span class="p">}</span>
@@ -1987,8 +1885,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns the CPScrollView containing the receiver.</span>
 <span class="cm">    @return the CPScrollView containing the receiver.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPScrollView</span><span class="p">)</span><span class="nf">enclosingScrollView</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPScrollView</span><span class="p">)</span><span class="nf">enclosingScrollView</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">superview</span> <span class="o">=</span> <span class="n">_superview</span><span class="p">,</span>
         <span class="n">scrollViewClass</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPScrollView</span> <span class="n">class</span><span class="p">];</span>
@@ -2003,8 +1900,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Scrolls the clip view to a specified point</span>
 <span class="cm">    @param the clip view to scoll</span>
 <span class="cm">    @param the point to scroll to</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">scrollClipView:</span><span class="p">(</span><span class="kt">CPClipView</span><span class="p">)</span>aClipView <span class="nf">toPoint:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">scrollClipView:</span><span class="p">(</span><span class="kt">CPClipView</span><span class="p">)</span>aClipView <span class="nf">toPoint:</span><span class="p">(</span><span class="kt">CGPoint</span><span class="p">)</span>aPoint
 <span class="p">{</span>
     <span class="p">[</span><span class="n">aClipView</span> <span class="n">scrollToPoint</span><span class="o">:</span><span class="n">aPoint</span><span class="p">];</span>
 <span class="p">}</span>
@@ -2013,15 +1909,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Notifies the receiver (superview of a CPClipView)</span>
 <span class="cm">    that the clip view bounds or the document view bounds have changed.</span>
 <span class="cm">    @param aClipView the clip view of the superview being notified</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">reflectScrolledClipView:</span><span class="p">(</span><span class="kt">CPClipView</span><span class="p">)</span>aClipView
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">reflectScrolledClipView:</span><span class="p">(</span><span class="kt">CPClipView</span><span class="p">)</span>aClipView
 <span class="p">{</span>
 <span class="p">}</span>
 
 <span class="k">@end</span>
 
 <span class="k">@implementation</span> <span class="nc">CPView</span> <span class="p">(</span><span class="nl">KeyView</span>)
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">performKeyEquivalent:</span><span class="p">(</span><span class="kt">CPEvent</span><span class="p">)</span>anEvent
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="n">_subviews</span> <span class="n">count</span><span class="p">];</span>
@@ -2033,17 +1927,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="kc">NO</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">canBecomeKeyView</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">acceptsFirstResponder</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">[</span><span class="nb">self</span> <span class="n">isHiddenOrHasHiddenAncestor</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">nextKeyView</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_nextKeyView</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">nextValidKeyView</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">nextKeyView</span><span class="p">];</span>
@@ -2053,12 +1944,10 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">previousKeyView</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_previousKeyView</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">previousValidKeyView</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">previousKeyView</span><span class="p">];</span>
@@ -2068,12 +1957,10 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_setPreviousKeyView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>previous
 <span class="p">{</span>
     <span class="n">_previousKeyView</span> <span class="o">=</span> <span class="n">previous</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setNextKeyView:</span><span class="p">(</span><span class="kt">CPView</span><span class="p">)</span>next
 <span class="p">{</span>
     <span class="n">_nextKeyView</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
@@ -2086,17 +1973,16 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Sets the core animation layer to be used by this receiver.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setLayer:</span><span class="p">(</span><span class="kt">CALayer</span><span class="p">)</span>aLayer
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setLayer:</span><span class="p">(</span><span class="kt">CALayer</span><span class="p">)</span>aLayer
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">_layer</span> <span class="o">==</span> <span class="n">aLayer</span><span class="p">)</span>
         <span class="k">return</span><span class="p">;</span>
     
     <span class="k">if</span> <span class="p">(</span><span class="n">_layer</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="n">_layer</span><span class="p">.</span><span class="n">_owningView</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span><span class="cp"></span>
+        <span class="n">_layer</span><span class="p">.</span><span class="n">_owningView</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="cp">#if PLATFORM(DOM)</span>
-        <span class="n">_DOMElement</span><span class="p">.</span><span class="nf">removeChild</span><span class="p">(</span><span class="n">_layer</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">);</span><span class="cp"></span>
+        <span class="n">_DOMElement</span><span class="p">.</span><span class="nf">removeChild</span><span class="p">(</span><span class="n">_layer</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">);</span>
 <span class="cp">#endif</span>
     <span class="p">}</span>
     
@@ -2106,20 +1992,19 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="p">{</span>
         <span class="kd">var</span> <span class="n">bounds</span> <span class="o">=</span> <span class="nf">CGRectMakeCopy</span><span class="p">([</span><span class="nb">self</span> <span class="n">bounds</span><span class="p">]);</span>
         
-        <span class="p">[</span><span class="n">_layer</span> <span class="n">_setOwningView</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span><span class="cp"></span>
-<span class="cp">        </span>
+        <span class="p">[</span><span class="n">_layer</span> <span class="n">_setOwningView</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+        
 <span class="cp">#if PLATFORM(DOM)</span>
         <span class="n">_layer</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">zIndex</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
         
-        <span class="n">_DOMElement</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="n">_layer</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">);</span><span class="cp"></span>
+        <span class="n">_DOMElement</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="n">_layer</span><span class="p">.</span><span class="n">_DOMElement</span><span class="p">);</span>
 <span class="cp">#endif</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns the core animation layer used by the receiver.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CALayer</span><span class="p">)</span><span class="nf">layer</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CALayer</span><span class="p">)</span><span class="nf">layer</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_layer</span><span class="p">;</span>
 <span class="p">}</span>
@@ -2127,8 +2012,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Sets whether the receiver wants a core animation layer.</span>
 <span class="cm">    @param \c YES means the receiver wants a layer.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setWantsLayer:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>aFlag
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setWantsLayer:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>aFlag
 <span class="p">{</span>
     <span class="n">_wantsLayer</span> <span class="o">=</span> <span class="o">!!</span><span class="n">aFlag</span><span class="p">;</span>
 <span class="p">}</span>
@@ -2136,27 +2020,23 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns \c YES if the receiver uses a CALayer</span>
 <span class="cm">    @returns \c YES if the receiver uses a CALayer</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">wantsLayer</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">wantsLayer</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_wantsLayer</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">@end</span>
 
-<span class="k">@implementation</span> <span class="nc">CPView</span> <span class="p">(</span><span class="nl">Theming</span>)<span class="cp"></span>
+<span class="k">@implementation</span> <span class="nc">CPView</span> <span class="p">(</span><span class="nl">Theming</span>)
 <span class="cp">#pragma mark Theme States</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">themeState</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_themeState</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">hasThemeState:</span><span class="p">(</span><span class="kt">CPThemeState</span><span class="p">)</span>aState
 <span class="p">{</span>
     <span class="k">return</span> <span class="o">!!</span><span class="p">(</span><span class="n">_themeState</span> <span class="o">&amp;</span> <span class="p">((</span><span class="k">typeof</span> <span class="n">aState</span> <span class="o">===</span> <span class="s">&quot;string&quot;</span><span class="p">)</span> <span class="o">?</span> <span class="nf">CPThemeState</span><span class="p">(</span><span class="n">aState</span><span class="p">)</span> <span class="o">:</span> <span class="n">aState</span><span class="p">));</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">setThemeState:</span><span class="p">(</span><span class="kt">CPThemeState</span><span class="p">)</span>aState
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">newState</span> <span class="o">=</span> <span class="p">(</span><span class="k">typeof</span> <span class="n">aState</span> <span class="o">===</span> <span class="s">&quot;string&quot;</span><span class="p">)</span> <span class="o">?</span> <span class="nf">CPThemeState</span><span class="p">(</span><span class="n">aState</span><span class="p">)</span> <span class="o">:</span> <span class="n">aState</span><span class="p">;</span>
@@ -2171,7 +2051,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="kc">YES</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">unsetThemeState:</span><span class="p">(</span><span class="kt">CPThemeState</span><span class="p">)</span>aState
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">newState</span> <span class="o">=</span> <span class="p">((</span><span class="k">typeof</span> <span class="n">aState</span> <span class="o">===</span> <span class="s">&quot;string&quot;</span><span class="p">)</span> <span class="o">?</span> <span class="nf">CPThemeState</span><span class="p">(</span><span class="n">aState</span><span class="p">)</span> <span class="o">:</span> <span class="n">aState</span><span class="p">);</span>
@@ -2185,20 +2064,17 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsDisplay</span><span class="o">:</span><span class="kc">YES</span><span class="p">];</span>
 
     <span class="k">return</span> <span class="kc">YES</span><span class="p">;</span>
-<span class="p">}</span><span class="cp"></span>
+<span class="p">}</span>
 
 <span class="cp">#pragma mark Theme Attributes</span>
-
 <span class="o">+</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">themeClass</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">+</span> <span class="p">(</span><span class="kt">CPDictionary</span><span class="p">)</span><span class="nf">themeAttributes</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">+</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">_themeAttributes</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">CachedThemeAttributes</span><span class="p">)</span>
@@ -2239,7 +2115,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="n">attributes</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_loadThemeAttributes</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">theClass</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">class</span><span class="p">],</span>
@@ -2264,7 +2139,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
         <span class="n">_themeAttributes</span><span class="p">[</span><span class="n">attributeName</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setTheme:</span><span class="p">(</span><span class="kt">CPTheme</span><span class="p">)</span>aTheme
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">_theme</span> <span class="o">===</span> <span class="n">aTheme</span><span class="p">)</span>
@@ -2274,12 +2148,10 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
         
     <span class="p">[</span><span class="nb">self</span> <span class="n">viewDidChangeTheme</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPTheme</span><span class="p">)</span><span class="nf">theme</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">_theme</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidChangeTheme</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_themeAttributes</span><span class="p">)</span>
@@ -2295,7 +2167,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsLayout</span><span class="p">];</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsDisplay</span><span class="o">:</span><span class="kc">YES</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPDictionary</span><span class="p">)</span><span class="nf">_themeAttributeDictionary</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPDictionary</span> <span class="n">dictionary</span><span class="p">];</span>
@@ -2311,7 +2182,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="n">dictionary</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aValue <span class="nf">forThemeAttribute:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aName <span class="nf">inState:</span><span class="p">(</span><span class="kt">CPThemeState</span><span class="p">)</span>aState
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_themeAttributes</span> <span class="o">||</span> <span class="o">!</span><span class="n">_themeAttributes</span><span class="p">[</span><span class="n">aName</span><span class="p">])</span>
@@ -2327,7 +2197,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsDisplay</span><span class="o">:</span><span class="kc">YES</span><span class="p">];</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsLayout</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aValue <span class="nf">forThemeAttribute:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aName
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_themeAttributes</span> <span class="o">||</span> <span class="o">!</span><span class="n">_themeAttributes</span><span class="p">[</span><span class="n">aName</span><span class="p">])</span>
@@ -2343,7 +2212,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsDisplay</span><span class="o">:</span><span class="kc">YES</span><span class="p">];</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">setNeedsLayout</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">valueForThemeAttribute:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aName <span class="nf">inState:</span><span class="p">(</span><span class="kt">CPThemeState</span><span class="p">)</span>aState
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_themeAttributes</span> <span class="o">||</span> <span class="o">!</span><span class="n">_themeAttributes</span><span class="p">[</span><span class="n">aName</span><span class="p">])</span>
@@ -2351,7 +2219,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="p">[</span><span class="n">_themeAttributes</span><span class="p">[</span><span class="n">aName</span><span class="p">]</span> <span class="n">valueForState</span><span class="o">:</span><span class="n">aState</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">valueForThemeAttribute:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aName
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_themeAttributes</span> <span class="o">||</span> <span class="o">!</span><span class="n">_themeAttributes</span><span class="p">[</span><span class="n">aName</span><span class="p">])</span>
@@ -2359,7 +2226,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="p">[</span><span class="n">_themeAttributes</span><span class="p">[</span><span class="n">aName</span><span class="p">]</span> <span class="n">value</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">currentValueForThemeAttribute:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aName
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_themeAttributes</span> <span class="o">||</span> <span class="o">!</span><span class="n">_themeAttributes</span><span class="p">[</span><span class="n">aName</span><span class="p">])</span>
@@ -2367,17 +2233,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="p">[</span><span class="n">_themeAttributes</span><span class="p">[</span><span class="n">aName</span><span class="p">]</span> <span class="n">valueForState</span><span class="o">:</span><span class="n">_themeState</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">createEphemeralSubviewNamed:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aViewName
 <span class="p">{</span>
     <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CGRect</span><span class="p">)</span><span class="nf">rectForEphemeralSubviewNamed:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aViewName
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">_CGRectMakeZero</span><span class="p">();</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">layoutEphemeralSubviewNamed:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aViewName 
                            <span class="nf">positioned:</span><span class="p">(</span><span class="kt">CPWindowOrderingMode</span><span class="p">)</span>anOrderingMode
       <span class="nf">relativeToEphemeralSubviewNamed:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>relativeToViewName
@@ -2440,15 +2303,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Initializes the view from an archive.</span>
 <span class="cm">    @param aCoder the coder from which to initialize</span>
 <span class="cm">    @return the initialized view</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithCoder:</span><span class="p">(</span><span class="kt">CPCoder</span><span class="p">)</span>aCoder
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithCoder:</span><span class="p">(</span><span class="kt">CPCoder</span><span class="p">)</span>aCoder
 <span class="p">{</span>
     <span class="c1">// We create the DOMElement &quot;early&quot; because there is a chance that we </span>
     <span class="c1">// will decode our superview before we are done decoding, at which point </span>
     <span class="c1">// we have to have an element to place in the tree.  Perhaps there is </span>
     <span class="c1">// a more &quot;elegant&quot; way to do this...?</span>
 <span class="cp">#if PLATFORM(DOM)</span>
-    <span class="n">_DOMElement</span> <span class="o">=</span> <span class="n">DOMElementPrototype</span><span class="p">.</span><span class="nf">cloneNode</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="cp"></span>
+    <span class="n">_DOMElement</span> <span class="o">=</span> <span class="n">DOMElementPrototype</span><span class="p">.</span><span class="nf">cloneNode</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 <span class="cp">#endif</span>
 
     <span class="c1">// Also decode these &quot;early&quot;.</span>
@@ -2490,7 +2352,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
         <span class="p">{</span>
             <span class="nf">CPDOMDisplayServerAppendChild</span><span class="p">(</span><span class="n">_DOMElement</span><span class="p">,</span> <span class="n">_subviews</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">_DOMElement</span><span class="p">);</span>
             <span class="c1">//_subviews[index]._superview = self;</span>
-        <span class="p">}</span><span class="cp"></span>
+        <span class="p">}</span>
 <span class="cp">#endif</span>
 
         <span class="k">if</span> <span class="p">([</span><span class="n">aCoder</span> <span class="n">containsValueForKey</span><span class="o">:</span><span class="n">CPViewIsHiddenKey</span><span class="p">])</span>
@@ -2533,8 +2395,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Archives the view to a coder.</span>
 <span class="cm">    @param aCoder the object into which the view&#39;s data will be archived.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">encodeWithCoder:</span><span class="p">(</span><span class="kt">CPCoder</span><span class="p">)</span>aCoder
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">encodeWithCoder:</span><span class="p">(</span><span class="kt">CPCoder</span><span class="p">)</span>aCoder
 <span class="p">{</span>
     <span class="p">[</span><span class="nb">super</span> <span class="n">encodeWithCoder</span><span class="o">:</span><span class="n">aCoder</span><span class="p">];</span>
     

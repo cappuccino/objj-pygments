@@ -1,0 +1,1033 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=latin1">
+  <style type="text/css">
+td.linenos { background-color: #f0f0f0; padding-right: 10px; }
+span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+pre { line-height: 125%; }
+body .hll { background-color: #ffffcc }
+body  { background: #f8f8f8; }
+body .c { color: #408080; font-style: italic } /* Comment */
+body .err { border: 1px solid #FF0000 } /* Error */
+body .k { color: #008000; font-weight: bold } /* Keyword */
+body .o { color: #666666 } /* Operator */
+body .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+body .cp { color: #BC7A00 } /* Comment.Preproc */
+body .c1 { color: #408080; font-style: italic } /* Comment.Single */
+body .cs { color: #408080; font-style: italic } /* Comment.Special */
+body .gd { color: #A00000 } /* Generic.Deleted */
+body .ge { font-style: italic } /* Generic.Emph */
+body .gr { color: #FF0000 } /* Generic.Error */
+body .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+body .gi { color: #00A000 } /* Generic.Inserted */
+body .go { color: #808080 } /* Generic.Output */
+body .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+body .gs { font-weight: bold } /* Generic.Strong */
+body .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+body .gt { color: #0040D0 } /* Generic.Traceback */
+body .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+body .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+body .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+body .kp { color: #008000 } /* Keyword.Pseudo */
+body .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+body .kt { color: #B00040 } /* Keyword.Type */
+body .m { color: #666666 } /* Literal.Number */
+body .s { color: #BA2121 } /* Literal.String */
+body .na { color: #7D9029 } /* Name.Attribute */
+body .nb { color: #008000 } /* Name.Builtin */
+body .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+body .no { color: #880000 } /* Name.Constant */
+body .nd { color: #AA22FF } /* Name.Decorator */
+body .ni { color: #999999; font-weight: bold } /* Name.Entity */
+body .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+body .nf { color: #0000FF } /* Name.Function */
+body .nl { color: #A0A000 } /* Name.Label */
+body .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+body .nt { color: #008000; font-weight: bold } /* Name.Tag */
+body .nv { color: #19177C } /* Name.Variable */
+body .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+body .w { color: #bbbbbb } /* Text.Whitespace */
+body .mf { color: #666666 } /* Literal.Number.Float */
+body .mh { color: #666666 } /* Literal.Number.Hex */
+body .mi { color: #666666 } /* Literal.Number.Integer */
+body .mo { color: #666666 } /* Literal.Number.Oct */
+body .sb { color: #BA2121 } /* Literal.String.Backtick */
+body .sc { color: #BA2121 } /* Literal.String.Char */
+body .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+body .s2 { color: #BA2121 } /* Literal.String.Double */
+body .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+body .sh { color: #BA2121 } /* Literal.String.Heredoc */
+body .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+body .sx { color: #008000 } /* Literal.String.Other */
+body .sr { color: #BB6688 } /* Literal.String.Regex */
+body .s1 { color: #BA2121 } /* Literal.String.Single */
+body .ss { color: #19177C } /* Literal.String.Symbol */
+body .bp { color: #008000 } /* Name.Builtin.Pseudo */
+body .vc { color: #19177C } /* Name.Variable.Class */
+body .vg { color: #19177C } /* Name.Variable.Global */
+body .vi { color: #19177C } /* Name.Variable.Instance */
+body .il { color: #666666 } /* Literal.Number.Integer.Long */
+
+  </style>
+</head>
+<body>
+<h2></h2>
+
+<div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm"> * preprocessor.js</span>
+<span class="cm"> * Objective-J</span>
+<span class="cm"> *</span>
+<span class="cm"> * Created by Francisco Tolmasky.</span>
+<span class="cm"> * Copyright 2008, 280 North, Inc.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This library is free software; you can redistribute it and/or</span>
+<span class="cm"> * modify it under the terms of the GNU Lesser General Public</span>
+<span class="cm"> * License as published by the Free Software Foundation; either</span>
+<span class="cm"> * version 2.1 of the License, or (at your option) any later version.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This library is distributed in the hope that it will be useful,</span>
+<span class="cm"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="cm"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU</span>
+<span class="cm"> * Lesser General Public License for more details.</span>
+<span class="cm"> *</span>
+<span class="cm"> * You should have received a copy of the GNU Lesser General Public</span>
+<span class="cm"> * License along with this library; if not, write to the Free Software</span>
+<span class="cm"> * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA</span>
+<span class="cm"> */</span>
+
+<span class="kd">var</span> <span class="n">OBJJ_PREPROCESSOR_DEBUG_SYMBOLS</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">OBJJ_PREPROCESSOR_TYPE_SIGNATURES</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nf">objj_preprocess</span><span class="p">(</span><span class="cm">/*String*/</span> <span class="n">aString</span><span class="p">,</span> <span class="cm">/*objj_bundle*/</span> <span class="n">aBundle</span><span class="p">,</span> <span class="cm">/*objj_file*/</span> <span class="n">aSourceFile</span><span class="p">,</span> <span class="cm">/*unsigned*/</span> <span class="n">flags</span><span class="p">)</span> 
+<span class="p">{</span>    
+    <span class="k">try</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">objj_preprocessor</span><span class="p">(</span><span class="n">aString</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sr">/^#[^\n]+\n/</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">),</span> <span class="n">aSourceFile</span><span class="p">,</span> <span class="n">aBundle</span><span class="p">,</span> <span class="n">flags</span><span class="p">).</span><span class="nf">fragments</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">anException</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nf">objj_exception_report</span><span class="p">(</span><span class="n">anException</span><span class="p">,</span> <span class="n">aSourceFile</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="n">OBJJParseException</span>          <span class="o">=</span> <span class="s">&quot;OBJJParseException&quot;</span><span class="p">,</span>
+    <span class="n">OBJJClassNotFoundException</span>  <span class="o">=</span> <span class="s">&quot;OBJJClassNotFoundException&quot;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="n">TOKEN_ACCESSORS</span>         <span class="o">=</span> <span class="s">&quot;accessors&quot;</span><span class="p">,</span>
+    <span class="n">TOKEN_CLASS</span>             <span class="o">=</span> <span class="s">&quot;class&quot;</span><span class="p">,</span>
+    <span class="n">TOKEN_END</span>               <span class="o">=</span> <span class="s">&quot;end&quot;</span><span class="p">,</span>
+    <span class="n">TOKEN_FUNCTION</span>          <span class="o">=</span> <span class="s">&quot;function&quot;</span><span class="p">,</span>
+    <span class="n">TOKEN_IMPLEMENTATION</span>    <span class="o">=</span> <span class="s">&quot;implementation&quot;</span><span class="p">,</span>
+    <span class="n">TOKEN_IMPORT</span>            <span class="o">=</span> <span class="s">&quot;import&quot;</span><span class="p">,</span>
+    <span class="n">TOKEN_NEW</span>               <span class="o">=</span> <span class="s">&quot;new&quot;</span><span class="p">,</span>
+    <span class="n">TOKEN_SELECTOR</span>          <span class="o">=</span> <span class="s">&quot;selector&quot;</span><span class="p">,</span>
+    <span class="n">TOKEN_SUPER</span>             <span class="o">=</span> <span class="s">&quot;super&quot;</span><span class="p">,</span>
+                            
+    <span class="n">TOKEN_EQUAL</span>             <span class="o">=</span> <span class="sc">&#39;=&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_PLUS</span>              <span class="o">=</span> <span class="sc">&#39;+&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_MINUS</span>             <span class="o">=</span> <span class="sc">&#39;-&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_COLON</span>             <span class="o">=</span> <span class="sc">&#39;:&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_COMMA</span>             <span class="o">=</span> <span class="sc">&#39;,&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_PERIOD</span>            <span class="o">=</span> <span class="sc">&#39;.&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_ASTERISK</span>          <span class="o">=</span> <span class="sc">&#39;*&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_SEMICOLON</span>         <span class="o">=</span> <span class="sc">&#39;;&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_LESS_THAN</span>         <span class="o">=</span> <span class="sc">&#39;&lt;&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_OPEN_BRACE</span>        <span class="o">=</span> <span class="sc">&#39;{&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_CLOSE_BRACE</span>       <span class="o">=</span> <span class="sc">&#39;}&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_GREATER_THAN</span>      <span class="o">=</span> <span class="sc">&#39;&gt;&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_OPEN_BRACKET</span>      <span class="o">=</span> <span class="sc">&#39;[&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_DOUBLE_QUOTE</span>      <span class="o">=</span> <span class="sc">&#39;&quot;&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_PREPROCESSOR</span>      <span class="o">=</span> <span class="sc">&#39;@&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_CLOSE_BRACKET</span>     <span class="o">=</span> <span class="sc">&#39;]&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_QUESTION_MARK</span>     <span class="o">=</span> <span class="sc">&#39;?&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_OPEN_PARENTHESIS</span>  <span class="o">=</span> <span class="sc">&#39;(&#39;</span><span class="p">,</span>
+    <span class="n">TOKEN_CLOSE_PARENTHESIS</span> <span class="o">=</span> <span class="sc">&#39;)&#39;</span><span class="p">,</span>
+    
+    <span class="n">TOKEN_WHITESPACE</span>        <span class="o">=</span> <span class="sr">/^(?:(?:\s+$)|(?:\/(?:\/|\*)))/</span><span class="p">,</span>
+    <span class="n">TOKEN_NUMBER</span>            <span class="o">=</span> <span class="sr">/^[+-]?\d+(([.]\d+)*([eE][+-]?\d+))?$/</span><span class="p">,</span>
+    <span class="n">TOKEN_IDENTIFIER</span>        <span class="o">=</span> <span class="sr">/^[a-zA-Z_$](\w|$)*$/</span><span class="p">;</span>
+    
+<span class="cp">#define IS_WORD(token) /^\w+$/.test(token)</span>
+
+<span class="cp">#define IS_NOT_EMPTY(buffer) buffer.atoms.length !== 0</span>
+<span class="cp">#define CONCAT(buffer, atom) buffer.atoms[buffer.atoms.length] = atom</span>
+
+<span class="kd">var</span> <span class="n">SUPER_CLASSES</span>           <span class="o">=</span> <span class="k">new</span> <span class="nf">objj_dictionary</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="n">OBJJ_CURRENT_BUNDLE</span>     <span class="o">=</span> <span class="kc">NULL</span><span class="p">;</span>
+
+<span class="c1">// FIXME: Used fixed regex</span>
+<span class="kd">var</span> <span class="n">objj_lexer</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">aString</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_tokens</span> <span class="o">=</span> <span class="p">(</span><span class="n">aString</span> <span class="o">+</span> <span class="sc">&#39;\n&#39;</span><span class="p">).</span><span class="nf">match</span><span class="p">(</span><span class="sr">/\/\/.*(\r|\n)?|\/\*(?:.|\n|\r)*?\*\/|\w+\b|[+-]?\d+(([.]\d+)*([eE][+-]?\d+))?|&quot;[^&quot;\\]*(\\[\s\S][^&quot;\\]*)*&quot;|&#39;[^&#39;\\]*(\\[\s\S][^&#39;\\]*)*&#39;|\s+|./g</span><span class="p">);</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_context</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="k">return</span> <span class="nb">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">objj_lexer</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">push</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_context</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">_index</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">objj_lexer</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">pop</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_index</span> <span class="o">=</span> <span class="nb">this</span><span class="p">.</span><span class="n">_context</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">objj_lexer</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">peak</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">shouldSkipWhitespace</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">shouldSkipWhitespace</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nb">this</span><span class="p">.</span><span class="nf">push</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="n">token</span> <span class="o">=</span> <span class="nb">this</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">();</span>
+        <span class="nb">this</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span>
+        
+        <span class="k">return</span> <span class="n">token</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nb">this</span><span class="p">.</span><span class="n">_tokens</span><span class="p">[</span><span class="nb">this</span><span class="p">.</span><span class="n">_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">objj_lexer</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">next</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nb">this</span><span class="p">.</span><span class="n">_tokens</span><span class="p">[</span><span class="o">++</span><span class="nb">this</span><span class="p">.</span><span class="n">_index</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">objj_lexer</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">previous</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nb">this</span><span class="p">.</span><span class="n">_tokens</span><span class="p">[</span><span class="o">--</span><span class="nb">this</span><span class="p">.</span><span class="n">_index</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">objj_lexer</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">last</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">_index</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">NULL</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="nb">this</span><span class="p">.</span><span class="n">_tokens</span><span class="p">[</span><span class="nb">this</span><span class="p">.</span><span class="n">_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">objj_lexer</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">skip_whitespace</span><span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">shouldMoveBackwards</span><span class="p">)</span>
+<span class="p">{</span>   
+    <span class="kd">var</span> <span class="n">token</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">shouldMoveBackwards</span><span class="p">)</span>
+        <span class="k">while</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="nb">this</span><span class="p">.</span><span class="nf">previous</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">TOKEN_WHITESPACE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">token</span><span class="p">))</span> <span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">while</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="nb">this</span><span class="p">.</span><span class="nf">next</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">TOKEN_WHITESPACE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">token</span><span class="p">))</span> <span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">token</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="n">objj_stringBuffer</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="n">objj_stringBuffer</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">toString</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nb">this</span><span class="p">.</span><span class="n">atoms</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">objj_stringBuffer</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">clear</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="n">objj_stringBuffer</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">isEmpty</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">atoms</span><span class="p">.</span><span class="n">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="n">objj_preprocessor</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">aString</span><span class="p">,</span> <span class="n">aSourceFile</span><span class="p">,</span> <span class="n">aBundle</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentSelector</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentClass</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperClass</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperMetaClass</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+    
+    <span class="nb">this</span><span class="p">.</span><span class="n">_file</span> <span class="o">=</span> <span class="n">aSourceFile</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_fragments</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_preprocessed</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">objj_stringBuffer</span><span class="p">();</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_tokens</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">objj_lexer</span><span class="p">(</span><span class="n">aString</span><span class="p">);</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_flags</span> <span class="o">=</span> <span class="n">flags</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_bundle</span> <span class="o">=</span> <span class="n">aBundle</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_classMethod</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    
+    <span class="nb">this</span><span class="p">.</span><span class="nf">preprocess</span><span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">_tokens</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="n">_preprocessed</span><span class="p">);</span>
+    <span class="c1">//alert(this._preprocessed + &quot;&quot;);</span>
+    <span class="nb">this</span><span class="p">.</span><span class="nf">fragment</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">fragments</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nb">this</span><span class="p">.</span><span class="n">_fragments</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">accessors</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">(),</span>
+        <span class="n">attributes</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_OPEN_PARENTHESIS</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">tokens</span><span class="p">.</span><span class="nf">previous</span><span class="p">();</span>
+        
+        <span class="k">return</span> <span class="n">attributes</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">())</span> <span class="o">!=</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kd">var</span> <span class="n">name</span> <span class="o">=</span> <span class="n">token</span><span class="p">,</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nf">IS_WORD</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+            <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** @property attribute name not valid.&quot;</span><span class="p">)));</span>
+
+        <span class="k">if</span> <span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">())</span> <span class="o">==</span> <span class="n">TOKEN_EQUAL</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">();</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nf">IS_WORD</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+                <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** @property attribute value not valid.&quot;</span><span class="p">)));</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">name</span> <span class="o">==</span> <span class="s">&quot;setter&quot;</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">())</span> <span class="o">!=</span> <span class="n">TOKEN_COLON</span><span class="p">)</span>
+                    <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** @property setter attribute requires argument with </span><span class="se">\&quot;</span><span class="s">:</span><span class="se">\&quot;</span><span class="s"> at end of selector name.&quot;</span><span class="p">)));</span>
+                
+                <span class="n">value</span> <span class="o">+=</span> <span class="s">&quot;:&quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="n">attributes</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_COMMA</span><span class="p">)</span>
+            <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Expected &#39;,&#39; or &#39;)&#39; in @property attribute list.&quot;</span><span class="p">)));</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">attributes</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">brackets</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="cm">/*objj_lexer*/</span> <span class="n">tokens</span><span class="p">,</span> <span class="cm">/*objj_stringBuffer*/</span> <span class="n">aStringBuffer</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">tuples</span> <span class="o">=</span> <span class="p">[];</span>
+        
+    <span class="k">while</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="nf">preprocess</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="kc">NULL</span><span class="p">,</span> <span class="kc">NULL</span><span class="p">,</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">tuples</span><span class="p">[</span><span class="n">tuples</span><span class="p">.</span><span class="n">length</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]))</span> <span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">tuples</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">length</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="sc">&#39;[&#39;</span><span class="p">);</span>
+        
+        <span class="c1">// When we have an empty array literal ([]), tuples[0][0] will be an empty objj_stringBuffer</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="n">tuples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+        
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="sc">&#39;]&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="kd">var</span> <span class="n">selector</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">objj_stringBuffer</span><span class="p">();</span>
+        <span class="c1">//alert(tuples[0][0].toString() + &quot;]&quot; );</span>
+        <span class="c1">// The first two arguments are always the receiver and the selector.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">tuples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">TOKEN_SUPER</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="s">&quot;objj_msgSendSuper(&quot;</span><span class="p">);</span>
+            <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="s">&quot;{ receiver:self, super_class:&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">_classMethod</span> <span class="o">?</span> <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperMetaClass</span> <span class="o">:</span> <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperClass</span> <span class="p">)</span> <span class="o">+</span> <span class="s">&quot; }&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="s">&quot;objj_msgSend(&quot;</span><span class="p">);</span>
+            <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="n">tuples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="p">}</span>
+        
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="n">tuples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+        
+        <span class="kd">var</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">tuples</span><span class="p">.</span><span class="n">length</span><span class="p">,</span>
+            <span class="n">marg_list</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">objj_stringBuffer</span><span class="p">();</span>
+        
+        <span class="k">for</span><span class="p">(;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="o">++</span><span class="n">index</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kd">var</span> <span class="n">pair</span> <span class="o">=</span> <span class="n">tuples</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+            
+            <span class="nf">CONCAT</span><span class="p">(</span><span class="n">selector</span><span class="p">,</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="nf">CONCAT</span><span class="p">(</span><span class="n">marg_list</span><span class="p">,</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="p">}</span>
+        
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="s">&quot;, </span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="n">selector</span><span class="p">);</span> <span class="c1">// FIXME: sel_getUid(selector + &quot;&quot;) ?</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="sc">&#39;\&quot;&#39;</span><span class="p">);</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="n">marg_list</span><span class="p">);</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="sc">&#39;)&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">directive</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">aStringBuffer</span><span class="p">,</span> <span class="n">allowedDirectivesFlags</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Grab the next token, preprocessor directives follow &#39;@&#39; immediately.</span>
+    <span class="kd">var</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">aStringBuffer</span> <span class="o">?</span> <span class="n">aStringBuffer</span> <span class="o">:</span> <span class="k">new</span> <span class="nf">objj_stringBuffer</span><span class="p">(),</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">();</span>
+            
+    <span class="c1">// To provide compatibility with Objective-C files, we convert NSString literals into </span>
+    <span class="c1">// toll-freed JavaScript/CPString strings.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="nf">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="n">TOKEN_DOUBLE_QUOTE</span><span class="p">)</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+    
+    <span class="c1">// Currently we simply swallow forward declarations and only provide them to allow </span>
+    <span class="c1">// compatibility with Objective-C files.</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_CLASS</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">();</span>
+        
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// @implementation Class implementations</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_IMPLEMENTATION</span><span class="p">)</span>
+        <span class="nb">this</span><span class="p">.</span><span class="nf">implementation</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+
+    <span class="c1">// @import</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_IMPORT</span><span class="p">)</span>
+        <span class="nb">this</span><span class="p">.</span><span class="nf">_import</span><span class="p">(</span><span class="n">tokens</span><span class="p">);</span>
+
+    <span class="c1">// @selector</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_SELECTOR</span><span class="p">)</span>
+        <span class="nb">this</span><span class="p">.</span><span class="nf">selector</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+    
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_ACCESSORS</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">this</span><span class="p">.</span><span class="nf">accessors</span><span class="p">(</span><span class="n">tokens</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">aStringBuffer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">buffer</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">fragment</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">preprocessed</span> <span class="o">=</span> <span class="nb">this</span><span class="p">.</span><span class="n">_preprocessed</span><span class="p">.</span><span class="nf">toString</span><span class="p">();</span>
+    
+    <span class="c1">// But make sure it&#39;s not just all whitespace!</span>
+    <span class="k">if</span> <span class="p">((</span><span class="sr">/[^\s]/</span><span class="p">).</span><span class="nf">test</span><span class="p">(</span><span class="n">preprocessed</span><span class="p">))</span>
+        <span class="nb">this</span><span class="p">.</span><span class="n">_fragments</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nf">fragment_create_code</span><span class="p">(</span><span class="n">preprocessed</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="n">_bundle</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="n">_file</span><span class="p">));</span>
+    
+    <span class="nb">this</span><span class="p">.</span><span class="n">_preprocessed</span><span class="p">.</span><span class="nf">clear</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">implementation</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="cm">/*objj_stringBuffer*/</span> <span class="n">aStringBuffer</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">aStringBuffer</span><span class="p">,</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="kc">NO</span><span class="p">,</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">(),</span>
+        <span class="n">superclass_name</span> <span class="o">=</span> <span class="s">&quot;Nil&quot;</span><span class="p">,</span>
+
+        <span class="n">instance_methods</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">objj_stringBuffer</span><span class="p">(),</span>
+        <span class="n">class_methods</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">objj_stringBuffer</span><span class="p">();</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="sr">/^\w/</span><span class="p">).</span><span class="nf">test</span><span class="p">(</span><span class="n">class_name</span><span class="p">))</span>
+        <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Expected class name, found </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">class_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">.&quot;</span><span class="p">)));</span>
+    
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperClass</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperMetaClass</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentClass</span> <span class="o">=</span> <span class="n">class_name</span><span class="p">;</span>
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentSelector</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+
+    <span class="c1">// If we reach an open parenthesis, we are declaring a category.</span>
+    <span class="k">if</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">())</span> <span class="o">==</span> <span class="n">TOKEN_OPEN_PARENTHESIS</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">();</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+            <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Can&#39;t Have Empty Category Name for class </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">class_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">.&quot;</span><span class="p">)));</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">()</span> <span class="o">!=</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+            <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Improper Category Definition for class </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">class_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">.&quot;</span><span class="p">)));</span>
+        
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;{</span><span class="se">\n</span><span class="s">var the_class = objj_getClass(</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">class_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;if(!the_class) objj_exception_throw(new objj_exception(OBJJClassNotFoundException, </span><span class="se">\&quot;</span><span class="s">*** Could not find definition for class </span><span class="se">\\\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">class_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\\\&quot;\&quot;</span><span class="s">));</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;var meta_class = the_class.isa;&quot;</span><span class="p">);</span>
+        
+        <span class="kd">var</span> <span class="n">superclass_name</span> <span class="o">=</span> <span class="nf">dictionary_getValue</span><span class="p">(</span><span class="n">SUPER_CLASSES</span><span class="p">,</span> <span class="n">class_name</span><span class="p">);</span>
+
+        <span class="c1">// FIXME: We should have a better solution for this case, although it&#39;s actually not much slower than the real case.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">superclass_name</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperClass</span> <span class="o">=</span> <span class="s">&quot;objj_getClass(</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">class_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">).super_class&quot;</span><span class="p">;</span>
+            <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperMetaClass</span> <span class="o">=</span> <span class="s">&quot;objj_getMetaClass(</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">class_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">).super_class&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperClass</span> <span class="o">=</span> <span class="s">&quot;objj_getClass(</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">superclass_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">)&quot;</span><span class="p">;</span>
+            <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperMetaClass</span> <span class="o">=</span> <span class="s">&quot;objj_getMeraClass(</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">superclass_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">)&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="c1">// If we reach a colon (&#39;:&#39;), then a superclass is being declared.</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_COLON</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">();</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">TOKEN_IDENTIFIER</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+                <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Expected class name, found </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">token</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">.&quot;</span><span class="p">)));</span>
+            
+            <span class="n">superclass_name</span> <span class="o">=</span> <span class="n">token</span><span class="p">;</span>
+
+            <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperClass</span> <span class="o">=</span> <span class="s">&quot;objj_getClass(</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">superclass_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">)&quot;</span><span class="p">;</span>
+            <span class="nb">this</span><span class="p">.</span><span class="n">_currentSuperMetaClass</span> <span class="o">=</span> <span class="s">&quot;objj_getMetaClass(</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">superclass_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">)&quot;</span><span class="p">;</span>
+            
+            <span class="nf">dictionary_setValue</span><span class="p">(</span><span class="n">SUPER_CLASSES</span><span class="p">,</span> <span class="n">class_name</span><span class="p">,</span> <span class="n">superclass_name</span><span class="p">);</span>
+
+            <span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">();</span>
+        <span class="p">}</span>
+        
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;{var the_class = objj_allocateClassPair(&quot;</span> <span class="o">+</span> <span class="n">superclass_name</span> <span class="o">+</span> <span class="s">&quot;, </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">class_name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">),</span><span class="se">\n</span><span class="s">meta_class = the_class.isa;&quot;</span><span class="p">);</span>
+        
+        <span class="c1">// If we are at an opening curly brace (&#39;{&#39;), then we have an ivar declaration.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_OPEN_BRACE</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kd">var</span> <span class="n">ivar_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="n">declaration</span> <span class="o">=</span> <span class="p">[],</span>
+                
+                <span class="n">attributes</span><span class="p">,</span>
+                <span class="n">accessors</span> <span class="o">=</span> <span class="p">{};</span>
+            
+            <span class="k">while</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_CLOSE_BRACE</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_PREPROCESSOR</span><span class="p">)</span>
+                    <span class="n">attributes</span> <span class="o">=</span> <span class="nb">this</span><span class="p">.</span><span class="nf">directive</span><span class="p">(</span><span class="n">tokens</span><span class="p">);</span>
+                
+                <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_SEMICOLON</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">ivar_count</span><span class="o">++</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;class_addIvars(the_class, [&quot;</span><span class="p">);</span>
+                    <span class="k">else</span>
+                        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;, &quot;</span><span class="p">);</span>
+                    
+                    <span class="kd">var</span> <span class="n">name</span> <span class="o">=</span> <span class="n">declaration</span><span class="p">[</span><span class="n">declaration</span><span class="p">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+                    
+                    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;new objj_ivar(</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">)&quot;</span><span class="p">);</span>
+                    
+                    <span class="n">declaration</span> <span class="o">=</span> <span class="p">[];</span>
+                    
+                    <span class="k">if</span> <span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+                    <span class="p">{</span>
+                        <span class="n">accessors</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">attributes</span><span class="p">;</span>
+                        <span class="n">attributes</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                    <span class="n">declaration</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
+            <span class="p">}</span>
+            
+            <span class="c1">// If we have objects in our declaration, the user forgot a &#39;;&#39;.</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">declaration</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+                <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Expected &#39;;&#39; in ivar declaration, found &#39;}&#39;.&quot;</span><span class="p">)));</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">ivar_count</span><span class="p">)</span>
+                <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;]);</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">token</span><span class="p">)</span>
+                <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Expected &#39;}&#39;&quot;</span><span class="p">)));</span>
+            
+            <span class="k">for</span> <span class="p">(</span><span class="n">ivar_name</span> <span class="k">in</span> <span class="n">accessors</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="kd">var</span> <span class="n">accessor</span> <span class="o">=</span> <span class="n">accessors</span><span class="p">[</span><span class="n">ivar_name</span><span class="p">],</span>
+                    <span class="n">property</span> <span class="o">=</span> <span class="n">accessor</span><span class="p">[</span><span class="s">&quot;property&quot;</span><span class="p">]</span> <span class="o">||</span> <span class="n">ivar_name</span><span class="p">;</span>
+                    
+                <span class="c1">// getter</span>
+                <span class="kd">var</span> <span class="n">getterName</span> <span class="o">=</span> <span class="n">accessor</span><span class="p">[</span><span class="s">&quot;getter&quot;</span><span class="p">]</span> <span class="o">||</span> <span class="n">property</span><span class="p">,</span>
+                    <span class="n">getterCode</span> <span class="o">=</span> <span class="s">&quot;(id)&quot;</span> <span class="o">+</span> <span class="n">getterName</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">{</span><span class="se">\n</span><span class="s">return &quot;</span> <span class="o">+</span> <span class="n">ivar_name</span> <span class="o">+</span> <span class="s">&quot;;</span><span class="se">\n</span><span class="s">}&quot;</span><span class="p">;</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nf">IS_NOT_EMPTY</span><span class="p">(</span><span class="n">instance_methods</span><span class="p">))</span>
+                    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">instance_methods</span><span class="p">,</span> <span class="s">&quot;,</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                
+                <span class="nf">CONCAT</span><span class="p">(</span><span class="n">instance_methods</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">method</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_lexer</span><span class="p">(</span><span class="n">getterCode</span><span class="p">)));</span>
+                
+                <span class="c1">// setter</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">accessor</span><span class="p">[</span><span class="s">&quot;readonly&quot;</span><span class="p">])</span>
+                    <span class="k">continue</span><span class="p">;</span>
+                
+                <span class="kd">var</span> <span class="n">setterName</span> <span class="o">=</span> <span class="n">accessor</span><span class="p">[</span><span class="s">&quot;setter&quot;</span><span class="p">];</span>
+                
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">setterName</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="kd">var</span> <span class="n">start</span> <span class="o">=</span> <span class="n">property</span><span class="p">.</span><span class="nf">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="sc">&#39;_&#39;</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="n">setterName</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">?</span> <span class="s">&quot;_&quot;</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;set&quot;</span> <span class="o">+</span> <span class="n">property</span><span class="p">.</span><span class="nf">substr</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="nf">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="n">property</span><span class="p">.</span><span class="nf">substring</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span><span class="p">;</span>
+                <span class="p">}</span>
+                
+                <span class="kd">var</span> <span class="n">setterCode</span> <span class="o">=</span> <span class="s">&quot;(void)&quot;</span> <span class="o">+</span> <span class="n">setterName</span> <span class="o">+</span> <span class="s">&quot;(id)newValue</span><span class="se">\n</span><span class="s">{</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+                
+                <span class="k">if</span> <span class="p">(</span><span class="n">accessor</span><span class="p">[</span><span class="s">&quot;copy&quot;</span><span class="p">])</span>
+                    <span class="n">setterCode</span> <span class="o">+=</span> <span class="s">&quot;if (&quot;</span> <span class="o">+</span> <span class="n">ivar_name</span> <span class="o">+</span> <span class="s">&quot; !== newValue)</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">ivar_name</span> <span class="o">+</span> <span class="s">&quot; = [newValue copy];</span><span class="se">\n</span><span class="s">}&quot;</span><span class="p">;</span>
+                <span class="k">else</span>
+                    <span class="n">setterCode</span> <span class="o">+=</span> <span class="n">ivar_name</span> <span class="o">+</span> <span class="s">&quot; = newValue;</span><span class="se">\n</span><span class="s">}&quot;</span><span class="p">;</span>
+                
+                <span class="k">if</span> <span class="p">(</span><span class="nf">IS_NOT_EMPTY</span><span class="p">(</span><span class="n">instance_methods</span><span class="p">))</span>
+                    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">instance_methods</span><span class="p">,</span> <span class="s">&quot;,</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                
+                <span class="nf">CONCAT</span><span class="p">(</span><span class="n">instance_methods</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">method</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_lexer</span><span class="p">(</span><span class="n">setterCode</span><span class="p">)));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+            <span class="n">tokens</span><span class="p">.</span><span class="nf">previous</span><span class="p">();</span>
+        
+        <span class="c1">// We must make a new class object for our class definition.</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;objj_registerClassPair(the_class);</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Add this class to the current bundle.</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;objj_addClassForBundle(the_class, objj_getBundleWithPath(OBJJ_CURRENT_BUNDLE.path));</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">while</span> <span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">()))</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_PLUS</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nb">this</span><span class="p">.</span><span class="n">_classMethod</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nf">IS_NOT_EMPTY</span><span class="p">(</span><span class="n">class_methods</span><span class="p">))</span>
+                <span class="nf">CONCAT</span><span class="p">(</span><span class="n">class_methods</span><span class="p">,</span> <span class="s">&quot;, &quot;</span><span class="p">);</span>
+            
+            <span class="nf">CONCAT</span><span class="p">(</span><span class="n">class_methods</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">method</span><span class="p">(</span><span class="n">tokens</span><span class="p">));</span>
+        <span class="p">}</span>
+        
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_MINUS</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nb">this</span><span class="p">.</span><span class="n">_classMethod</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nf">IS_NOT_EMPTY</span><span class="p">(</span><span class="n">instance_methods</span><span class="p">))</span>
+                <span class="nf">CONCAT</span><span class="p">(</span><span class="n">instance_methods</span><span class="p">,</span> <span class="s">&quot;, &quot;</span><span class="p">);</span>
+            
+            <span class="nf">CONCAT</span><span class="p">(</span><span class="n">instance_methods</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">method</span><span class="p">(</span><span class="n">tokens</span><span class="p">));</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Check if we&#39;ve reached @end...</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_PREPROCESSOR</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// The only preprocessor directive we should ever encounter at this point is @end.</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">())</span> <span class="o">==</span> <span class="n">TOKEN_END</span><span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+            
+            <span class="k">else</span>
+                <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Expected </span><span class="se">\&quot;</span><span class="s">@end</span><span class="se">\&quot;</span><span class="s">, found </span><span class="se">\&quot;</span><span class="s">@&quot;</span> <span class="o">+</span> <span class="n">token</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">.&quot;</span><span class="p">)));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nf">IS_NOT_EMPTY</span><span class="p">(</span><span class="n">instance_methods</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;class_addMethods(the_class, [&quot;</span><span class="p">);</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">instance_methods</span><span class="p">);</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;]);</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nf">IS_NOT_EMPTY</span><span class="p">(</span><span class="n">class_methods</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;class_addMethods(meta_class, [&quot;</span><span class="p">);</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">class_methods</span><span class="p">);</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;]);</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="sc">&#39;}&#39;</span><span class="p">);</span>
+
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentClass</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">_import</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// The introduction of an import statement forces the creation of a code fragment.</span>
+    <span class="nb">this</span><span class="p">.</span><span class="nf">fragment</span><span class="p">();</span>
+    
+    <span class="kd">var</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">(),</span>
+        <span class="n">isLocal</span> <span class="o">=</span> <span class="p">(</span><span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_LESS_THAN</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_LESS_THAN</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">while</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_GREATER_THAN</span><span class="p">)</span>
+            <span class="n">path</span> <span class="o">+=</span> <span class="n">token</span><span class="p">;</span>
+        
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">token</span><span class="p">)</span>
+            <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Unterminated import statement.&quot;</span><span class="p">)));</span>
+    <span class="p">}</span>
+    
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="nf">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="n">TOKEN_DOUBLE_QUOTE</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">token</span><span class="p">.</span><span class="nf">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">token</span><span class="p">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+    
+    <span class="k">else</span>
+        <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Expecting &#39;&lt;&#39; or &#39;</span><span class="se">\&quot;</span><span class="s">&#39;, found </span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">token</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">.&quot;</span><span class="p">)));</span>
+    
+    <span class="nb">this</span><span class="p">.</span><span class="n">_fragments</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nf">fragment_create_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">isLocal</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="n">_file</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">method</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">objj_stringBuffer</span><span class="p">(),</span>
+        <span class="n">token</span><span class="p">,</span>
+        <span class="n">selector</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">parameters</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="kc">null</span><span class="p">];</span>
+    
+    <span class="k">while</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_OPEN_BRACE</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_COLON</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kd">var</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+
+            <span class="c1">// Colons are part of the selector name</span>
+            <span class="n">selector</span> <span class="o">+=</span> <span class="n">token</span><span class="p">;</span>
+            
+            <span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">();</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_OPEN_PARENTHESIS</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="c1">// Swallow parameter/return type.  Perhaps later we can use this for debugging?</span>
+                <span class="k">while</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+                    <span class="n">type</span> <span class="o">+=</span> <span class="n">token</span><span class="p">;</span>
+    
+                <span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">();</span>
+            <span class="p">}</span>
+            
+            <span class="c1">// Add the type. If it&#39;s empty, add null instead.</span>
+            <span class="n">types</span><span class="p">[</span><span class="n">parameters</span><span class="p">.</span><span class="n">length</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">type</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+
+            <span class="c1">// Since this follows a colon, this must be the parameter name.</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="n">parameters</span><span class="p">.</span><span class="n">length</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_OPEN_PARENTHESIS</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kd">var</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+
+            <span class="c1">// Since :( is handled above, this must be the return type, just swallow it.</span>
+            <span class="k">while</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+                <span class="n">type</span> <span class="o">+=</span> <span class="n">token</span><span class="p">;</span>
+
+            <span class="c1">// types[0] is the return argument</span>
+            <span class="n">types</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">type</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Argument list &quot;, ...&quot;</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_COMMA</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// At this point, &quot;...&quot; MUST follow.</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">())</span> <span class="o">!=</span> <span class="n">TOKEN_PERIOD</span> <span class="o">||</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">()</span> <span class="o">!=</span> <span class="n">TOKEN_PERIOD</span> <span class="o">||</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">()</span> <span class="o">!=</span> <span class="n">TOKEN_PERIOD</span><span class="p">)</span>
+                <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Argument list expected after &#39;,&#39;.&quot;</span><span class="p">)));</span>
+            
+            <span class="c1">// FIXME: Shouldn&#39;t allow any more after this.</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Build selector name.</span>
+        <span class="k">else</span>
+            <span class="n">selector</span> <span class="o">+=</span> <span class="n">token</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">var</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
+    
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;new objj_method(sel_getUid(</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">selector</span><span class="p">);</span>
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">), function&quot;</span><span class="p">);</span>
+
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentSelector</span> <span class="o">=</span> <span class="n">selector</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">_flags</span> <span class="o">&amp;</span> <span class="n">OBJJ_PREPROCESSOR_DEBUG_SYMBOLS</span><span class="p">)</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot; $&quot;</span> <span class="o">+</span> <span class="nb">this</span><span class="p">.</span><span class="n">_currentClass</span> <span class="o">+</span> <span class="s">&quot;__&quot;</span> <span class="o">+</span> <span class="n">selector</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sr">/:/g</span><span class="p">,</span> <span class="s">&quot;_&quot;</span><span class="p">));</span>
+    
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;(self, _cmd&quot;</span><span class="p">);</span>
+    
+    <span class="k">for</span><span class="p">(;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="o">++</span><span class="n">index</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;, &quot;</span><span class="p">);</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">parameters</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;)</span><span class="se">\n</span><span class="s">{ with(self)</span><span class="se">\n</span><span class="s">{&quot;</span><span class="p">);</span>
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">preprocess</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">TOKEN_CLOSE_BRACE</span><span class="p">,</span> <span class="n">TOKEN_OPEN_BRACE</span><span class="p">));</span>
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;}</span><span class="se">\n</span><span class="s">}&quot;</span><span class="p">);</span>
+    <span class="c1">// TODO: actually use OBJJ_PREPROCESSOR_TYPE_SIGNATURES flag instead of tying to OBJJ_PREPROCESSOR_DEBUG_SYMBOLS</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">_flags</span> <span class="o">&amp;</span> <span class="n">OBJJ_PREPROCESSOR_DEBUG_SYMBOLS</span><span class="p">)</span> <span class="c1">//OBJJ_PREPROCESSOR_TYPE_SIGNATURES)</span>
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;,&quot;</span><span class="o">+</span><span class="n">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="n">types</span><span class="p">));</span>
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;)&quot;</span><span class="p">);</span>
+
+    <span class="nb">this</span><span class="p">.</span><span class="n">_currentSelector</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">buffer</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">preprocess</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="cm">/*objj_stringBuffer*/</span> <span class="n">aStringBuffer</span><span class="p">,</span> <span class="n">terminator</span><span class="p">,</span> <span class="n">instigator</span><span class="p">,</span> <span class="n">tuple</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">aStringBuffer</span> <span class="o">?</span> <span class="n">aStringBuffer</span> <span class="o">:</span> <span class="k">new</span> <span class="nf">objj_stringBuffer</span><span class="p">(),</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">tuple</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">;</span>
+        
+        <span class="kd">var</span> <span class="n">bracket</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="n">closures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">];</span>
+    <span class="p">}</span>
+    
+    <span class="k">while</span> <span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">token</span> <span class="o">!=</span> <span class="n">terminator</span><span class="p">)</span> <span class="o">||</span> <span class="n">count</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">tuple</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Ignore :&#39;s the belong to tertiary operators (?:) </span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_QUESTION_MARK</span><span class="p">)</span>
+                <span class="o">++</span><span class="n">closures</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+            
+            <span class="c1">// Ingore anything between { } and ()                </span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_OPEN_BRACE</span><span class="p">)</span>
+                <span class="o">++</span><span class="n">closures</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+                
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_BRACE</span><span class="p">)</span>
+                <span class="o">--</span><span class="n">closures</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+            
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_OPEN_PARENTHESIS</span><span class="p">)</span>
+                <span class="o">++</span><span class="n">closures</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+                
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+                <span class="o">--</span><span class="n">closures</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+            
+            <span class="c1">// If not in {} and not in () and this is a colon and we don&#39;t belong to a tertiary operator OR this is a closing bracket...</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_COLON</span> <span class="o">&amp;&amp;</span> <span class="n">closures</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">--</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">||</span> 
+                    <span class="p">(</span><span class="n">bracket</span> <span class="o">=</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_BRACKET</span><span class="p">)))</span> <span class="o">&amp;&amp;</span>
+                    <span class="n">closures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">closures</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">tokens</span><span class="p">.</span><span class="nf">push</span><span class="p">();</span> <span class="c1">// 1</span>
+                
+                <span class="c1">// If a bracket made us enter, go backwards skipping whitespace ([a b   ] allowed), </span>
+                <span class="c1">// if not grab token immediately behind us ([a b  : c] not allowed</span>
+                <span class="kd">var</span> <span class="n">label</span> <span class="o">=</span> <span class="n">bracket</span> <span class="o">?</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="o">:</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">previous</span><span class="p">(),</span>
+                    <span class="n">isEmptyLabel</span> <span class="o">=</span> <span class="n">TOKEN_WHITESPACE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
+                
+                <span class="c1">// The label must be an identifier, and preceded by whitespace, or whitespace itself (the &quot;empty label&quot;)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">isEmptyLabel</span> <span class="o">||</span> <span class="n">TOKEN_IDENTIFIER</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">TOKEN_WHITESPACE</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="nf">previous</span><span class="p">()))</span>
+                <span class="p">{</span>
+                    <span class="n">tokens</span><span class="p">.</span><span class="nf">push</span><span class="p">();</span> <span class="c1">// 2</span>
+                    
+                    <span class="kd">var</span> <span class="n">last</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+                        <span class="n">operatorCheck</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+                        <span class="n">isDoubleOperator</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                    
+                    <span class="c1">// unary or binary, still disables.</span>
+                    <span class="c1">// + - + x is bad because it could be (+ - + x) or (a + - + x)</span>
+                    <span class="c1">// the only good is unbroken chain</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">last</span> <span class="o">===</span> <span class="sc">&#39;+&#39;</span> <span class="o">||</span> <span class="n">last</span> <span class="o">===</span> <span class="sc">&#39;-&#39;</span><span class="p">){</span><span class="c1">//alert(tokens.last())</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="nf">previous</span><span class="p">()</span> <span class="o">!==</span> <span class="n">last</span><span class="p">)</span>
+                            <span class="n">operatorCheck</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                        <span class="k">else</span>
+                        <span class="p">{</span>
+                            <span class="n">last</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+                            <span class="n">isDoubleOperator</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                        <span class="p">}}</span>
+                        
+                    <span class="n">tokens</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span> <span class="c1">// 2</span>
+                    
+                    <span class="n">tokens</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span> <span class="c1">// 1</span>
+                    
+                    <span class="c1">//alert(operatorCheck + &quot;operatorCheck for &quot; + label + &quot; and &quot; + last);</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">operatorCheck</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+                    
+                        <span class="c1">// &lt;)&gt; &lt;label&gt;&lt;:|]&gt;</span>
+                        <span class="c1">// &lt;}&gt; &lt;label&gt;&lt;:|]&gt;</span>
+                        <span class="c1">// &lt;]&gt; &lt;label&gt;&lt;:|]&gt;                        </span>
+                        <span class="p">(</span><span class="o">!</span><span class="n">isDoubleOperator</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">last</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_BRACE</span><span class="p">))</span> <span class="o">||</span> 
+                        
+                        <span class="n">last</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span> <span class="o">||</span> <span class="n">last</span> <span class="o">===</span> <span class="n">TOKEN_CLOSE_BRACKET</span> <span class="o">||</span> 
+                    
+                    <span class="c1">// &lt;.&gt; label&lt;:|]&gt; --&gt; 5. label</span>
+                    <span class="c1">// &lt;5&gt; label&lt;:|]&gt;</span>
+                        <span class="n">last</span> <span class="o">===</span> <span class="n">TOKEN_PERIOD</span> <span class="o">||</span> <span class="n">TOKEN_NUMBER</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">last</span><span class="p">)</span> <span class="o">||</span>
+                        
+                    <span class="c1">// &lt;string&gt; &lt;label&gt;&lt;:\]&gt;/</span>
+                        <span class="n">last</span><span class="p">.</span><span class="nf">charAt</span><span class="p">(</span><span class="n">last</span><span class="p">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">===</span> <span class="sc">&#39;\&quot;&#39;</span> <span class="o">||</span> <span class="n">last</span><span class="p">.</span><span class="nf">charAt</span><span class="p">(</span><span class="n">last</span><span class="p">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">===</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">||</span> 
+                    
+                    <span class="c1">// &lt;identifier-not&gt; &lt;label&gt;&lt;:|]&gt;</span>
+                        <span class="n">TOKEN_IDENTIFIER</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">last</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="sr">/^(new|return|case|var)$/</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">last</span><span class="p">)))</span>
+                    <span class="p">{</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">isEmptyLabel</span><span class="p">)</span>
+                            <span class="n">tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;:&#39;</span><span class="p">;</span>
+                        <span class="k">else</span>
+                        <span class="p">{</span>
+                            <span class="n">tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span><span class="p">;</span>
+                        
+                            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">bracket</span><span class="p">)</span>
+                                <span class="n">tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="sc">&#39;:&#39;</span><span class="p">;</span>
+                                
+                            <span class="kd">var</span> <span class="n">count</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">atoms</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
+                    
+                            <span class="k">while</span> <span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">count</span><span class="o">--</span><span class="p">]</span> <span class="o">!==</span> <span class="n">label</span><span class="p">)</span> <span class="p">;</span>
+                
+                            <span class="n">buffer</span><span class="p">.</span><span class="n">atoms</span><span class="p">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">count</span><span class="p">;</span>
+                        <span class="p">}</span>
+                        
+                        <span class="k">return</span> <span class="o">!</span><span class="n">bracket</span><span class="p">;</span>
+                    <span class="p">}</span>
+                
+                    <span class="k">if</span> <span class="p">(</span><span class="n">bracket</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="kc">NO</span><span class="p">;</span>
+                <span class="p">}</span>
+                
+                <span class="n">tokens</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span> <span class="c1">// 2</span>
+                
+                <span class="k">if</span> <span class="p">(</span><span class="n">bracket</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="kc">NO</span><span class="p">;</span>    
+            <span class="p">}</span>
+            
+            <span class="n">closures</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nf">MAX</span><span class="p">(</span><span class="n">closures</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+            
+        <span class="k">if</span> <span class="p">(</span><span class="n">instigator</span><span class="p">)</span>
+        <span class="p">{</span> 
+            <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">instigator</span><span class="p">)</span>
+                <span class="o">++</span><span class="n">count</span><span class="p">;</span>
+            
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">terminator</span><span class="p">)</span> 
+                <span class="o">--</span><span class="n">count</span><span class="p">;</span>    
+        <span class="p">}</span>
+        
+        <span class="c1">// imports are deprecated in favor of @imort</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_IMPORT</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nf">objj_fprintf</span><span class="p">(</span><span class="n">warning_stream</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="n">_file</span><span class="p">.</span><span class="n">path</span> <span class="o">+</span> <span class="s">&quot;: import keyword is deprecated, use @import instead.&quot;</span><span class="p">);</span>
+            
+            <span class="nb">this</span><span class="p">.</span><span class="nf">_import</span><span class="p">(</span><span class="n">tokens</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Safari can&#39;t handle function declarations of the form function [name]([arguments]) { } </span>
+        <span class="c1">// in evals.  It requires them to be in the form [name] = function([arguments]) { }.  So we </span>
+        <span class="c1">// need to find these and fix them.</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_FUNCTION</span><span class="p">)</span>
+        <span class="p">{</span><span class="c1">//if (window.p) alert(&quot;function&quot;);</span>
+            <span class="kd">var</span> <span class="n">accumulator</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+        
+            <span class="c1">// Following the function identifier we can either have an open parenthesis or an identifier:</span>
+            <span class="k">while</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_OPEN_PARENTHESIS</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="sr">/^\w/</span><span class="p">).</span><span class="nf">test</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+                <span class="n">accumulator</span> <span class="o">+=</span> <span class="n">token</span><span class="p">;</span>
+            
+            <span class="c1">// If the next token is an open parenthesis, we have a standard function and we don&#39;t have to </span>
+            <span class="c1">// change it:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">===</span> <span class="n">TOKEN_OPEN_PARENTHESIS</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;function&quot;</span> <span class="o">+</span> <span class="n">accumulator</span> <span class="o">+</span> <span class="sc">&#39;(&#39;</span><span class="p">);</span>
+                
+                <span class="k">if</span> <span class="p">(</span><span class="n">tuple</span><span class="p">)</span>
+                    <span class="o">++</span><span class="n">closures</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="c1">// If it&#39;s not a parenthesis, we know we have a non-supported function declaration, so fix it:</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">token</span> <span class="o">+</span> <span class="s">&quot;= function&quot;</span><span class="p">);</span>
+            
+<span class="cp">#if FIREBUG</span>
+                <span class="kd">var</span> <span class="n">functionName</span> <span class="o">=</span> <span class="n">token</span><span class="p">;</span>
+
+                <span class="c1">// Skip everything until the next close parenthesis.</span>
+                <span class="k">while</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+                    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+                    
+                <span class="c1">// Don&#39;t forget the last token!</span>
+                <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+                
+                <span class="c1">// Skip everything until the next open curly brace. </span>
+                <span class="k">while</span><span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_OPEN_BRACE</span><span class="p">)</span>
+                    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+                
+                <span class="k">if</span> <span class="p">(</span><span class="n">tuple</span><span class="p">)</span>
+                    <span class="o">++</span><span class="n">closures</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+                
+                <span class="c1">// Place the open curly brace as well, and the function name</span>
+                <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">token</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s"> </span><span class="se">\&quot;</span><span class="s">__FIREBUG_FNAME__&quot;</span> <span class="o">+</span> <span class="n">functionName</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">.length;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="cp">#endif</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// If we reach an @ symbol, we are at a preprocessor directive.</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_PREPROCESSOR</span><span class="p">)</span>
+            <span class="nb">this</span><span class="p">.</span><span class="nf">directive</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+        
+        <span class="c1">// If we reach a bracket, we will either be preprocessing a message send, a literal </span>
+        <span class="c1">// array, or an array index.</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_OPEN_BRACKET</span><span class="p">)</span>
+            <span class="nb">this</span><span class="p">.</span><span class="nf">brackets</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+                
+        <span class="c1">// If not simply append the token.</span>
+        <span class="k">else</span>
+            <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// If we get this far and we&#39;re parsing an objj_msgSend (or array), then we have a problem.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tuple</span><span class="p">)</span>
+        <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Expected &#39;]&#39; - Unterminated message send or array.&quot;</span><span class="p">)));</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">aStringBuffer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">buffer</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">selector</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">aStringBuffer</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">aStringBuffer</span> <span class="o">?</span> <span class="n">aStringBuffer</span> <span class="o">:</span> <span class="k">new</span> <span class="nf">objj_stringBuffer</span><span class="p">();</span>
+    
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;sel_getUid(</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">);</span>
+    
+    <span class="c1">// Swallow open parenthesis.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">()</span> <span class="o">!=</span> <span class="n">TOKEN_OPEN_PARENTHESIS</span><span class="p">)</span>
+        <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Expected &#39;(&#39;&quot;</span><span class="p">)));</span>
+    
+    <span class="c1">// Eat leading whitespace</span>
+    <span class="kd">var</span> <span class="n">selector</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">();</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">selector</span> <span class="o">==</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+        <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Unexpected &#39;)&#39;, can&#39;t have empty @selector()&quot;</span><span class="p">)));</span>
+    
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">aStringBuffer</span><span class="p">,</span> <span class="n">selector</span><span class="p">);</span>
+    
+    <span class="kd">var</span> <span class="n">token</span><span class="p">,</span>
+        <span class="n">starting</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    
+    <span class="k">while</span> <span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="nf">next</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="n">token</span> <span class="o">!=</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">starting</span> <span class="o">&amp;&amp;</span> <span class="sr">/^\d+$/</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="sr">/^(\w|$|\:)/</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="n">token</span><span class="p">)))</span>
+        <span class="p">{</span>
+            <span class="c1">// Only allow tail whitespace</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="sr">/\S/</span><span class="p">).</span><span class="nf">test</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="nf">skip_whitespace</span><span class="p">()</span> <span class="o">==</span> <span class="n">TOKEN_CLOSE_PARENTHESIS</span><span class="p">)</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="k">else</span>
+                    <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Unexpected whitespace in @selector().&quot;</span><span class="p">)));</span>
+            <span class="k">else</span>
+                <span class="nf">objj_exception_throw</span><span class="p">(</span><span class="k">new</span> <span class="nf">objj_exception</span><span class="p">(</span><span class="n">OBJJParseException</span><span class="p">,</span> <span class="nb">this</span><span class="p">.</span><span class="nf">error_message</span><span class="p">(</span><span class="s">&quot;*** Illegal character &#39;&quot;</span> <span class="o">+</span> <span class="n">token</span> <span class="o">+</span> <span class="s">&quot;&#39; in @selector().&quot;</span><span class="p">)));</span>
+        <span class="p">}</span>
+        
+        <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+        <span class="n">starting</span> <span class="o">=</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="n">TOKEN_COLON</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="nf">CONCAT</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">)&quot;</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">aStringBuffer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">buffer</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">objj_preprocessor</span><span class="p">.</span><span class="k">prototype</span><span class="p">.</span><span class="n">error_message</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">errorMessage</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">errorMessage</span> <span class="o">+</span> <span class="s">&quot; &lt;Context File: &quot;</span><span class="o">+</span> <span class="nb">this</span><span class="p">.</span><span class="n">_file</span><span class="p">.</span><span class="n">path</span> <span class="o">+</span>
+                                <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">_currentClass</span> <span class="o">?</span> <span class="s">&quot; Class: &quot;</span><span class="o">+</span><span class="nb">this</span><span class="p">.</span><span class="n">_currentClass</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+                                <span class="p">(</span><span class="nb">this</span><span class="p">.</span><span class="n">_currentSelector</span> <span class="o">?</span> <span class="s">&quot; Method: &quot;</span><span class="o">+</span><span class="nb">this</span><span class="p">.</span><span class="n">_currentSelector</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span><span class="s">&quot;&gt;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</body>
+</html>

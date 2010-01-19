@@ -112,7 +112,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="n">CPArray</span> <span class="n">_array</span><span class="p">;</span>
     <span class="kt">int</span>     <span class="n">_index</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">];</span>
@@ -125,7 +124,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
     <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">nextObject</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">_index</span> <span class="o">&gt;=</span> <span class="p">[</span><span class="n">_array</span> <span class="n">count</span><span class="p">])</span>
@@ -142,7 +140,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="n">CPArray</span> <span class="n">_array</span><span class="p">;</span>
     <span class="kt">int</span>     <span class="n">_index</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">];</span>
@@ -155,7 +152,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     
     <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">nextObject</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">--</span><span class="n">_index</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
@@ -181,16 +177,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns a new uninitialized CPArray.</span>
-<span class="cm">*/</span>
-<span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">alloc</span>
+<span class="cm">*/</span><span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">alloc</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[];</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns a new initialized CPArray.</span>
-<span class="cm">*/</span>
-<span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">array</span>
+<span class="cm">*/</span><span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">array</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
 <span class="p">}</span>
@@ -199,8 +193,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Creates a new array containing the objects in \c anArray.</span>
 <span class="cm">    @param anArray Objects in this array will be added to the new array</span>
 <span class="cm">    @return a new CPArray of the provided objects</span>
-<span class="cm">*/</span>
-<span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">arrayWithArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
+<span class="cm">*/</span><span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">arrayWithArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithArray</span><span class="o">:</span><span class="n">anArray</span><span class="p">];</span>
 <span class="p">}</span>
@@ -209,8 +202,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Creates a new array with \c anObject in it.</span>
 <span class="cm">    @param anObject the object to be added to the array</span>
 <span class="cm">    @return a new CPArray containing a single object</span>
-<span class="cm">*/</span>
-<span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">arrayWithObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="cm">*/</span><span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">arrayWithObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithObjects</span><span class="o">:</span><span class="n">anObject</span><span class="p">];</span>
 <span class="p">}</span>
@@ -219,8 +211,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Creates a new CPArray containing all the objects passed as arguments to the method.</span>
 <span class="cm">    @param anObject the objects that will be added to the new array</span>
 <span class="cm">    @return a new CPArray containing the argument objects</span>
-<span class="cm">*/</span>
-<span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">arrayWithObjects:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject<span class="p">,</span> <span class="p">...</span>
+<span class="cm">*/</span><span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">arrayWithObjects:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject<span class="p">,</span> <span class="p">...</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
         <span class="n">array</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">],</span>
@@ -237,8 +228,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param objects the JavaScript Array</span>
 <span class="cm">    @param aCount the number of objects in the JS Array</span>
 <span class="cm">    @return a new CPArray containing the specified objects</span>
-<span class="cm">*/</span>
-<span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">arrayWithObjects:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>objects <span class="nf">count:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>aCount
+<span class="cm">*/</span><span class="o">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">arrayWithObjects:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>objects <span class="nf">count:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>aCount
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithObjects</span><span class="o">:</span><span class="n">objects</span> <span class="n">count</span><span class="o">:</span><span class="n">aCount</span><span class="p">];</span>
 <span class="p">}</span>
@@ -246,8 +236,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Initializes the CPArray.</span>
 <span class="cm">    @return the initialized array</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
 <span class="p">}</span>
@@ -257,8 +246,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Creates a new CPArray from \c anArray.</span>
 <span class="cm">    @param anArray objects in this array will be added to the new array</span>
 <span class="cm">    @return a new CPArray containing the objects of \c anArray</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">];</span>
     
@@ -275,8 +263,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param copyItems if \c YES, each object will be copied by having a \c -copy message sent to it, and the</span>
 <span class="cm">    returned object will be added to the receiver. Otherwise, no copying will be performed.</span>
 <span class="cm">    @return the initialized array of objects</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray <span class="nf">copyItems:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>copyItems
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray <span class="nf">copyItems:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>copyItems
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">copyItems</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">initWithArray</span><span class="o">:</span><span class="n">anArray</span><span class="p">];</span>
@@ -303,8 +290,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    initializes an array with the contents of anArray</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithObjects:</span><span class="p">(</span><span class="kt">Array</span><span class="p">)</span>anArray<span class="p">,</span> <span class="p">...</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithObjects:</span><span class="p">(</span><span class="kt">Array</span><span class="p">)</span>anArray<span class="p">,</span> <span class="p">...</span>
 <span class="p">{</span>
     <span class="c1">// The arguments array contains self and _cmd, so the first object is at position 2.</span>
     <span class="kd">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
@@ -321,8 +307,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param objects the array of objects to add to the receiver</span>
 <span class="cm">    @param aCount the number of objects in \c objects</span>
 <span class="cm">    @return the initialized CPArray</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithObjects:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>objects <span class="nf">count:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>aCount
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithObjects:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>objects <span class="nf">count:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>aCount
 <span class="p">{</span>
     <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">];</span>
     
@@ -341,16 +326,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns \c YES if the array contains \c anObject. Otherwise, it returns \c NO.</span>
 <span class="cm">    @param anObject the method checks if this object is already in the array</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">containsObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">containsObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">indexOfObject</span><span class="o">:</span><span class="n">anObject</span><span class="p">]</span> <span class="o">!=</span> <span class="n">CPNotFound</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns the number of elements in the array</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">count</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">count</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="n">length</span><span class="p">;</span>
 <span class="p">}</span>
@@ -361,8 +344,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    returns \c CPNotFound. It first attempts to find</span>
 <span class="cm">    a match using \c -isEqual:, then \c ==.</span>
 <span class="cm">    @param anObject the object to search for</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">anObject</span> <span class="o">===</span> <span class="kc">nil</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">CPNotFound</span><span class="p">;</span>
@@ -397,8 +379,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param anObject the object to search for</span>
 <span class="cm">    @param aRange the range to search within</span>
 <span class="cm">    @return the index of the object, or \c CPNotFound if it was not found.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">inRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">inRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">anObject</span> <span class="o">===</span> <span class="kc">nil</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">CPNotFound</span><span class="p">;</span>
@@ -426,8 +407,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Returns the index of \c anObject in the array. The test for equality is done using only \c ==.</span>
 <span class="cm">    @param anObject the object to search for</span>
 <span class="cm">    @return the index of the object in the array. \c CPNotFound if the object is not in the array.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">indexOfObjectIdenticalTo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">indexOfObjectIdenticalTo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">anObject</span> <span class="o">===</span> <span class="kc">nil</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">CPNotFound</span><span class="p">;</span>
@@ -458,8 +438,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param anObject the object to search for</span>
 <span class="cm">    @param aRange the range to search within</span>
 <span class="cm">    @return the index of the object, or \c CPNotFound if it was not found.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">indexOfObjectIdenticalTo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">inRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">indexOfObjectIdenticalTo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">inRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">anObject</span> <span class="o">===</span> <span class="kc">nil</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">CPNotFound</span><span class="p">;</span>
@@ -495,8 +474,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aSelector the comparison selector to call on each item in the list, the same</span>
 <span class="cm">    selector should have been used to sort the array (or to maintain its sorted order).</span>
 <span class="cm">    @return the index of the object, or \c CPNotFound if it was not found.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">sortedBySelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">sortedBySelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">indexOfObject</span><span class="o">:</span><span class="n">anObject</span> <span class="n">sortedByFunction</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span> <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">aSelector</span><span class="p">,</span> <span class="n">rhs</span><span class="p">);</span> <span class="p">}];</span>
 <span class="p">}</span>
@@ -512,8 +490,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aFunction the comparison function to call on each item in the array that we search. the same</span>
 <span class="cm">    selector should have been used to sort the array (or to maintain its sorted order).</span>
 <span class="cm">    @return the index of the object, or \c CPNotFound if it was not found.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">sortedByFunction:</span><span class="p">(</span><span class="kt">Function</span><span class="p">)</span>aFunction
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">sortedByFunction:</span><span class="p">(</span><span class="kt">Function</span><span class="p">)</span>aFunction
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">indexOfObject</span><span class="o">:</span><span class="n">anObject</span> <span class="n">sortedByFunction</span><span class="o">:</span><span class="n">aFunction</span> <span class="n">context</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
 <span class="p">}</span>
@@ -530,8 +507,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    function should have been used to sort the array (or to maintain its sorted order).</span>
 <span class="cm">    @param aContext a context object that will be passed to the sort function</span>
 <span class="cm">    @return the index of the object, or \c CPNotFound if it was not found.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">sortedByFunction:</span><span class="p">(</span><span class="kt">Function</span><span class="p">)</span>aFunction <span class="nf">context:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aContext
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">sortedByFunction:</span><span class="p">(</span><span class="kt">Function</span><span class="p">)</span>aFunction <span class="nf">context:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aContext
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">aFunction</span> <span class="o">||</span> <span class="n">anObject</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">CPNotFound</span><span class="p">;</span>
@@ -565,8 +541,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param descriptors the array of descriptors to use to compare each item in the array that we search. the same</span>
 <span class="cm">    descriptors should have been used to sort the array (or to maintain its sorted order).</span>
 <span class="cm">    @return the index of the object, or \c CPNotFound if it was not found.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">sortedByDescriptors:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>descriptors
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="nf">indexOfObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">sortedByDescriptors:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>descriptors
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">indexOfObject</span><span class="o">:</span><span class="n">anObject</span> <span class="n">sortedByFunction</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
     <span class="p">{</span>
@@ -584,8 +559,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns the last object in the array. If the array is empty, returns \c nil/</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">lastObject</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">lastObject</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">];</span>
     
@@ -597,8 +571,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns the object at index \c anIndex.</span>
 <span class="cm">    @throws CPRangeException if \c anIndex is out of bounds</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">objectAtIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">objectAtIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">anIndex</span> <span class="o">&gt;=</span> <span class="n">length</span> <span class="o">||</span> <span class="n">anIndex</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
         <span class="p">[</span><span class="n">CPException</span> <span class="n">raise</span><span class="o">:</span><span class="n">CPRangeException</span> <span class="n">reason</span><span class="o">:</span><span class="s">@&quot;index (&quot;</span> <span class="o">+</span> <span class="n">anIndex</span> <span class="o">+</span> <span class="s">@&quot;) beyond bounds (&quot;</span> <span class="o">+</span> <span class="n">length</span> <span class="o">+</span> <span class="s">@&quot;)&quot;</span><span class="p">];</span>
@@ -610,8 +583,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Returns the objects at \c indexes in a new CPArray.</span>
 <span class="cm">    @param indexes the set of indices</span>
 <span class="cm">    @throws CPRangeException if any of the indices is greater than or equal to the length of the array</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">objectsAtIndexes:</span><span class="p">(</span><span class="kt">CPIndexSet</span><span class="p">)</span>indexes
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">objectsAtIndexes:</span><span class="p">(</span><span class="kt">CPIndexSet</span><span class="p">)</span>indexes
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">index</span> <span class="o">=</span> <span class="n">CPNotFound</span><span class="p">,</span>
         <span class="n">objects</span> <span class="o">=</span> <span class="p">[];</span>
@@ -626,8 +598,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Returns an enumerator describing the array sequentially</span>
 <span class="cm">    from the first to the last element. You should not modify</span>
 <span class="cm">    the array during enumeration.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPEnumerator</span><span class="p">)</span><span class="nf">objectEnumerator</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPEnumerator</span><span class="p">)</span><span class="nf">objectEnumerator</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="n">_CPArrayEnumerator</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithArray</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
 <span class="p">}</span>
@@ -636,8 +607,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Returns an enumerator describing the array sequentially</span>
 <span class="cm">    from the last to the first element. You should not modify</span>
 <span class="cm">    the array during enumeration.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPEnumerator</span><span class="p">)</span><span class="nf">reverseObjectEnumerator</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPEnumerator</span><span class="p">)</span><span class="nf">reverseObjectEnumerator</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="n">_CPReverseArrayEnumerator</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithArray</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
 <span class="p">}</span>
@@ -647,8 +617,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Sends each element in the array a message.</span>
 <span class="cm">    @param aSelector the selector of the message to send</span>
 <span class="cm">    @throws CPInvalidArgumentException if \c aSelector is \c nil</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">makeObjectsPerformSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">makeObjectsPerformSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">aSelector</span><span class="p">)</span>
         <span class="p">[</span><span class="n">CPException</span> <span class="n">raise</span><span class="o">:</span><span class="n">CPInvalidArgumentException</span> <span class="n">reason</span><span class="o">:</span><span class="s">&quot;makeObjectsPerformSelector: &#39;aSelector&#39; can&#39;t be nil&quot;</span><span class="p">];</span>
@@ -665,8 +634,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aSelector the selector of the message to send</span>
 <span class="cm">    @param anObject the first argument of the message</span>
 <span class="cm">    @throws CPInvalidArgumentException if \c aSelector is \c nil</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">makeObjectsPerformSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector <span class="nf">withObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">makeObjectsPerformSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector <span class="nf">withObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">aSelector</span><span class="p">)</span>
         <span class="p">[</span><span class="n">CPException</span> <span class="n">raise</span><span class="o">:</span><span class="n">CPInvalidArgumentException</span> <span class="n">reason</span><span class="o">:</span><span class="s">&quot;makeObjectsPerformSelector:withObject &#39;aSelector&#39; can&#39;t be nil&quot;</span><span class="p">];</span>
@@ -677,7 +645,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="k">for</span><span class="p">(;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="o">++</span><span class="n">index</span><span class="p">)</span> 
         <span class="nf">objj_msgSend</span><span class="p">(</span><span class="nb">self</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">aSelector</span><span class="p">,</span> <span class="n">anObject</span><span class="p">);</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">makeObjectsPerformSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector <span class="nf">withObjects:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>objects
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">aSelector</span><span class="p">)</span>
@@ -700,8 +667,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Returns the first object found in the receiver (starting at index 0) which is present in the</span>
 <span class="cm">    \c otherArray as determined by using the \c -containsObject: method.</span>
 <span class="cm">    @return the first object found, or \c nil if no common object was found.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">firstObjectCommonWithArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">firstObjectCommonWithArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">anArray</span> <span class="n">count</span><span class="p">]</span> <span class="o">||</span> <span class="o">!</span><span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">])</span>
         <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
@@ -718,8 +684,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns true if anArray contains exactly the same objects as the reciever.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isEqualToArray:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anArray
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isEqualToArray:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">self</span> <span class="o">===</span> <span class="n">anArray</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">YES</span><span class="p">;</span>
@@ -742,7 +707,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
         
     <span class="k">return</span> <span class="kc">YES</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isEqual:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">self</span> <span class="o">===</span> <span class="n">anObject</span><span class="p">)</span>
@@ -760,8 +724,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param anObject the object to be added to the array copy</span>
 <span class="cm">    @throws CPInvalidArgumentException if \c anObject is \c nil</span>
 <span class="cm">    @return a new array that should be n+1 in size compared to the receiver.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">arrayByAddingObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">arrayByAddingObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">anObject</span> <span class="o">===</span> <span class="kc">nil</span> <span class="o">||</span> <span class="n">anObject</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span>
         <span class="p">[</span><span class="n">CPException</span> <span class="n">raise</span><span class="o">:</span><span class="n">CPInvalidArgumentException</span>
@@ -777,8 +740,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns a new array which is the concatenation of \c self and otherArray (in this precise order).</span>
 <span class="cm">    @param anArray the array that will be concatenated to the receiver&#39;s copy</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">arrayByAddingObjectsFromArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">arrayByAddingObjectsFromArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nf">concat</span><span class="p">(</span><span class="n">anArray</span><span class="p">);</span>
 <span class="p">}</span>
@@ -802,8 +764,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Returns a subarray of the receiver containing the objects found in the specified range \c aRange.</span>
 <span class="cm">    @param aRange the range of objects to be copied into the subarray</span>
 <span class="cm">    @throws CPRangeException if the specified range exceeds the bounds of the array</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">subarrayWithRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">subarrayWithRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">aRange</span><span class="p">.</span><span class="n">location</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nf">CPMaxRange</span><span class="p">(</span><span class="n">aRange</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">length</span><span class="p">)</span>
         <span class="p">[</span><span class="n">CPException</span> <span class="n">raise</span><span class="o">:</span><span class="n">CPRangeException</span> <span class="n">reason</span><span class="o">:</span><span class="s">&quot;subarrayWithRange: aRange out of bounds&quot;</span><span class="p">];</span>
@@ -814,8 +775,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="c1">// Sorting arrays</span>
 <span class="cm">/*</span>
 <span class="cm">    Not yet described.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">sortedArrayUsingDescriptors:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>descriptors
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">sortedArrayUsingDescriptors:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>descriptors
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">sorted</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">copy</span><span class="p">];</span>
     
@@ -826,8 +786,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Return a copy of the receiver sorted using the function passed into the first parameter.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">sortedArrayUsingFunction:</span><span class="p">(</span><span class="kt">Function</span><span class="p">)</span>aFunction
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">sortedArrayUsingFunction:</span><span class="p">(</span><span class="kt">Function</span><span class="p">)</span>aFunction
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">sortedArrayUsingFunction</span><span class="o">:</span><span class="n">aFunction</span> <span class="n">context</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
 <span class="p">}</span>
@@ -839,8 +798,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aFunction a JavaScript &#39;Function&#39; type that compares objects</span>
 <span class="cm">    @param aContext context information</span>
 <span class="cm">    @return a new sorted array</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">sortedArrayUsingFunction:</span><span class="p">(</span><span class="kt">Function</span><span class="p">)</span>aFunction <span class="nf">context:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aContext
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">sortedArrayUsingFunction:</span><span class="p">(</span><span class="kt">Function</span><span class="p">)</span>aFunction <span class="nf">context:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aContext
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">sorted</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">copy</span><span class="p">];</span>
     
@@ -852,8 +810,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Returns a new array in which the objects are ordered according to a sort with \c aSelector.</span>
 <span class="cm">    @param aSelector the selector that will perform object comparisons</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">sortedArrayUsingSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">sortedArrayUsingSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">sorted</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">copy</span><span class="p">]</span>
     
@@ -871,8 +828,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    of that object will be used, otherwise the default JavaScript representation will be used.</span>
 <span class="cm">    @param aString the separator that will separate each object string</span>
 <span class="cm">    @return the string representation of the array</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">componentsJoinedByString:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aString
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">componentsJoinedByString:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aString
 <span class="p">{</span>
     <span class="c1">// Objective-J objects get &quot;description&quot; called on them automatically when coerced to strings</span>
     <span class="c1">// (see &quot;objj_object.prototype.toString&quot; at bottom of CPObject.j)</span>
@@ -883,8 +839,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <span class="cm">/*!</span>
 <span class="cm">    Returns a human readable description of this array and it&#39;s elements.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">description</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">description</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">],</span>
@@ -916,8 +871,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    that are of type CPString are candidates for inclusion in the returned array.</span>
 <span class="cm">    @param filterTypes an array of CPString objects that contain file extensions (without the &#39;.&#39;)</span>
 <span class="cm">    @return a new array with matching paths</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">pathsMatchingExtensions:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>filterTypes
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">pathsMatchingExtensions:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>filterTypes
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">],</span>
@@ -935,8 +889,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Sets the key-value for each element in the array.</span>
 <span class="cm">    @param aValue the value for the coding</span>
 <span class="cm">    @param aKey the key for the coding</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aValue <span class="nf">forKey:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aKey
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setValue:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aValue <span class="nf">forKey:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aKey
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">];</span>
@@ -949,8 +902,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Returns the value for \c aKey from each element in the array.</span>
 <span class="cm">    @param aKey the key to return the value for</span>
 <span class="cm">    @return an array of containing a value for each element in the array</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">valueForKey:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aKey
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">valueForKey:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aKey
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">],</span>
@@ -967,8 +919,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Makes a copy of the receiver.</span>
 <span class="cm">    @return a new CPArray copy</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">copy</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">copy</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="p">}</span>
@@ -982,8 +933,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Creates an array able to store at least  \c aCapacity</span>
 <span class="cm">    items. Because CPArray is backed by JavaScript arrays,</span>
 <span class="cm">    this method ends up simply returning a regular array.</span>
-<span class="cm">*/</span>
-<span class="o">+</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">arrayWithCapacity:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>aCapacity
+<span class="cm">*/</span><span class="o">+</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">arrayWithCapacity:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>aCapacity
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithCapacity</span><span class="o">:</span><span class="n">aCapacity</span><span class="p">];</span>
 <span class="p">}</span>
@@ -991,8 +941,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Initializes an array able to store at least \c aCapacity items. Because CPArray</span>
 <span class="cm">    is backed by JavaScript arrays, this method ends up simply returning a regular array.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithCapacity:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>aCapacity
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithCapacity:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>aCapacity
 <span class="p">{</span>
     <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1001,8 +950,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Adds \c anObject to the end of the array.</span>
 <span class="cm">    @param anObject the object to add to the array</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="nf">push</span><span class="p">(</span><span class="n">anObject</span><span class="p">);</span>
 <span class="p">}</span>
@@ -1010,8 +958,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Adds the objects in \c anArray to the receiver array.</span>
 <span class="cm">    @param anArray the array of objects to add to the end of the receiver</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addObjectsFromArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addObjectsFromArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="n">splice</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="p">[</span><span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">].</span><span class="nf">concat</span><span class="p">(</span><span class="n">anArray</span><span class="p">));</span>
 <span class="p">}</span>
@@ -1020,8 +967,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Inserts an object into the receiver at the specified location.</span>
 <span class="cm">    @param anObject the object to insert into the array</span>
 <span class="cm">    @param anIndex the location to insert \c anObject at</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">insertObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">atIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">insertObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">atIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex
 <span class="p">{</span>
     <span class="nf">splice</span><span class="p">(</span><span class="n">anIndex</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">anObject</span><span class="p">);</span>
 <span class="p">}</span>
@@ -1030,8 +976,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Inserts the objects in the provided array into the receiver at the indexes specified.</span>
 <span class="cm">    @param objects the objects to add to this array</span>
 <span class="cm">    @param anIndexSet the indices for the objects</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">insertObjects:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>objects <span class="nf">atIndexes:</span><span class="p">(</span><span class="kt">CPIndexSet</span><span class="p">)</span>indexes
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">insertObjects:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>objects <span class="nf">atIndexes:</span><span class="p">(</span><span class="kt">CPIndexSet</span><span class="p">)</span>indexes
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">indexesCount</span> <span class="o">=</span> <span class="p">[</span><span class="n">indexes</span> <span class="n">count</span><span class="p">],</span>
         <span class="n">objectsCount</span> <span class="o">=</span> <span class="p">[</span><span class="n">objects</span> <span class="n">count</span><span class="p">];</span>
@@ -1055,8 +1000,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Replaces the element at \c anIndex with \c anObject.</span>
 <span class="cm">    The current element at position \c anIndex will be removed from the array.</span>
 <span class="cm">    @param anIndex the position in the array to place \c anObject</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replaceObjectAtIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex <span class="nf">withObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replaceObjectAtIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex <span class="nf">withObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="nb">self</span><span class="p">[</span><span class="n">anIndex</span><span class="p">]</span> <span class="o">=</span> <span class="n">anObject</span><span class="p">;</span>
 <span class="p">}</span>
@@ -1066,8 +1010,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    the objects in \c objects.</span>
 <span class="cm">    @param anIndexSet the set of indices to array positions that will be replaced</span>
 <span class="cm">    @param objects the array of objects to place in the specified indices</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replaceObjectsAtIndexes:</span><span class="p">(</span><span class="kt">CPIndexSet</span><span class="p">)</span>anIndexSet <span class="nf">withObjects:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>objects
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replaceObjectsAtIndexes:</span><span class="p">(</span><span class="kt">CPIndexSet</span><span class="p">)</span>anIndexSet <span class="nf">withObjects:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>objects
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
         <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">anIndexSet</span> <span class="n">firstIndex</span><span class="p">];</span>
@@ -1086,8 +1029,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    @param aRange the range of elements to be replaced in the receiver</span>
 <span class="cm">    @param anArray the array to retrieve objects for placement into the receiver</span>
 <span class="cm">    @param otherRange the range of objects in \c anArray to pull from for placement into the receiver</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replaceObjectsInRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange <span class="nf">withObjectsFromArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray <span class="nf">range:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>otherRange
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replaceObjectsInRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange <span class="nf">withObjectsFromArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray <span class="nf">range:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>otherRange
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">otherRange</span><span class="p">.</span><span class="n">location</span> <span class="o">&amp;&amp;</span> <span class="n">otherRange</span><span class="p">.</span><span class="n">length</span> <span class="o">==</span> <span class="p">[</span><span class="n">anArray</span> <span class="n">count</span><span class="p">])</span>
         <span class="p">[</span><span class="nb">self</span> <span class="n">replaceObjectsInRange</span><span class="o">:</span><span class="n">aRange</span> <span class="n">withObjectsFromArray</span><span class="o">:</span><span class="n">anArray</span><span class="p">];</span>
@@ -1101,8 +1043,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    receiver in the range specified by \c aRange.</span>
 <span class="cm">    @param aRange the range of elements to be replaced in the receiver</span>
 <span class="cm">    @param anArray the array to retrieve objects for placement into the receiver</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replaceObjectsInRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange <span class="nf">withObjectsFromArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">replaceObjectsInRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange <span class="nf">withObjectsFromArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="n">splice</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="p">[</span><span class="n">aRange</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="n">aRange</span><span class="p">.</span><span class="n">length</span><span class="p">].</span><span class="nf">concat</span><span class="p">(</span><span class="n">anArray</span><span class="p">));</span>
 <span class="p">}</span>
@@ -1110,8 +1051,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Sets the contents of the receiver to be identical to the contents of \c anArray.</span>
 <span class="cm">    @param anArray the array of objects used to replace the receiver&#39;s objects</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">self</span> <span class="o">==</span> <span class="n">anArray</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
     
@@ -1121,16 +1061,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="c1">// Removing Objects</span>
 <span class="cm">/*!</span>
 <span class="cm">    Removes all objects from this array.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeAllObjects</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeAllObjects</span>
 <span class="p">{</span>
     <span class="nf">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="cm">/*!</span>
 <span class="cm">    Removes the last object from the array.</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeLastObject</span>
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeLastObject</span>
 <span class="p">{</span>
     <span class="nf">pop</span><span class="p">();</span>
 <span class="p">}</span>
@@ -1138,8 +1076,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Removes all entries of \c anObject from the array.</span>
 <span class="cm">    @param anObject the object whose entries are to be removed</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">removeObject</span><span class="o">:</span><span class="n">anObject</span> <span class="n">inRange</span><span class="o">:</span><span class="nf">CPMakeRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">)];</span>
 <span class="p">}</span>
@@ -1148,8 +1085,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Removes all entries of \c anObject from the array, in the range specified by \c aRange.</span>
 <span class="cm">    @param anObject the object to remove</span>
 <span class="cm">    @param aRange the range to search in the receiver for the object</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">inRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObject:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">inRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">index</span><span class="p">;</span>
     
@@ -1163,8 +1099,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Removes the object at \c anIndex.</span>
 <span class="cm">    @param anIndex the location of the element to be removed</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectAtIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectAtIndex:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>anIndex
 <span class="p">{</span>
     <span class="nf">splice</span><span class="p">(</span><span class="n">anIndex</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 <span class="p">}</span>
@@ -1172,8 +1107,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Removes the objects at the indices specified by \c CPIndexSet.</span>
 <span class="cm">    @param anIndexSet the indices of the elements to be removed from the array</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectsAtIndexes:</span><span class="p">(</span><span class="kt">CPIndexSet</span><span class="p">)</span>anIndexSet
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectsAtIndexes:</span><span class="p">(</span><span class="kt">CPIndexSet</span><span class="p">)</span>anIndexSet
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">anIndexSet</span> <span class="n">lastIndex</span><span class="p">];</span>
    
@@ -1188,8 +1122,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Remove the first instance of \c anObject from the array.</span>
 <span class="cm">    The search for the object is done using \c ==.</span>
 <span class="cm">    @param anObject the object to remove</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectIdenticalTo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectIdenticalTo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject
 <span class="p">{</span>
     <span class="p">[</span><span class="nb">self</span> <span class="n">removeObjectIdenticalTo</span><span class="o">:</span><span class="n">anObject</span> <span class="n">inRange</span><span class="o">:</span><span class="nf">CPMakeRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">])];</span>
 <span class="p">}</span>
@@ -1200,8 +1133,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    The search for the object is done using \c ==.</span>
 <span class="cm">    @param anObject the object to remove</span>
 <span class="cm">    @param aRange the range in the array to search for the object</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectIdenticalTo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">inRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectIdenticalTo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>anObject <span class="nf">inRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">index</span><span class="p">,</span>
         <span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">count</span><span class="p">];</span>
@@ -1216,8 +1148,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Remove the objects in \c anArray from the receiver array.</span>
 <span class="cm">    @param anArray the array of objects to remove from the receiver</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectsInArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectsInArray:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>anArray
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="n">anArray</span> <span class="n">count</span><span class="p">];</span>
@@ -1229,8 +1160,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Removes all the objects in the specified range from the receiver.</span>
 <span class="cm">    @param aRange the range of objects to remove</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectsInRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeObjectsInRange:</span><span class="p">(</span><span class="kt">CPRange</span><span class="p">)</span>aRange
 <span class="p">{</span>
     <span class="nf">splice</span><span class="p">(</span><span class="n">aRange</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="n">aRange</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
 <span class="p">}</span>
@@ -1240,14 +1170,12 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Swaps the elements at the two specified indices.</span>
 <span class="cm">    @param anIndex the first index to swap from</span>
 <span class="cm">    @param otherIndex the second index to swap from</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">exchangeObjectAtIndex:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>anIndex <span class="nf">withObjectAtIndex:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>otherIndex
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">exchangeObjectAtIndex:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>anIndex <span class="nf">withObjectAtIndex:</span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span>otherIndex
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">temporary</span> <span class="o">=</span> <span class="nb">self</span><span class="p">[</span><span class="n">anIndex</span><span class="p">];</span>
     <span class="nb">self</span><span class="p">[</span><span class="n">anIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nb">self</span><span class="p">[</span><span class="n">otherIndex</span><span class="p">];</span>
     <span class="nb">self</span><span class="p">[</span><span class="n">otherIndex</span><span class="p">]</span> <span class="o">=</span> <span class="n">temporary</span><span class="p">;</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">sortUsingDescriptors:</span><span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span>descriptors
 <span class="p">{</span>
     <span class="nf">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
@@ -1268,8 +1196,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">    Sorts the receiver array using a JavaScript function as a comparator, and a specified context.</span>
 <span class="cm">    @param aFunction a JavaScript function that will be called to compare objects</span>
 <span class="cm">    @param aContext an object that will be passed to \c aFunction with comparison</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">sortUsingFunction:</span><span class="p">(</span><span class="kt">Function</span><span class="p">)</span>aFunction <span class="nf">context:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aContext
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">sortUsingFunction:</span><span class="p">(</span><span class="kt">Function</span><span class="p">)</span>aFunction <span class="nf">context:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aContext
 <span class="p">{</span>
     <span class="nf">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">aFunction</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">aContext</span><span class="p">);</span> <span class="p">});</span>
 <span class="p">}</span>
@@ -1277,8 +1204,7 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">/*!</span>
 <span class="cm">    Sorts the receiver array using an Objective-J method as a comparator.</span>
 <span class="cm">    @param aSelector the selector for the method to call for comparison</span>
-<span class="cm">*/</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">sortUsingSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector
+<span class="cm">*/</span><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">sortUsingSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector
 <span class="p">{</span>
     <span class="nf">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">aSelector</span><span class="p">,</span> <span class="n">rhs</span><span class="p">);</span> <span class="p">});</span>
 <span class="p">}</span>
@@ -1286,12 +1212,10 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="k">@end</span>
 
 <span class="k">@implementation</span> <span class="nc">CPArray</span> <span class="p">(</span><span class="nl">CPCoding</span>)
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithCoder:</span><span class="p">(</span><span class="kt">CPCoder</span><span class="p">)</span>aCoder
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">aCoder</span> <span class="n">decodeObjectForKey</span><span class="o">:</span><span class="s">@&quot;CP.objects&quot;</span><span class="p">];</span>
 <span class="p">}</span>
-
 <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">encodeWithCoder:</span><span class="p">(</span><span class="kt">CPCoder</span><span class="p">)</span>aCoder
 <span class="p">{</span>
     <span class="p">[</span><span class="n">aCoder</span> <span class="n">_encodeArrayOfObjects</span><span class="o">:</span><span class="nb">self</span> <span class="n">forKey</span><span class="o">:</span><span class="s">@&quot;CP.objects&quot;</span><span class="p">];</span>

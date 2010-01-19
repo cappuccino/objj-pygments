@@ -28,13 +28,17 @@ class ObjectiveJLexer(RegexLexer):
 
     flags = re.DOTALL
 
+    def test(a, b, c=1):
+        print b.group(0)
+        return []
+
     tokens = {
-        'root': [
-            include('whitespace'),
-            
+        'root': [           
             # function definition
-            (r'([\+-]' + _ws + r')(?=\([$a-zA-Z_])(.*?)(?={)',
+            (r'\n([\+-]' + _ws + r')(.*?)(?=[^\(]{)', # ugly lookahead hack to handle types w/ curly braces
              bygroups(using(this), using(this, state='function_signature'))),
+            
+            include('whitespace'),
 
             # class definition
             (r'(@interface|@implementation)(\s+)', bygroups(Keyword, Text),
@@ -44,17 +48,18 @@ class ObjectiveJLexer(RegexLexer):
             (r'(\s*)(@end)(\s*)', bygroups(Text, Keyword, Text)),
 
             include('statements'),
-            ('[{}]', Punctuation),
+            ('[{\(\)}]', Punctuation),
             (';', Punctuation)
         ],
         'whitespace': [
-            (r'\s*(#(?:if|pragma|define).*?\n)', Comment.Preproc),
-            (r'\s*#(else|endif)', Comment.Preproc),
-
             (r'(@import)(\s+)("(\\\\|\\"|[^"])*")', bygroups(Comment.Preproc, Text, String.Double)),
             (r'(@import)(\s+)(<(\\\\|\\>|[^>])*>)', bygroups(Comment.Preproc, Text, String.Double)),
-            (r'(#include)(\s+)("(\\\\|\\"|[^"])*")', bygroups(Comment.Preproc, Text, String.Double)),
-            (r'(#include)(\s+)(<(\\\\|\\>|[^>])*>)', bygroups(Comment.Preproc, Text, String.Double)),
+            (r'(#(?:include|import))(\s+)("(\\\\|\\"|[^"])*")', bygroups(Comment.Preproc, Text, String.Double)),
+            (r'(#(?:include|import))(\s+)(<(\\\\|\\>|[^>])*>)', bygroups(Comment.Preproc, Text, String.Double)),
+            
+            (r'#if\s+0', Comment.Preproc, 'if0'),
+            (r'#', Comment.Preproc, 'macro'),
+
 
             (r'\n', Text),
             (r'\s+', Text),
@@ -144,10 +149,9 @@ class ObjectiveJLexer(RegexLexer):
             (r'(\(' + _ws + r')'                # open paren
              r'([a-zA-Z_][a-zA-Z0-9_]+)'        # return type
              r'(' + _ws + r'\)' + _ws + r')'    # close paren
-             r'([$a-zA-Z_][a-zA-Z0-9_]+:)',     # function name
+             r'([$a-zA-Z_][a-zA-Z0-9_]+' + _ws + r':)', # function name
              bygroups(using(this), Keyword.Type, using(this),
-                 Name.Function),
-             'function_parameters'),
+                 Name.Function), 'function_parameters'),
 
             # no-param function
             (r'(\(' + _ws + r')'                # open paren
@@ -155,8 +159,17 @@ class ObjectiveJLexer(RegexLexer):
              r'(' + _ws + r'\)' + _ws + r')'    # close paren
              r'([$a-zA-Z_][a-zA-Z0-9_]+)',      # function name
              bygroups(using(this), Keyword.Type, using(this),
-                 Name.Function),
-             "#pop"),
+                 Name.Function), "#pop"),
+
+ 
+            # no return type given, start of a selector w/ parameters
+            (r'([$a-zA-Z_][a-zA-Z0-9_]+' + _ws + r':)', # function name
+             bygroups (Name.Function), 'function_parameters'),
+
+            # no return type given, no-param function
+            (r'([$a-zA-Z_][a-zA-Z0-9_]+)',      # function name
+             bygroups(Name.Function), "#pop"),
+
 
             ('', Text, '#pop'),
         ],
@@ -164,20 +177,23 @@ class ObjectiveJLexer(RegexLexer):
             include('whitespace'),
 
             # parameters
-            (r'(\(' + _ws + r')'                # open paren
-             r'([a-zA-Z_][a-zA-Z0-9_]+)'        # type
-             r'(' + _ws + r'\)' + _ws + r')'    # close paren
+            (r'(\(' + _ws + ')'                 # open paren
+             r'([^\)]+)'                        # type
+             r'(' + _ws + r'\)' + _ws + r')+'   # close paren
              r'([$a-zA-Z_][a-zA-Z0-9_]+)',      # param name
              bygroups(using(this), Keyword.Type, using(this), Text)),
 
             # one piece of a selector name
-            (r'([$a-zA-Z_][a-zA-Z0-9_]+:)',     # function name
+            (r'([$a-zA-Z_][a-zA-Z0-9_]+' + _ws + r':)',     # function name
              Name.Function),
+
+            # smallest possible selector piece
+            (r'(:)', Name.Function),
 
             # var args
             (r'(,' + _ws + r'...)', using(this)),
 
-            ('{', Punctuation, "#pop")
+            (r'([$a-zA-Z_][a-zA-Z0-9_]+)', Text)# param name
         ],
         'expression' : [
             (r'([$a-zA-Z_][a-zA-Z0-9_]*)(\()', bygroups(Name.Function, Punctuation)),

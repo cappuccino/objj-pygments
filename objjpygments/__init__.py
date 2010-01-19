@@ -28,10 +28,6 @@ class ObjectiveJLexer(RegexLexer):
 
     flags = re.DOTALL
 
-    def test(a, b, c=1):
-        print b.group(0)
-        return []
-
     tokens = {
         'root': [           
             # function definition
@@ -122,7 +118,7 @@ class ObjectiveJLexer(RegexLexer):
              r'Error|eval|isFinite|isNaN|parseFloat|parseInt|document|this|'
              r'window)\b', Name.Builtin),
 
-            (r'([$a-zA-Z_][a-zA-Z0-9_]*)(?=\()', Name.Function),
+            (r'([$a-zA-Z_][a-zA-Z0-9_]*)(' + _ws + r')(?=\()', bygroups(Name.Function, using(this))),
 
             (r'[$a-zA-Z_][a-zA-Z0-9_]*', Name),
         ],

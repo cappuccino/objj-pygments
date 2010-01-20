@@ -1,0 +1,6 @@
+You can install this lexer via setuptools by running:
+[sudo] python setup.py install
+
+Alternatively, you can copy the ObjectievJLexer class from objjpygments/__init__.py
+into pygments directly, by appending it to pygments/lexers/web.py and reinstalling
+pygments.

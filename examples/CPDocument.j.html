@@ -1,0 +1,1012 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=latin1">
+  <style type="text/css">
+td.linenos { background-color: #f0f0f0; padding-right: 10px; }
+span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+pre { line-height: 125%; }
+body .hll { background-color: #ffffcc }
+body  { background: #f8f8f8; }
+body .c { color: #408080; font-style: italic } /* Comment */
+body .err { border: 1px solid #FF0000 } /* Error */
+body .k { color: #008000; font-weight: bold } /* Keyword */
+body .o { color: #666666 } /* Operator */
+body .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+body .cp { color: #BC7A00 } /* Comment.Preproc */
+body .c1 { color: #408080; font-style: italic } /* Comment.Single */
+body .cs { color: #408080; font-style: italic } /* Comment.Special */
+body .gd { color: #A00000 } /* Generic.Deleted */
+body .ge { font-style: italic } /* Generic.Emph */
+body .gr { color: #FF0000 } /* Generic.Error */
+body .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+body .gi { color: #00A000 } /* Generic.Inserted */
+body .go { color: #808080 } /* Generic.Output */
+body .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+body .gs { font-weight: bold } /* Generic.Strong */
+body .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+body .gt { color: #0040D0 } /* Generic.Traceback */
+body .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+body .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+body .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+body .kp { color: #008000 } /* Keyword.Pseudo */
+body .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+body .kt { color: #B00040 } /* Keyword.Type */
+body .m { color: #666666 } /* Literal.Number */
+body .s { color: #BA2121 } /* Literal.String */
+body .na { color: #7D9029 } /* Name.Attribute */
+body .nb { color: #008000 } /* Name.Builtin */
+body .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+body .no { color: #880000 } /* Name.Constant */
+body .nd { color: #AA22FF } /* Name.Decorator */
+body .ni { color: #999999; font-weight: bold } /* Name.Entity */
+body .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+body .nf { color: #0000FF } /* Name.Function */
+body .nl { color: #A0A000 } /* Name.Label */
+body .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+body .nt { color: #008000; font-weight: bold } /* Name.Tag */
+body .nv { color: #19177C } /* Name.Variable */
+body .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+body .w { color: #bbbbbb } /* Text.Whitespace */
+body .mf { color: #666666 } /* Literal.Number.Float */
+body .mh { color: #666666 } /* Literal.Number.Hex */
+body .mi { color: #666666 } /* Literal.Number.Integer */
+body .mo { color: #666666 } /* Literal.Number.Oct */
+body .sb { color: #BA2121 } /* Literal.String.Backtick */
+body .sc { color: #BA2121 } /* Literal.String.Char */
+body .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+body .s2 { color: #BA2121 } /* Literal.String.Double */
+body .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+body .sh { color: #BA2121 } /* Literal.String.Heredoc */
+body .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+body .sx { color: #008000 } /* Literal.String.Other */
+body .sr { color: #BB6688 } /* Literal.String.Regex */
+body .s1 { color: #BA2121 } /* Literal.String.Single */
+body .ss { color: #19177C } /* Literal.String.Symbol */
+body .bp { color: #008000 } /* Name.Builtin.Pseudo */
+body .vc { color: #19177C } /* Name.Variable.Class */
+body .vg { color: #19177C } /* Name.Variable.Global */
+body .vi { color: #19177C } /* Name.Variable.Instance */
+body .il { color: #666666 } /* Literal.Number.Integer.Long */
+
+  </style>
+</head>
+<body>
+<h2></h2>
+
+<div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm"> * CPDocument.j</span>
+<span class="cm"> * AppKit</span>
+<span class="cm"> *</span>
+<span class="cm"> * Created by Francisco Tolmasky.</span>
+<span class="cm"> * Copyright 2008, 280 North, Inc.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This library is free software; you can redistribute it and/or</span>
+<span class="cm"> * modify it under the terms of the GNU Lesser General Public</span>
+<span class="cm"> * License as published by the Free Software Foundation; either</span>
+<span class="cm"> * version 2.1 of the License, or (at your option) any later version.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This library is distributed in the hope that it will be useful,</span>
+<span class="cm"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="cm"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU</span>
+<span class="cm"> * Lesser General Public License for more details.</span>
+<span class="cm"> *</span>
+<span class="cm"> * You should have received a copy of the GNU Lesser General Public</span>
+<span class="cm"> * License along with this library; if not, write to the Free Software</span>
+<span class="cm"> * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA</span>
+<span class="cm"> */</span>
+
+<span class="cp">@import</span> <span class="s2">&lt;Foundation/CPString.j&gt;</span>
+<span class="cp">@import</span> <span class="s2">&lt;Foundation/CPArray.j&gt;</span>
+
+<span class="cp">@import</span> <span class="s2">&quot;CPResponder.j&quot;</span>
+<span class="cp">@import</span> <span class="s2">&quot;CPSavePanel.j&quot;</span>
+<span class="cp">@import</span> <span class="s2">&quot;CPViewController.j&quot;</span>
+<span class="cp">@import</span> <span class="s2">&quot;CPWindowController.j&quot;</span>
+
+
+<span class="cm">/*</span>
+<span class="cm">    @global</span>
+<span class="cm">    @group CPSaveOperationType</span>
+<span class="cm">*/</span>
+<span class="n">CPSaveOperation</span>             <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">    @global</span>
+<span class="cm">    @group CPSaveOperationType</span>
+<span class="cm">*/</span>
+<span class="n">CPSaveAsOperation</span>           <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">    @global</span>
+<span class="cm">    @group CPSaveOperationType</span>
+<span class="cm">*/</span>
+<span class="n">CPSaveToOperation</span>           <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">    @global</span>
+<span class="cm">    @group CPSaveOperationType</span>
+<span class="cm">*/</span>
+<span class="n">CPAutosaveOperation</span>         <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+<span class="cm">/*</span>
+<span class="cm">    @global</span>
+<span class="cm">    @group CPDocumentChangeType</span>
+<span class="cm">*/</span>
+<span class="n">CPChangeDone</span>                <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">    @global</span>
+<span class="cm">    @group CPDocumentChangeType</span>
+<span class="cm">*/</span>
+<span class="n">CPChangeUndone</span>              <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">    @global</span>
+<span class="cm">    @group CPDocumentChangeType</span>
+<span class="cm">*/</span>
+<span class="n">CPChangeCleared</span>             <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">    @global</span>
+<span class="cm">    @group CPDocumentChangeType</span>
+<span class="cm">*/</span>
+<span class="n">CPChangeReadOtherContents</span>   <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">    @global</span>
+<span class="cm">    @group CPDocumentChangeType</span>
+<span class="cm">*/</span>
+<span class="n">CPChangeAutosaved</span>           <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+<span class="n">CPDocumentWillSaveNotification</span>      <span class="o">=</span> <span class="s">@&quot;CPDocumentWillSaveNotification&quot;</span><span class="p">;</span>
+<span class="n">CPDocumentDidSaveNotification</span>       <span class="o">=</span> <span class="s">@&quot;CPDocumentDidSaveNotification&quot;</span><span class="p">;</span>
+<span class="n">CPDocumentDidFailToSaveNotification</span> <span class="o">=</span> <span class="s">@&quot;CPDocumentDidFailToSaveNotification&quot;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="n">CPDocumentUntitledCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="cm">/*! </span>
+<span class="cm">    @ingroup appkit</span>
+<span class="cm">    @class CPDocument</span>
+
+<span class="cm">    CPDocument is used to represent a document/file in a Cappuccino application.</span>
+<span class="cm">    In a document-based application, generally multiple documents are open simutaneously</span>
+<span class="cm">    (multiple text documents, slide presentations, spreadsheets, etc.), and multiple</span>
+<span class="cm">    CPDocuments should be used to represent this.</span>
+<span class="cm">*/</span>
+<span class="k">@implementation</span> <span class="nc">CPDocument</span> <span class="o">:</span> <span class="nc">CPResponder</span>
+<span class="p">{</span>
+    <span class="n">CPWindow</span>            <span class="n">_window</span><span class="p">;</span> <span class="c1">// For outlet purposes.</span>
+    <span class="n">CPView</span>              <span class="n">_view</span><span class="p">;</span> <span class="c1">// For outlet purposes</span>
+    <span class="n">CPDictionary</span>        <span class="n">_viewControllersForWindowControllers</span><span class="p">;</span>
+
+    <span class="n">CPURL</span>               <span class="n">_fileURL</span><span class="p">;</span>
+    <span class="n">CPString</span>            <span class="n">_fileType</span><span class="p">;</span>
+    <span class="n">CPArray</span>             <span class="n">_windowControllers</span><span class="p">;</span>
+    <span class="kt">unsigned</span>            <span class="n">_untitledDocumentIndex</span><span class="p">;</span>
+
+    <span class="kt">BOOL</span>                <span class="n">_hasUndoManager</span><span class="p">;</span>
+    <span class="n">CPUndoManager</span>       <span class="n">_undoManager</span><span class="p">;</span>
+
+    <span class="kt">int</span>                 <span class="n">_changeCount</span><span class="p">;</span>
+
+    <span class="n">CPURLConnection</span>     <span class="n">_readConnection</span><span class="p">;</span>
+    <span class="n">CPURLRequest</span>        <span class="n">_writeRequest</span><span class="p">;</span>
+
+    <span class="n">CPAlert</span>             <span class="n">_canCloseAlert</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Initializes an empty document.</span>
+<span class="cm">    @return the initialized document</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span>
+<span class="p">{</span>
+    <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_windowControllers</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="n">_viewControllersForWindowControllers</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPDictionary</span> <span class="n">dictionary</span><span class="p">];</span>
+
+        <span class="n">_hasUndoManager</span> <span class="o">=</span> <span class="kc">YES</span><span class="p">;</span>
+        <span class="n">_changeCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="p">[</span><span class="nb">self</span> <span class="n">setNextResponder</span><span class="o">:</span><span class="n">CPApp</span><span class="p">];</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Initializes the document with a specific data type.</span>
+<span class="cm">    @param aType the type of document to initialize</span>
+<span class="cm">    @param anError not used</span>
+<span class="cm">    @return the initialized document</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithType:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aType <span class="nf">error:</span><span class="p">(</span><span class="kt">{CPError}</span><span class="p">)</span>anError
+<span class="p">{</span>
+    <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">init</span><span class="p">];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">setFileType</span><span class="o">:</span><span class="n">aType</span><span class="p">];</span>
+    
+    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Initializes a document of a specific type located at a URL. Notifies</span>
+<span class="cm">    the provided delegate after initialization.</span>
+<span class="cm">    @param anAbsoluteURL the url of the document content</span>
+<span class="cm">    @param aType the type of document located at the URL</span>
+<span class="cm">    @param aDelegate the delegate to notify</span>
+<span class="cm">    @param aDidReadSelector the selector used to notify the delegate</span>
+<span class="cm">    @param aContextInfo context information passed to the delegate</span>
+<span class="cm">    after initialization</span>
+<span class="cm">    @return the initialized document</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithContentsOfURL:</span><span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span>anAbsoluteURL <span class="nf">ofType:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aType <span class="nf">delegate:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aDelegate <span class="nf">didReadSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aDidReadSelector <span class="nf">contextInfo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aContextInfo
+<span class="p">{</span>
+    <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">init</span><span class="p">];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">setFileURL</span><span class="o">:</span><span class="n">anAbsoluteURL</span><span class="p">];</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">setFileType</span><span class="o">:</span><span class="n">aType</span><span class="p">];</span>
+
+        <span class="p">[</span><span class="nb">self</span> <span class="n">readFromURL</span><span class="o">:</span><span class="n">anAbsoluteURL</span> <span class="n">ofType</span><span class="o">:</span><span class="n">aType</span> <span class="n">delegate</span><span class="o">:</span><span class="n">aDelegate</span> <span class="n">didReadSelector</span><span class="o">:</span><span class="n">aDidReadSelector</span> <span class="n">contextInfo</span><span class="o">:</span><span class="n">aContextInfo</span><span class="p">];</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Initializes the document from a URL.</span>
+<span class="cm">    @param anAbsoluteURL the document location</span>
+<span class="cm">    @param absoluteContentsURL the location of the document&#39;s contents</span>
+<span class="cm">    @param aType the type of the contents</span>
+<span class="cm">    @param aDelegate this object will receive a callback after the document&#39;s contents are loaded</span>
+<span class="cm">    @param aDidReadSelector the message selector that will be sent to \c aDelegate</span>
+<span class="cm">    @param aContextInfo passed as the argument to the message sent to the \c aDelegate</span>
+<span class="cm">    @return the initialized document</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initForURL:</span><span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span>anAbsoluteURL <span class="nf">withContentsOfURL:</span><span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span>absoluteContentsURL <span class="nf">ofType:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aType <span class="nf">delegate:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aDelegate <span class="nf">didReadSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aDidReadSelector <span class="nf">contextInfo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aContextInfo
+<span class="p">{</span>
+    <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">init</span><span class="p">];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">setFileURL</span><span class="o">:</span><span class="n">anAbsoluteURL</span><span class="p">];</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">setFileType</span><span class="o">:</span><span class="n">aType</span><span class="p">];</span>
+
+        <span class="p">[</span><span class="nb">self</span> <span class="n">readFromURL</span><span class="o">:</span><span class="n">absoluteContentsURL</span> <span class="n">ofType</span><span class="o">:</span><span class="n">aType</span> <span class="n">delegate</span><span class="o">:</span><span class="n">aDelegate</span> <span class="n">didReadSelector</span><span class="o">:</span><span class="n">aDidReadSelector</span> <span class="n">contextInfo</span><span class="o">:</span><span class="n">aContextInfo</span><span class="p">];</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Returns the receiver&#39;s data in a specified type. The default implementation just</span>
+<span class="cm">    throws an exception.</span>
+<span class="cm">    @param aType the format of the data</span>
+<span class="cm">    @param anError not used</span>
+<span class="cm">    @throws CPUnsupportedMethodException if this method hasn&#39;t been overriden by the subclass</span>
+<span class="cm">    @return the document data</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPData</span><span class="p">)</span><span class="nf">dataOfType:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aType <span class="nf">error:</span><span class="p">(</span><span class="kt">{CPError}</span><span class="p">)</span>anError
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">CPException</span> <span class="n">raise</span><span class="o">:</span><span class="n">CPUnsupportedMethodException</span>
+                <span class="n">reason</span><span class="o">:</span><span class="s">&quot;dataOfType:error: must be overridden by the document subclass.&quot;</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Sets the content of the document by reading the provided</span>
+<span class="cm">    data. The default implementation just throws an exception.</span>
+<span class="cm">    @param aData the document&#39;s data</span>
+<span class="cm">    @param aType the document type</span>
+<span class="cm">    @param anError not used</span>
+<span class="cm">    @throws CPUnsupportedMethodException if this method hasn&#39;t been</span>
+<span class="cm">    overridden by the subclass</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">readFromData:</span><span class="p">(</span><span class="kt">CPData</span><span class="p">)</span>aData <span class="nf">ofType:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aType <span class="nf">error:</span><span class="p">(</span><span class="kt">CPError</span><span class="p">)</span>anError
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">CPException</span> <span class="n">raise</span><span class="o">:</span><span class="n">CPUnsupportedMethodException</span>
+                <span class="n">reason</span><span class="o">:</span><span class="s">&quot;readFromData:ofType: must be overridden by the document subclass.&quot;</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewControllerWillLoadCib:</span><span class="p">(</span><span class="kt">CPViewController</span><span class="p">)</span>aViewController
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewControllerDidLoadCib:</span><span class="p">(</span><span class="kt">CPViewController</span><span class="p">)</span>aViewController
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPWindowController</span><span class="p">)</span><span class="nf">firstEligibleExistingWindowController</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Creating and managing window controllers</span>
+<span class="cm">/*!</span>
+<span class="cm">    Creates the window controller for this document.</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">makeWindowControllers</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="nb">self</span> <span class="n">makeViewAndWindowControllers</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">makeViewAndWindowControllers</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">viewCibName</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">viewCibName</span><span class="p">],</span>
+        <span class="n">viewController</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="n">windowController</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
+
+    <span class="c1">// Create our view controller if we have a cib for it.</span>
+    <span class="k">if</span> <span class="p">([</span><span class="n">viewCibName</span> <span class="n">length</span><span class="p">])</span>
+        <span class="n">viewController</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CPViewController</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithCibName</span><span class="o">:</span><span class="n">viewCibName</span> <span class="n">bundle</span><span class="o">:</span><span class="kc">nil</span> <span class="n">owner</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+
+    <span class="c1">// If we have a view controller, check if we have a free window for it.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">viewController</span><span class="p">)</span>
+        <span class="n">windowController</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">firstEligibleExistingWindowController</span><span class="p">];</span>
+
+    <span class="c1">// If not, create one.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">windowController</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kd">var</span> <span class="n">windowCibName</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">windowCibName</span><span class="p">];</span>
+
+        <span class="c1">// From a cib if we have one.</span>
+        <span class="k">if</span> <span class="p">([</span><span class="n">windowCibName</span> <span class="n">length</span><span class="p">])</span>
+            <span class="n">windowController</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CPWindowController</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithWindowCibName</span><span class="o">:</span><span class="n">windowCibName</span> <span class="n">owner</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+
+        <span class="c1">// If not you get a standard window capable of displaying multiple documents and view</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">viewController</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kd">var</span> <span class="n">view</span> <span class="o">=</span> <span class="p">[</span><span class="n">viewController</span> <span class="n">view</span><span class="p">],</span>
+                <span class="n">viewFrame</span> <span class="o">=</span> <span class="p">[</span><span class="n">view</span> <span class="n">frame</span><span class="p">];</span>
+            
+            <span class="n">viewFrame</span><span class="p">.</span><span class="n">origin</span> <span class="o">=</span> <span class="nf">CGPointMake</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+
+            <span class="kd">var</span> <span class="n">theWindow</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CPWindow</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithContentRect</span><span class="o">:</span><span class="n">viewFrame</span> <span class="n">styleMask</span><span class="o">:</span><span class="n">CPTitledWindowMask</span> <span class="o">|</span> <span class="n">CPClosableWindowMask</span> <span class="o">|</span> <span class="n">CPMiniaturizableWindowMask</span> <span class="o">|</span> <span class="n">CPResizableWindowMask</span><span class="p">];</span>
+
+            <span class="n">windowController</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CPWindowController</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithWindow</span><span class="o">:</span><span class="n">theWindow</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">windowController</span> <span class="o">&amp;&amp;</span> <span class="n">viewController</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">windowController</span> <span class="n">setSupportsMultipleDocuments</span><span class="o">:</span><span class="kc">YES</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">windowController</span><span class="p">)</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">addWindowController</span><span class="o">:</span><span class="n">windowController</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">viewController</span><span class="p">)</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">addViewController</span><span class="o">:</span><span class="n">viewController</span> <span class="n">forWindowController</span><span class="o">:</span><span class="n">windowController</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Returns the document&#39;s window controllers</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">windowControllers</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">_windowControllers</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Add a controller to the document&#39;s list of controllers. This should</span>
+<span class="cm">    be called after making a new window controller.</span>
+<span class="cm">    @param aWindowController the controller to add</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addWindowController:</span><span class="p">(</span><span class="kt">CPWindowController</span><span class="p">)</span>aWindowController
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">_windowControllers</span> <span class="n">addObject</span><span class="o">:</span><span class="n">aWindowController</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">([</span><span class="n">aWindowController</span> <span class="nb">document</span><span class="p">]</span> <span class="o">!==</span> <span class="nb">self</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">aWindowController</span> <span class="n">setDocument</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Remove a controller to the document&#39;s list of controllers. This should</span>
+<span class="cm">    be called after closing the controller&#39;s window.</span>
+<span class="cm">    @param aWindowController the controller to remove</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeWindowController:</span><span class="p">(</span><span class="kt">CPWindowController</span><span class="p">)</span>aWindowController
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">aWindowController</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">_windowControllers</span> <span class="n">removeObject</span><span class="o">:</span><span class="n">aWindowController</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">([</span><span class="n">aWindowController</span> <span class="nb">document</span><span class="p">]</span> <span class="o">===</span> <span class="nb">self</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">aWindowController</span> <span class="n">setDocument</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPView</span><span class="p">)</span><span class="nf">view</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">_view</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPArray</span><span class="p">)</span><span class="nf">viewControllers</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_viewControllersForWindowControllers</span> <span class="n">allValues</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addViewController:</span><span class="p">(</span><span class="kt">CPViewController</span><span class="p">)</span>aViewController <span class="nf">forWindowController:</span><span class="p">(</span><span class="kt">CPWindowController</span><span class="p">)</span>aWindowController
+<span class="p">{</span>
+    <span class="c1">// FIXME: exception if we don&#39;t own the window controller?</span>
+    <span class="p">[</span><span class="n">_viewControllersForWindowControllers</span> <span class="n">setObject</span><span class="o">:</span><span class="n">aViewController</span> <span class="n">forKey</span><span class="o">:</span><span class="p">[</span><span class="n">aWindowController</span> <span class="n">UID</span><span class="p">]];</span>
+
+    <span class="k">if</span> <span class="p">([</span><span class="n">aWindowController</span> <span class="nb">document</span><span class="p">]</span> <span class="o">===</span> <span class="nb">self</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">aWindowController</span> <span class="n">setViewController</span><span class="o">:</span><span class="n">aViewController</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">removeViewController:</span><span class="p">(</span><span class="kt">CPViewController</span><span class="p">)</span>aViewController
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">_viewControllersForWindowControllers</span> <span class="n">removeObject</span><span class="o">:</span><span class="n">aViewController</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPViewController</span><span class="p">)</span><span class="nf">viewControllerForWindowController:</span><span class="p">(</span><span class="kt">CPWindowController</span><span class="p">)</span>aWindowController
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_viewControllersForWindowControllers</span> <span class="n">objectForKey</span><span class="o">:</span><span class="p">[</span><span class="n">aWindowController</span> <span class="n">UID</span><span class="p">]];</span>
+<span class="p">}</span>
+
+<span class="c1">// Managing Document Windows</span>
+<span class="cm">/*!</span>
+<span class="cm">    Shows all the document&#39;s windows.</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">showWindows</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">_windowControllers</span> <span class="n">makeObjectsPerformSelector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">setDocument</span><span class="o">:</span><span class="p">)</span> <span class="n">withObject</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">_windowControllers</span> <span class="n">makeObjectsPerformSelector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">showWindow</span><span class="o">:</span><span class="p">)</span> <span class="n">withObject</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Returns the name of the document as displayed in the title bar.</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">displayName</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_fileURL</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">_fileURL</span> <span class="n">lastPathComponent</span><span class="p">];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_untitledDocumentIndex</span><span class="p">)</span>
+        <span class="n">_untitledDocumentIndex</span> <span class="o">=</span> <span class="o">++</span><span class="n">CPDocumentUntitledCount</span><span class="p">;</span>
+	
+	<span class="k">if</span> <span class="p">(</span><span class="n">_untitledDocumentIndex</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+	   <span class="k">return</span> <span class="s">@&quot;Untitled&quot;</span><span class="p">;</span>
+
+	<span class="k">return</span> <span class="s">@&quot;Untitled &quot;</span> <span class="o">+</span> <span class="n">_untitledDocumentIndex</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">viewCibName</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Returns the document&#39;s Cib name</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">windowCibName</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Called after \c aWindowController loads the document&#39;s Nib file.</span>
+<span class="cm">    @param aWindowController the controller that loaded the Nib file</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">windowControllerDidLoadCib:</span><span class="p">(</span><span class="kt">CPWindowController</span><span class="p">)</span>aWindowController
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Called before \c aWindowController will load the document&#39;s Nib file.</span>
+<span class="cm">    @param aWindowController the controller that will load the Nib file</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">windowControllerWillLoadCib:</span><span class="p">(</span><span class="kt">CPWindowController</span><span class="p">)</span>aWindowController
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="c1">// Reading from and Writing to URLs</span>
+<span class="cm">/*!</span>
+<span class="cm">    Set the document&#39;s data from a URL. Notifies the provided delegate afterwards.</span>
+<span class="cm">    @param anAbsoluteURL the URL to the document&#39;s content</span>
+<span class="cm">    @param aType the document type</span>
+<span class="cm">    @param aDelegate delegate to notify after reading the data</span>
+<span class="cm">    @param aDidReadSelector message that will be sent to the delegate</span>
+<span class="cm">    @param aContextInfo context information that gets sent to the delegate</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">readFromURL:</span><span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span>anAbsoluteURL <span class="nf">ofType:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aType <span class="nf">delegate:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aDelegate <span class="nf">didReadSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aDidReadSelector <span class="nf">contextInfo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aContextInfo
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">_readConnection</span> <span class="n">cancel</span><span class="p">];</span>
+
+    <span class="c1">// FIXME: Oh man is this every looking for trouble, we need to handle login at the Cappuccino level, with HTTP Errors.</span>
+    <span class="n">_readConnection</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPURLConnection</span> <span class="n">connectionWithRequest</span><span class="o">:</span><span class="p">[</span><span class="n">CPURLRequest</span> <span class="n">requestWithURL</span><span class="o">:</span><span class="n">anAbsoluteURL</span><span class="p">]</span> <span class="n">delegate</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+
+    <span class="n">_readConnection</span><span class="p">.</span><span class="n">session</span> <span class="o">=</span> <span class="nf">_CPReadSessionMake</span><span class="p">(</span><span class="n">aType</span><span class="p">,</span> <span class="n">aDelegate</span><span class="p">,</span> <span class="n">aDidReadSelector</span><span class="p">,</span> <span class="n">aContextInfo</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Returns the path to the document&#39;s file.</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span><span class="nf">fileURL</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">_fileURL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Sets the path to the document&#39;s file.</span>
+<span class="cm">    @param aFileURL the path to the document&#39;s file</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setFileURL:</span><span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span>aFileURL
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_fileURL</span> <span class="o">===</span> <span class="n">aFileURL</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">_fileURL</span> <span class="o">=</span> <span class="n">aFileURL</span><span class="p">;</span>
+    
+    <span class="p">[</span><span class="n">_windowControllers</span> <span class="n">makeObjectsPerformSelector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">synchronizeWindowTitleWithDocumentName</span><span class="p">)];</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Saves the document to the specified URL. Notifies the provided delegate</span>
+<span class="cm">    with the provided selector and context info afterwards.</span>
+<span class="cm">    @param anAbsoluteURL the url to write the document data to</span>
+<span class="cm">    @param aTypeName the document type</span>
+<span class="cm">    @param aSaveOperation the type of save operation</span>
+<span class="cm">    @param aDelegate the delegate to notify after saving</span>
+<span class="cm">    @param aDidSaveSelector the selector to send the delegate</span>
+<span class="cm">    @param aContextInfo context info that gets passed to the delegate</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">saveToURL:</span><span class="p">(</span><span class="kt">CPURL</span><span class="p">)</span>anAbsoluteURL <span class="nf">ofType:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aTypeName <span class="nf">forSaveOperation:</span><span class="p">(</span><span class="kt">CPSaveOperationType</span><span class="p">)</span>aSaveOperation <span class="nf">delegate:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aDelegate <span class="nf">didSaveSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aDidSaveSelector <span class="nf">contextInfo:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aContextInfo
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">dataOfType</span><span class="o">:</span><span class="p">[</span><span class="nb">self</span> <span class="n">fileType</span><span class="p">]</span> <span class="n">error</span><span class="o">:</span><span class="kc">nil</span><span class="p">],</span>
+        <span class="n">oldChangeCount</span> <span class="o">=</span> <span class="n">_changeCount</span><span class="p">;</span>
+
+    <span class="n">_writeRequest</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPURLRequest</span> <span class="n">requestWithURL</span><span class="o">:</span><span class="n">anAbsoluteURL</span><span class="p">];</span>
+
+    <span class="c1">// FIXME: THIS IS WRONG! We need a way to decide</span>
+    <span class="k">if</span> <span class="p">([</span><span class="n">CPPlatform</span> <span class="n">isBrowser</span><span class="p">])</span>
+        <span class="p">[</span><span class="n">_writeRequest</span> <span class="n">setHTTPMethod</span><span class="o">:</span><span class="s">@&quot;POST&quot;</span><span class="p">];</span>
+    <span class="k">else</span>
+        <span class="p">[</span><span class="n">_writeRequest</span> <span class="n">setHTTPMethod</span><span class="o">:</span><span class="s">@&quot;PUT&quot;</span><span class="p">];</span>
+
+    <span class="p">[</span><span class="n">_writeRequest</span> <span class="n">setHTTPBody</span><span class="o">:</span><span class="p">[</span><span class="n">data</span> <span class="n">string</span><span class="p">]];</span>
+
+    <span class="p">[</span><span class="n">_writeRequest</span> <span class="n">setValue</span><span class="o">:</span><span class="s">@&quot;close&quot;</span> <span class="n">forHTTPHeaderField</span><span class="o">:</span><span class="s">@&quot;Connection&quot;</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">aSaveOperation</span> <span class="o">==</span> <span class="n">CPSaveOperation</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">_writeRequest</span> <span class="n">setValue</span><span class="o">:</span><span class="s">@&quot;true&quot;</span> <span class="n">forHTTPHeaderField</span><span class="o">:</span><span class="s">@&quot;x-cappuccino-overwrite&quot;</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">aSaveOperation</span> <span class="o">!=</span> <span class="n">CPSaveToOperation</span><span class="p">)</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">updateChangeCount</span><span class="o">:</span><span class="n">CPChangeCleared</span><span class="p">];</span>
+
+    <span class="c1">// FIXME: Oh man is this every looking for trouble, we need to handle login at the Cappuccino level, with HTTP Errors.</span>
+    <span class="kd">var</span> <span class="n">connection</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPURLConnection</span> <span class="n">connectionWithRequest</span><span class="o">:</span><span class="n">_writeRequest</span> <span class="n">delegate</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+
+    <span class="n">connection</span><span class="p">.</span><span class="n">session</span> <span class="o">=</span> <span class="nf">_CPSaveSessionMake</span><span class="p">(</span><span class="n">anAbsoluteURL</span><span class="p">,</span> <span class="n">aSaveOperation</span><span class="p">,</span> <span class="n">oldChangeCount</span><span class="p">,</span> <span class="n">aDelegate</span><span class="p">,</span> <span class="n">aDidSaveSelector</span><span class="p">,</span> <span class="n">aContextInfo</span><span class="p">,</span> <span class="n">connection</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">    Implemented as a delegate method for CPURLConnection</span>
+<span class="cm">    @ignore</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">connection:</span><span class="p">(</span><span class="kt">CPURLConnection</span><span class="p">)</span>aConnection <span class="nf">didReceiveResponse:</span><span class="p">(</span><span class="kt">CPURLResponse</span><span class="p">)</span>aResponse
+<span class="p">{</span>
+    <span class="c1">// If we got this far and it wasn&#39;t an HTTP request, then everything is fine.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">aResponse</span> <span class="n">isKindOfClass</span><span class="o">:</span><span class="p">[</span><span class="n">CPHTTPURLResponse</span> <span class="n">class</span><span class="p">]])</span>
+        <span class="k">return</span><span class="p">;</span>
+    
+    <span class="kd">var</span> <span class="n">statusCode</span> <span class="o">=</span> <span class="p">[</span><span class="n">aResponse</span> <span class="n">statusCode</span><span class="p">];</span>
+    
+    <span class="c1">// Nothing to do if everything is hunky dory.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">statusCode</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    
+    <span class="kd">var</span> <span class="n">session</span> <span class="o">=</span> <span class="n">aConnection</span><span class="p">.</span><span class="n">session</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">aConnection</span> <span class="o">==</span> <span class="n">_readConnection</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="p">[</span><span class="n">aConnection</span> <span class="n">cancel</span><span class="p">];</span>
+            
+        <span class="nf">alert</span><span class="p">(</span><span class="s">&quot;There was an error retrieving the document.&quot;</span><span class="p">);</span>
+        
+        <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">delegate</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">didReadSelector</span><span class="p">,</span> <span class="nb">self</span><span class="p">,</span> <span class="kc">NO</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">contextInfo</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="c1">// 409: Conflict, in Cappuccino, overwrite protection for documents.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">statusCode</span> <span class="o">==</span> <span class="mi">409</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="p">[</span><span class="n">aConnection</span> <span class="n">cancel</span><span class="p">];</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="nf">confirm</span><span class="p">(</span><span class="s">&quot;There already exists a file with that name, would you like to overwrite it?&quot;</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="p">[</span><span class="n">_writeRequest</span> <span class="n">setValue</span><span class="o">:</span><span class="s">@&quot;true&quot;</span> <span class="n">forHTTPHeaderField</span><span class="o">:</span><span class="s">@&quot;x-cappuccino-overwrite&quot;</span><span class="p">];</span>
+    
+                <span class="p">[</span><span class="n">aConnection</span> <span class="n">start</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="k">else</span>        
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">saveOperation</span> <span class="o">!=</span> <span class="n">CPSaveToOperation</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">_changeCount</span> <span class="o">+=</span> <span class="n">session</span><span class="p">.</span><span class="n">changeCount</span><span class="p">;</span>
+                    <span class="p">[</span><span class="n">_windowControllers</span> <span class="n">makeObjectsPerformSelector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">setDocumentEdited</span><span class="o">:</span><span class="p">)</span> <span class="n">withObject</span><span class="o">:</span><span class="p">[</span><span class="nb">self</span> <span class="n">isDocumentEdited</span><span class="p">]];</span>
+                <span class="p">}</span>
+                
+                <span class="n">_writeRequest</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
+    
+                <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">delegate</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">didSaveSelector</span><span class="p">,</span> <span class="nb">self</span><span class="p">,</span> <span class="kc">NO</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">contextInfo</span><span class="p">);</span>
+                <span class="p">[</span><span class="nb">self</span> <span class="n">_sendDocumentSavedNotification</span><span class="o">:</span><span class="kc">NO</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">    Implemented as a delegate method for CPURLConnection</span>
+<span class="cm">    @ignore</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">connection:</span><span class="p">(</span><span class="kt">CPURLConnection</span><span class="p">)</span>aConnection <span class="nf">didReceiveData:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aData
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">session</span> <span class="o">=</span> <span class="n">aConnection</span><span class="p">.</span><span class="n">session</span><span class="p">;</span>
+        
+    <span class="c1">// READ</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">aConnection</span> <span class="o">==</span> <span class="n">_readConnection</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">readFromData</span><span class="o">:</span><span class="p">[</span><span class="n">CPData</span> <span class="n">dataWithString</span><span class="o">:</span><span class="n">aData</span><span class="p">]</span> <span class="n">ofType</span><span class="o">:</span><span class="n">session</span><span class="p">.</span><span class="n">fileType</span> <span class="n">error</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
+
+        <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">delegate</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">didReadSelector</span><span class="p">,</span> <span class="nb">self</span><span class="p">,</span> <span class="kc">YES</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">contextInfo</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">saveOperation</span> <span class="o">!=</span> <span class="n">CPSaveToOperation</span><span class="p">)</span>
+            <span class="p">[</span><span class="nb">self</span> <span class="n">setFileURL</span><span class="o">:</span><span class="n">session</span><span class="p">.</span><span class="n">absoluteURL</span><span class="p">];</span>
+            
+        <span class="n">_writeRequest</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
+        
+        <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">delegate</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">didSaveSelector</span><span class="p">,</span> <span class="nb">self</span><span class="p">,</span> <span class="kc">YES</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">contextInfo</span><span class="p">);</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">_sendDocumentSavedNotification</span><span class="o">:</span><span class="kc">YES</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">    Implemented as a delegate method for CPURLConnection</span>
+<span class="cm">    @ignore</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">connection:</span><span class="p">(</span><span class="kt">CPURLConnection</span><span class="p">)</span>aConnection <span class="nf">didFailWithError:</span><span class="p">(</span><span class="kt">CPError</span><span class="p">)</span>anError
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">session</span> <span class="o">=</span> <span class="n">aConnection</span><span class="p">.</span><span class="n">session</span><span class="p">;</span>
+        
+    <span class="k">if</span> <span class="p">(</span><span class="n">_readConnection</span> <span class="o">==</span> <span class="n">aConnection</span><span class="p">)</span>
+        <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">delegate</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">didReadSelector</span><span class="p">,</span> <span class="nb">self</span><span class="p">,</span> <span class="kc">NO</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">contextInfo</span><span class="p">);</span>
+    
+    <span class="k">else</span>
+    <span class="p">{</span>        
+        <span class="k">if</span> <span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">saveOperation</span> <span class="o">!=</span> <span class="n">CPSaveToOperation</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">_changeCount</span> <span class="o">+=</span> <span class="n">session</span><span class="p">.</span><span class="n">changeCount</span><span class="p">;</span>
+            <span class="p">[</span><span class="n">_windowControllers</span> <span class="n">makeObjectsPerformSelector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">setDocumentEdited</span><span class="o">:</span><span class="p">)</span> <span class="n">withObject</span><span class="o">:</span><span class="p">[</span><span class="nb">self</span> <span class="n">isDocumentEdited</span><span class="p">]];</span>
+        <span class="p">}</span>        
+
+        <span class="n">_writeRequest</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
+
+        <span class="nf">alert</span><span class="p">(</span><span class="s">&quot;There was an error saving the document.&quot;</span><span class="p">);</span>
+
+        <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">session</span><span class="p">.</span><span class="n">delegate</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">didSaveSelector</span><span class="p">,</span> <span class="nb">self</span><span class="p">,</span> <span class="kc">NO</span><span class="p">,</span> <span class="n">session</span><span class="p">.</span><span class="n">contextInfo</span><span class="p">);</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">_sendDocumentSavedNotification</span><span class="o">:</span><span class="kc">NO</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">    Implemented as a delegate method for CPURLConnection</span>
+<span class="cm">    @ignore</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">connectionDidFinishLoading:</span><span class="p">(</span><span class="kt">CPURLConnection</span><span class="p">)</span>aConnection
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_readConnection</span> <span class="o">==</span> <span class="n">aConnection</span><span class="p">)</span>
+        <span class="n">_readConnection</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Managing Document Status</span>
+<span class="cm">/*!</span>
+<span class="cm">    Returns \c YES if there are any unsaved changes.</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">isDocumentEdited</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">_changeCount</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Updates the number of unsaved changes to the document.</span>
+<span class="cm">    @param aChangeType a new document change to apply</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">updateChangeCount:</span><span class="p">(</span><span class="kt">CPDocumentChangeType</span><span class="p">)</span>aChangeType
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">aChangeType</span> <span class="o">==</span> <span class="n">CPChangeDone</span><span class="p">)</span>
+        <span class="o">++</span><span class="n">_changeCount</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">aChangeType</span> <span class="o">==</span> <span class="n">CPChangeUndone</span><span class="p">)</span>
+        <span class="o">--</span><span class="n">_changeCount</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">aChangeType</span> <span class="o">==</span> <span class="n">CPChangeCleared</span><span class="p">)</span>
+        <span class="n">_changeCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="cm">/*else if (aChangeType == CPCHangeReadOtherContents)</span>
+<span class="cm">        </span>
+<span class="cm">    else if (aChangeType == CPChangeAutosaved)*/</span> 
+    
+    <span class="p">[</span><span class="n">_windowControllers</span> <span class="n">makeObjectsPerformSelector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">setDocumentEdited</span><span class="o">:</span><span class="p">)</span> <span class="n">withObject</span><span class="o">:</span><span class="p">[</span><span class="nb">self</span> <span class="n">isDocumentEdited</span><span class="p">]];</span>
+<span class="p">}</span>
+
+<span class="c1">// Managing File Types</span>
+<span class="cm">/*!</span>
+<span class="cm">    Sets the document&#39;s file type</span>
+<span class="cm">    @param aType the document&#39;s type</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setFileType:</span><span class="p">(</span><span class="kt">CPString</span><span class="p">)</span>aType
+<span class="p">{</span>
+    <span class="n">_fileType</span> <span class="o">=</span> <span class="n">aType</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Returns the document&#39;s file type</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPString</span><span class="p">)</span><span class="nf">fileType</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">_fileType</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Working with Undo Manager</span>
+<span class="cm">/*!</span>
+<span class="cm">    Returns \c YES if the document has a</span>
+<span class="cm">    CPUndoManager.</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">hasUndoManager</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">_hasUndoManager</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Sets whether the document should have a CPUndoManager.</span>
+<span class="cm">    @param aFlag \c YES makes the document have an undo manager</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setHasUndoManager:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>aFlag
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_hasUndoManager</span> <span class="o">==</span> <span class="n">aFlag</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    
+    <span class="n">_hasUndoManager</span> <span class="o">=</span> <span class="n">aFlag</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_hasUndoManager</span><span class="p">)</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">setUndoManager</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/* @ignore */</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_undoManagerWillCloseGroup:</span><span class="p">(</span><span class="kt">CPNotification</span><span class="p">)</span>aNotification
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">undoManager</span> <span class="o">=</span> <span class="p">[</span><span class="n">aNotification</span> <span class="n">object</span><span class="p">];</span>
+    
+    <span class="k">if</span> <span class="p">([</span><span class="n">undoManager</span> <span class="n">isUndoing</span><span class="p">]</span> <span class="o">||</span> <span class="p">[</span><span class="n">undoManager</span> <span class="n">isRedoing</span><span class="p">])</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="p">[</span><span class="nb">self</span> <span class="n">updateChangeCount</span><span class="o">:</span><span class="n">CPChangeDone</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/* @ignore */</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_undoManagerDidUndoChange:</span><span class="p">(</span><span class="kt">CPNotification</span><span class="p">)</span>aNotification
+<span class="p">{</span>
+    <span class="p">[</span><span class="nb">self</span> <span class="n">updateChangeCount</span><span class="o">:</span><span class="n">CPChangeUndone</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/* @ignore */</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_undoManagerDidRedoChange:</span><span class="p">(</span><span class="kt">CPNotification</span><span class="p">)</span>aNotification
+<span class="p">{</span>
+    <span class="p">[</span><span class="nb">self</span> <span class="n">updateChangeCount</span><span class="o">:</span><span class="n">CPChangeDone</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">    Sets the document&#39;s undo manager. This method will add the</span>
+<span class="cm">    undo manager as an observer to the notification center.</span>
+<span class="cm">    @param anUndoManager the new undo manager for the document</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setUndoManager:</span><span class="p">(</span><span class="kt">CPUndoManager</span><span class="p">)</span>anUndoManager
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">defaultCenter</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">_undoManager</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="p">[</span><span class="n">defaultCenter</span> <span class="n">removeObserver</span><span class="o">:</span><span class="nb">self</span>
+                                 <span class="n">name</span><span class="o">:</span><span class="n">CPUndoManagerDidUndoChangeNotification</span>
+                               <span class="n">object</span><span class="o">:</span><span class="n">_undoManager</span><span class="p">];</span>
+                               
+        <span class="p">[</span><span class="n">defaultCenter</span> <span class="n">removeObserver</span><span class="o">:</span><span class="nb">self</span>
+                                 <span class="n">name</span><span class="o">:</span><span class="n">CPUndoManagerDidRedoChangeNotification</span>
+                               <span class="n">object</span><span class="o">:</span><span class="n">_undoManager</span><span class="p">];</span>
+
+        <span class="p">[</span><span class="n">defaultCenter</span> <span class="n">removeObserver</span><span class="o">:</span><span class="nb">self</span>
+                                 <span class="n">name</span><span class="o">:</span><span class="n">CPUndoManagerWillCloseUndoGroupNotification</span>
+                               <span class="n">object</span><span class="o">:</span><span class="n">_undoManager</span><span class="p">];</span>
+    <span class="p">}</span>
+    
+    <span class="n">_undoManager</span> <span class="o">=</span> <span class="n">anUndoManager</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">_undoManager</span><span class="p">)</span>
+    <span class="p">{</span>
+    
+        <span class="p">[</span><span class="n">defaultCenter</span> <span class="n">addObserver</span><span class="o">:</span><span class="nb">self</span>
+                          <span class="n">selector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">_undoManagerDidUndoChange</span><span class="o">:</span><span class="p">)</span>
+                              <span class="n">name</span><span class="o">:</span><span class="n">CPUndoManagerDidUndoChangeNotification</span>
+                            <span class="n">object</span><span class="o">:</span><span class="n">_undoManager</span><span class="p">];</span>
+                            
+        <span class="p">[</span><span class="n">defaultCenter</span> <span class="n">addObserver</span><span class="o">:</span><span class="nb">self</span>
+                          <span class="n">selector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">_undoManagerDidRedoChange</span><span class="o">:</span><span class="p">)</span>
+                              <span class="n">name</span><span class="o">:</span><span class="n">CPUndoManagerDidRedoChangeNotification</span>
+                            <span class="n">object</span><span class="o">:</span><span class="n">_undoManager</span><span class="p">];</span>
+
+        <span class="p">[</span><span class="n">defaultCenter</span> <span class="n">addObserver</span><span class="o">:</span><span class="nb">self</span>
+                          <span class="n">selector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">_undoManagerWillCloseGroup</span><span class="o">:</span><span class="p">)</span>
+                              <span class="n">name</span><span class="o">:</span><span class="n">CPUndoManagerWillCloseUndoGroupNotification</span>
+                            <span class="n">object</span><span class="o">:</span><span class="n">_undoManager</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Returns the document&#39;s undo manager. If the document</span>
+<span class="cm">    should have one, but the manager is \c nil, it</span>
+<span class="cm">    will be created and then returned.</span>
+<span class="cm">    @return the document&#39;s undo manager</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPUndoManager</span><span class="p">)</span><span class="nf">undoManager</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_hasUndoManager</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">_undoManager</span><span class="p">)</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">setUndoManager</span><span class="o">:</span><span class="p">[[</span><span class="n">CPUndoManager</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">]];</span>
+
+    <span class="k">return</span> <span class="n">_undoManager</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="cm">/*</span>
+<span class="cm">    Implemented as a delegate of a CPWindow</span>
+<span class="cm">    @ignore</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">CPUndoManager</span><span class="p">)</span><span class="nf">windowWillReturnUndoManager:</span><span class="p">(</span><span class="kt">CPWindow</span><span class="p">)</span>aWindow
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">undoManager</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Handling User Actions</span>
+<span class="cm">/*!</span>
+<span class="cm">    Saves the document. If the document does not</span>
+<span class="cm">    have a file path to save to (\c fileURL)</span>
+<span class="cm">    then \c -saveDocumentAs: will be called.</span>
+<span class="cm">    @param aSender the object requesting the save</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">saveDocument:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aSender
+<span class="p">{</span>
+    <span class="p">[</span><span class="nb">self</span> <span class="n">saveDocumentWithDelegate</span><span class="o">:</span><span class="kc">nil</span> <span class="n">didSaveSelector</span><span class="o">:</span><span class="kc">nil</span> <span class="n">contextInfo</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">saveDocumentWithDelegate:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>delegate <span class="nf">didSaveSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>didSaveSelector <span class="nf">contextInfo:</span><span class="p">(</span><span class="kt">Object</span><span class="p">)</span>contextInfo
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_fileURL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="p">[[</span><span class="n">CPNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span>
+            <span class="n">postNotificationName</span><span class="o">:</span><span class="n">CPDocumentWillSaveNotification</span>
+                          <span class="n">object</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+        
+        <span class="p">[</span><span class="nb">self</span> <span class="n">saveToURL</span><span class="o">:</span><span class="n">_fileURL</span> <span class="n">ofType</span><span class="o">:</span><span class="p">[</span><span class="nb">self</span> <span class="n">fileType</span><span class="p">]</span> <span class="n">forSaveOperation</span><span class="o">:</span><span class="n">CPSaveOperation</span> <span class="n">delegate</span><span class="o">:</span><span class="n">delegate</span> <span class="n">didSaveSelector</span><span class="o">:</span><span class="n">didSaveSelector</span> <span class="n">contextInfo</span><span class="o">:</span><span class="n">contextInfo</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">_saveDocumentAsWithDelegate</span><span class="o">:</span><span class="n">delegate</span> <span class="n">didSaveSelector</span><span class="o">:</span><span class="n">didSaveSelector</span> <span class="n">contextInfo</span><span class="o">:</span><span class="n">contextInfo</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/*!</span>
+<span class="cm">    Saves the document to a user specified path.</span>
+<span class="cm">    @param aSender the object requesting the operation</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">saveDocumentAs:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aSender
+<span class="p">{</span>
+    <span class="p">[</span><span class="nb">self</span> <span class="n">_saveDocumentAsWithDelegate</span><span class="o">:</span><span class="kc">nil</span> <span class="n">didSaveSelector</span><span class="o">:</span><span class="kc">nil</span> <span class="n">contextInfo</span><span class="o">:</span><span class="kc">nil</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_saveDocumentAsWithDelegate:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>delegate <span class="nf">didSaveSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>didSaveSelector <span class="nf">contextInfo:</span><span class="p">(</span><span class="kt">Object</span><span class="p">)</span>contextInfo
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">savePanel</span> <span class="o">=</span> <span class="p">[</span><span class="n">CPSavePanel</span> <span class="n">savePanel</span><span class="p">],</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="p">[</span><span class="n">savePanel</span> <span class="n">runModal</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">response</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="n">saveURL</span> <span class="o">=</span> <span class="p">[</span><span class="n">savePanel</span> <span class="n">URL</span><span class="p">];</span>
+
+    <span class="p">[[</span><span class="n">CPNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span>
+        <span class="n">postNotificationName</span><span class="o">:</span><span class="n">CPDocumentWillSaveNotification</span>
+                      <span class="n">object</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+
+    <span class="p">[</span><span class="nb">self</span> <span class="n">saveToURL</span><span class="o">:</span><span class="n">saveURL</span> <span class="n">ofType</span><span class="o">:</span><span class="p">[</span><span class="nb">self</span> <span class="n">fileType</span><span class="p">]</span> <span class="n">forSaveOperation</span><span class="o">:</span><span class="n">CPSaveAsOperation</span> <span class="n">delegate</span><span class="o">:</span><span class="n">delegate</span> <span class="n">didSaveSelector</span><span class="o">:</span><span class="n">didSaveSelector</span> <span class="n">contextInfo</span><span class="o">:</span><span class="n">contextInfo</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">    @ignore</span>
+<span class="cm">*/</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_sendDocumentSavedNotification:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>didSave
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">didSave</span><span class="p">)</span>
+        <span class="p">[[</span><span class="n">CPNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span>
+            <span class="n">postNotificationName</span><span class="o">:</span><span class="n">CPDocumentDidSaveNotification</span>
+                          <span class="n">object</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+    <span class="k">else</span>
+        <span class="p">[[</span><span class="n">CPNotificationCenter</span> <span class="n">defaultCenter</span><span class="p">]</span>
+            <span class="n">postNotificationName</span><span class="o">:</span><span class="n">CPDocumentDidFailToSaveNotification</span>
+                          <span class="n">object</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+
+<span class="k">@implementation</span> <span class="nc">CPDocument</span> <span class="p">(</span><span class="nl">ClosingDocuments</span>)
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">close</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">_windowControllers</span> <span class="n">makeObjectsPerformSelector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">removeDocumentAndCloseIfNecessary</span><span class="o">:</span><span class="p">)</span> <span class="n">withObject</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">CPDocumentController</span> <span class="n">sharedDocumentController</span><span class="p">]</span> <span class="n">removeDocument</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">shouldCloseWindowController:</span><span class="p">(</span><span class="kt">CPWindowController</span><span class="p">)</span>controller <span class="nf">delegate:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>delegate <span class="nf">shouldCloseSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>selector <span class="nf">contextInfo:</span><span class="p">(</span><span class="kt">Object</span><span class="p">)</span>info 
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">([</span><span class="n">controller</span> <span class="n">shouldCloseDocument</span><span class="p">]</span> <span class="o">||</span> <span class="p">([</span><span class="n">_windowControllers</span> <span class="n">count</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">_windowControllers</span> <span class="n">indexOfObject</span><span class="o">:</span><span class="n">controller</span><span class="p">]</span> <span class="o">!==</span> <span class="n">CPNotFound</span><span class="p">))</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">canCloseDocumentWithDelegate</span><span class="o">:</span><span class="nb">self</span> <span class="n">shouldCloseSelector</span><span class="o">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">_document</span><span class="o">:</span><span class="n">shouldClose</span><span class="o">:</span><span class="n">context</span><span class="o">:</span><span class="p">)</span> <span class="n">contextInfo</span><span class="o">:</span><span class="p">{</span><span class="n">delegate</span><span class="o">:</span><span class="n">delegate</span><span class="p">,</span> <span class="n">selector</span><span class="o">:</span><span class="n">selector</span><span class="p">,</span> <span class="n">context</span><span class="o">:</span><span class="n">info</span><span class="p">}];</span>
+
+    <span class="k">else</span> <span class="k">if</span> <span class="p">([</span><span class="n">delegate</span> <span class="n">respondsToSelector</span><span class="o">:</span><span class="n">selector</span><span class="p">])</span>
+        <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">delegate</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="nb">self</span><span class="p">,</span> <span class="kc">YES</span><span class="p">,</span> <span class="n">info</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">_document:</span><span class="p">(</span><span class="kt">CPDocument</span><span class="p">)</span>aDocument <span class="nf">shouldClose:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span>shouldClose <span class="nf">context:</span><span class="p">(</span><span class="kt">Object</span><span class="p">)</span>context
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">aDocument</span> <span class="o">===</span> <span class="nb">self</span> <span class="o">&amp;&amp;</span> <span class="n">shouldClose</span><span class="p">)</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">close</span><span class="p">];</span>
+
+    <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">delegate</span><span class="p">,</span> <span class="n">context</span><span class="p">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">aDocument</span><span class="p">,</span> <span class="n">shouldClose</span><span class="p">,</span> <span class="n">context</span><span class="p">.</span><span class="n">context</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">canCloseDocumentWithDelegate:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span>aDelegate <span class="nf">shouldCloseSelector:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span>aSelector <span class="nf">contextInfo:</span><span class="p">(</span><span class="kt">Object</span><span class="p">)</span>context 
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="nb">self</span> <span class="n">isDocumentEdited</span><span class="p">])</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">aDelegate</span> <span class="n">respondsToSelector</span><span class="o">:</span><span class="n">aSelector</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">aDelegate</span><span class="p">,</span> <span class="n">aSelector</span><span class="p">,</span> <span class="nb">self</span><span class="p">,</span> <span class="kc">YES</span><span class="p">,</span> <span class="n">context</span><span class="p">);</span>
+
+    <span class="n">_canCloseAlert</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CPAlert</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+
+    <span class="p">[</span><span class="n">_canCloseAlert</span> <span class="n">setDelegate</span><span class="o">:</span><span class="nb">self</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">_canCloseAlert</span> <span class="n">setAlertStyle</span><span class="o">:</span><span class="n">CPWarningAlertStyle</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">_canCloseAlert</span> <span class="n">setTitle</span><span class="o">:</span><span class="s">@&quot;Unsaved Document&quot;</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">_canCloseAlert</span> <span class="n">setMessageText</span><span class="o">:</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">@&quot;Do you want to save the changes you&#39;ve made to the document </span><span class="se">\&quot;</span><span class="s">%@</span><span class="se">\&quot;</span><span class="s">?&quot;</span><span class="p">,</span> 
+                                        <span class="p">[</span><span class="nb">self</span> <span class="n">displayName</span><span class="p">]</span> <span class="o">||</span> <span class="p">[</span><span class="nb">self</span> <span class="n">fileName</span><span class="p">])];</span>
+
+    <span class="p">[</span><span class="n">_canCloseAlert</span> <span class="n">addButtonWithTitle</span><span class="o">:</span><span class="s">@&quot;Save&quot;</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">_canCloseAlert</span> <span class="n">addButtonWithTitle</span><span class="o">:</span><span class="s">@&quot;Cancel&quot;</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">_canCloseAlert</span> <span class="n">addButtonWithTitle</span><span class="o">:</span><span class="s">@&quot;Don&#39;t Save&quot;</span><span class="p">];</span>
+
+    <span class="n">_canCloseAlert</span><span class="p">.</span><span class="n">_context</span> <span class="o">=</span> <span class="p">{</span><span class="n">delegate</span><span class="o">:</span><span class="n">aDelegate</span><span class="p">,</span> <span class="n">selector</span><span class="o">:</span><span class="n">aSelector</span><span class="p">,</span> <span class="n">context</span><span class="o">:</span><span class="n">context</span><span class="p">};</span>
+
+    <span class="p">[</span><span class="n">_canCloseAlert</span> <span class="n">runModal</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">alertDidEnd:</span><span class="p">(</span><span class="kt">CPAlert</span><span class="p">)</span>alert <span class="nf">returnCode:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>returnCode
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">alert</span> <span class="o">!==</span> <span class="n">_canCloseAlert</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="n">delegate</span> <span class="o">=</span> <span class="n">alert</span><span class="p">.</span><span class="n">_context</span><span class="p">.</span><span class="n">delegate</span><span class="p">,</span>
+        <span class="n">selector</span> <span class="o">=</span> <span class="n">alert</span><span class="p">.</span><span class="n">_context</span><span class="p">.</span><span class="n">selector</span><span class="p">,</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">alert</span><span class="p">.</span><span class="n">_context</span><span class="p">.</span><span class="n">context</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">returnCode</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">saveDocumentWithDelegate</span><span class="o">:</span><span class="n">delegate</span> <span class="n">didSaveSelector</span><span class="o">:</span><span class="n">selector</span> <span class="n">contextInfo</span><span class="o">:</span><span class="n">context</span><span class="p">];</span>
+    <span class="k">else</span>
+        <span class="nf">objj_msgSend</span><span class="p">(</span><span class="n">delegate</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="nb">self</span><span class="p">,</span> <span class="n">returnCode</span> <span class="o">===</span> <span class="mi">2</span><span class="p">,</span> <span class="n">context</span><span class="p">);</span>
+
+    <span class="n">_canCloseAlert</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+
+<span class="kd">var</span> <span class="n">_CPReadSessionMake</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">aType</span><span class="p">,</span> <span class="n">aDelegate</span><span class="p">,</span> <span class="n">aDidReadSelector</span><span class="p">,</span> <span class="n">aContextInfo</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="n">fileType</span><span class="o">:</span><span class="n">aType</span><span class="p">,</span> <span class="n">delegate</span><span class="o">:</span><span class="n">aDelegate</span><span class="p">,</span> <span class="n">didReadSelector</span><span class="o">:</span><span class="n">aDidReadSelector</span><span class="p">,</span> <span class="n">contextInfo</span><span class="o">:</span><span class="n">aContextInfo</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="n">_CPSaveSessionMake</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="n">anAbsoluteURL</span><span class="p">,</span> <span class="n">aSaveOperation</span><span class="p">,</span> <span class="n">aChangeCount</span><span class="p">,</span> <span class="n">aDelegate</span><span class="p">,</span> <span class="n">aDidSaveSelector</span><span class="p">,</span> <span class="n">aContextInfo</span><span class="p">,</span> <span class="n">aConnection</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="n">absoluteURL</span><span class="o">:</span><span class="n">anAbsoluteURL</span><span class="p">,</span> <span class="n">saveOperation</span><span class="o">:</span><span class="n">aSaveOperation</span><span class="p">,</span> <span class="n">changeCount</span><span class="o">:</span><span class="n">aChangeCount</span><span class="p">,</span> <span class="n">delegate</span><span class="o">:</span><span class="n">aDelegate</span><span class="p">,</span> <span class="n">didSaveSelector</span><span class="o">:</span><span class="n">aDidSaveSelector</span><span class="p">,</span> <span class="n">contextInfo</span><span class="o">:</span><span class="n">aContextInfo</span><span class="p">,</span> <span class="n">connection</span><span class="o">:</span><span class="n">aConnection</span> <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</body>
+</html>

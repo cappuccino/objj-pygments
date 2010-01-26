@@ -33,8 +33,8 @@ class ObjectiveJLexer(RegexLexer):
             include('whitespace'),
 
             # function definition
-            (r'^(\s*[\+-]\s*)(.*?)(?=[^\(]{)', # ugly lookahead hack to handle types w/ curly braces
-             bygroups(Text, using(this, state='function_signature'))),
+            (r'^(' + _ws + r'[\+-]' + _ws + r')([\(a-zA-Z_].*?[^\(])(' + _ws + '{)',
+             bygroups(using(this), using(this, state='function_signature'), using(this))),
 
 
             # class definition
